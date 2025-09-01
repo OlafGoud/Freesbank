@@ -2,6 +2,9 @@
 SenstoSea freesbank
 
 
+De freesbank word aangestuurd door een modificeerde versie van gurble
+
+
 ## Info
 Geert Mosterdijk
 
