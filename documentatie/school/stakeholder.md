@@ -5,3 +5,6 @@ Dit is de belangrijkste stakeholder van het project. Het project word uitgevoerd
 
 ## Olaf Goudriaan
 Dis is de student en is de projectleider en uitvoerder van het project.
+
+## P.G.M. van der Klugt
+Dit is 
