@@ -21,3 +21,10 @@ Make closed loop with motor drivers that converte the position to the right loca
 - $ -> help
 - $I -> info
 - ? -> gives location and positions.
+
+
+Motor driver: https://wiki.keyestudio.com/Ks0160_keyestudio_CNC_Shield_V3
+https://www.amazon.nl/-/en/STEPPERONLINE-Stepper-Pancake-Degrees-Printer/dp/B0B93PNYCP
+
+Zet de motor op 12 Volt en 2-3 amp
+Snelheid naar 200 -> F200

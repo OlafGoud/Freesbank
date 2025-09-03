@@ -45,3 +45,7 @@ X10 Y15
 X12 Y20
 ```
 This is because the G01 stays until replaced by other command. it wil go from (0, 0) -> (5, 7) -> (10, 15) -> (12, 20). The feedrate (F##) is set once and stays so until changed. 
+
+
+
+Schrijven & uploaden kan met: Universal Gcode Sender.
