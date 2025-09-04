@@ -1,9 +1,28 @@
 # Requirements
 
 ## MUST
-- Kop kan bewegen over 3 assen (x, y, z)
+### Kop kan bewegen over 3 assen (x, y, z)
+De kop van de machine moet kunnen bewegen over 3 assen (x, y, z).
+
+#### Taken
+- Onderzoek hoe een motor aangestuurd word.
+- Onderzoek hoe een programma zoals grbl werkt.
+- Sluit alle onderdelen aan
+- Test
+- Filmpie
+
+### Kop kan materiaal toevoegen of verwijderen
+De kop van de machine moet materiaal kunnen toevoegen of verwijderen.
+
+#### Taken
+- Onderzoek hoe het werkt
+- Sluit aan
+- Onderzoek welke snelheid
+- Test
+- Filmpje
+
 - Kop kan materiaal toevoegen of verwijderen
-- De positie van de kop kan bepaald worden door sensoren.
+- De positie van de kop kan bepaald worden door sensoren op 3mm nauwkeuring.
 - Er kan een bestand om uit te voeren op de machine geladen worden
 - Er word een variant van grbl gebruikt.
 
