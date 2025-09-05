@@ -21,8 +21,8 @@ De kop van de machine moet materiaal kunnen toevoegen of verwijderen.
 - Test
 - Filmpje
 
-- Kop kan materiaal toevoegen of verwijderen
-- De positie van de kop kan bepaald worden door sensoren op 3mm nauwkeuring.
+
+- De positie van de kop kan bepaald worden door sensoren op ?mm nauwkeuring.
 - Er kan een bestand om uit te voeren op de machine geladen worden
 - Er word een variant van grbl gebruikt.
 
@@ -40,5 +40,5 @@ De scope van de opdracht bevat het aansturen met code van de freesbank doormidde
 
 # Vragen
 1 materiaal?
-
+bed Heading?
 
