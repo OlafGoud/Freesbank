@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1757338127.27881 "c:/Users/Olaf/Desktop/stage/Freesbank/documentatie/school/stageverslag/Stageverslag.tex" "Stageverslag.pdf" "Stageverslag" 1757338127.98393 0
-  "C:/Users/Olaf/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1757335680 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
+["pdflatex"] 1757410912.38128 "c:/Users/Olaf/Desktop/stage/Freesbank/documentatie/school/stageverslag/Stageverslag.tex" "Stageverslag.pdf" "Stageverslag" 1757410913.05419 0
+  "C:/Users/Olaf/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1757410866 123019 4e6d54fe28a67ad1b512b0cc9d03c2e8 ""
   "C:/Users/Olaf/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1757324156 13256858 01998d2fe4182ef134d134d4478e669b ""
   "C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmbx10.tfm" 1136765053 1328 c834bbb027764024c09d3d2bf908b5f0 ""
   "C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmbx12.tfm" 1136765053 1324 c910af8c371558dc20f2d7822f66fe64 ""
@@ -32,11 +32,13 @@
   "C:/Users/Olaf/AppData/Local/Programs/MiKTeX/tex/latex/graphics/trig.sty" 1749322634 4023 e66acf578d6b564c4670fb57ff336a7a ""
   "C:/Users/Olaf/AppData/Local/Programs/MiKTeX/tex/latex/l3backend/l3backend-pdftex.def" 1751005717 30351 a2b09edc6c93a742566b222c33d0278e ""
   "ChatGPTFrontImage.png" 1757337995 1670811 e4d127bd5f6f17d6884ba0d16cc9059d ""
-  "Stageverslag.aux" 1757338127 320 e211b5c51d35ad14a16da39fbd7ca895 "pdflatex"
-  "Stageverslag.tex" 1757338126 398 ce167b66dd1bee7327ee2ce12e1f943f ""
-  "c:/Users/Olaf/Desktop/stage/Freesbank/documentatie/school/stageverslag/Stageverslag.tex" 1757338126 398 ce167b66dd1bee7327ee2ce12e1f943f ""
+  "Stageverslag.aux" 1757410912 242 410d33ad2b45ee1560e262fbd86dac8f "pdflatex"
+  "Stageverslag.tex" 1757410911 420 13ba24f4c14e9170bb4d63a62df9740f ""
+  "Stageverslag.toc" 1757410912 51 c8ec4113b5b214f03b29e77ecb21419e "pdflatex"
+  "c:/Users/Olaf/Desktop/stage/Freesbank/documentatie/school/stageverslag/Stageverslag.tex" 1757410911 420 13ba24f4c14e9170bb4d63a62df9740f ""
   (generated)
   "Stageverslag.aux"
   "Stageverslag.log"
   "Stageverslag.pdf"
+  "Stageverslag.toc"
   (rewritten before read)

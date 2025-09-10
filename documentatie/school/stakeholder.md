@@ -1,10 +1,13 @@
 # Stakeholders
 
 ## Geert mosterdijk
-Dit is de belangrijkste stakeholder van het project. Het project word uitgevoerd vanaf hem. Het project is voor hem. Hij is de opdrachtgever.
+Geert is de opdrachtgever, hierdoor heeft hij veel belang bij het project en ook alle zeggenschap over het project. Hij gaat het product ook gebruiken.
 
 ## Olaf Goudriaan
-Dis is de student en is de projectleider en uitvoerder van het project.
+Dis is de student en is de projectleider en uitvoerder van het project. Hij heeft belang bij het project.
 
 ## P.G.M. van der Klugt
-Dit is 
+Dit is de collega van Geert. Hij heeft belang bij het project dat het soepel verloopt maar is ook een expert
+
+## Jan
+Jan is een expert en heeft impact over hoe iets gedaan word.
