@@ -1,11 +1,13 @@
 # Probleemstelling
-Een radar maakt gebruik van een antenne om het bereik te vergroten en om de data nauwkeuriger te maken. Er zijn verschillende soorten antennes waarvan een parabolische antenne er 1 is. deze antennes komen in verschillende grote en maten. Er zijn 'standaard' maten die al geproduceerd worden. Alleen als er een custom maat nodig is voor een radar word de prijs per antenne veel duurder ten opzichte van een 'standaard' maat. Daarom wilt Geert Mosterdijk van Sens2Sea een manier hebben om die antennes een stuk goedkoper te maken. Er zijn al testen gedaan met het 3d printen van de onderdelen. Dit werkte goed uit. Alleen zijn er tijdens het bevestigen kansen dat de vorm veranderd word waardoor het parabolische effect van de antenne minder effectief werkt. Hiervoor willen ze een grotere 3d printer, cnc machine combinatie. Deze moet de vormen in 1 keer kunnen uitprinten met zo min mogelijk fouten in de vorm.
+Een radar maakt gebruik van een antenne om het bereik te vergroten en om de data nauwkeuriger te maken. Er zijn verschillende soorten antennes waarvan een parabolische antenne er 1 is. deze antennes komen in verschillende grote en maten. Er zijn 'standaard' maten die al geproduceerd worden. Alleen als er een custom maat nodig is voor een radar word de prijs per antenne veel duurder ten opzichte van een 'standaard' maat. Daarom wilt Sens2Sea een manier vinden om die antennes een stuk goedkoper te maken. Er zijn al testen gedaan met het 3d printen van de onderdelen. Dit werkte goed uit. Alleen zijn er tijdens het bevestigen kansen dat de vorm veranderd word waardoor het parabolische effect van de antenne minder effectief werkt. Hiervoor willen ze een grotere 3d printer, cnc machine combinatie. Deze moet de vormen in 1 keer kunnen uitprinten met zo min mogelijk fouten in de vorm.
 
 
 # Scope
 De scope van de opdracht bevat het aansturen met code van de freesbank doormiddel van een vorm van grbl. Hier nog een sensor aan toevoegen om de exacte locatie van de kop te kunnen bepalen. (En simpele elektra voor de motoren aan te sturen.)
+aansturing van de 4 assen. en de localisering scheiden van de aansturing
 
 
+leverancier bepaalt de inhoud van de encoder. dus als je wat anders wilt doen dan is dat niet mogelijk. dus ben je afhankelijk van de leverancier.
 
 # Requirements
 
@@ -52,8 +54,8 @@ De machine gebruikt een aangepaste variant van grbl voor het aansturen.
 
 
 ## SHOULD
-## (F) De kop kan over 4 assen bewegen.
-De kop van de machine moet over 4 assen kunnen bewegen. Dit zijn de x, y, z en ook een rotatie om de x as.
+## (F) De kop kan over 5 assen bewegen.
+De kop van de machine moet over 5 assen kunnen bewegen. Dit zijn de x, y, z en ook een rotatie om de x as.
 
 **Acceptatie:**
 De machine kan over alle assen bewegen.
