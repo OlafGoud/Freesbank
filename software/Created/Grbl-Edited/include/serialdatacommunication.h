@@ -44,8 +44,8 @@ void uart_init(unsigned long baud) {
 
 
 
-#ifndef CNCSniffer_H
-#define CNCSniffer_H
+#ifndef CNCReceiver_H
+#define CNCReceiver_H
 
 // ---------------- INTERRUPTS ----------------
 
