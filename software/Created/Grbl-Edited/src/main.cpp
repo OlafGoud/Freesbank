@@ -35,7 +35,6 @@ int main() {
   uart_write('\n');
 
 
-  //Serial.begin(9600);
   while (true) {
     int state = mainLoop();
 
