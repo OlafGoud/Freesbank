@@ -9,6 +9,15 @@ Het bedrijf
 
 
 
+## Docu git: 
+- \[docu\] changed readme / added file.md -> documentation
+- \[fix\] file.h, fixed ..... -> bugfix
+- \[feature\] file.h, added ..... -> feature add
+- \[refact\] file.h -> changed code by refactoring
+- \[del\] file.h, removed: ..... -> deleted feature
+
+
+\/ needs fixing
 
 
 
