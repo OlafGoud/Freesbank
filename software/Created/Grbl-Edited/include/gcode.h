@@ -1,4 +1,8 @@
+#ifndef MILLING_GCODE_H
+#define MILLING_GCODE_H
 
-void executeGcodeLine(char *line) {
-    
-}
+#pragma once
+
+void executeGcodeLine(const char *line, int length);
+
+#endif

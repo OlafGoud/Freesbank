@@ -35,7 +35,7 @@ void uartInit(unsigned long baud) {
  * Reads RX buffer and process the data
  * Called by main loop.
  */
-int uartRead() {
+uint8_t uartRead() {
 	if (rx_head == rx_tail) {
 		return 0xff; // no data
 	}
@@ -64,14 +64,29 @@ void uartWrite(uint8_t data) {
 
 /**
  * Writes a String to the TX buffer.
- * 
+ * @param str pointer to array
+ * @param len Integer
  */
-void uartWriteString(char data[], int length) {
-	if(length > TX_BUFFER_SIZE) {
+void uartWriteString(const char *str, int len) {
+	if(len > TX_BUFFER_SIZE) {
 		return;
 	}
-	for(int i = 0; i < length; i++) {
-		uartWrite((uint8_t) data[i]);
+	for(int i = 0; i < len; i++) {
+		uartWrite((uint8_t) str[i]);
+	}
+}
+
+/**
+ * Writes a string to the TX buffer until it is bigger than the buffersize or a terminator (\0, \n) is reached.
+ * @param str const char *str (need to end wiht terminator).
+ */
+void uartWriteStringWithTerminator(const char *str) {
+	for(int i = 0; i < TX_BUFFER_SIZE; i++) {
+		if(str[i] == '\n' || str[i] == '\0') {
+			return;
+		}
+
+		uartWrite(str[i]);
 	}
 }
 

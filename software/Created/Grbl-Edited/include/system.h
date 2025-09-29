@@ -2,12 +2,16 @@
 #ifndef MILLING_STATUS_H
 #define MILLING_STATUS_H
 
+
 #include <avr/io.h>
 #include <stdlib.h>   
 #include <stdio.h>
 #include <avr/interrupt.h>
+
+
 #include "serialdatacommunication.h"
 #include "config.h"
+#include "gcode.h"
 
 
 
@@ -35,7 +39,7 @@
 #define STATE_SLEEP         bit(7) // Sleep state.
 
 #define SERIAL_NO_DATA 0xff
-
+#define LINE_BUFFER 60
 
 #define SYSTEM_INFO "<Idle|MPos:0.000,0.000,0.000|FS:0,0|WCO:0.000,0.000,0.000>\nok"
 
