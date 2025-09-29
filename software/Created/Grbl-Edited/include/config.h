@@ -1,5 +1,5 @@
-#ifndef CNC_PINOUT_H
-#define CNC_PINOUT_H
+#ifndef MILLING_PINOUT_H
+#define MILLING_PINOUT_H
 
 #define X_LINIAR_MOTOR_PULSE_PIN
 #define X_LINIAR_MOTOR_DIRECTION_PIN
@@ -16,6 +16,14 @@
 #define Y_ROTATION_MOTOR_PULSE_PIN
 #define Y_ROTATION_MOTOR_DIRECTION_PIN
 
-#define CNC_SPINDLE_PIN
+#define MILLING_SPINDLE_PIN
+
+
+/**
+ * Sizes of the Serial TX and RX Buffers
+ */
+#define TX_BUFFER_SIZE 64
+#define RX_BUFFER_SIZE 64
+
 
 #endif
