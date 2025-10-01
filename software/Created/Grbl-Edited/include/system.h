@@ -7,6 +7,7 @@
 #include <stdlib.h>   
 #include <stdio.h>
 #include <avr/interrupt.h>
+#include <math.h>
 
 
 #include "serialdatacommunication.h"
@@ -19,7 +20,14 @@
  * Configurable
  *******************************************************************************************************************************************/
 
-#define N_POS 5 // x = 0, y = 1, z = 2, a = 3, b = 4 (those are indexes. + 1 for the amount)
+#define N_AXIS 5 //amount of axis
+//all axis number in array's
+
+#define X_AXIS 0
+#define Y_AXIS 1
+#define Z_AXIS 2
+#define A_AXIS 3
+#define B_AXIS 4
 
 
 
@@ -48,7 +56,7 @@
 
 typedef struct {
 	uint8_t state;
-	int32_t position[N_POS]; // measures in mircometer (1E-6 meter)
+	int32_t position[N_AXIS]; // measures in mircometer (1E-6 meter)
 
 	
 } SystemInfo ;

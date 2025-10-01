@@ -49,3 +49,45 @@ This is because the G01 stays until replaced by other command. it wil go from (0
 
 
 Schrijven & uploaden kan met: Universal Gcode Sender.
+
+
+
+# list of letters
+A: x-rotation in degree's
+B: y-rotation in degree's
+C: z-rotation -> **not suported**
+D: 
+E: Extrude amount between points -> **not suported**
+F: Feedrate in mm/min
+G: -> **reserved for G-code commands**
+H: 
+I: X space point to maintain constant distance from in mm
+J: Y space point to maintain constant distance from in mm
+K: Z space point to maintain constant distance from in mm
+L:
+M: -> **reserved for M-code commands**
+N:
+O:
+P: time to wait in milliseconds.
+Q:
+R: Radius of arc -> **not suported**
+S: Spindle power (RPM)
+T:
+U:
+V:
+W:
+X: x-axis in mm
+Y: y-axis in mm
+Z: z-axis in mm
+
+
+
+
+# GCode
+G0: G0 (Xn, Yn, Zn, An, Bn, Fn) -> not all parameters must be used. **rapid movement**
+G1: G1 (Xn, Yn, Zn, An, Bn, Fn, En, Sn) -> not all parameters must be used. **liniar movement**
+G2: G2 (Xn, Yn, Zn, In, Jn, Kn, En, Fn, Sn, Rn) -> not all parameters must be used. **Clockwise Arc**
+G3: G3 (Xn, Yn, Zn, In, Jn, Kn, En, Fn, Sn, Rn) -> not all parameters must be used. **Counter-Clockwise Arc**
+G4: G4 (Pn) -> pause the machine. **Dwell**
+G6: **Not suported**
+G10: G10 (Xnnn)
