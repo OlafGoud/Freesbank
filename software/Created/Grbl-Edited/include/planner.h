@@ -28,6 +28,18 @@ typedef struct {
 
 extern planner_t planner;
 
+void planBufferLine(float targetPos[N_AXIS], float feedrate);
 
+void planner_recalculate(float J);
+
+float junction_speed_from_deviation(const float u[3], const float v[3], float J, float a);
+
+static inline float vec_dot3(const float a[3], const float b[3]);
+
+static inline void vec_sub3(float r[3], const float a[3], const float b[3]);
+
+static inline float vec_norm3(const float a[3]);
+
+static inline void vec_normalize3(float r[3]);
 
 #endif

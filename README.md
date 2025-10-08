@@ -69,7 +69,7 @@ grenzen van de scope
 
 
 
-closed loop stepper driver control board???
+closed loop stepper driver control board??? -> dat word hem niet ivm afhankelijkheid van leverancier
 
 
 ## Info

@@ -9,7 +9,7 @@ void executeMovementLine() {
   } 
   printString("\n \n \n");
   
-  moveMotor(x, y);
+ // moveMotor(x, y);
 
 
 }

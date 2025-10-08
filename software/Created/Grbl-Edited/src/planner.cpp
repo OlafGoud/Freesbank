@@ -1,9 +1,16 @@
 #include "planner.h"
 
+//planner ringbuffer
 planner_t planner;
 float currentPosition[N_AXIS] = {0,0,0};
 
 
+
+/**
+ * Plans a line and puts it in the planner ring buffer.
+ * @param targetPow float targetPos[N_AXIS] -> target position for each axis on the machine.
+ * @param feedrate float feedrate -> the feedrate (nominalspeed) for each block.
+ */
 void planBufferLine(float targetPos[N_AXIS], float feedrate) {
   planner_block_t *block = &planner.block[planner.head];
 
@@ -33,7 +40,10 @@ void planBufferLine(float targetPos[N_AXIS], float feedrate) {
 
 }
 
-
+/**
+ * Recalculates the junction speed for every planned block in the 'planner' ringbuffer to ensure the machine is running on maximum speed for each segment without losing accuracy.
+ * @param J float J -> dividation that can happen in the corner smaller = more accurate.
+ */
 void planner_recalculate(float J) {
 
   if(planner.head == planner.tail) {
@@ -55,10 +65,7 @@ void planner_recalculate(float J) {
   while(idx != planner.head) {
     int prev = (idx - 1 + PLANNER_BUFFER_SIZE) % PLANNER_BUFFER_SIZE;
     if(prev != idx) {
-      float maxJunctionSpeed = junction_speed_from_deviation(planner.block[prev].dir, 
-                                                            planner.block[idx].dir, 
-                                                            J, 
-                                                            fminf(planner.block[prev].accel, planner.block[idx].accel));
+      float maxJunctionSpeed = junction_speed_from_deviation(planner.block[prev].dir, planner.block[idx].dir, J, fminf(planner.block[prev].accel, planner.block[idx].accel));
 
       if(planner.block[idx].entry_speed > maxJunctionSpeed) {
         planner.block[idx].entry_speed = maxJunctionSpeed;
@@ -108,13 +115,21 @@ void planner_recalculate(float J) {
     }
     idx = (idx + 1) % PLANNER_BUFFER_SIZE;
   }
-
 }
 
 
 
 
-//returns junctionspeed
+/**
+ * calculates the maximum junctionspeed from deviation with unit vectors.
+ * 
+ * @param u const float u[3] -> unit vector prev block.
+ * @param v const float v[3] -> unit vector current block.
+ * @param J float J -> dividation that can happen in the corner smaller = more accurate.
+ * @param a float a -> maxmimal system acceleration.
+ * 
+ * @return float - junction speed.
+ */
 float junction_speed_from_deviation(const float u[3], const float v[3], float J, float a) {
   float cos_theta = vec_dot3(u, v);
 
@@ -140,22 +155,47 @@ float junction_speed_from_deviation(const float u[3], const float v[3], float J,
 
 
 
-
+/**
+ * Vector function for function: junction_speed_from_deviation. 
+ * 
+ * @param a const float a[3] -> vector of floats 
+ * @param b const float b[3] -> vector of floats
+ * @return angle between vectors
+ */
 static inline float vec_dot3(const float a[3], const float b[3]) {
-    return a[0]*b[0] + a[1]*b[1] + a[2]*b[2];
+  return a[0]*b[0] + a[1]*b[1] + a[2]*b[2];
 }
 
+
+/**
+ * Vector function for function: planBufferLine. Gives the displacement.
+ *  
+ * @param r float r[3] -> refrence to return vector
+ * @param a float a[3] -> vector of floats
+ * @param b float b[3] -> vector of floats
+ */
 static inline void vec_sub3(float r[3], const float a[3], const float b[3]) {
-    r[0] = a[0]-b[0]; r[1] = a[1]-b[1]; r[2] = a[2]-b[2];
+  r[0] = a[0]-b[0]; r[1] = a[1]-b[1]; r[2] = a[2]-b[2];
 }
 
+/**
+ * Vector function for function: vec_normalize3. It calculates the length of the vector
+ * 
+ * @param a const float a[3] -> vector of floats to get length of.
+ * @return float - lenght of vector
+ */
 static inline float vec_norm3(const float a[3]) {
-    return sqrtf(a[0]*a[0] + a[1]*a[1] + a[2]*a[2]);
+  return sqrtf(a[0]*a[0] + a[1]*a[1] + a[2]*a[2]);
 }
 
+/**
+ * Vector function for function: planBufferLine. It calculates the unit vector.
+ * 
+ * @param r float r[3] -> refrence to vector to change.
+ */
 static inline void vec_normalize3(float r[3]) {
-    float n = vec_norm3(r);
-    if (n > 0.0f) { r[0]/=n; r[1]/=n; r[2]/=n; }
+  float n = vec_norm3(r);
+  if (n > 0.0f) { r[0]/=n; r[1]/=n; r[2]/=n; }
 }
 
 

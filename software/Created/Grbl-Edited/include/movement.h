@@ -11,7 +11,7 @@
 extern float currentPos[];
 
 
-void executeMovementLine(int x, int y, int z);
+void executeMovementLine();
 
 
 void updateCurrentLocation(int dirX, int dirY);
