@@ -8,11 +8,14 @@
 #include <stdio.h>
 #include <avr/interrupt.h>
 #include <math.h>
+#include <string.h>
 
 
 #include "serialdatacommunication.h"
 #include "config.h"
+#include "movement.h"
 #include "gcode.h"
+#include "print.h"
 
 
 
@@ -50,7 +53,7 @@
 #define LINE_BUFFER 60
 
 #define SYSTEM_INFO "<Idle|MPos:0.000,0.000,0.000|FS:0,0|WCO:0.000,0.000,0.000>\nok"
-
+#define SYSTEM_MAX_ACCEL 200
 
 
 
@@ -63,10 +66,6 @@ typedef struct {
 extern volatile SystemInfo sys;
 
 
-/**
- * write ready message for fork.
- */
-void systemExecuteReadyLine();
 
 void systemExecuteLine();
 

@@ -3,10 +3,9 @@
 volatile SystemInfo sys;
 int length = 0;
 char line[LINE_BUFFER];
+float currentPos[3];
 
-void systemExecuteReadyLine() {
-	uartWriteString("Milling machine ready V1\n", 25);
-}
+
 
 
 void readSerialLine() {
@@ -77,7 +76,8 @@ int mainLoop() {
   systemExecuteReadyLine();
 
   while (sys.state != 1) {
-    readSerialLine();
+    //readSerialLine();
+    executeMovementLine(100, 100, 0);
   }
 
 
