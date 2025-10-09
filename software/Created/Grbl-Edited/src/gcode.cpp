@@ -11,7 +11,7 @@ void executeGcodeLine(char *line, int length) {
   uint8_t axisCommand = AXIS_COMMAND_NONE;
   memset(&blockData, 0, sizeof(gc_data));
   memcpy(&blockData.mode, &state, sizeof(gc_modes));
-
+  blockData.feedrate = SYSTEM_MAX_SPEED;
 
   float value;
   uint8_t charIndex = 0;
@@ -37,7 +37,7 @@ void executeGcodeLine(char *line, int length) {
       switch (intValue)
       {
       case 0: case 1: case 2: case 3:
-        blockData.mode.motion = intValue;
+        blockData.motion = intValue;
 
 
 
@@ -96,7 +96,6 @@ void executeGcodeLine(char *line, int length) {
   
 
 }
-
 
 
 
@@ -190,9 +189,7 @@ uint8_t read_float(char *line, uint8_t *char_counter, float *float_ptr) {
   else {
     *float_ptr = fval;
   }
-
   *char_counter = ptr - line - 1; // Set char_counter to next statement
 
   return (true);
 }
-

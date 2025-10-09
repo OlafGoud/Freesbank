@@ -7,6 +7,7 @@
 
 
 #include "system.h"
+#include "planner.h"
 #pragma once
 extern float currentPos[];
 

@@ -76,7 +76,9 @@ int mainLoop() {
   systemExecuteReadyLine();
 
   while (sys.state != 1) {
-    //readSerialLine();
+    readSerialLine();
+
+    
     executeMovementLine();
   }
 

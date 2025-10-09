@@ -8,12 +8,11 @@
 #define AXIS_COMMAND_NONE 0
 #define AXIS_COMMAND_MOTION 1
 #ifndef N_AXIS
-#define N_AXIS 5
+#define N_AXIS 3
 #endif
 
 // NOTE: When this struct is zeroed, the above defines set the defaults for the system.
 typedef struct {
-  uint8_t motion;          // {G0,G1,G2,G3}
   uint8_t tool_length;     // Vnnn mm
   uint8_t tool_diameter;   // Wnnn mm
   uint8_t program_flow;    // {M0,M1,M2,M30}
@@ -25,7 +24,7 @@ typedef struct {
 
 
 typedef struct {
-
+  uint8_t motion;
   float offset[N_AXIS];
   float endPos[3];
   float feedrate;
