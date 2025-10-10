@@ -51,7 +51,6 @@
  *******************************************************************************************************************************************/
 
 #define STATE_IDLE          0      // Must be zero. No flags.
-#define STATE_ALARM         bit(0) // In alarm state. Locks out all g-code processes. Allows settings access.
 #define STATE_CHECK_MODE    bit(1) // G-code check mode. Locks out planner and motion only.
 #define STATE_HOMING        bit(2) // Performing homing cycle
 #define STATE_CYCLE         bit(3) // Cycle is running or motions are being executed.
@@ -59,6 +58,13 @@
 #define STATE_JOG           bit(5) // Jogging mode.
 #define STATE_SAFETY_DOOR   bit(6) // Safety door is ajar. Feed holds and de-energizes system.
 #define STATE_SLEEP         bit(7) // Sleep state.
+
+#define STATE_CLEAR       0
+#define STATE_BUSY        0
+#define STATE_ALARM       1 
+#define STATE_EXIT        7
+
+
 
 #define SERIAL_NO_DATA 0xff
 #define LINE_BUFFER 60

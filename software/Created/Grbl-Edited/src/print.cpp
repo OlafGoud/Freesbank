@@ -1,4 +1,5 @@
 #include "print.h"
+#include "serialdatacommunication.h"
 
 void printString(const char *s) {
   while (*s) uartWrite(*s++);

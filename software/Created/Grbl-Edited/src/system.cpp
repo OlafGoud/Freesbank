@@ -1,6 +1,5 @@
-#include "system.h"
+#include "main.cpp"
 
-volatile SystemInfo sys;
 int length = 0;
 char line[LINE_BUFFER];
 float currentPos[3];
