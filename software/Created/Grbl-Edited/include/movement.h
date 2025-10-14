@@ -9,11 +9,12 @@
 #include "system.h"
 #include "planner.h"
 #pragma once
+
+
 extern float currentPos[];
 
 
 void executeMovementLine();
-
 
 void updateCurrentLocation(int dirX, int dirY);
 

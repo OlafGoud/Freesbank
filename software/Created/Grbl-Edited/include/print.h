@@ -6,13 +6,13 @@
  */
 
 #include "system.h"
-
+#include "serialdatacommunication.h"
 
 void printString(const char *s);
 
-void print_uint8_base10(uint8_t n);
+void printUint8Base10(uint8_t n);
 
-void print_uint32_base10(uint32_t n);
+void printUint32Base10(uint32_t n);
 
 void printInteger(long n);
 

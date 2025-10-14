@@ -7,12 +7,12 @@ extern gc_data blockData;
  * @todo
  * @param data gc_data* data -> struct with gcode data
  */
-void executeMovementLine(gc_data* data) {
-
-  switch (data->motion)
+void executeMovementLine() {
+  gc_data data;
+  switch (data.motion)
   {
   case 0: case 1:
-    planBufferLine(data->endPos, data->feedrate);
+    planBufferLine(data.endPos, data.feedrate);
     break;
   case 2: case 3:
     // TODO arc

@@ -1,6 +1,4 @@
 #include "gcode.h"
-#include "string.h"
-
 gc_data blockData;
 gc_modes state;
 
@@ -25,7 +23,7 @@ void executeGcodeLine(char *line, int length) {
     }
     charIndex++;
 
-    if(!read_float(line, &charIndex, &value)) {
+    if(!readFloat(line, &charIndex, &value)) {
       return; //TODO message value expected
     }
 
@@ -92,8 +90,7 @@ void executeGcodeLine(char *line, int length) {
     }
   }
 
-
-  
+  executeMovementLine();  
 
 }
 

@@ -27,8 +27,8 @@ void planBufferLine(float targetPos[N_AXIS], float feedrate) {
   float dz = targetPos[2] - currentPos[2];
   block->distance = sqrtf(dx*dx + dy*dy + dz*dz);
   block->accel = SYSTEM_MAX_ACCEL;
-  vec_sub3(block->dir, block->p0, block->p1);
-  vec_normalize3(block->dir);
+  vecSub3(block->dir, block->p0, block->p1);
+  vecNormalize3(block->dir);
 
 
 
@@ -36,7 +36,7 @@ void planBufferLine(float targetPos[N_AXIS], float feedrate) {
   if (planner.head == planner.tail) return; //buffer overflow.  
 
 
-  planner_recalculate(0.001f);
+  plannerRecalculate(0.001f);
 
 }
 
@@ -44,7 +44,7 @@ void planBufferLine(float targetPos[N_AXIS], float feedrate) {
  * Recalculates the junction speed for every planned block in the 'planner' ringbuffer to ensure the machine is running on maximum speed for each segment without losing accuracy.
  * @param J float J -> dividation that can happen in the corner smaller = more accurate.
  */
-void planner_recalculate(float J) {
+void plannerRecalculate(float J) {
 
   if(planner.head == planner.tail) {
     planner.block[planner.head].exit_speed = 0.0f;
@@ -65,7 +65,7 @@ void planner_recalculate(float J) {
   while(idx != planner.head) {
     int prev = (idx - 1 + PLANNER_BUFFER_SIZE) % PLANNER_BUFFER_SIZE;
     if(prev != idx) {
-      float maxJunctionSpeed = junction_speed_from_deviation(planner.block[prev].dir, planner.block[idx].dir, J, fminf(planner.block[prev].accel, planner.block[idx].accel));
+      float maxJunctionSpeed = junctionSpeedFromDeviation(planner.block[prev].dir, planner.block[idx].dir, J, fminf(planner.block[prev].accel, planner.block[idx].accel));
 
       if(planner.block[idx].entry_speed > maxJunctionSpeed) {
         planner.block[idx].entry_speed = maxJunctionSpeed;
@@ -130,8 +130,8 @@ void planner_recalculate(float J) {
  * 
  * @return float - junction speed.
  */
-float junction_speed_from_deviation(const float u[3], const float v[3], float J, float a) {
-  float cos_theta = vec_dot3(u, v);
+float junctionSpeedFromDeviation(const float u[3], const float v[3], float J, float a) {
+  float cos_theta = vecDot3(u, v);
 
   if(cos_theta > EPS_COS_STRAIGHT) {
     return __FLT_MAX__;
@@ -156,13 +156,13 @@ float junction_speed_from_deviation(const float u[3], const float v[3], float J,
 
 
 /**
- * Vector function for function: junction_speed_from_deviation. 
+ * Vector function for function: junctionSpeedFromDeviation. 
  * 
  * @param a const float a[3] -> vector of floats 
  * @param b const float b[3] -> vector of floats
  * @return angle between vectors
  */
-static inline float vec_dot3(const float a[3], const float b[3]) {
+static inline float vecDot3(const float a[3], const float b[3]) {
   return a[0]*b[0] + a[1]*b[1] + a[2]*b[2];
 }
 
@@ -174,17 +174,17 @@ static inline float vec_dot3(const float a[3], const float b[3]) {
  * @param a float a[3] -> vector of floats
  * @param b float b[3] -> vector of floats
  */
-static inline void vec_sub3(float r[3], const float a[3], const float b[3]) {
+static inline void vecSub3(float r[3], const float a[3], const float b[3]) {
   r[0] = a[0]-b[0]; r[1] = a[1]-b[1]; r[2] = a[2]-b[2];
 }
 
 /**
- * Vector function for function: vec_normalize3. It calculates the length of the vector
+ * Vector function for function: vecNormalize3. It calculates the length of the vector
  * 
  * @param a const float a[3] -> vector of floats to get length of.
  * @return float - lenght of vector
  */
-static inline float vec_norm3(const float a[3]) {
+static inline float vecNorm3(const float a[3]) {
   return sqrtf(a[0]*a[0] + a[1]*a[1] + a[2]*a[2]);
 }
 
@@ -193,8 +193,8 @@ static inline float vec_norm3(const float a[3]) {
  * 
  * @param r float r[3] -> refrence to vector to change.
  */
-static inline void vec_normalize3(float r[3]) {
-  float n = vec_norm3(r);
+static inline void vecNormalize3(float r[3]) {
+  float n = vecNorm3(r);
   if (n > 0.0f) { r[0]/=n; r[1]/=n; r[2]/=n; }
 }
 
@@ -206,7 +206,7 @@ static inline void vec_normalize3(float r[3]) {
  * @param i index in buffer - int
  * @param J mm junction diviation - float
  */
-void compute_block_entry_speed(int i, float J) {
+void computeBlockEntrySpeed(int i, float J) {
   if(i == planner.tail) return;
   int prev = (i - 1 + PLANNER_BUFFER_SIZE) % PLANNER_BUFFER_SIZE;
   int next = i;

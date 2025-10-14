@@ -1,4 +1,3 @@
-#pragma once
 #ifndef MILLING_SERIAL_H
 #define MILLING_SERIAL_H
 

@@ -3,6 +3,7 @@
 #define MILLING_PLANNER_H
 
 #include "system.h"
+#include "config.h"
 #define PLANNER_BUFFER_SIZE 16
 #define EPS_COS_STRAIGHT 0.999999f
 
@@ -30,16 +31,16 @@ extern planner_t planner;
 
 void planBufferLine(float targetPos[N_AXIS], float feedrate);
 
-void planner_recalculate(float J);
+void plannerRecalculate(float J);
 
-float junction_speed_from_deviation(const float u[3], const float v[3], float J, float a);
+float junctionSpeedFromDeviation(const float u[3], const float v[3], float J, float a);
 
-static inline float vec_dot3(const float a[3], const float b[3]);
+static inline float vecDot3(const float a[3], const float b[3]);
 
-static inline void vec_sub3(float r[3], const float a[3], const float b[3]);
+static inline void vecSub3(float r[3], const float a[3], const float b[3]);
 
-static inline float vec_norm3(const float a[3]);
+static inline float vecNorm3(const float a[3]);
 
-static inline void vec_normalize3(float r[3]);
+static inline void vecNormalize3(float r[3]);
 
 #endif

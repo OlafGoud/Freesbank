@@ -1,4 +1,3 @@
-#pragma once
 #ifndef MILLING_REGULATOR_H
 #define MILLING_REGULATOR_H
 #include <avr/io.h>
@@ -35,7 +34,5 @@ void LiniarMotorHandler::driveMotor(float distancemm, float speed) {
     if(pulses < 0) {
         dir = 1; // backward
     }
-
-    
 
 }

@@ -1,12 +1,19 @@
 #include "print.h"
 #include "serialdatacommunication.h"
 
+/**
+ * print a full char*
+ * @param s const char*, string to print
+ */
 void printString(const char *s) {
   while (*s) uartWrite(*s++);
 }
 
-// Prints an uint8 variable in base 10.
-void print_uint8_base10(uint8_t n) {
+/**
+ * print an uint8_t (8 bit) variable in base 10. unisgned
+ * @param n uint8_t, 8 bit integer to print
+ */
+void printUint8Base10(uint8_t n) {
   uint8_t digit_a = 0;
   uint8_t digit_b = 0;
   if (n >= 100) { // 100-255
@@ -22,8 +29,11 @@ void print_uint8_base10(uint8_t n) {
   if (digit_a) { uartWrite(digit_a); }
 }
 
-
-void print_uint32_base10(uint32_t n) {
+/**
+ * print an uint32_t (32 bit) variable in base 10. unisgned
+ * @param n uint32_t, 32 bit integer to print
+ */
+void printUint32Base10(uint32_t n) {
   if (n == 0) {
     uartWrite('0');
     return;
@@ -41,16 +51,21 @@ void print_uint32_base10(uint32_t n) {
     uartWrite('0' + buf[i-1]);
 }
 
-
+/**
+ * print an long base 10. signed
+ * @param n long, long integer to print
+ */
 void printInteger(long n) {
   if (n < 0) {
     uartWrite('-');
-    print_uint32_base10(-n);
+    printUint32Base10(-n);
   } else {
-    print_uint32_base10(n);
+    printUint32Base10(n);
   }
 }
 
+
+// official grbl code ------------------------------------------------------------------
 // Convert float to string by immediately converting to a long integer, which contains
 // more digits than a float. Number of decimal places, which are tracked by a counter,
 // may be set by the user. The integer is then efficiently converted to a string.
@@ -92,6 +107,11 @@ void printFloat(float n, uint8_t decimal_places) {
   }
 }
 
+
+
+/**
+ * Print ready line when starting program
+ */
 void systemExecuteReadyLine() {
 	printString("Milling machine ready V1\n");
 }
