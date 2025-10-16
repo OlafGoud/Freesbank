@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram name="SystemArchitecture" id="hrtLZk-t5wfWhnMYysPn">
-        <mxGraphModel dx="261" dy="451" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1083" dy="555" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -2162,7 +2162,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="W9H7pijOvDZUlmn5seLE" name="Page-8">
-        <mxGraphModel dx="-3624" dy="719" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="-3052" dy="555" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -2432,6 +2432,86 @@
                 </mxCell>
                 <mxCell id="b6MVP3h5cYBvx9WGE6zy-48" value="" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;align=center;shape=mxgraph.azure.computer;pointerEvents=1;fontFamily=Helvetica;fontSize=11;labelBackgroundColor=default;container=0;" parent="b6MVP3h5cYBvx9WGE6zy-52" vertex="1">
                     <mxGeometry x="110" y="32.5" width="70" height="57.5" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="ghsmh8eoLgZnY5ElICja" name="Page-9">
+        <mxGraphModel dx="903" dy="599" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="Hc01q3zCoAx1mrXllumg-1" value="sensor" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="150" y="90" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Hc01q3zCoAx1mrXllumg-2" value="nouwkeurigheid" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="270" y="90" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Hc01q3zCoAx1mrXllumg-3" value="Range" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="390" y="90" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Hc01q3zCoAx1mrXllumg-4" value="Ultrasoon" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="30" y="150" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Hc01q3zCoAx1mrXllumg-5" value="Soort" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="30" y="90" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Hc01q3zCoAx1mrXllumg-6" value="HC-SR04" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="150" y="150" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Hc01q3zCoAx1mrXllumg-7" value="Kosten" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="510" y="90" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Hc01q3zCoAx1mrXllumg-8" value="3mm" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="270" y="150" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Hc01q3zCoAx1mrXllumg-9" value="2 - 400 cm" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="390" y="150" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Hc01q3zCoAx1mrXllumg-10" value="€3 - €6" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="510" y="150" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Hc01q3zCoAx1mrXllumg-11" value="Time of flight /&lt;br&gt;laser" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="30" y="210" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Hc01q3zCoAx1mrXllumg-12" value="VL53L1X" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="150" y="210" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Hc01q3zCoAx1mrXllumg-13" value="20 - 25 mm" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="270" y="210" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Hc01q3zCoAx1mrXllumg-14" value="400 cm" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="390" y="210" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Hc01q3zCoAx1mrXllumg-15" value="€6,50" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="510" y="210" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Hc01q3zCoAx1mrXllumg-16" value="IR" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="30" y="270" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Hc01q3zCoAx1mrXllumg-17" value="Sharp Optische Afstandsensor GP2Y0A21YK0F" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="150" y="270" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Hc01q3zCoAx1mrXllumg-18" value="?" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="270" y="270" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Hc01q3zCoAx1mrXllumg-19" value="10 - 80 cm" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="390" y="270" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Hc01q3zCoAx1mrXllumg-20" value="$5,50" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="510" y="270" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Hc01q3zCoAx1mrXllumg-26" value="Opmerking" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="630" y="90" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Hc01q3zCoAx1mrXllumg-27" value="recht oppervlak nodig&lt;br&gt;uitvalshoek 15 graden" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="630" y="150" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Hc01q3zCoAx1mrXllumg-28" value="de ligt omstandigheden maken uit" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="630" y="210" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Hc01q3zCoAx1mrXllumg-29" value="Nouwkeurigheid&lt;br&gt;word nergens genoemd" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="630" y="270" width="120" height="60" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>

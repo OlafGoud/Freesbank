@@ -6,7 +6,6 @@
  */
 
 #include "system.h"
-#include "serialdatacommunication.h"
 
 void printString(const char *s);
 

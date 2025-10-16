@@ -4,17 +4,17 @@
 /**
  * high level movement controller
  */
-
-
 #include "system.h"
-#include "planner.h"
-#pragma once
 
 
 extern float currentPos[];
 
-
-void executeMovementLine();
+/**
+ * Excecutes movement lines.
+ * @note void* -> gc_data. conflict errors in header functions make it not posible to user the gc_data struct.
+ * @param fdata (void*) only gc_data*
+ */
+void executeMovementLine(void* fdata);
 
 void updateCurrentLocation(int dirX, int dirY);
 

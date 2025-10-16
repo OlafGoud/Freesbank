@@ -1,5 +1,4 @@
 #include "print.h"
-#include "serialdatacommunication.h"
 
 /**
  * print a full char*

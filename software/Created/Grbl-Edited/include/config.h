@@ -24,9 +24,7 @@
 /********************************************************************************************************************************************
  * Configurable
  *******************************************************************************************************************************************/
-#ifndef N_AXIS
 #define N_AXIS 5 //amount of axis
-#endif
 //all axis number in array's
 
 #define X_AXIS 0
@@ -34,6 +32,11 @@
 #define Z_AXIS 2
 #define A_AXIS 3
 #define B_AXIS 4
+
+#define AXIS_COMMAND_NONE 0
+#define AXIS_COMMAND_MOTION 1
+
+
 
 /**
  * Sizes of the Serial TX and RX Buffers
@@ -66,6 +69,8 @@
 #define STATE_ALARM       1 
 #define STATE_EXIT        7
 
+#define PLANNER_BUFFER_SIZE 16
+#define EPS_COS_STRAIGHT 0.999999f
 
 
 #define SERIAL_NO_DATA 0xff

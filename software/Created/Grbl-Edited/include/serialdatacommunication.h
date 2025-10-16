@@ -1,8 +1,6 @@
 #ifndef MILLING_SERIAL_H
 #define MILLING_SERIAL_H
 
-#include <avr/io.h>
-#include <avr/interrupt.h>
 #include "system.h"
 
 

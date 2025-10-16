@@ -5,7 +5,7 @@ typedef struct {
 	uint8_t state;
 	int32_t position[N_AXIS]; /** measures in mircometer (1E-6 meter) @deprecated @todo @remove */
 
-} SystemInfo ;
+} SystemInfo;
 
 volatile SystemInfo sys;
 

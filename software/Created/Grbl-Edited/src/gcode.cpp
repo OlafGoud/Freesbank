@@ -1,7 +1,7 @@
 #include "gcode.h"
+
 gc_data blockData;
 gc_modes state;
-
 
 //TODO: return message
 
@@ -90,7 +90,7 @@ void executeGcodeLine(char *line, int length) {
     }
   }
 
-  executeMovementLine();  
+  executeMovementLine(&blockData);  
 
 }
 

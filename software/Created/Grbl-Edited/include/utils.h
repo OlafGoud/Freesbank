@@ -1,9 +1,7 @@
-#pragma once
-
 #ifndef MILLING_UTILS_H
 #define MILLING_UTILS_H
+#pragma once
 #include "system.h"
-#include "config.h"
 
 /**
  * @note Macro definitions
@@ -39,6 +37,56 @@
 
 
 /**
+ * @note structs
+ * @namespace data
+ */
+
+
+// NOTE: When this struct is zeroed, the above defines set the defaults for the system.
+typedef struct {
+  uint8_t tool_length;     // Vnnn mm
+  uint8_t tool_diameter;   // Wnnn mm
+  uint8_t program_flow;    // {M0,M1,M2,M30}
+  uint8_t coolant;         // {M7,M8,M9}
+  uint8_t spindle;         // {M3,M4,M5}
+  uint8_t override;        // {M56}
+} gc_modes;
+
+typedef struct {
+  uint8_t motion;
+  float offset[N_AXIS];
+  float endPos[3];
+  float feedrate;
+  float arcRadius;
+  gc_modes mode;
+} gc_data;
+
+typedef struct {
+  float distance;       // length of move (mm)
+  float feedrate;       // mm/min
+  float dir[N_AXIS];    // unit vector
+  float nominal_speed;  // nominal speed
+  float accel;
+  float entry_speed;        // velocity entry (mm/s)
+  float exit_speed;         // velocity exit  (mm/s)
+  float t_total;        // total time of motion
+  float p0[N_AXIS];     // start pos
+  float p1[N_AXIS];     // end pos
+} planner_block_t;
+
+typedef struct {
+  planner_block_t block[PLANNER_BUFFER_SIZE];
+  uint8_t head;
+  uint8_t tail;
+} planner_t;
+
+
+
+
+
+
+
+/**
  * @note Functions from here 
  * @def read_float -> read float from a char*.
  */
@@ -61,6 +109,12 @@
  */
 uint8_t readFloat(char *line, uint8_t *char_counter, float *float_ptr);
 
+float vecDot3(const float a[3], const float b[3]);
 
+void vecSub3(float r[3], const float a[3], const float b[3]);
+
+float vecNorm3(const float a[3]);
+
+void vecNormalize3(float r[3]);
 
 #endif

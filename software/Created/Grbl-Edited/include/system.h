@@ -8,14 +8,13 @@
 #include <math.h>
 #include <string.h>
 
-
+#include "config.h"
+#include "utils.h"
 #include "serialdatacommunication.h"
+#include "print.h"
+#include "planner.h"
 #include "movement.h"
 #include "gcode.h"
-#include "print.h"
-#include "system.h"
-#include "utility.h"
-#include "config.h"
 
 
 /**

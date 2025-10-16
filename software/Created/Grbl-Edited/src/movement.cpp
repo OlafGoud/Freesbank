@@ -1,14 +1,13 @@
 #include "movement.h"
 
-extern gc_data blockData;
 
 /**
  * Executes line movement for a block.
  * @todo
  * @param data gc_data* data -> struct with gcode data
  */
-void executeMovementLine() {
-  gc_data data;
+void executeMovementLine(void* fdata) {
+  gc_data &data = *(gc_data*)fdata;
   switch (data.motion)
   {
   case 0: case 1:
@@ -20,9 +19,6 @@ void executeMovementLine() {
   default:
     break;
   }
-  
-
-
 }
 
 /**
@@ -30,7 +26,7 @@ void executeMovementLine() {
  * @todo
  * @param data gc_data* data -> struct with gcode data
  */
-void planLine() {
+void planLine(gc_data* data) {
 
 }
 
