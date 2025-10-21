@@ -24,7 +24,7 @@
 /********************************************************************************************************************************************
  * Configurable
  *******************************************************************************************************************************************/
-#define N_AXIS 5 //amount of axis
+#define N_AXIS 3 //amount of axis
 //all axis number in array's
 
 #define X_AXIS 0
@@ -69,7 +69,7 @@
 #define STATE_ALARM       1 
 #define STATE_EXIT        7
 
-#define PLANNER_BUFFER_SIZE 16
+#define PLANNER_BUFFER_SIZE 5
 #define EPS_COS_STRAIGHT 0.999999f
 
 

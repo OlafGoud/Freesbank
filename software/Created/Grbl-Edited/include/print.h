@@ -7,6 +7,9 @@
 
 #include "system.h"
 
+
+extern float currentPosition[N_AXIS];
+
 void printString(const char *s);
 
 void printUint8Base10(uint8_t n);
@@ -19,6 +22,8 @@ void printFloat(float n, uint8_t decimal_places);
 
 void systemExecuteReadyLine();
 
+
+void printStatus();
 
 #endif
 

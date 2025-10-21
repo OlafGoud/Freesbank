@@ -6,6 +6,7 @@ gc_modes state;
 //TODO: return message
 
 void executeGcodeLine(char *line, int length) {
+  printString("executegcodeline\n");
   uint8_t axisCommand = AXIS_COMMAND_NONE;
   memset(&blockData, 0, sizeof(gc_data));
   memcpy(&blockData.mode, &state, sizeof(gc_modes));
@@ -16,22 +17,35 @@ void executeGcodeLine(char *line, int length) {
   uint8_t intValue;
   uint16_t mantissa;
 
-  while(charIndex < length) {
+  while(charIndex < length - 1) {
+    printString("index: "); printUint8Base10(charIndex); printString(", length: "); printUint8Base10(length); uartWrite('\n');
+
+    if(line[charIndex] == 32) {
+      charIndex++;
+    }
     char letter = line[charIndex];
+    printString("letter: "); uartWrite(letter); printString(", integer: ");
+    
     if(letter < 'A' && letter > 'Z') {
+      printString("Error: not a letter");
       return; //TODO: message letter expected
     }
     charIndex++;
 
     if(!readFloat(line, &charIndex, &value)) {
+      printString("Error: not a number");
+
       return; //TODO message value expected
     }
 
     intValue = trunc(value);
+    printInteger(value);
+    printString("\n");
     mantissa = round(100*(value - intValue)); 
     switch (letter) {
     case 'G':
-      
+      printString("command: G\n");
+    
       switch (intValue)
       {
       case 0: case 1: case 2: case 3:
@@ -89,7 +103,7 @@ void executeGcodeLine(char *line, int length) {
       break;
     }
   }
-
+  printString("executemovementline\n");
   executeMovementLine(&blockData);  
 
 }

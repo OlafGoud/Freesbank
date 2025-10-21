@@ -9,6 +9,7 @@ typedef struct {
 
 volatile SystemInfo sys;
 
+bool comment = false;
 int length = 0;
 char line[LINE_BUFFER];
 float currentPos[3];
@@ -32,6 +33,11 @@ int mainLoop() {
   sei();                        // enable interrupts 
 
   systemExecuteReadyLine();
+  printFloat(181.2181, 3); uartWrite('\n');
+  printInteger(10000); uartWrite('\n');
+  printUint8Base10(19); uartWrite('\n');
+  printString("----------------------\n");
+  printStatus();
 
   /*main loop*/
   while (!CHECK_BIT(sys.state, STATE_EXIT)) {
@@ -68,7 +74,6 @@ int mainLoop() {
  * read the serial buffer for input. it seperates it into lines and then sends it to the gcode reader and planner.
  */
 void readSerialLine() {
-  bool comment = false;
 	while (length < LINE_BUFFER) {
     uint8_t data = uartRead();
 
@@ -87,14 +92,21 @@ void readSerialLine() {
     if(data == '\n' || data == '\0') {
       line[length] = '\n';
       length++;
-      if(line[0] == '$') {
+      if(line[0] == '$' && length > 1) {
+        if(line[1] == 'I') {
+          printString("[VER:1.1h.20190830:]\n[OPT:V,15,128]\nok\n"); // dummy
+        } else if(line[1] == '$') {
+          printString("$0 = 10\nok\n"); // dummy
+        } else if (line[1] == 'G') {
+          printString("[GC:G0 G54 G17 G21 G90 G94 M5 M9 T0 F0 S0]\nok");
+        }
         //TODO: execute system command
+      } else if (line[0] == '?') {
+        printStatus();
       } else {
         executeGcodeLine(line, length);
         // TODO: Execute gc command
       }
-      uartWrite('&');
-      uartWriteString(line, length);
 
       length = 0;
       
@@ -119,8 +131,12 @@ void readSerialLine() {
 
   // never reached or gcode is to big per line;
   uartWriteStringWithTerminator("Line is to long. default is 60.\n");
-
+  printInteger(length);
+  printString(" is current length.\n");
 }
+
+
+
 
 /**
  * @deprecated
@@ -144,5 +160,4 @@ void readSerialLine() {
 
   return 0;
 }
-
 */

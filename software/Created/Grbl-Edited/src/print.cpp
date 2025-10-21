@@ -64,6 +64,18 @@ void printInteger(long n) {
 }
 
 
+void printStatus() {
+  char* num;
+  printString("<Run|MPos:");
+  for(int i = 0; i < N_AXIS; i++) {
+    printFloat(currentPosition[i], 2);
+    if(i < N_AXIS - 1) {
+      printString(",");
+    }
+  }
+  printString("|FS:0.000,0.000|WCO:0.000,0.000,0.000>\n");
+}
+
 // official grbl code ------------------------------------------------------------------
 // Convert float to string by immediately converting to a long integer, which contains
 // more digits than a float. Number of decimal places, which are tracked by a counter,

@@ -11,4 +11,7 @@ void plannerRecalculate(float J);
 
 float junctionSpeedFromDeviation(const float u[3], const float v[3], float J, float a);
 
+void* getBufferBlock();
+
+void* getPlan();
 #endif

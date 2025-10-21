@@ -1,6 +1,6 @@
 #include "planner.h"
-//planner ringbuffer
-planner_t planner;
+
+static planner_t planner;
 float currentPosition[N_AXIS] = {0,0,0};
 
 
@@ -11,6 +11,8 @@ float currentPosition[N_AXIS] = {0,0,0};
  * @param feedrate float feedrate -> the feedrate (nominalspeed) for each block.
  */
 void planBufferLine(float targetPos[N_AXIS], float feedrate) {
+  printString("target X: "); printFloat(targetPos[0], 3); printString(", Y: "); printFloat(targetPos[1], 3); uartWrite('\n');
+
   planner_block_t *block = &planner.block[planner.head];
 
   memcpy(block->p0, currentPosition, sizeof(currentPosition));
@@ -21,26 +23,31 @@ void planBufferLine(float targetPos[N_AXIS], float feedrate) {
   }
   block->nominal_speed = feedrate;
   
-  float dx = targetPos[0] - currentPos[0];
-  float dy = targetPos[1] - currentPos[1];
-  float dz = targetPos[2] - currentPos[2];
+  float dx = targetPos[0] - currentPosition[0]; printFloat(dx, 3); uartWrite('\n');
+  float dy = targetPos[1] - currentPosition[1]; printFloat(dy, 3); uartWrite('\n');
+  float dz = targetPos[2] - currentPosition[2]; printFloat(dz, 3); uartWrite('\n');
   block->distance = sqrtf(dx*dx + dy*dy + dz*dz);
   block->accel = SYSTEM_MAX_ACCEL;
   vecSub3(block->dir, block->p0, block->p1);
   vecNormalize3(block->dir);
+  printString("dir X: "); printFloat(block->dir[0], 3); printString(", Y: "); printFloat(block->dir[1], 3); uartWrite('\n');
 
 
 
   planner.head = (planner.head + 1) % PLANNER_BUFFER_SIZE;
   if (planner.head == planner.tail) return; //buffer overflow.  
 
+  printString("origin 1 X: "); printFloat(block->p0[0], 3); printString(", Y: "); printFloat(block->p0[1], 3); uartWrite('\n');
+  printString("target 1 X: "); printFloat(block->p1[0], 3); printString(", Y: "); printFloat(block->p1[1], 3); uartWrite('\n');
+  memcpy(currentPosition, block->p1, sizeof(currentPosition));
 
   plannerRecalculate(0.001f);
-
+  prepareStepperBuffer();
 }
 
 /**
- * Recalculates the junction speed for every planned block in the 'planner' ringbuffer to ensure the machine is running on maximum speed for each segment without losing accuracy.
+ * Recalculates the junction speed for every planned block in the 'planner' ringbuffer to ensure the machine is running on maximum speed for each segment without losing
+ * accuracy.
  * @param J float J -> dividation that can happen in the corner smaller = more accurate.
  */
 void plannerRecalculate(float J) {
@@ -117,14 +124,12 @@ void plannerRecalculate(float J) {
 }
 
 
-
-
 /**
  * calculates the maximum junctionspeed from deviation with unit vectors.
  * 
  * @param u const float u[3] -> unit vector prev block.
  * @param v const float v[3] -> unit vector current block.
- * @param J float J -> dividation that can happen in the corner smaller = more accurate.
+ * @param J float J -> dividation that is allowed in the corner smaller = more accurate.
  * @param a float a -> maxmimal system acceleration.
  * 
  * @return float - junction speed.
@@ -149,6 +154,19 @@ float junctionSpeedFromDeviation(const float u[3], const float v[3], float J, fl
   }
 
   return sqrtf(vj_sq);
+}
+
+
+void* getBufferBlock() {
+  planner_block_t* ptr = &(planner.block[planner.head - 1]);
+  printString("origin 2 getbufferblock X: "); printFloat(ptr->p0[0], 3); printString(", Y: "); printFloat(ptr->p0[1], 3); uartWrite('\n');
+  return (void*)ptr;
+}
+
+void* getPlan() {
+  planner_t* ptr = &(planner);
+  //printString("origin 2 getbufferblock X: "); printFloat(ptr->p0[0], 3); printString(", Y: "); printFloat(ptr->p0[1], 3); uartWrite('\n');
+  return (void*)ptr;
 }
 
 
