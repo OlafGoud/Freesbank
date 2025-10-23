@@ -90,6 +90,7 @@ uint8_t readFloat(char *line, uint8_t *char_counter, float *float_ptr) {
 }
 
 
+
 /**
  * Vector function for function: junctionSpeedFromDeviation. 
  * 

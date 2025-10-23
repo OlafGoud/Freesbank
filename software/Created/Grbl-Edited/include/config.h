@@ -38,17 +38,13 @@
 
 
 
-/**
- * Sizes of the Serial TX and RX Buffers
- */
-#define TX_BUFFER_SIZE 64
-#define RX_BUFFER_SIZE 64
+#define MAX_INT_DIGITS 10
 
 
 #define SYSTEM_MAX_SPEED 3000
-#define SYSTEM_MAX_ACCEL 200
+#define SYSTEM_MAX_ACCEL 500
+#define SYSTEM_MAX_DECEL 500
 
-#define MAX_INT_DIGITS 10
 
 
 /********************************************************************************************************************************************
@@ -69,13 +65,27 @@
 #define STATE_ALARM       1 
 #define STATE_EXIT        7
 
-#define PLANNER_BUFFER_SIZE 5
 #define EPS_COS_STRAIGHT 0.999999f
 
 
-#define SERIAL_NO_DATA 0xff
+/********************************************************************************************************************************************
+ * Buffer sizes
+ *******************************************************************************************************************************************/
 #define LINE_BUFFER 60
+#define PLANNER_BUFFER_SIZE 16
+#define STEPPER_BUFFER_SIZE 4
+/**
+ * Sizes of the Serial TX and RX Buffers
+ */
+#define TX_BUFFER_SIZE 64
+#define RX_BUFFER_SIZE 64
 
-#define SYSTEM_INFO "<Idle|MPos:0.000,0.000,0.000|FS:0,0|WCO:0.000,0.000,0.000>\nok"
+// --------------------------------------------------
+
+
+
+#define SERIAL_NO_DATA 0xff
+
+//#define SYSTEM_INFO "<Idle|MPos:0.000,0.000,0.000|FS:0,0|WCO:0.000,0.000,0.000>\nok"
 
 #endif

@@ -65,7 +65,6 @@ void printInteger(long n) {
 
 
 void printStatus() {
-  char* num;
   printString("<Run|MPos:");
   for(int i = 0; i < N_AXIS; i++) {
     printFloat(currentPosition[i], 2);
@@ -73,7 +72,14 @@ void printStatus() {
       printString(",");
     }
   }
-  printString("|FS:0.000,0.000|WCO:0.000,0.000,0.000>\n");
+  //printString("|FS:0.000,0.000|WCO:0.000,0.000,0.000>\n");
+}
+
+void printHLine(char c) {
+  for (int i = 0; i < 20; i++) {
+    uartWrite(c);
+  }
+  uartWrite('\n');
 }
 
 // official grbl code ------------------------------------------------------------------
@@ -124,5 +130,6 @@ void printFloat(float n, uint8_t decimal_places) {
  * Print ready line when starting program
  */
 void systemExecuteReadyLine() {
-	printString("Milling machine ready V1\n");
+	printString("CNC Ready\n");
+  printHLine('=');
 }

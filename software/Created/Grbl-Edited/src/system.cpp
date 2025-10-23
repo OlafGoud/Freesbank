@@ -33,11 +33,7 @@ int mainLoop() {
   sei();                        // enable interrupts 
 
   systemExecuteReadyLine();
-  printFloat(181.2181, 3); uartWrite('\n');
-  printInteger(10000); uartWrite('\n');
-  printUint8Base10(19); uartWrite('\n');
-  printString("----------------------\n");
-  printStatus();
+
 
   /*main loop*/
   while (!CHECK_BIT(sys.state, STATE_EXIT)) {
@@ -55,7 +51,7 @@ int mainLoop() {
 
     /** @todo get from plannerbuffer
      * 
-    stepperLoadPlanning( @todo parameters );
+    stepperLoadPlanning( @todo parameters);
     */
      
 
@@ -94,11 +90,11 @@ void readSerialLine() {
       length++;
       if(line[0] == '$' && length > 1) {
         if(line[1] == 'I') {
-          printString("[VER:1.1h.20190830:]\n[OPT:V,15,128]\nok\n"); // dummy
+          //printString("[VER:1.1h.20190830:]\n[OPT:V,15,128]\nok\n"); // dummy
         } else if(line[1] == '$') {
-          printString("$0 = 10\nok\n"); // dummy
+          //printString("$0 = 10\nok\n"); // dummy
         } else if (line[1] == 'G') {
-          printString("[GC:G0 G54 G17 G21 G90 G94 M5 M9 T0 F0 S0]\nok");
+          //printString("[GC:G0 G54 G17 G21 G90 G94 M5 M9 T0 F0 S0]\nok");
         }
         //TODO: execute system command
       } else if (line[0] == '?') {
@@ -130,9 +126,9 @@ void readSerialLine() {
 	}
 
   // never reached or gcode is to big per line;
-  uartWriteStringWithTerminator("Line is to long. default is 60.\n");
+  uartWriteStringWithTerminator("Line to long: ");
   printInteger(length);
-  printString(" is current length.\n");
+  uartWrite('\n');
 }
 
 

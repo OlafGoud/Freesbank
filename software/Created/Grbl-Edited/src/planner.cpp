@@ -11,7 +11,7 @@ float currentPosition[N_AXIS] = {0,0,0};
  * @param feedrate float feedrate -> the feedrate (nominalspeed) for each block.
  */
 void planBufferLine(float targetPos[N_AXIS], float feedrate) {
-  printString("target X: "); printFloat(targetPos[0], 3); printString(", Y: "); printFloat(targetPos[1], 3); uartWrite('\n');
+//  printString("target X: "); printFloat(targetPos[0], 3); printString(", Y: "); printFloat(targetPos[1], 3); uartWrite('\n');
 
   planner_block_t *block = &planner.block[planner.head];
 
@@ -27,18 +27,17 @@ void planBufferLine(float targetPos[N_AXIS], float feedrate) {
   float dy = targetPos[1] - currentPosition[1]; printFloat(dy, 3); uartWrite('\n');
   float dz = targetPos[2] - currentPosition[2]; printFloat(dz, 3); uartWrite('\n');
   block->distance = sqrtf(dx*dx + dy*dy + dz*dz);
-  block->accel = SYSTEM_MAX_ACCEL;
   vecSub3(block->dir, block->p0, block->p1);
   vecNormalize3(block->dir);
-  printString("dir X: "); printFloat(block->dir[0], 3); printString(", Y: "); printFloat(block->dir[1], 3); uartWrite('\n');
+//  printString("dir X: "); printFloat(block->dir[0], 3); printString(", Y: "); printFloat(block->dir[1], 3); uartWrite('\n');
 
 
 
   planner.head = (planner.head + 1) % PLANNER_BUFFER_SIZE;
   if (planner.head == planner.tail) return; //buffer overflow.  
 
-  printString("origin 1 X: "); printFloat(block->p0[0], 3); printString(", Y: "); printFloat(block->p0[1], 3); uartWrite('\n');
-  printString("target 1 X: "); printFloat(block->p1[0], 3); printString(", Y: "); printFloat(block->p1[1], 3); uartWrite('\n');
+//  printString("origin 1 X: "); printFloat(block->p0[0], 3); printString(", Y: "); printFloat(block->p0[1], 3); uartWrite('\n');
+//  printString("target 1 X: "); printFloat(block->p1[0], 3); printString(", Y: "); printFloat(block->p1[1], 3); uartWrite('\n');
   memcpy(currentPosition, block->p1, sizeof(currentPosition));
 
   plannerRecalculate(0.001f);
@@ -71,7 +70,7 @@ void plannerRecalculate(float J) {
   while(idx != planner.head) {
     int prev = (idx - 1 + PLANNER_BUFFER_SIZE) % PLANNER_BUFFER_SIZE;
     if(prev != idx) {
-      float maxJunctionSpeed = junctionSpeedFromDeviation(planner.block[prev].dir, planner.block[idx].dir, J, fminf(planner.block[prev].accel, planner.block[idx].accel));
+      float maxJunctionSpeed = junctionSpeedFromDeviation(planner.block[prev].dir, planner.block[idx].dir, J, SYSTEM_MAX_ACCEL);
 
       if(planner.block[idx].entry_speed > maxJunctionSpeed) {
         planner.block[idx].entry_speed = maxJunctionSpeed;
@@ -99,7 +98,7 @@ void plannerRecalculate(float J) {
       planner_block_t *B = &planner.block[i];
       planner_block_t *P = &planner.block[prev];
 
-      float max_entry_from_prev = sqrtf(fmaxf(0.0f, P->entry_speed * P->entry_speed + 2.0f * P->accel * P->distance));
+      float max_entry_from_prev = sqrtf(fmaxf(0.0f, P->entry_speed * P->entry_speed + 2.0f * SYSTEM_MAX_ACCEL * P->distance));
 
       if(B->entry_speed > max_entry_from_prev) {
         B->entry_speed = max_entry_from_prev;
@@ -159,7 +158,7 @@ float junctionSpeedFromDeviation(const float u[3], const float v[3], float J, fl
 
 void* getBufferBlock() {
   planner_block_t* ptr = &(planner.block[planner.head - 1]);
-  printString("origin 2 getbufferblock X: "); printFloat(ptr->p0[0], 3); printString(", Y: "); printFloat(ptr->p0[1], 3); uartWrite('\n');
+  //printString("origin 2 getbufferblock X: "); printFloat(ptr->p0[0], 3); printString(", Y: "); printFloat(ptr->p0[1], 3); uartWrite('\n');
   return (void*)ptr;
 }
 

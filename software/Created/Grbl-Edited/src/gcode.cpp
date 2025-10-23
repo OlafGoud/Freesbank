@@ -6,7 +6,7 @@ gc_modes state;
 //TODO: return message
 
 void executeGcodeLine(char *line, int length) {
-  printString("executegcodeline\n");
+  //printString("executegcodeline\n");
   uint8_t axisCommand = AXIS_COMMAND_NONE;
   memset(&blockData, 0, sizeof(gc_data));
   memcpy(&blockData.mode, &state, sizeof(gc_modes));

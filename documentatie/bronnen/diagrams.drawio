@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram name="SystemArchitecture" id="hrtLZk-t5wfWhnMYysPn">
-        <mxGraphModel dx="1062" dy="719" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1062" dy="396" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -2474,24 +2474,24 @@
                 <mxCell id="Hc01q3zCoAx1mrXllumg-28" value="rondes worden niet geteld. dus als het tandwiel te snel gaat kun je" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="460" y="210" width="320" height="70" as="geometry"/>
                 </mxCell>
-                <mxCell id="eCsz_3r7l2C7IkQfcvZP-1" value="absolute + rotation&amp;nbsp;&lt;span style=&quot;background-color: transparent;&quot;&gt;counter&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontColor=light-dark(#000000,#FFFFFF);" vertex="1" parent="1">
+                <mxCell id="eCsz_3r7l2C7IkQfcvZP-1" value="absolute + rotation&amp;nbsp;&lt;span style=&quot;background-color: transparent;&quot;&gt;counter&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontColor=light-dark(#000000,#FFFFFF);" parent="1" vertex="1">
                     <mxGeometry x="-50" y="280" width="120" height="70" as="geometry"/>
                 </mxCell>
-                <mxCell id="eCsz_3r7l2C7IkQfcvZP-3" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="eCsz_3r7l2C7IkQfcvZP-2">
+                <mxCell id="eCsz_3r7l2C7IkQfcvZP-3" value="" style="edgeStyle=none;html=1;" parent="1" source="eCsz_3r7l2C7IkQfcvZP-2" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="230" y="280" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="eCsz_3r7l2C7IkQfcvZP-2" value="18 bit per rotatie en 24 bit rotaties tellen.&lt;br&gt;&amp;nbsp;262,144 per revolution,&amp;nbsp;16,777,216 revolutions&lt;br&gt;stel 1 rotatie is 60 mm =&amp;nbsp;0.000228881836 mm per tick" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="eCsz_3r7l2C7IkQfcvZP-2" value="18 bit per rotatie en 24 bit rotaties tellen.&lt;br&gt;&amp;nbsp;262,144 per revolution,&amp;nbsp;16,777,216 revolutions&lt;br&gt;stel 1 rotatie is 60 mm =&amp;nbsp;0.000228881836 mm per tick" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="70" y="280" width="320" height="70" as="geometry"/>
                 </mxCell>
-                <mxCell id="eCsz_3r7l2C7IkQfcvZP-4" value="€85,38 ex btw" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="eCsz_3r7l2C7IkQfcvZP-4" value="€85,38 ex btw" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="390" y="280" width="70" height="70" as="geometry"/>
                 </mxCell>
-                <mxCell id="eCsz_3r7l2C7IkQfcvZP-5" value="onthoud de positie ook als die uit is geweest. OVERKILL" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="eCsz_3r7l2C7IkQfcvZP-5" value="onthoud de positie ook als die uit is geweest. OVERKILL" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="460" y="280" width="320" height="70" as="geometry"/>
                 </mxCell>
-                <mxCell id="eCsz_3r7l2C7IkQfcvZP-6" value="12 bit. dus 4096 mogelijkheden voor 1 rotatie. 0.1 mm met een 200 tanden tandwiel en kleiner tandwiel voor meer nouwkeurigheid" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="eCsz_3r7l2C7IkQfcvZP-6" value="12 bit. dus 4096 mogelijkheden voor 1 rotatie. 0.1 mm met een 200 tanden tandwiel en kleiner tandwiel voor meer nouwkeurigheid" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="70" y="210" width="320" height="70" as="geometry"/>
                 </mxCell>
             </root>

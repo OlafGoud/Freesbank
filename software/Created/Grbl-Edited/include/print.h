@@ -22,6 +22,7 @@ void printFloat(float n, uint8_t decimal_places);
 
 void systemExecuteReadyLine();
 
+void printHLine(char c);
 
 void printStatus();
 

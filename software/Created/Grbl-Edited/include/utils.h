@@ -62,16 +62,14 @@ typedef struct {
 } gc_data;
 
 typedef struct {
-  float distance;       // length of move (mm)
-  float feedrate;       // mm/min
-  float dir[N_AXIS];    // unit vector
-  float nominal_speed;  // nominal speed
-  float accel;
-  float entry_speed;        // velocity entry (mm/s)
-  float exit_speed;         // velocity exit  (mm/s)
-  float t_total;        // total time of motion
-  float p0[N_AXIS];     // start pos
-  float p1[N_AXIS];     // end pos
+  float distance;       // length of move (mm)              4
+  float feedrate;       // mm/min                           4
+  float dir[N_AXIS];    // unit vector                      4
+  float nominal_speed;  // nominal speed                    4
+  float entry_speed;        // velocity entry (mm/s)        4
+  float exit_speed;         // velocity exit  (mm/s)        4
+  float p0[N_AXIS];     // start pos                        4 * naxis = 4*3 = 12
+  float p1[N_AXIS];     // end pos                          4 * naxis = 4*3 = 12
 } planner_block_t;
 
 typedef struct {
