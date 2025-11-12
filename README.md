@@ -1,75 +1,23 @@
-# Stage Sens2Sea 3D Printer
+# Stage Sens2Sea Frees Printer
 
-Sens2Sea is een klein bedrijf dat radar systemen en radar video technologie ontwikkeld. Het bedrijf word geleid door Geert Mosterdijk als directeur en vijf andere collega's. Deze technologie word gebruikt op zee om bewegende en stilstaande objecten te detecteren. Ook kan deze radar techonologie olievlekken in water detecteren en de zeebodem inkaart brengen. 
+## Context
 
-Het bedrijf
+Sens2Sea is een klein bedrijf dat radar systemen en radar video technologie ontwikkeld. Het bedrijf word geleid door Geert Mosterdijk als directeur. Deze technologie word gebruikt op zee om bewegende en stilstaande objecten te detecteren bij goed en slecht zicht. Ook kan deze radar techonologie olievlekken in water detecteren en de zeebodem inkaart brengen. 
 
+Het bedrijf is bezig met pulsradar technologie. Hiervoor wilt deze parabool antennes gebruiken. Deze zijn makkelijk te verkrijgen in standaard maten. Alleen heeft Sens2Sea custom maten nodig. Deze zijn veel duurder dan de standaard maten antennes. Hierom willen ze zelf een machine bezitten om de radar te maken. Dit is een freesmachine die een werkruimte van 4m x 1m x 0.4m moet hebben. Daarvoor moet ik de code maken en electronica doen.
 
-
-
-
-
-## Docu git: 
-- \[docu\] changed readme / added file.md -> documentation
-- \[fix\] file.h, fixed ..... -> bugfix
-- \[feature\] file.h, added ..... -> feature add
-- \[refact\] file.h -> changed code by refactoring
-- \[del\] file.h, removed: ..... -> deleted feature
+Er is opensource software zoals GRBL dat dit werk kan doen alleen is deze niet aangepast op wat de opdrachtgever wilt. Omdat de freesmachine over de afstand van 4 meter moet kunnen werken wilt Sens2Sea dat de aandrijving en locatie bepaling gescheiden word. Dit is niet het geval bij GRBL. Deze software bepaalt de positie van de kop op basis van de stappen die uitgevoerd worden te tellen bij de stappen motoren. Maar stepper motoren kunnen een stap verspringen. Hierdoor zou de vorm van een antenne verslechteren waardoor die minder effectief word. Hierom wilt Sens2Sea dat de positie van de kop door sensoren bepaald word.
 
 
-\/ needs fixing
+## Documentatie
+[Sensoronderzoek](./documentatie/inhoud/sensor.md)
+
+[requirements](./documentatie/inhoud/requirments.md)
+[risico-iventarisatie](./documentatie/inhoud/risico-iventarisatie.md)
 
 
 
 
-**Sens2Sea is a small business that develops radars systems and radar video technology. The business is run by Geert Mosterdijk as managing director  and five more coleges.**(wie) 
-
-## Radar
-Radar is a system that emits radio waves from a transmitter. Those waves travel through the air until they reflect on an object. this reflection is scatterd in many directions. Some waves will be absorbed by or penetrate the target. Materials with good electrical conductivity like metals, seawater and wet ground reflect the radar waves especially well. The antenna is switched between the transmitter and the receiver.
-
-Radio waves are weakly absorbed by the medium they go through. That makes them suitable for relatively long range detection of objects. Wheather like fog, clouds, snow and rain that block those other wavelengths are usually transparent  to radiowaves. Certain radiowaves are absorbed by those mediums but they are avoided for radar technology.
-
-Radar beams that are emited by a transmitter will go in all directions and that is not optimal for long range detection. That's why antennas are used for radars. They redirect the waves to the desired direction. A lot of antennes are shaped like a parabola because that shape directes the waves always in the same direction regardless of where they hit the parabola. **To make those antennes in a different size than a 'standard' size is considerable more expensive so Sens2Sea want to print them with a 3D printer. 3D printers are usually small compared to the antennes so you print them in pieces.**(waarom, wat, wanneer) But if there are minor mistakes in the process of attaching all pieces together the antenne does not work as intended. The 3d printer that needs to be build must be able to print those antennes accurately in one piece.
-
-## 3D printer.
-**The printer mus be able to print in one piece. That's why the work area is 4 meter long, 1 meter wide and 0.40 meter high. The position of the head of the machine needs to be known to print without impacting the shape. That needs to be done with sensors. The base of the program is the opensource project grbl. It does not include the capabilities of determin the exact location so the grbl code needs to be modified. The commands are given via the serial monitor by a tool named 'Universal Gcode Sender'** (hoe)
-
-
-pulsradar
-nadelen tegenover toepassingen die gemaakt worden. resolutie, geen dopler (golven spectrum meten met minimaal 64 omwentelingen )
-voordelen fmcw (frequency modulated contuinous wave) dopler (1 omwenteling voor hele golven pectrum) geen squint en hoge resolutie (10 cm)
-
-
-Probleemstelling:
-- voor wie is het een probleem
-- wat is het probleem
-- waarom is het een probleem
-- wanneer is het een probleem
-- hoe los je het op
-
-analyse:
-- product: bestaande oplossing, product
-- mensen: stakeholders
-- processen: welke processen
-
-functioneel = wat
-non functioneel = hoe
-
-
-
-zijn er deelproducten bij het bedrijf?
-er staan
-
-scope:
-lengte en breedte
-realitstisch
-grenzen van de scope
-
-
-
-
-
-closed loop stepper driver control board??? -> dat word hem niet ivm afhankelijkheid van leverancier
 
 
 ## Info
@@ -79,6 +27,15 @@ Geert Mosterdijk
 
 ### Contributors
 - Olaf Goudriaan (1071349)
+
+### GIT
+https://github.com/OlafGoud/Freesbank (CLOSED)
+#### Docu git: 
+- \[docu\] changed readme / added file.md -> documentation
+- \[fix\] file.h, fixed ..... -> bugfix
+- \[feature\] file.h, added ..... -> feature add
+- \[refact\] file.h -> changed code by refactoring
+- \[del\] file.h, removed: ..... -> deleted feature
 
 ## sources
 https://github.com/gnea/grbl/wiki | https://github.com/gnea/grbl

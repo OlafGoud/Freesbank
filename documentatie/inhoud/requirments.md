@@ -4,10 +4,7 @@ Een radar maakt gebruik van een antenne om het bereik te vergroten en om de data
 
 # Scope
 De scope van de opdracht bevat het aansturen met code van de freesbank doormiddel van een vorm van grbl. Hier nog een sensor aan toevoegen om de exacte locatie van de kop te kunnen bepalen. (En simpele elektra voor de motoren aan te sturen.)
-aansturing van de 4 assen. en de localisering scheiden van de aansturing
-
-
-leverancier bepaalt de inhoud van de encoder. dus als je wat anders wilt doen dan is dat niet mogelijk. dus ben je afhankelijk van de leverancier.
+aansturing van de 4 assen. en de localisering scheiden van de aansturing.
 
 # Requirements
 
@@ -22,8 +19,8 @@ De kop kan omhoog, omlaag, links, rechts, vooruit en achteruit bewegen. (x+, x-,
 **Taken**
 [x] Test de motoren + drivers.
 [ ] Sluit de motoren aan op de machine.
-[ ] Maak testplan.
 [ ] Maak code om de assen te bewegen.
+[ ] Maak testplan.
 [ ] Doe testen en zet de resultaten in testplan.
 [ ] Demo video.
 [ ] Aanbevelingen noteren.
@@ -35,7 +32,7 @@ De kop kan materiaal toevoegen dat word aangegeven.
 Er kan materiaal toegevoegd worden aan de vorm. Dit materiaal moet aan de andere vorm hechten.
 
 **Taken**
-[ ] Zoek uit hoe 3d printen werkt.
+[x] Zoek uit hoe 3d printen werkt.
 [ ] Zoek uit welke 3d print kop het beste is voor de toepassing.
 [ ] Maak testplan.
 [ ] Maak code om de kop aan te sturen.
@@ -51,7 +48,7 @@ De kop kan materiaal verwijderen.
 Er kan materiaal verwijderd worden van de vorm.
 
 **Taken**
-[ ] Zoek uit hoe CNC machines werken.
+[x] Zoek uit hoe CNC machines werken.
 [ ] Zoek uit welke snijkop het beste is voor de toepassing.
 [ ] Maak testplan.
 [ ] Maak code om de kop aan te sturen.
@@ -67,9 +64,9 @@ De positie van de kop van de machine moet bepaald kunnen worden door sensoren.
 De positie van de kop van de machine moet op 5mm nauwkeurig gemeten worden.
 
 **Taken**
-[ ] Zoek uit welke sensoren gebruikt gaan worden.
+[x] Zoek uit welke sensoren gebruikt gaan worden.
 [ ] Maak testplan.
-[ ] Maak code om de de sensoren uit te lezen.
+[x] Maak code om de de sensoren uit te lezen.
 [ ] Doe testen en zet de resultaten in testplan.
 [ ] Demo video.
 [ ] Aanbevelingen noteren.
@@ -82,9 +79,9 @@ De machine kan een g-code bestand gestreamd krijgen en het bestand uitvoeren.
 Er kan een g-code bestand op de machine gezet worden door een seriele verbinding en de machine volgt de instructies van dat bestand.
 
 **Taken**
-[ ] Zoek uit welk wat g-code is en hoe het werkt.
+[x] Zoek uit welk wat g-code is en hoe het werkt.
+[x] Maak code om de g-code te kunnen uitlezen van de seriele buffer en te kunnen gebruiken.
 [ ] Maak testplan.
-[ ] Maak code om de g-code te kunnen uitlezen van de seriele buffer en te kunnen gebruiken.
 [ ] Doe testen en zet de resultaten in testplan.
 [ ] Demo video.
 [ ] Aanbevelingen noteren.
@@ -98,9 +95,9 @@ De code van de machine gebruikt interfaces tussen de verschillende functionalite
 Er kan een onderdeel veranderd worden, nieuwe code voor dat onderdeel geschreven worden die gebruikt maakt van de interface zonder de hele code om te bouwen.
 
 **Taken**
-[ ] Maak architectuur
+[x] Maak architectuur
+[x/] Maak de core code.
 [ ] Maak testplan.
-[ ] Maak de core code.
 [ ] Maak code voor alle losse onderdelen.
 [ ] Laat de core gebruik maken van de lossen onderdelen.
 [ ] Aanbevelingen noteren.
