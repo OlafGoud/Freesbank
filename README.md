@@ -10,14 +10,18 @@ Er is opensource software zoals GRBL dat dit werk kan doen alleen is deze niet a
 
 
 ## Documentatie
-[Sensoronderzoek](./documentatie/inhoud/sensor.md)
+- [Sensoronderzoek PDF](./documentatie/inhoud/sensor.pdf)
+- [requirements PDF](./documentatie/inhoud/requirments.pdf)
+- [aantekeningen](./documentatie/inhoud/aantekeningen.md)
+- [g-code-onderzoek](./documentatie/inhoud/g-code-onderzoek.md)
+- [grbl-onderzoek](./documentatie/inhoud/grbl-onderzoek.md)
+- []
+- [electric sceme testopstelling](./documentatie/bronnen/CNC3DPrinter-electricsceme-testopstelling.pdf)
 
-[requirements](./documentatie/inhoud/requirments.md)
-[risico-iventarisatie](./documentatie/inhoud/risico-iventarisatie.md)
-
-
-
-
+### Other Documents
+- [PVA PDF](./documentatie/school/planvanaanpak.pdf)  
+- [stakeholder PDF](./documentatie/school/stakeholder.pdf)
+- [risico-iventarisatie PDF](./documentatie/inhoud/risico-iventarisatie.pdf)
 
 
 ## Info

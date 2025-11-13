@@ -29,9 +29,8 @@ De hardware is verbonden aan de microcontroller. Ieder systeem op een eigen IO p
 ### Software
 ![SoftwareDiagram](../bronnen/systemimages/Microcontroller.png)
 *Diagram 3: Software*
-# TODO -> sniffer -> receiver
-**Sniffer**  
-De sniffer luistert naar al het binnenkomend verkeer. Deze geeft dan een sijntje om de raw data te gaan gebruiken.
+**receiver**  
+De receiver luistert naar al het binnenkomend verkeer. Deze geeft dan een sijntje om de raw data te gaan gebruiken.
 
 **Reader**  
 De reader haalt de data op en gaat deze in commando's verdelen die uit te voeren zijn. Systeem commando's worden hiervan direct uitgevoerd. Wanneer er een beweging gemaakt moet worden zal de reader de commando's formateren om te geven aan de movement planner.
@@ -58,4 +57,4 @@ De feedback controller gebruikt het geplande pad en de sensor data om de actuato
 De sender stuurt alle data dat naar de gebruiker moet. Dit zijn status updates, error codes, sensor informatie, systeem informatie etc.
 
 
-De microcontroller bestaat uit meerdere onderdelen. De sniffer luisterd naar de lijn die binnen komt. Deze haalt de data uit de input bus en zet ze op een plek waar de reader erbij kan. De reader haalt de data uit die plek. Deze zet dit om naar bruikbare commando's. Deze worden gebruikt door de movementplanner om daarvan een pad te berekenen. Deze planner berekent ook de snelheid waarmee iedere motor moet bewegen. 
+De microcontroller bestaat uit meerdere onderdelen. De receiver luisterd naar de lijn die binnen komt. Deze haalt de data uit de input bus en zet ze op een plek waar de reader erbij kan. De reader haalt de data uit die plek. Deze zet dit om naar bruikbare commando's. Deze worden gebruikt door de movementplanner om daarvan een pad te berekenen. Deze planner berekent ook de snelheid waarmee iedere motor moet bewegen. 
