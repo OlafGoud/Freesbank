@@ -61,7 +61,7 @@ Er kan materiaal verwijderd worden van de vorm.
 De positie van de kop van de machine moet bepaald kunnen worden door sensoren.
 
 **Acceptatie:**
-De positie van de kop van de machine moet op 5mm nauwkeurig gemeten worden.
+De positie van de kop van de machine moet op 1mm nauwkeurig gemeten worden.
 
 **Taken**
 [x] Zoek uit welke sensoren gebruikt gaan worden.
@@ -96,7 +96,10 @@ Er kan een onderdeel veranderd worden, nieuwe code voor dat onderdeel geschreven
 
 **Taken**
 [x] Maak architectuur
-[x/] Maak de core code.
+[x] Maak custom serial data reader
+[x] Maak gcode parcer
+[x] Maak gcode
+[x] Maak de core code.
 [ ] Maak testplan.
 [ ] Maak code voor alle losse onderdelen.
 [ ] Laat de core gebruik maken van de lossen onderdelen.

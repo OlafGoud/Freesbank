@@ -7,6 +7,9 @@ Geert is de opdrachtgever, hierdoor heeft hij veel belang bij het project en ook
 ## De student
 De student (Olaf Goudriaan) is de projectleider en uitvoerder van het project. Hij heeft belang bij het project omdat hij zijn kennis moet vergroten.
 
+## CoE HR TECH
+Deze organisatie zorgt voor de subsidie voor het project. Dus deze hebben veel belang bij het project.
+
 ## P.G.M. van der Klugt
 Peter is de collega van Geert. Zijn belang is bij dat het project soepel verloopt en dat e reen werkend product komt. Tevens is hij expert op het gebied van regel systemen en andere algoritmes.
 

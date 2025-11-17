@@ -11,3 +11,8 @@ aangegeven dat ook met motorencoders kan maar dan zit je vast aan de fabricant d
 ### ??
 gesprek gehad over sensoren
 eruit is gebleken dat de opdrachtgever wilt dat er een incrementele encoder gebruik word.
+
+
+
+week van 10-11
+sensor is binnen, maar is kapot.
