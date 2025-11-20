@@ -64,7 +64,7 @@ typedef struct {
 typedef struct {
   float distance;       // length of move (mm)              4
   float feedrate;       // mm/min                           4
-  float dir[N_AXIS];    // unit vector                      4
+  float dir[N_AXIS];    // unit vector                      4 * naxis = 4*3 = 12
   float nominal_speed;  // nominal speed                    4
   float entry_speed;        // velocity entry (mm/s)        4
   float exit_speed;         // velocity exit  (mm/s)        4

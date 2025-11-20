@@ -65,7 +65,44 @@ Linieare encoders zijn net als incrementele encoders maar in plaats van dat de g
 ## Conclusie
 Na voorgelegd te hebben aan de opdrachtgever is er besloten om een incrementele encoder te gebruiken. Dit omdat deze meer vrijheid bieden dan de andere encoders.
 
+## Code
+```cpp
 
+volatile int steps = 0;
+volatile uint_8t encoderState = 0;
+
+void setup() {
+  pinMode(2, INPUT_PULLUP);
+  pinMode(3, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(2), encoderStep, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(3), encoderStep, CHANGE);
+
+}
+
+void loop() {
+  if(Serial.available()) {
+    noInterrupts();
+    if(Serial.read() == '?') {
+      Serial.println(steps);
+    }
+    interrupts();
+  }
+}
+
+void encoderStep() {
+  bool interupt1 = digitalRead(2);
+  bool interupt2 = digitalRead(3);
+
+  uint8_t tempStep = interupt1 == 1 ? (interupt2 == 1 ? 2 : 3) : (interupt2 == 1 ? 1 : 0);
+  if((encoderState + 1) % 4 == tempStep) {
+    encoderState = ((encoderState + 1) % 4); //vooruit
+  } else if((encoderState - 1) % 4 == tempStep) {
+    encoderState = ((encoderState - 1) % 4); // achteruit
+  } else {
+    //ERR
+  }
+}
+```
 
 
 # Bronnen 

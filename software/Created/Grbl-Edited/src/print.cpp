@@ -111,7 +111,7 @@ void printFloat(float n, uint8_t decimal_places) {
     a /= 10;
   }
   while (i < decimal_places) {
-     buf[i++] = '0'; // Fill in zeros to decimal point for (n < 1)
+    buf[i++] = '0'; // Fill in zeros to decimal point for (n < 1)
   }
   if (i == decimal_places) { // Fill in leading zero, if needed.
     buf[i++] = '0';

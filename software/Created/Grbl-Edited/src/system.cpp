@@ -44,7 +44,7 @@ int mainLoop() {
     }
 
     readSerialLine();
-
+    prepareStepperBuffer();
     
     
     
@@ -53,9 +53,7 @@ int mainLoop() {
      * 
     stepperLoadPlanning( @todo parameters);
     */
-     
-
-
+    
   }
   
   /**
@@ -126,7 +124,7 @@ void readSerialLine() {
 	}
 
   // never reached or gcode is to big per line;
-  uartWriteStringWithTerminator("Line to long: ");
+  uartWriteStringWithTerminator("Line to long: \0");
   printInteger(length);
   uartWrite('\n');
 }
