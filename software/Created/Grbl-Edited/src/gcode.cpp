@@ -92,8 +92,8 @@ void executeGcodeLine(char *line, int length) {
       case 'S': break; //not suported
       case 'T': break; //not suported
       case 'U': break; //not suported
-      case 'V': if(value > 255) { /*bigger than 25.5 cm - ERR*/ break; } blockData.mode.tool_length = round(value); break; // length off tool (spindle cnc)
-      case 'W': if(value > 255) { /*bigger than 25.5 cm - ERR*/ break; } blockData.mode.tool_diameter = round(value); break; // diameter of tool (spindle cnc)
+      case 'V': if(value > 255) { /* bigger than 25.5 cm - ERR */ break; } blockData.mode.tool_length = round(value); break; // length off tool (spindle cnc)
+      case 'W': if(value > 255) { /* bigger than 25.5 cm - ERR */ break; } blockData.mode.tool_diameter = round(value); break; // diameter of tool (spindle cnc)
       case 'X': if(N_AXIS > X_AXIS) { blockData.endPos[X_AXIS] = value; } else { break; /*not suported*/} break; 
       case 'Y': if(N_AXIS > Y_AXIS) { blockData.endPos[Y_AXIS] = value; } else { break; /*not suported*/} break; 
       case 'Z': if(N_AXIS > Z_AXIS) { blockData.endPos[Z_AXIS] = value; } else { break; /*not suported*/} break; 

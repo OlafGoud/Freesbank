@@ -108,6 +108,11 @@ stepper isr -> flag niewe nodig aan
 - BAUD 9600: baud rate tx/rx
 - MAX_LINE_SIZE 40: lenght of a line;
 - EMPTY_CHAR 0xff: empty character code
+- MAX_BUFFER_SIZE 10: ring buffer size;
+- EPS_COS_STRAIGHT 0.999999f: magic value to calculate max junction speed
+- SYSTEM_MAX_ACCEL 300: max acceleration
+- SYSTEM_MAX_BRAKE 200: max deceleration/brake
+- PLANNER_MAX_ITERATIONS 10: max iterations to calculate backward passes
 
 ### Globals
 - systemState: state of system (use SYSTEM states)
@@ -133,27 +138,58 @@ stepper isr -> flag niewe nodig aan
 - SENSOR_OK
 - SENSOR_ERROR
 
+### axis
+- AXIS_PLANE_XY 0
+- AXIS_PLANE_ZX 1
+- AXIS_PLANE_YZ 2
 
 
 
 # GCODE commands
 
 ## (Fast) move straigt
-- G0 (x,y,z,f)
+- G0 (x,y,z,f) -> turns spindle off
 - G1 (x,y,z,f,e)
 
 ## arc -> G17 G18 G19 for selecting plane (i=x, i=y planes) TODO
 - G2 (x,y,z,i,j,r) clockwise
 - G3 (x,y,z,i,j,r) counter clockwise
 
+## Plane
+- G17 -> XY
+- G18 -> ZX
+- G19 -> YZ
+
 ## absolute-relative TODO
 - G90 -> relative
 - G91 -> absolute
 
-
+## units
+- G20 -> inch, not suported
+- G21 -> default, command not suported
 
 # Mcode commands
 
 ## stop
 - M0 -> STOP after last movement (not needed) NO PARAMS
 - M1 -> STOP NOW INSTANT executed when readed. (note full buffer can fuck this up) NO PARMS
+
+## Work tool commands
+- M3 (o) -> spindle on, o = 0-255 power. (s,i not suported)
+- M5 -> spindle off 
+- M7 -> mist coolant (not suported (yet))
+- M8 -> flood coolant (not suported (yet))
+- M9 -> turn off all coulants (not suported (yet))
+
+
+## Stepper controles
+- M17 (X,Y,Z (E,A,B,C,U,V,W NOT SUPORTED)) -> (M17 X Y -> turn on steppers X and Y immediately) (not suported(yet))
+- M18 -> disable steppers (X,Y,Z (E,A,B,C,U,V,W NOT SUPORTED)) NOT SUPORTED (YET)
+
+
+
+
+
+# TODO
+- selected plane
+- absolute & relative mode. (suport??)

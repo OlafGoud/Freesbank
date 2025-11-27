@@ -59,7 +59,7 @@ int main() {
 
 
   }
-  
+
   /** @note hopefully never reached */
   println("END, restart required!");
 

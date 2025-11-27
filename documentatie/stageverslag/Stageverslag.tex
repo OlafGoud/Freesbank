@@ -1,0 +1,70 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{hyperref} 
+
+
+\title{Stage Verslag 2025 - 2026}
+\author{Olaf Goudriaan 1071349}
+\date{TINSTG05 - Wessel Oele, Renee van Dorn}
+
+\begin{document}
+	\begin{figure}
+		\includegraphics[width=\linewidth]{ChatGPTFrontImage.png}
+		\caption{Gemaakt door ChatGPT}
+	\end{figure}
+	\maketitle
+
+	\newpage
+	\tableofcontents
+	\newpage
+	\section{Context}
+		\subsection{Het bedrijf}
+			De stage vond plaats bij het bedrijf Sens2Sea. Sens2Sea is een klein bedrijf dat gevestigd is op het RDM terrein. Het bedrijf heeft een kavel in het innovation dock. Sens2Sea ontwikkeld radar technologieën voor sectoren zoals de scheepsvaart en andere maritime sectoren. Hiernaast heeft Sens2Sea veel projecten lopen bij de hoge school voor studenten.
+
+		\subsection{Opdracht}
+			Sens2Sea is bezig met radar technologie. Radar is een technologie dat radiogolven gebruikt om de afstand, snelheid en richting van objecten te bepalen. Radar kan gebruikt worden in goed en slecht weer. Hierdoor is het uitstekend om objecten te detecteren in sectoren zoals de scheepsvaart. Ook kan radar technologie gebruikt worden om de zeebodem in kaart te brengen en om olievlekken te detecteren.
+
+			Sens2Sea is nu bezig met pulsradar technologie. Hiervoor wilt deze parabool antennes gebruiken. Deze antennes zorgen ervoor dat de radiogolven gebundeld worden. Door de bundeling van deze golven is er sterke signaalversterking. Dit zorgt ervoor dat het beeld een betere resolutie heeft. Deze antennes zijn te verkrijgen in standaard maten, deze maten voldoen niet aan de maten die Sens2Sea nodig heeft. Hierom zijn custom maten nodig, deze zijn relatief aan de standaard maten een stuk duurder. Daarom wilt Sens2Sea hun eigen antennes maken met een 3D freesmachine. Machines die al op de markt zijn en groot genoeg zijn met een werkgrote van 4m x 1m x 0.4m, kosten 10 duizenden euro's. Dit vind Sens2Sea te duur en daarom is deze opdracht er om de aansturing van een 3d freesmachine te maken.
+			
+		\subsection{scope} 
+			Er is opensource software zoals GRBL die dit werk zouden kunnen done. Alleen wilt Sens2Sea makkelijk aanpasbaar is door het systeem modulair te houden. Ook omdat de freesmachine over een afstand van 4 meter moet kunnen werken zonder nauwkeurigheid problemen. Hiervoor moet de aandrijving en locatie bepaling gescheiden worden. Dit is niet het geval met deze opensource software zoals GRBL. Bij deze systemen bepaalt het systeem de positie van de kop door de stappen te tellen die de motoren moeten uitvoeren. Het problemen hiervan is dat de motoren een stap kunnen verspringen waardoor de vorm van de antenne veranderd word. Hierom wilt Sens2Sea dat de positie van de kop door sensoren bepaald word. 
+			
+			De scope omvat het scheiden van de aandrijving en locatie bepaling van de machine. Daarnaast het aanpassen of herschrijven van GRBL om deze te laten werken met de sensoren. Ook de hardware aansturen/aansluiten hoort bij de scope. 
+
+			De requirements zijn te vinden in requirements.pdf
+	
+	\section{Stakeholders}
+
+	\section{Analyse}
+
+		\subsection{Closed loop}
+			In het begin van de stage is er een oplossing gevonden die te gebruiken is zonder de code van GRBL aan te passen. Dit is in de vorm van closed loop encoders. Deze encoders zitten vast aan de achterkant van de motoren en compenseren meteen de fouten als deze gemaakt worden door de motoren. Dit vind Sens2Sea geen oplossing omdat zij dan afhankelijk zijn van de encoder die de fabriekant levert. Het systeem dat Sens2Sea wilt is een systeem dat aan te passen is indien meer nauwkeurigheid nodig is. Hiervoor moet de aansturing en locatie bepaling gescheiden worden.
+
+		\subsection{Encoders}
+			
+	\section{Ontwerpen}
+		\subsection{Tekeningen en diagrammen}
+
+
+
+	\section{Aanbevelingen}
+
+	\section{Bronnen}
+		https://nl.wikipedia.org/wiki/Radar 
+	\section{Bijlagen}
+\end{document}
+
+
+• Voorwoord
+• Context waarin het stagebedrijf werkzaam is
+• Stagebedrijf: Wat voor soort bedrijf is het? (werkveld, grootte, afdeling waar je stageloopt)
+• Probleemstelling/ opdrachtbeschrijving/ eventueel een hoofdvraag en -deelvragen
+• Stakeholders (+ op welke manier je ze betrekt bij jouw opdracht)
+• Scope en passende eisen die relevant zijn voor jouw opdracht
+• Mogelijke oplossingen en je onderbouwde keuze(s)
+• Requirements
+• Bijbehorende ontwerpen
+• Realisatie (diverse iteraties/ prototypes), testen en testresultaten op basis van de requirements en
+de ontwerpen.
+• Aanbevelingen
+Bijlagen
