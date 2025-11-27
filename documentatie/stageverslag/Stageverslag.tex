@@ -1,6 +1,9 @@
 \documentclass{article}
 \usepackage{graphicx} % Required for inserting images
 \usepackage{hyperref} 
+\usepackage{todonotes}
+\usepackage{hyperref}
+
 
 
 \title{Stage Verslag 2025 - 2026}
@@ -29,19 +32,53 @@
 		\subsection{scope} 
 			Er is opensource software zoals GRBL die dit werk zouden kunnen done. Alleen wilt Sens2Sea makkelijk aanpasbaar is door het systeem modulair te houden. Ook omdat de freesmachine over een afstand van 4 meter moet kunnen werken zonder nauwkeurigheid problemen. Hiervoor moet de aandrijving en locatie bepaling gescheiden worden. Dit is niet het geval met deze opensource software zoals GRBL. Bij deze systemen bepaalt het systeem de positie van de kop door de stappen te tellen die de motoren moeten uitvoeren. Het problemen hiervan is dat de motoren een stap kunnen verspringen waardoor de vorm van de antenne veranderd word. Hierom wilt Sens2Sea dat de positie van de kop door sensoren bepaald word. 
 			
-			De scope omvat het scheiden van de aandrijving en locatie bepaling van de machine. Daarnaast het aanpassen of herschrijven van GRBL om deze te laten werken met de sensoren. Ook de hardware aansturen/aansluiten hoort bij de scope. 
-
-			De requirements zijn te vinden in requirements.pdf
+			De scope omvat het scheiden van de aandrijving en locatie bepaling van de machine. Daarnaast het aanpassen of herschrijven van GRBL om deze te laten werken met de sensoren. Ook de hardware aansturen/aansluiten hoort bij de scope. De requirements zijn te vinden in requirements.pdf
+			\todo{requirements}
 	
 	\section{Stakeholders}
-
+		\paragraph{}
 	\section{Analyse}
 
 		\subsection{Closed loop}
 			In het begin van de stage is er een oplossing gevonden die te gebruiken is zonder de code van GRBL aan te passen. Dit is in de vorm van closed loop encoders. Deze encoders zitten vast aan de achterkant van de motoren en compenseren meteen de fouten als deze gemaakt worden door de motoren. Dit vind Sens2Sea geen oplossing omdat zij dan afhankelijk zijn van de encoder die de fabriekant levert. Het systeem dat Sens2Sea wilt is een systeem dat aan te passen is indien meer nauwkeurigheid nodig is. Hiervoor moet de aansturing en locatie bepaling gescheiden worden.
 
 		\subsection{Encoders}
-			
+			Encoders zijn er in verschillende soorten. Hieronder worden de encoders genoemd. Na het voorleggen aan de opdrachtgever heeft deze de incrementele encoder gekozen omdat deze meer vrijheid bied dan de andere encoders.
+
+			\subsubsection{Incrementele encoder}
+				encoders zijn encoders die pulsen geven als de as is gedraait. De resolutie van deze encoders word afgedrukt in PPR (pulses per rotation). Door de pulsen te tellen die uit de output(s) komen kun je de locatie en eventueel snelheid bepalen. Als deze encoders meerdere output poorten hebben word de resolutie van deze encoders beter. Als een encoder 2 outputs heeft kan de encoder in 4x resolutie werken. Dit is omdat op de schijf van deze encoders fases in verschuiving staan. Hierdoor kan de richting ook bepaald worden door de sequentie te volgen die de encoder loopt zoals te zien is in \todo{figure 2}. Door de sequentie door te lopen in een richting kan de richting bepaald worden.
+				
+				\paragraph{Interupts} Omdat deze encoders signalen versturen wanneer er een rotatie plaats vind is de locatie niet op te vragen. Hiervoor kunnen er interupts gebruikt worden. Deze gaan alleen af wanneer er een signaal plaats vind. Omdat deze encoders per rotatie x aantal pulses afgeven is het belangrijk om te weten of een arduino zoveel interupts kan verwerken. Hiervoor is een test gedaan. De code is te vinden bij de bijlagen. \todo{code bijlagen} Voor deze test is gekeken hoeveel interupts de arduino per seconde registreert om een beeld te geven of deze optie realistisch is.
+
+				\begin{center}
+					Op tijdstip 1: 09:36:47.772 waren er 848785 interupts geweest. \\
+					Op tijdstip 2: 09:36:53.204 waren er 1484065 interupts geweest.\\ 
+
+					Dit betekent dat er in 5.432 seconde 635280 interupts zijn geweest. \\
+					$5.432/635280 =~ 116951$ interupts per seconde.
+				\end{center}
+
+				\begin{figure}
+				\begin{center}\begin{tabular}{ c|c }
+				A & B \\ 
+				\hline
+				0 & 0 \\  
+				\hline
+				1 & 0 \\
+				\hline
+				1 & 1 \\
+				\hline
+				0 & 1      
+				\end{tabular}\end{center}
+				\caption{Encoder sequentie}
+				\end{figure}
+
+
+			\subsubsection{Absolute encoder}
+				Een absolute encoder geeft voor elke hoek van de as een unieke code. Deze encoders bepalen door de as op een bepaalde manier te encoden tussen welke hoeken de as zich bevind. Deze encoders slaan de de rotatie op en deze is uit te lezen via een protocol zoals SPI. De aantal bits bepaald de nauwkeurigheid van deze encoder. Er zijn ook absolute encoders die naast de hoek, ook het aantal revoluties bijhouden.
+
+			\subsubsection{Liniaere encoder}
+				Lineare encoders bepalen op een zelfde manier als incrementele encoders de locatie. Deze sensoren zijn minder flexibel dan andere encoders omdat deze een vaste lengte hebben voor een vooraf gedefineerde afstand.
 	\section{Ontwerpen}
 		\subsection{Tekeningen en diagrammen}
 
@@ -50,7 +87,20 @@
 	\section{Aanbevelingen}
 
 	\section{Bronnen}
-		https://nl.wikipedia.org/wiki/Radar 
+	\begin{enumerate}
+		\item \url{https://nl.wikipedia.org/wiki/Radar}
+		\item \url{https://en.wikipedia.org/wiki/Incremental_encoder}
+		\item \url{https://en.wikipedia.org/wiki/Rotary_encoder} 
+	\end{enumerate}
+		
+
+		
+
+		
+		
+		
+		
+
 	\section{Bijlagen}
 \end{document}
 
