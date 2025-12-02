@@ -5,6 +5,7 @@
 
 volatile int encoderSteps = 0;
 volatile short encoderState = 0;
+volatile int steperSteps = 0;
 
 
 
@@ -48,4 +49,5 @@ void encoderStep() {
 
 void step() {
   PINB = (1 << PB5);    
+  steperSteps++;
 }

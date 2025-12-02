@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.8)  27 NOV 2025 15:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.8)  27 NOV 2025 15:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -411,7 +411,7 @@ Package hyperref Info: Link coloring OFF on input line 13.
 \@outlinefile=\write4
 \openout4 = `Stageverslag.out'.
 
-<ChatGPTFrontImage.png, id=70, 925.056pt x 826.287pt>
+<ChatGPTFrontImage.png, id=90, 925.056pt x 826.287pt>
 File: ChatGPTFrontImage.png Graphic file (type png)
 <use ChatGPTFrontImage.png>
 Package pdftex.def Info: ChatGPTFrontImage.png  used on input line 15.
@@ -445,26 +445,28 @@ Package hyperref Info: bookmark level for unknown todo defaults to 0 on input li
 
 [4]
 
-[5] (Stageverslag.aux)
+[5]
+
+[6] (Stageverslag.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-08-13>
  ***********
 Package rerunfilecheck Info: File `Stageverslag.out' has not changed.
-(rerunfilecheck)             Checksum: 6611C4863B45474169404D7491D5EE2A;1782.
+(rerunfilecheck)             Checksum: 012B014F6A1D862FA49118736866C997;2407.
  ) 
 Here is how much of TeX's memory you used:
- 19639 strings out of 468133
- 375224 string characters out of 5431197
- 762139 words of memory out of 5000000
- 47921 multiletter control sequences out of 15000+600000
+ 19649 strings out of 468133
+ 375370 string characters out of 5431197
+ 761142 words of memory out of 5000000
+ 47926 multiletter control sequences out of 15000+600000
  631248 words of font info for 55 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,9n,101p,897b,952s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on Stageverslag.pdf (5 pages, 1772169 bytes).
+Output written on Stageverslag.pdf (6 pages, 1778689 bytes).
 PDF statistics:
- 169 PDF objects out of 1000 (max. 8388607)
- 33 named destinations out of 1000 (max. 500000)
- 146 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 200 PDF objects out of 1000 (max. 8388607)
+ 38 named destinations out of 1000 (max. 500000)
+ 186 words of extra memory for PDF output out of 10000 (max. 10000000)
 

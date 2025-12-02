@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head><title>test</title></head>
+
+
+  <body>
+
+    <canvas id="myCanvas" width="200" height="200" style="border:1px solid #000000;"></canvas>
+    <div>
+      <input type="range" id="slider" name="volume" min="0.05" max="1" step="0.01" value="1"/>
+      <p>Value: <output id="value"></output></p>
+    </div>  
+
+  </body>
+  <script>
+    var c = document.getElementById("myCanvas");
+    
+
+    function customCircleDraw(center, radius, start, end, stepsize) {
+      var step_size = stepsize; //(end - start) / 50;
+      console.log(step_size);
+      var angle = start;
+      var first = true;
+      while (angle <= end) {
+        let px = (Math.sin(angle) * radius) + center.x,
+            py = (-Math.cos(angle) * radius) + center.y;
+        if (first) {
+          ctx.moveTo(px,py);
+          first = false;
+        } else {
+          ctx.lineTo(px,py);
+        }
+        angle = angle + step_size;
+      }
+    }
+
+    const value = document.querySelector("#value");
+    const input = document.querySelector("#slider");
+    value.textContent = input.value;
+    input.addEventListener("input", (event) => {
+      const v = event.target.value;
+      value.textContent = v;
+
+      // Clear canvas first
+      ctx.clearRect(0, 0, c.width, c.height);
+
+      // Start new path
+      ctx.beginPath();
+
+      // Draw circle/arc
+      customCircleDraw({x: 100, y: 100}, 50, degtorad(30), degtorad(90), v);
+
+      // Finally stroke the path
+      ctx.stroke();
+    });
+
+    var ctx = c.getContext("2d");
+
+    function degtorad(degrees) {
+      return degrees * Math.PI / 180;
+    };
+    ctx.beginPath();
+
+    customCircleDraw({x:100, y:100}, 50, degtorad(30), degtorad(90), 1);
+
+    ctx.stroke();
+  </script>
+</html>
