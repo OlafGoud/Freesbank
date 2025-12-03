@@ -33,7 +33,33 @@
 			Er is opensource software zoals GRBL die dit werk zouden kunnen done. Alleen wilt Sens2Sea makkelijk aanpasbaar is door het systeem modulair te houden. Ook omdat de freesmachine over een afstand van 4 meter moet kunnen werken zonder nauwkeurigheid problemen. Hiervoor moet de aandrijving en locatie bepaling gescheiden worden. Dit is niet het geval met deze opensource software zoals GRBL. Bij deze systemen bepaalt het systeem de positie van de kop door de stappen te tellen die de motoren moeten uitvoeren. Het problemen hiervan is dat de motoren een stap kunnen verspringen waardoor de vorm van de antenne veranderd word. Hierom wilt Sens2Sea dat de positie van de kop door sensoren bepaald word. 
 			
 			De scope omvat het scheiden van de aandrijving en locatie bepaling van de machine. Daarnaast het aanpassen of herschrijven van GRBL om deze te laten werken met de sensoren. Ook de hardware aansturen/aansluiten hoort bij de scope. De requirements zijn te vinden in requirements.pdf
-			\todo{requirements}
+	
+		\subsection{Requirements}
+			Waar moet prototype aan moet voldoen is het volgende.
+
+			\subsubsection{De kop van de machine moet over twee assen bewegen.}
+				De kop van de machine moet over de x, y, z assen kunnen bewegen. (Functioneel) (MUST) \newline
+				\textbf{Acceptatie:} De requirement is voltooid als de kop over de 3 assen heen en weer kan bewegen.
+				
+			\subsubsection{De kop kan materiaal verwijderen en/of toevoegen.}
+				De kop van de machine kan materiaal verwijderen en/of toevoegen. (Functioneel) (MUST) \newline
+				\textbf{Acceptatie:} De requirement is voltooid als de kop materiaal kan toevoegen of verwijderen.
+
+			\subsubsection{De positie van de kop word bepaald door sensoren.} 
+				De positie van de kop van de machine moet bepaald kunnen worden doormiddel van sensoren. (Functioneel) (MUST) \newline
+				\textbf{Acceptatie:} De requirement is voltooid als de locatie van de kop van de machine bepaald word door een sensor.
+
+			\subsubsection{Er kan g-code worden uitgevoerd met de machine.} 
+				De machine kan een g-code bestand uitvoeren dat deze gestreamd krijgt via een seriële verbinding. (Functioneel) (MUST) \newline
+				\textbf{Acceptatie:} De requirement is voltooid als er een g-code bestand uitgelezen en uitgevoerd kan worden door de machine via een seriële verbinding.
+
+			\subsubsection{De code moet modulair zijn}
+				De code van het prototype moet modulair zijn waardoor er gemakkelijk delen vervangen kunnen worden. Bijvoorbeeld andere soorten actuatoren en sensoren toevoegen / vervangen. (Functioneel) (MUST) \newline				
+				\textbf{Acceptatie:} De requirement is voltooid als de code van de machine modulair is en niet afhangt van andere stukken code.
+
+			\subsubsection{De kop van de machine moet over twee rotatie assen bewegen}
+				De kop van de machine moet over twee roatie assen kunnen bewegen (Functioneel) (SHOULD) \newline
+				\textbf{Acceptatie:} De requirement is voltooid als de kop van de machine over twee rotatie assen kan bewegen.
 	
 	\section{Stakeholders}
 		\subsection{Geert Mosterdijk}
@@ -87,7 +113,6 @@
 				\caption{Encoder sequentie}
 				\end{figure}
 
-
 			\subsubsection{Absolute encoder}
 				Een absolute encoder geeft voor elke hoek van de as een unieke code. Deze encoders bepalen door de as op een bepaalde manier te encoden tussen welke hoeken de as zich bevind. Deze encoders slaan de de rotatie op en deze is uit te lezen via een protocol zoals SPI. De aantal bits bepaald de nauwkeurigheid van deze encoder. Er zijn ook absolute encoders die naast de hoek, ook het aantal revoluties bijhouden.
 
@@ -108,7 +133,6 @@
 		\end{enumerate}
 		\section{Bijlagen}
 \end{document}
-
 
 • Voorwoord
 • Context waarin het stagebedrijf werkzaam is
