@@ -13,7 +13,7 @@
 - stageplan.docx
 - 
 
-## Docu 50% af
+## Docu 50% af.
 - risico-iventarisatie.md
 - 
 
