@@ -266,6 +266,10 @@ void plannerRecalculate(float J) {
 
 }
 
+bool readFloat(char *line, uint8_t* i, float* f_ptr) {
+  
+}
+
 /**
  * generate segments for curves
  * the offset is absolute
@@ -434,9 +438,3 @@ ISR(INT1_vect) {
  * end encoder interupts
  */
 
-/**
- * handleEncoderInterrupt is the interrupt handler for the encoder signals.
- * It updates the encoderSteps.
- */
-void handleEncoderInterrupt() {
-}

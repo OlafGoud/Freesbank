@@ -11,7 +11,7 @@
 #define SYSTEM_MAX_BRAKE 200
 #define PLANNER_MAX_ITERATIONS 10
 
-extern volatile int32_t encoderSteps = 0;
+extern volatile int32_t encoderSteps;
 
 
 struct GCodeBlock {
@@ -36,8 +36,6 @@ struct PlannerBlock {
   float entrySpeed; 
   float exitSpeed;
   float unitVector[3];
-
-  uint8_t feedrate;
 };
 
 struct PlannerBuffer {
@@ -69,4 +67,3 @@ void vecNormalize3(float r[3]);
 
 void setStepperInterupts();
 void setEncoderInterupts();
-void handleEncoderInterrupt();

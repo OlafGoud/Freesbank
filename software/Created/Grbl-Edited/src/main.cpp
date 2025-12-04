@@ -27,9 +27,7 @@ uint8_t stepperState = STEPPER_EMPTY;
 int main() {
 
   cli();
-  
   uartInit(BAUD);
-
   sei();
   println("Ready!");
 
