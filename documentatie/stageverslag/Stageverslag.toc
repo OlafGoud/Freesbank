@@ -1,9 +1,9 @@
 \contentsline {section}{\numberline {1}Context}{3}{section.1}%
 \contentsline {subsection}{\numberline {1.1}Het bedrijf}{3}{subsection.1.1}%
 \contentsline {subsection}{\numberline {1.2}Opdracht}{3}{subsection.1.2}%
-\contentsline {subsection}{\numberline {1.3}scope}{3}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.3}Scope}{3}{subsection.1.3}%
 \contentsline {subsection}{\numberline {1.4}Requirements}{4}{subsection.1.4}%
-\contentsline {subsubsection}{\numberline {1.4.1}De kop van de machine moet over twee assen bewegen.}{4}{subsubsection.1.4.1}%
+\contentsline {subsubsection}{\numberline {1.4.1}De kop van de machine moet over drie bewegings assen bewegen.}{4}{subsubsection.1.4.1}%
 \contentsline {subsubsection}{\numberline {1.4.2}De kop kan materiaal verwijderen en/of toevoegen.}{4}{subsubsection.1.4.2}%
 \contentsline {subsubsection}{\numberline {1.4.3}De positie van de kop word bepaald door sensoren.}{4}{subsubsection.1.4.3}%
 \contentsline {subsubsection}{\numberline {1.4.4}Er kan g-code worden uitgevoerd met de machine.}{4}{subsubsection.1.4.4}%
@@ -19,11 +19,19 @@
 \contentsline {subsection}{\numberline {3.1}Closed loop}{5}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Encoders}{5}{subsection.3.2}%
 \contentsline {subsubsection}{\numberline {3.2.1}Incrementele encoder}{6}{subsubsection.3.2.1}%
-\contentsline {paragraph}{Interupts}{6}{section*.3}%
+\contentsline {paragraph}{Interrupts}{6}{section*.3}%
 \contentsline {subsubsection}{\numberline {3.2.2}Absolute encoder}{6}{subsubsection.3.2.2}%
-\contentsline {subsubsection}{\numberline {3.2.3}Liniaere encoder}{7}{subsubsection.3.2.3}%
+\contentsline {subsubsection}{\numberline {3.2.3}Lineaire encoder}{7}{subsubsection.3.2.3}%
 \contentsline {section}{\numberline {4}Ontwerpen}{7}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Tekeningen en diagrammen}{7}{subsection.4.1}%
-\contentsline {section}{\numberline {5}Aanbevelingen}{7}{section.5}%
-\contentsline {section}{\numberline {6}Bronnen}{7}{section.6}%
-\contentsline {section}{\numberline {7}Bijlagen}{7}{section.7}%
+\contentsline {section}{\numberline {5}Test Rapport}{7}{section.5}%
+\contentsline {subsection}{\numberline {5.1}De kop van de machine moet over drie assen bewegen}{7}{subsection.5.1}%
+\contentsline {subsubsection}{\numberline {5.1.1}Acceptatiecriteria:}{7}{subsubsection.5.1.1}%
+\contentsline {subsubsection}{\numberline {5.1.2}Testopstelling}{7}{subsubsection.5.1.2}%
+\contentsline {subsubsection}{\numberline {5.1.3}Instructies}{7}{subsubsection.5.1.3}%
+\contentsline {subsubsection}{\numberline {5.1.4}Verwacht resultaat}{7}{subsubsection.5.1.4}%
+\contentsline {subsubsection}{\numberline {5.1.5}Waarnemingen}{7}{subsubsection.5.1.5}%
+\contentsline {section}{\numberline {6}Aanbevelingen}{7}{section.6}%
+\contentsline {section}{\numberline {7}Bronnen}{8}{section.7}%
+\contentsline {section}{\numberline {8}Bijlagen}{8}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Bijlage test code}{8}{subsection.8.1}%

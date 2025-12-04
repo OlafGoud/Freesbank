@@ -56,8 +56,6 @@ int main() {
       loadSegmentInStepperBuffer();
     }
 
-
-
   }
 
   /** @note hopefully never reached */
