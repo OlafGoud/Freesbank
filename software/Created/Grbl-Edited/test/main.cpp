@@ -49,7 +49,7 @@ int main() {
       continue;
     }
 
-    
+
     readSerialLine();
 
     if(stepperState == STEPPER_EMPTY) {

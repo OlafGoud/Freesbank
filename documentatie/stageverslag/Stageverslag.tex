@@ -18,24 +18,25 @@
 	\newpage
 	\tableofcontents
 	\newpage
+	\todo{voorwoord}
 	\section{Context}
 		\subsection{Het bedrijf}
-			De stage vond plaats bij het bedrijf Sens2Sea. Sens2Sea is een klein bedrijf dat gevestigd is op het RDM terrein. Het bedrijf heeft een kavel in het innovation dock. Sens2Sea ontwikkeld radar technologieën voor sectoren zoals de scheepsvaart en andere maritieme sectoren. Hiernaast heeft Sens2Sea veel projecten lopen bij de hoge school voor studenten.
+			De stage vond plaats bij het bedrijf Sens2Sea. Sens2Sea is een klein bedrijf dat gevestigd is op het RDM terrein. Het bedrijf heeft een kavel in het innovation dock. Sens2Sea ontwikkelt radar technologieën voor sectoren zoals de scheepsvaart en andere maritieme sectoren. Hiernaast heeft Sens2Sea veel projecten lopen bij de hogeschool voor studenten.
 
 		\subsection{Opdracht}
 			Sens2Sea is bezig met radar technologie. Radar is een technologie dat radiogolven gebruikt om de afstand, snelheid en richting van objecten te bepalen. Radar kan gebruikt worden in goed en slecht weer. Hierdoor is het uitstekend om objecten te detecteren in sectoren zoals de scheepsvaart. Ook kan radar technologie gebruikt worden om de zeebodem in kaart te brengen en om olievlekken te detecteren.
 
-			Sens2Sea is nu bezig met puls radar technologie. Hiervoor wilt deze parabool antennes gebruiken. Deze antennes zorgen ervoor dat de radiogolven gebundeld worden. Door de bundeling van deze golven is er sterke signaalversterking. Dit zorgt ervoor dat het beeld een betere resolutie heeft. Deze antennes zijn te verkrijgen in standaard maten, deze maten voldoen niet aan de maten die Sens2Sea nodig heeft. Hierom zijn aangepaste maten nodig, deze zijn relatief aan de standaard maten een stuk duurder. Daarom wilt Sens2Sea hun eigen antennes maken met een 3D freesmachine. Machines die al op de markt zijn en groot genoeg zijn met een werkgrote van 4m x 1m x 0.4m, kosten 10 duizenden euro's. Dit vind Sens2Sea te duur en daarom is deze opdracht er om de aansturing van een 3d freesmachine te maken.
+			Sens2Sea is nu bezig met puls radar technologie. Hiervoor wilt Sens2Sea parabool antennes gebruiken. Deze antennes zorgen ervoor dat de radiogolven gebundeld worden. Door de bundeling van deze golven is er sterke signaalversterking. Dit zorgt ervoor dat het beeld een betere resolutie heeft. Deze antennes zijn te verkrijgen in standaard maten, deze maten voldoen niet aan de maten die Sens2Sea nodig heeft. Hierom zijn aangepaste maten nodig, deze zijn relatief aan de standaard maten een stuk duurder. Daarom wilt Sens2Sea hun eigen antennes maken met een 3D freesmachine. Machines die al op de markt zijn en groot genoeg zijn met een werkgrote van 4m x 1m x 0.4m, kosten 10 duizenden euro's. Dit vind Sens2Sea te duur en daarom is deze opdracht er om de aansturing van een 3d freesmachine te maken.
 			
 		\subsection{Scope} 
-			Er is opensource software zoals GRBL die dit werk zouden kunnen doen. Alleen wilt Sens2Sea makkelijk aanpasbaar is door het systeem modulair te houden. Ook omdat de freesmachine over een afstand van 4 meter moet kunnen werken zonder nauwkeurigheid problemen. Hiervoor moet de aandrijving en locatie bepaling gescheiden worden. Dit is niet het geval met deze opensource software zoals GRBL. Bij deze systemen bepaalt het systeem de positie van de kop door de stappen te tellen die de motoren moeten uitvoeren. Het problemen hiervan is dat de motoren een stap kunnen verspringen waardoor de vorm van de antenne veranderd word. Hierom wilt Sens2Sea dat de positie van de kop door sensoren bepaald word. 
+			Om een freesmachine aan te sturen is er opensource software zoals GRBL. Alleen wilt Sens2Sea makkelijk aanpasbaar is door het systeem modulair te houden. Ook omdat de freesmachine over een afstand van 4 meter moet kunnen werken zonder nauwkeurigheid problemen. Hiervoor moet de aandrijving en locatie bepaling gescheiden worden. Dit is niet het geval met deze opensource software zoals GRBL. Bij deze systemen bepaalt het systeem de positie van de kop door de stappen te tellen die de motoren moeten uitvoeren. Het problem hiervan is dat de motoren een stap kunnen verspringen waardoor de vorm van de antenne wordt veranderd. Hierom wilt Sens2Sea dat de positie van de kop door sensoren wordt bepaald. 
 			
 			De scope omvat het scheiden van de aandrijving en locatie bepaling van de machine. Daarnaast het aanpassen of herschrijven van GRBL om deze te laten werken met de sensoren. Ook de hardware aansturen/aansluiten hoort bij de scope.
 	
 		\subsection{Requirements}
-			Waar moet prototype aan moet voldoen is het volgende.
+			Waar het prototype aan moet voldoen is het volgende.
 
-			\subsubsection{De kop van de machine moet over drie bewegings assen bewegen.}
+			\subsubsection{De kop van de machine moet over drie bewegingsassen bewegen.}
 				De kop van de machine moet over de x, y, z assen kunnen bewegen. (Functioneel) (MUST) \newline
 				\textbf{Acceptatie:} De requirement is voltooid als de kop over de drie assen heen en weer kan bewegen.
 				
@@ -43,9 +44,9 @@
 				De kop van de machine kan materiaal verwijderen en/of toevoegen. (Functioneel) (MUST) \newline
 				\textbf{Acceptatie:} De requirement is voltooid als de kop materiaal kan toevoegen of verwijderen.
 
-			\subsubsection{De positie van de kop word bepaald door sensoren.} 
+			\subsubsection{De positie van de kop wordt bepaald door sensoren.} 
 				De positie van de kop van de machine moet bepaald kunnen worden doormiddel van sensoren. (Functioneel) (MUST) \newline
-				\textbf{Acceptatie:} De requirement is voltooid als de locatie van de kop van de machine bepaald word door een sensor.
+				\textbf{Acceptatie:} De requirement is voltooid als de locatie van de kop van de machine bepaald wordt door een sensor.
 
 			\subsubsection{Er kan g-code worden uitgevoerd met de machine.} 
 				De machine kan een g-code bestand uitvoeren dat deze gestreamd krijgt via een seriële verbinding. (Functioneel) (MUST) \newline
@@ -66,11 +67,11 @@
 		\subsection{Student}
 			De student Olaf Goudriaan is de projectleider en voert het project uit. 
 
-		\subsection{P.G.M. van der Klugt}
+		\subsection{P.G.M. van der Klugt} \todo{veranderen}
 			Peter is de collega van Geert. Zijn belang is bij dat het project soepel verloopt en dat e reen werkend productkomt. Tevens is hij expert op het gebied van regel systemen en andere algoritmes.
 
 		\subsection{Medewerkers}
-			Medewerkers van het bedrijf die expert zijn op bepaalde gebieden zoals electronica en software hebben veelinvloed op het project omdat deze bepalen of de manier die voorgesteld word acceptabel is.
+			Medewerkers van het bedrijf die expert zijn op bepaalde gebieden zoals electronica en software hebben veel invloed op het project omdat deze bepalen of de manier die voorgesteld wordt acceptabel is.
 
 		\subsection{CoE HRTech}
 			CoE HRTech is de investeerder voor het project. Deze partij zorgt voor uitbetaling en heeft dus belang over dat het project goed gaat.
@@ -78,15 +79,15 @@
 	\section{Analyse}
 
 		\subsection{Closed loop}
-			In het begin van de stage is er een oplossing gevonden die te gebruiken is zonder de code van GRBL aan te passen. Dit is in de vorm van closed loop encoders. Deze encoders zitten vast aan de achterkant van de motoren en compenseren meteen de fouten als deze gemaakt worden door de motoren. Dit vind Sens2Sea geen oplossing omdat zij dan afhankelijk zijn van de encoder die de fabrikant levert. Het systeem dat Sens2Sea wilt is een systeem dat aan te passen is indien meer nauwkeurigheid nodig is. Hiervoor moet de aansturing en locatie bepaling gescheiden worden.
+			In het begin van de stage is er een oplossing gevonden die te gebruiken is zonder de code van GRBL aan te passen. Dit is in de vorm van closed loop encoders. Deze encoders zitten vast aan de achterkant van de motoren en compenseren meteen de fouten als deze gemaakt worden door de motoren. Dit vindt Sens2Sea geen oplossing omdat zij dan afhankelijk zijn van de encoder die de fabrikant levert. Het systeem dat Sens2Sea wilt is een systeem dat aan te passen is indien meer nauwkeurigheid nodig is. Hiervoor moet de aansturing en locatie bepaling gescheiden worden.
 
 		\subsection{Encoders}
-			Encoders zijn er in verschillende soorten. Hieronder worden de encoders genoemd. Na het voorleggen aan de opdrachtgever heeft deze de incrementele encoder gekozen omdat deze meer vrijheid bied dan de andere encoders.
+			Encoders zijn er in verschillende soorten. Hieronder worden de encoders genoemd. Na het voorleggen aan de opdrachtgever heeft deze de incrementele encoder gekozen omdat deze meer vrijheid biedt dan de andere encoders.
 
 			\subsubsection{Incrementele encoder}
-				encoders zijn encoders die pulsen geven als de as is gedraaid. De resolutie van deze encoders word afgedrukt in PPR (pulsen per rotatie). Door de pulsen te tellen die uit de output(s) komen kun je de locatie en eventueel snelheid bepalen. Als deze encoders meerdere output poorten hebben word de resolutie van deze encoders beter. Als een encoder 2 uitgangen heeft kan de encoder in 4x resolutie werken. Dit is omdat op de schijf van deze encoders fases in verschuiving staan. Hierdoor kan de richting ook bepaald worden door de sequentie te volgen die de encoder loopt zoals te zien is in \todo{figure 2}. Door de sequentie door te lopen in een richting kan de richting bepaald worden.
+				Encoders zijn encoders die pulsen geven als de as is gedraaid. De resolutie van deze encoders wordt afgedrukt in PPR (pulsen per rotatie). Door de pulsen te tellen die uit de output(s) komen kun je de locatie en eventueel snelheid bepalen. Als deze encoders meerdere uitgangen heeft, wordt de resolutie van deze encoders beter. Als een encoder 2 uitgangen heeft kan de encoder in 4x resolutie werken. Dit is omdat op de schijf van deze encoders fases in verschuiving staan. Hierdoor kan de richting ook bepaald worden door de sequentie te volgen die de encoder loopt zoals te zien is in \todo{figure 2}. Door de sequentie door te lopen in een richting kan de richting bepaald worden.
 				
-				\paragraph{Interrupts} Omdat deze encoders signalen versturen wanneer er een rotatie plaats vind is de locatie niet op te vragen. Hiervoor kunnen er interrupts gebruikt worden. Deze gaan af wanneer er een signaal plaats vind. Een interrupt is een signaal dat de computer verteld dat die moet stoppen waar die mee bezig is en een specifiek stuk code moet uitvoeren. Omdat deze encoders per rotatie x aantal pulsen afgeven is het belangrijk om te weten of een arduino zoveel interrupts kan verwerken. Hiervoor is een test gedaan. De code is te vinden bij de bijlagen. \todo{code bijlagen} Voor deze test is gekeken hoeveel interrupts de arduino per seconde registreert om een beeld te geven of deze optie realistisch is.
+				\paragraph{Interrupts} Omdat deze encoders signalen versturen wanneer er een rotatie plaatsvindt, is de locatie niet op te vragen. Hiervoor kunnen er interrupts gebruikt worden. Deze gaan af wanneer er een signaal plaatsvindt. Een interrupt is een signaal dat de computer vertelt dat die moet stoppen waar die mee bezig is en een specifiek stuk code moet uitvoeren. Omdat deze encoders per rotatie een x aantal pulsen afgeeft is het belangrijk om te weten of een arduino zoveel interrupts kan verwerken. Hiervoor is een test gedaan. De code is te vinden bij de bijlagen. \todo{code bijlagen} Voor deze test is gekeken hoeveel interrupts de arduino per seconde registreert om een beeld te geven of deze optie realistisch is.
 
 				\begin{center}
 					Op tijdstip 1: 09:36:47.772 waren er 848785 interrupts geweest. \\
@@ -112,7 +113,7 @@
 				\end{figure}
 
 			\subsubsection{Absolute encoder}
-				Een absolute encoder geeft voor elke hoek van de as een unieke code. Deze encoders bepalen door de as op een bepaalde manier te encoden tussen welke hoeken de as zich bevind. Deze encoders slaan de rotatie op in een register en deze is uit te lezen door een microcontroller via een protocol zoals SPI. De aantal bits bepaald de nauwkeurigheid van deze encoder. Er zijn ook absolute encoders die naast de hoek, ook het aantal revoluties bijhouden.
+				Een absolute encoder geeft voor elke hoek van de as een unieke code. Deze encoders bepalen door de as op een bepaalde manier te encoden tussen welke hoeken de as zich bevindt. Deze encoders slaan de rotatie op in een register en deze is uit te lezen door een microcontroller via een protocol zoals SPI. Het aantal bits bepaaldt de nauwkeurigheid van deze encoder. Er zijn ook absolute encoders die naast de hoek, ook het aantal revoluties bijhouden.
 
 			\subsubsection{Lineaire encoder}
 				Lineaire encoders bepalen op een zelfde manier als incrementele encoders de locatie. Deze sensoren zijn minder flexibel dan andere encoders omdat deze een vaste lengte hebben voor een vooraf gedefinieerde afstand.
@@ -125,7 +126,7 @@
 
 		\subsection{De kop van de machine moet over drie assen bewegen}
 			\subsubsection{Acceptatiecriteria:}
-				Deze test is voltooid als de kop van de machine kan bewegen over de 3 bewegings assen (x, y ,z).
+				Deze test is voltooid als de kop van de machine kan bewegen over de 3 bewegingsassen (x, y ,z).
 
 			\subsubsection{Testopstelling}
 				Deze test kan alleen op de machine worden uitgevoerd. Benodigd is: 
@@ -174,3 +175,7 @@
 de ontwerpen.
 • Aanbevelingen
 Bijlagen
+
+
+
+

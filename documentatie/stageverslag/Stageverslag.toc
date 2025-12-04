@@ -3,12 +3,12 @@
 \contentsline {subsection}{\numberline {1.2}Opdracht}{3}{subsection.1.2}%
 \contentsline {subsection}{\numberline {1.3}Scope}{3}{subsection.1.3}%
 \contentsline {subsection}{\numberline {1.4}Requirements}{4}{subsection.1.4}%
-\contentsline {subsubsection}{\numberline {1.4.1}De kop van de machine moet over drie bewegings assen bewegen.}{4}{subsubsection.1.4.1}%
+\contentsline {subsubsection}{\numberline {1.4.1}De kop van de machine moet over drie bewegingsassen bewegen.}{4}{subsubsection.1.4.1}%
 \contentsline {subsubsection}{\numberline {1.4.2}De kop kan materiaal verwijderen en/of toevoegen.}{4}{subsubsection.1.4.2}%
-\contentsline {subsubsection}{\numberline {1.4.3}De positie van de kop word bepaald door sensoren.}{4}{subsubsection.1.4.3}%
+\contentsline {subsubsection}{\numberline {1.4.3}De positie van de kop wordt bepaald door sensoren.}{4}{subsubsection.1.4.3}%
 \contentsline {subsubsection}{\numberline {1.4.4}Er kan g-code worden uitgevoerd met de machine.}{4}{subsubsection.1.4.4}%
 \contentsline {subsubsection}{\numberline {1.4.5}De code moet modulair zijn}{4}{subsubsection.1.4.5}%
-\contentsline {subsubsection}{\numberline {1.4.6}De kop van de machine moet over twee rotatie assen bewegen}{4}{subsubsection.1.4.6}%
+\contentsline {subsubsection}{\numberline {1.4.6}De kop van de machine moet over twee rotatie assen bewegen}{5}{subsubsection.1.4.6}%
 \contentsline {section}{\numberline {2}Stakeholders}{5}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Geert Mosterdijk}{5}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Student}{5}{subsection.2.2}%
@@ -17,10 +17,10 @@
 \contentsline {subsection}{\numberline {2.5}CoE HRTech}{5}{subsection.2.5}%
 \contentsline {section}{\numberline {3}Analyse}{5}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Closed loop}{5}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Encoders}{5}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.2}Encoders}{6}{subsection.3.2}%
 \contentsline {subsubsection}{\numberline {3.2.1}Incrementele encoder}{6}{subsubsection.3.2.1}%
-\contentsline {paragraph}{Interrupts}{6}{section*.3}%
-\contentsline {subsubsection}{\numberline {3.2.2}Absolute encoder}{6}{subsubsection.3.2.2}%
+\contentsline {paragraph}{Interrupts}{6}{section*.5}%
+\contentsline {subsubsection}{\numberline {3.2.2}Absolute encoder}{7}{subsubsection.3.2.2}%
 \contentsline {subsubsection}{\numberline {3.2.3}Lineaire encoder}{7}{subsubsection.3.2.3}%
 \contentsline {section}{\numberline {4}Ontwerpen}{7}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Tekeningen en diagrammen}{7}{subsection.4.1}%
@@ -29,9 +29,9 @@
 \contentsline {subsubsection}{\numberline {5.1.1}Acceptatiecriteria:}{7}{subsubsection.5.1.1}%
 \contentsline {subsubsection}{\numberline {5.1.2}Testopstelling}{7}{subsubsection.5.1.2}%
 \contentsline {subsubsection}{\numberline {5.1.3}Instructies}{7}{subsubsection.5.1.3}%
-\contentsline {subsubsection}{\numberline {5.1.4}Verwacht resultaat}{7}{subsubsection.5.1.4}%
-\contentsline {subsubsection}{\numberline {5.1.5}Waarnemingen}{7}{subsubsection.5.1.5}%
-\contentsline {section}{\numberline {6}Aanbevelingen}{7}{section.6}%
+\contentsline {subsubsection}{\numberline {5.1.4}Verwacht resultaat}{8}{subsubsection.5.1.4}%
+\contentsline {subsubsection}{\numberline {5.1.5}Waarnemingen}{8}{subsubsection.5.1.5}%
+\contentsline {section}{\numberline {6}Aanbevelingen}{8}{section.6}%
 \contentsline {section}{\numberline {7}Bronnen}{8}{section.7}%
 \contentsline {section}{\numberline {8}Bijlagen}{8}{section.8}%
 \contentsline {subsection}{\numberline {8.1}Bijlage test code}{8}{subsection.8.1}%

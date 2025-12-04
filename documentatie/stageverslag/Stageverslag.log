@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.8)  3 DEC 2025 11:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.8)  4 DEC 2025 15:57
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -463,38 +463,42 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 
 [2]
+Package hyperref Info: bookmark level for unknown todo defaults to 0 on input line 21.
+
+
+LaTeX Warning: Marginpar on page 3 moved.
+
+
 
 [3]
 
 [4]
-Package hyperref Info: bookmark level for unknown todo defaults to 0 on input line 87.
-
 
 [5]
 
 [6]
-Overfull \hbox (5.4168pt too wide) in paragraph at lines 147--147
-[][][]\OT1/cmr/m/n/10 waarnemingen 
- []
-
-
-Overfull \hbox (5.4168pt too wide) in paragraph at lines 147--147
-[][][]\OT1/cmr/m/n/10 waarnemingen 
- []
-
-
-Overfull \hbox (4.00014pt too wide) in paragraph at lines 152--152
-[][][]\OT1/cmr/m/n/10 aanbevelingen 
- []
-
-
-Overfull \hbox (4.00014pt too wide) in paragraph at lines 152--152
-[][][]\OT1/cmr/m/n/10 aanbevelingen 
- []
-
-
 
 [7]
+Overfull \hbox (5.4168pt too wide) in paragraph at lines 148--148
+[][][]\OT1/cmr/m/n/10 waarnemingen 
+ []
+
+
+Overfull \hbox (5.4168pt too wide) in paragraph at lines 148--148
+[][][]\OT1/cmr/m/n/10 waarnemingen 
+ []
+
+
+Overfull \hbox (4.00014pt too wide) in paragraph at lines 153--153
+[][][]\OT1/cmr/m/n/10 aanbevelingen 
+ []
+
+
+Overfull \hbox (4.00014pt too wide) in paragraph at lines 153--153
+[][][]\OT1/cmr/m/n/10 aanbevelingen 
+ []
+
+
 
 [8] (Stageverslag.aux)
  ***********
@@ -502,20 +506,20 @@ LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-08-13>
  ***********
 Package rerunfilecheck Info: File `Stageverslag.out' has not changed.
-(rerunfilecheck)             Checksum: 86164859DAFDA19EAD7EAB9B8B624F8A;5822.
+(rerunfilecheck)             Checksum: 7C2113D07947DB0426A8887845387DDB;5819.
  ) 
 Here is how much of TeX's memory you used:
- 21089 strings out of 468133
- 396705 string characters out of 5431197
- 788033 words of memory out of 5000000
- 49329 multiletter control sequences out of 15000+600000
+ 21107 strings out of 468133
+ 397097 string characters out of 5431197
+ 786329 words of memory out of 5000000
+ 49345 multiletter control sequences out of 15000+600000
  631248 words of font info for 55 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,9n,101p,902b,1047s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,9n,101p,906b,1047s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on Stageverslag.pdf (8 pages, 1798615 bytes).
+Output written on Stageverslag.pdf (8 pages, 1799756 bytes).
 PDF statistics:
- 298 PDF objects out of 1000 (max. 8388607)
- 63 named destinations out of 1000 (max. 500000)
+ 300 PDF objects out of 1000 (max. 8388607)
+ 65 named destinations out of 1000 (max. 500000)
  306 words of extra memory for PDF output out of 10000 (max. 10000000)
 
