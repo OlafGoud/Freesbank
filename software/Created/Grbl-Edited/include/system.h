@@ -12,7 +12,7 @@
 #define PLANNER_MAX_ITERATIONS 10
 
 extern volatile int32_t encoderSteps;
-
+extern volatile int32_t targetStep;
 
 struct GCodeBlock {
   float position[3];  /** xyz position, float, 12 bytes */

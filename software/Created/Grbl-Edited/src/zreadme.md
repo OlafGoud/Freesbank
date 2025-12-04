@@ -193,3 +193,20 @@ stepper isr -> flag niewe nodig aan
 # TODO
 - selected plane
 - absolute & relative mode. (suport??)
+
+
+
+
+
+
+
+
+
+# pins
+
+2 -> pin interrupt encoder
+3 -> pin interrupt encoder
+
+
+5 -> stepper puls pin
+6 -> stepper dir pin

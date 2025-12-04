@@ -4,7 +4,7 @@
 GCodeSettings gCodeSettings;
 
 volatile int32_t encoderSteps = 0;
-
+volatile int32_t targetStep = 0;
 
 /**
  * Function to load 1 segement into the buffer for the stepper motors. Also execute all functions for other componements for this segment (like spindle, printer etc)
@@ -143,7 +143,7 @@ void readGCodeLine(char* line, uint8_t size) {
     case 'K': break; /** @todo @note Not suported (YET) */
     case 'L': break; /** @todo @note Not suported (YET) */
     case 'N': break; /** @todo @note Not suported (YET) */
-    case 'O': break; /** @todo @note Not suported (YET) */
+    case 'O': targetStep = intValue; break; /** @todo @note Not suported (YET) @note temp */
     case 'P': break; /** @todo @note Not suported (YET) */
     case 'Q': break; /** @todo @note Not suported (YET) */
     case 'R': block.radius = value; break; /** @note Radius for circle */
@@ -445,9 +445,6 @@ void vecNormalize3(float r[3]) {
 }
 
 
-void setStepperInterupts() {
-
-}
 
 void setEncoderInterupts() {
 
@@ -466,7 +463,6 @@ void setEncoderInterupts() {
 
   /** enable  */
   EIMSK |= (1 << INT0) | (1 << INT1);
-
 
 }
 
@@ -521,3 +517,53 @@ ISR(INT1_vect) {
  * end encoder interupts
  */
 
+
+
+ /***************************
+  * 
+  * stepper interupts
+  * 
+  * 
+  */
+
+void setStepperInterupts() {
+  cli();
+
+  // set pins to output
+  DDRD |= (1 << PD5) | (1 << PD6); 
+  PORTD |= (1 << PD6); // set pin 6 to 1;
+  TCCR1A = 0;
+  TCCR1B = 0;
+
+  // prescaler 8 → Timer1 tick = 0.5 µs
+  TCCR1B |= (1 << WGM12);      // CTC mode
+  TCCR1B |= (1 << CS11);       // prescaler = 8
+
+  // INT1 every 10ms:
+  // 10,000 µs / 0.5 = 20,000 ticks
+  OCR1A = 20000;
+
+  TIMSK1 |= (1 << OCIE1A);     // enable compare A interrupt
+  sei();
+
+}
+
+ISR(TIMER1_COMPA_vect) {
+  /** call stepper */
+
+  PORTD |= (1 << PD5); /* set pin 5 high*/
+  
+
+  /** set second isr */
+  OCR1B = TCNT1 + (800 * 2); // 0.5us per tick at prescale=8 (800 = 800 microseconds (us))
+  TIMSK1 |= (1 << OCIE1B);             // enable compare B interrupt
+}
+
+ISR(TIMER1_COMPB_vect) {
+  /** Set stepper low */
+
+  PORTD &= ~(1 << PD5); /* set pin 5 low*/
+
+
+  TIMSK1 &= ~(1 << OCIE1B);            // disable until next cycle
+}
