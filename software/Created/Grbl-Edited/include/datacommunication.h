@@ -28,7 +28,7 @@ void printHline(uint8_t n, char c);
  */
 
 void uartInit(unsigned int baud); // fix higher values
-char uartRead();
+unsigned char uartRead();
 void uartWrite(char data);
 
 

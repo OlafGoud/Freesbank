@@ -12,7 +12,7 @@
 #define PLANNER_MAX_ITERATIONS 10
 
 extern volatile int32_t encoderSteps;
-extern volatile int32_t targetStep;
+extern volatile int targetStep;
 
 struct GCodeBlock {
   float position[3];  /** xyz position, float, 12 bytes */
@@ -67,3 +67,4 @@ void vecNormalize3(float r[3]);
 
 void setStepperInterupts();
 void setEncoderInterupts();
+void setDirection();

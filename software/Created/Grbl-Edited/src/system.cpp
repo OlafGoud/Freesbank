@@ -4,7 +4,7 @@
 GCodeSettings gCodeSettings;
 
 volatile int32_t encoderSteps = 0;
-volatile int32_t targetStep = 0;
+volatile int targetStep = 0;
 
 /**
  * Function to load 1 segement into the buffer for the stepper motors. Also execute all functions for other componements for this segment (like spindle, printer etc)
@@ -29,13 +29,12 @@ void readSerialLine() {
   static bool lineComment = false;
 
   while(size < MAX_LINE_SIZE) {
-    char c = uartRead();
+    unsigned char c = uartRead();
     
     if(c == EMPTY_CHAR) return; /** No data on RX Line */
     if(c == 32) continue;       /** filter spaces */
-
     if(lineComment == true) {
-      if(c == ')') lineComment == false; /** comments off */
+      if(c == ')') lineComment = false; /** comments off */
       continue; 
     }
 
@@ -70,7 +69,7 @@ void readSerialLine() {
   }
 
   /** when this is reached, the input lines are or to big, or something is not correct. */
-  println(size);
+  //println(size);
 }
 
 
@@ -143,7 +142,7 @@ void readGCodeLine(char* line, uint8_t size) {
     case 'K': break; /** @todo @note Not suported (YET) */
     case 'L': break; /** @todo @note Not suported (YET) */
     case 'N': break; /** @todo @note Not suported (YET) */
-    case 'O': targetStep = intValue; break; /** @todo @note Not suported (YET) @note temp */
+    case 'O': targetStep = intValue; print("point set to: "); println(targetStep); break; /** @todo @note Not suported (YET) @note temp */
     case 'P': break; /** @todo @note Not suported (YET) */
     case 'Q': break; /** @todo @note Not suported (YET) */
     case 'R': block.radius = value; break; /** @note Radius for circle */
@@ -566,4 +565,13 @@ ISR(TIMER1_COMPB_vect) {
 
 
   TIMSK1 &= ~(1 << OCIE1B);            // disable until next cycle
+}
+
+
+void setDirection() {
+  if(encoderSteps > targetStep) {
+    PORTD &= ~(1 << PD6);
+  } else if (encoderSteps < targetStep) {
+    PORTD |= (1 << PD6);
+  }
 }

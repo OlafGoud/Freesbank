@@ -32,7 +32,6 @@ int main() {
   println("Ready!");
 
   while (!(systemState == INTERNAL_ERROR_RESTART_REQUIRED)) {
-
     /** 
      * Error handling
      * @details systemState -> system erros
@@ -50,12 +49,13 @@ int main() {
 
 
     readSerialLine();
-
     if(stepperState == STEPPER_EMPTY) {
       loadSegmentInStepperBuffer();
     }
 
   }
+
+  setDirection();
 
   /** @note hopefully never reached */
   println("END, restart required!");

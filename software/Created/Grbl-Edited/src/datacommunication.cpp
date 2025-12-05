@@ -44,7 +44,7 @@ void uartInit(unsigned int baud) {
  * @note always non-blocking, returns a 0xff (default) if there is no data.
  * @returns the char in the front of the rx buffer. (0xff (default) when there is no data)
  */
-char uartRead() {
+unsigned char uartRead() {
   if(rx_head == rx_tail) return EMPTY_CHAR; /** there is no data on the buffer (EMPTY_CHAR = handle character without meaning in ASCII UTF-8) */
 
   char c = rx_buffer[rx_tail];
@@ -138,10 +138,19 @@ void print(int n) {
     n = -n;
   }
 
-  while (n > 0) {
-    uartWrite('0' + (n % 10));
-    n /= 10;
+  uint32_t p = 1;
+
+  // find highest power of 10 ≤ n
+  while (n / p >= 10) {
+      p *= 10;
   }
+
+  while (p > 0) {
+      uartWrite('0' + (n / p));
+      n %= p;
+      p /= 10;
+  }
+
 
   return;
 }
