@@ -1,6 +1,7 @@
 #include <stdlib.h>   
 #include <stdio.h>
 #include <avr/interrupt.h>
+#include "macros.h"
 
 #define EMPTY_CHAR 0xff
 #define SERIAL_BUFFER_SIZE 60
@@ -9,17 +10,19 @@
  */
 
 void println(char* str);
-void println(int n);
-void println(float f, uint8_t d);
-void println(uint8_t n);
+void println(int16 n);
+void println(float f, uint8 d);
+void println(uint8 n);
+void println(int32 n);
 
 void print(char* str);
-void print(int n);
-void print(float f, uint8_t d);
-void print(uint8_t n);
+void print(int16 n);
+void print(float f, uint8 d);
+void print(uint8 n);
+void print(int32 n);
 
-void printHline(uint8_t n);
-void printHline(uint8_t n, char c);
+void printHline(uint8 n);
+void printHline(uint8 n, char c);
 
 
 
@@ -27,8 +30,8 @@ void printHline(uint8_t n, char c);
  * Low level RX and TX functions.
  */
 
-void uartInit(unsigned int baud); // fix higher values
-unsigned char uartRead();
+void uartInit(uint16 baud); // fix higher values
+uchar uartRead();
 void uartWrite(char data);
 
 

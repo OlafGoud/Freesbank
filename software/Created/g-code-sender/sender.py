@@ -4,8 +4,39 @@ import time
 # --- Configure these for your cnc board ---
 PORT = 'COM3'      # e.g., Windows: 'COM3', Linux/Mac: '/dev/ttyUSB0'
 BAUDRATE = 9600  # Default for cnc
+lines = []
 
-# Open serial connection
+def readfile():
+  filename = input("filename: ")
+
+  with open(filename, "r") as f:
+    for line in f:
+      lines.append(line)
+  
+
+def send():
+  with serial.Serial(PORT, BAUDRATE, timeout=1) as cnc:
+    time.sleep(2)
+    cnc.reset_input_buffer()
+    for line in lines:
+      cnc.write(line.encode())
+      # Give cnc a moment to respond
+      time.sleep(0.1)
+
+      # Read and print available response
+      while cnc.in_waiting > 0:
+        response = cnc.readline().decode(errors='ignore').strip()
+        print(response)
+
+
+try:
+  BAUDRATE = int(input("geef n baud: "))  # Default for cnc
+except:
+  print("fout")
+
+readfile()
+send()
+"""
 with serial.Serial(PORT, BAUDRATE, timeout=1) as cnc:
   time.sleep(2)  # Wait for cnc to initialize
   cnc.reset_input_buffer()
@@ -28,3 +59,5 @@ with serial.Serial(PORT, BAUDRATE, timeout=1) as cnc:
     while cnc.in_waiting > 0:
       response = cnc.readline().decode(errors='ignore').strip()
       print(response)
+
+"""

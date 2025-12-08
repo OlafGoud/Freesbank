@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <math.h>
 #include "datacommunication.h"
+#include "macros.h"
 
 #define MAX_LINE_SIZE 60
 #define AXIS_PLANE_XY 0
@@ -11,8 +12,9 @@
 #define SYSTEM_MAX_BRAKE 200
 #define PLANNER_MAX_ITERATIONS 10
 
-extern volatile int32_t encoderSteps;
-extern volatile int targetStep;
+extern uint8 stepperState;
+extern volatile long int encoderSteps;
+extern volatile long int targetStep;
 
 struct GCodeBlock {
   float position[3];  /** xyz position, float, 12 bytes */
@@ -26,6 +28,12 @@ struct GCodeBlock {
 struct GCodeSettings {
   bool absolute = true;             /** true = absolute (G91), false = relative (G90) */
   uint8_t selectedPlane = AXIS_PLANE_XY;     /** 0 = xy, 1 = xz, 2 = yz */
+};
+
+struct StepperBlock {
+  float exitPos[3];
+  float exitSpeed;
+  float feedrate; // maxspeed
 };
 
 struct PlannerBlock {

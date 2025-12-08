@@ -4,20 +4,11 @@
 #include <avr/interrupt.h>
 
 #include "system.h"
+#include "macros.h"
 
-#define BAUD 9600
 
-#define IDLE 0
-#define RUNNING 1
-#define ERROR 2
-#define INTERNAL_ERROR_RESTART_REQUIRED 3
-
-#define STEPPER_FULL 0
-#define STEPPER_EMPTY 1
-#define STEPPER_ERROR 2
-
-uint8_t systemState = IDLE;
-uint8_t stepperState = STEPPER_EMPTY;
+uint8 systemState = IDLE;
+uint8 stepperState = STEPPER_EMPTY;
 
 
 /**
@@ -29,6 +20,8 @@ int main() {
   cli();
   uartInit(BAUD);
   sei();
+  setStepperInterupts();
+  setEncoderInterupts();
   println("Ready!");
 
   while (!(systemState == INTERNAL_ERROR_RESTART_REQUIRED)) {
@@ -52,10 +45,9 @@ int main() {
     if(stepperState == STEPPER_EMPTY) {
       loadSegmentInStepperBuffer();
     }
-
+    setDirection();
   }
 
-  setDirection();
 
   /** @note hopefully never reached */
   println("END, restart required!");

@@ -1,10 +1,14 @@
 #include "system.h"
 #include "string.h"
+#include <Arduino.h>
 
 GCodeSettings gCodeSettings;
 
-volatile int32_t encoderSteps = 0;
-volatile int targetStep = 0;
+volatile int32 encoderSteps = 0;
+volatile int32 targetStep = 0;
+
+StepperBlock stepperBlock;
+PlannerBuffer plannerBuffer;
 
 /**
  * Function to load 1 segement into the buffer for the stepper motors. Also execute all functions for other componements for this segment (like spindle, printer etc)
@@ -14,6 +18,17 @@ volatile int targetStep = 0;
  * @todo ( printer functions )
  */
 void loadSegmentInStepperBuffer() {
+
+  if(plannerBuffer.tail == plannerBuffer.head) {
+    return;
+  }
+  uint8 idx = plannerBuffer.tail++;
+  memcpy(stepperBlock.exitPos, plannerBuffer.block[idx].exitPoint, sizeof(stepperBlock.exitPos));
+  stepperBlock.feedrate = plannerBuffer.block[idx].feedrate;
+  stepperBlock.exitSpeed = plannerBuffer.block[idx].exitSpeed;
+
+  targetStep = static_cast<int32>(stepperBlock.exitPos[0]);
+  stepperState = STEPPER_FULL;
 
 }
 
@@ -25,9 +40,8 @@ void loadSegmentInStepperBuffer() {
  */
 void readSerialLine() {
   static char* line = new char[MAX_LINE_SIZE];
-  static uint8_t size = 0;
+  static uint8 size = 0;
   static bool lineComment = false;
-
   while(size < MAX_LINE_SIZE) {
     unsigned char c = uartRead();
     
@@ -45,7 +59,7 @@ void readSerialLine() {
         /** @todo handle commands (I (info about system), G (print settings), $ (???)) */
         /** @fn funciton */
       } else if (line[0] == '?') {
-        /** @todo print status */
+        print("Current pos: "); print(static_cast<int32>(encoderSteps)); print(", target: "); println(static_cast<int32>(targetStep));
       } else {
         readGCodeLine(line, size);
       }
@@ -58,18 +72,18 @@ void readSerialLine() {
         lineComment = true;
         continue;
       } else if (c == ';') {
-        /** ? */
+        /** rest of line comment @note not suported yet */
       } else {
         if(c >= 'a' && c <= 'z') c = c - 'a' + 'A'; /** change lowercase letters into capital leters */
 
         line[size++] = c;
       }
     }
-    
   }
 
   /** when this is reached, the input lines are or to big, or something is not correct. */
-  //println(size);
+  print("To big: ");
+  println(size);
 }
 
 
@@ -78,15 +92,15 @@ void readSerialLine() {
  * @param line char* line of information
  * @param size size of the effective data.
  */
-void readGCodeLine(char* line, uint8_t size) {
+void readGCodeLine(char* line, uint8 size) {
   
   GCodeBlock block;
 
   float value;
-  uint32_t intValue;
-  uint16_t mantissa;
-  uint16_t command;
-  uint8_t charIndex = 0;
+  int32 intValue;
+  uint16 mantissa; /** used for commands like GX.X (G28.1) */
+  uint16 command;
+  uint8 charIndex = 0;
 
   while(charIndex < size - 1) {
     
@@ -99,7 +113,7 @@ void readGCodeLine(char* line, uint8_t size) {
       println("ERR: !NUMBER");
       return;
     }
-
+    println(value, 3);
     intValue = trunc(value);
     mantissa = round(100 * (value - intValue)); /** @note get the value after the '.' for commands like: GXX.X */
 
@@ -125,7 +139,14 @@ void readGCodeLine(char* line, uint8_t size) {
     }
     
     if (letter == 'M') {
-
+      switch (intValue) {
+      case 1:
+        /** STOP NOW @todo */
+        break;
+      
+      default:
+        break;
+      }
       continue;
     }
 
@@ -142,7 +163,7 @@ void readGCodeLine(char* line, uint8_t size) {
     case 'K': break; /** @todo @note Not suported (YET) */
     case 'L': break; /** @todo @note Not suported (YET) */
     case 'N': break; /** @todo @note Not suported (YET) */
-    case 'O': targetStep = intValue; print("point set to: "); println(targetStep); break; /** @todo @note Not suported (YET) @note temp */
+    case 'O': break; /** @todo @note Not suported (YET) */
     case 'P': break; /** @todo @note Not suported (YET) */
     case 'Q': break; /** @todo @note Not suported (YET) */
     case 'R': block.radius = value; break; /** @note Radius for circle */
@@ -173,7 +194,6 @@ void readGCodeLine(char* line, uint8_t size) {
 }
 
 
-PlannerBuffer plannerBuffer;
 static float currPos[3] = {0,0,0};
 
 void addSegmentToPlanBuffer(GCodeBlock &gcode) {
@@ -198,7 +218,7 @@ void addSegmentToPlanBuffer(GCodeBlock &gcode) {
   if (plannerBuffer.head == plannerBuffer.tail) return; /** Buffer full */
 
   memcpy(currPos, block->exitPoint, sizeof(currPos));
-
+  stepperState = STEPPER_EMPTY;
     
 }
 
@@ -210,7 +230,7 @@ void plannerRecalculate(float J) {
   }
 
   /** set all speeds to feedrate */
-  uint8_t idx = plannerBuffer.tail;
+  uint8 idx = plannerBuffer.tail;
   while(idx != plannerBuffer.head) {
     plannerBuffer.block[idx].entrySpeed = plannerBuffer.block[idx].feedrate;
     plannerBuffer.block[idx].exitSpeed = plannerBuffer.block[idx].feedrate;
@@ -265,7 +285,7 @@ void plannerRecalculate(float J) {
 
 }
 
-bool readFloat(char *line, uint8_t *char_counter, float *float_ptr) {
+bool readFloat(char *line, uint8 *char_counter, float *float_ptr) {
 
   char *ptr = line + *char_counter;
   unsigned char c;
@@ -284,9 +304,9 @@ bool readFloat(char *line, uint8_t *char_counter, float *float_ptr) {
   }
 
   // Extract number into fast integer. Track decimal in terms of exponent value.
-  uint32_t intval = 0;
-  int8_t exp = 0;
-  uint8_t ndigit = 0;
+  uint32 intval = 0;
+  int8 exp = 0;
+  uint8 ndigit = 0;
   bool isdecimal = false;
   while (1) {
     c -= '0';
@@ -352,13 +372,15 @@ bool readFloat(char *line, uint8_t *char_counter, float *float_ptr) {
 }
 
 
+/** @todo */
 /**
  * generate segments for curves
  * the offset is absolute
  * @param block GCodeBlock what stores all important info.
  * @param selectedPlane plane that is selected to do the curve (XY, ZX, YZ).
+ * @todo 
  */
-void generateStraightSegementsFromCurve(GCodeBlock &block, uint8_t selectedPlane) {
+void generateStraightSegementsFromCurve(GCodeBlock &block, uint8 selectedPlane) {
 
   float centerAxis0 = block.offset[0];
   float centerAxis1 = block.offset[1];
@@ -443,8 +465,6 @@ void vecNormalize3(float r[3]) {
   if (n > 0.0f) { r[0]/=n; r[1]/=n; r[2]/=n; }
 }
 
-
-
 void setEncoderInterupts() {
 
   DDRD &= ~((1 << PD2) | (1 << PD3)); /** Set pins to input */
@@ -472,7 +492,7 @@ void setEncoderInterupts() {
 /***
  * Encoder state
  */
-volatile uint8_t encoderState = 0;
+volatile uint8 encoderState = 0;
 
 /** Interupt for pin 2 */
 ISR(INT0_vect) {
@@ -485,12 +505,12 @@ ISR(INT0_vect) {
    * 1 & 1 = 2
    * 0 & 1 = 3
    */
-  uint8_t b = (PIND >> PD3) & 1;
-  uint8_t curr = (((PIND >> PD2) & 1) ^ b) | (b << 1); 
+  uint8 b = (PIND >> PD3) & 1;
+  uint8 curr = (((PIND >> PD2) & 1) ^ b) | (b << 1); 
 
   /** check the difference from the current encoder state. */
-  uint8_t diff = (curr  - encoderState) & 3;
-  int8_t delta = (diff == 1) - (diff == 3);
+  uint8 diff = (curr  - encoderState) & 3;
+  int8 delta = (diff == 1) - (diff == 3);
 
   encoderSteps += delta;
   encoderState = curr;
@@ -502,11 +522,11 @@ ISR(INT0_vect) {
  */
 ISR(INT1_vect) {
 
-  uint8_t b = (PIND >> PD3) & 1;
-  uint8_t curr = (((PIND >> PD2) & 1) ^ b) | (b << 1); 
+  uint8 b = (PIND >> PD3) & 1;
+  uint8 curr = (((PIND >> PD2) & 1) ^ b) | (b << 1); 
 
-  uint8_t diff = (curr  - encoderState) & 3;
-  int8_t delta = (diff == 1) - (diff == 3);
+  uint8 diff = (curr  - encoderState) & 3;
+  int8 delta = (diff == 1) - (diff == 3);
 
   encoderSteps += delta;
   encoderState = curr;
@@ -569,6 +589,20 @@ ISR(TIMER1_COMPB_vect) {
 
 
 void setDirection() {
+
+  static bool on = true;
+
+  if(encoderSteps <= targetStep + 4 && encoderState >= targetStep - 4) {
+    TIMSK1 &= ~(1 << OCIE1A);   // disable Timer1 compare A interrupt
+    on = false;
+    return;
+  }
+
+  if(on == false) {
+    TIMSK1 |= (1 << OCIE1A);    // enable Timer1 compare A interrupt
+    on = true;
+  }
+
   if(encoderSteps > targetStep) {
     PORTD &= ~(1 << PD6);
   } else if (encoderSteps < targetStep) {
