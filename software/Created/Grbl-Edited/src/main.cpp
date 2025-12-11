@@ -23,6 +23,9 @@ int main() {
   setStepperInterupts();
   setEncoderInterupts();
   println("Ready!");
+  while (uartRead() != EMPTY_CHAR) {
+    println("clearing");
+  } 
 
   while (!(systemState == INTERNAL_ERROR_RESTART_REQUIRED)) {
     /** 

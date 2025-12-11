@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.8)  4 DEC 2025 21:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.8)  11 DEC 2025 09:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -387,118 +387,198 @@ File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
 File: listings.cfg 2024/09/23 1.10c listings configuration
 ))
 Package: listings 2024/09/23 1.10c (Carsten Heinz)
- (C:\Users\Olaf\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
+ (C:\Users\Olaf\AppData\Local\Programs\MiKTeX\tex/latex/blindtext\blindtext.sty
+Package: blindtext 2012/01/06 V2.0 blindtext-Package
+ (C:\Users\Olaf\AppData\Local\Programs\MiKTeX\tex/latex/tools\xspace.sty
+Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
+)
+\c@blindtext=\count329
+\c@Blindtext=\count330
+\c@blind@countparstart=\count331
+\blind@countxx=\count332
+\blindtext@numBlindtext=\count333
+\blind@countyy=\count334
+\c@blindlist=\count335
+\c@blindlistlevel=\count336
+\c@blindlist@level=\count337
+\blind@listitem=\count338
+\c@blind@listcount=\count339
+\c@blind@levelcount=\count340
+\blind@mathformula=\count341
+\blind@Mathformula=\count342
+\c@blind@randomcount=\count343
+\c@blind@randommax=\count344
+\c@blind@pangramcount=\count345
+\c@blind@pangrammax=\count346
+) (C:\Users\Olaf\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+ (C:\Users\Olaf\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+)
+\Gm@cnth=\count347
+\Gm@cntv=\count348
+\c@Gm@tempcnt=\count349
+\Gm@bindingoffset=\dimen267
+\Gm@wd@mp=\dimen268
+\Gm@odd@mp=\dimen269
+\Gm@even@mp=\dimen270
+\Gm@layoutwidth=\dimen271
+\Gm@layoutheight=\dimen272
+\Gm@layouthoffset=\dimen273
+\Gm@layoutvoffset=\dimen274
+\Gm@dimlist=\toks33
+ (C:\Users\Olaf\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg))
+(C:\Users\Olaf\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-06-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count329
+\l__color_backend_stack_int=\count350
 ) (Stageverslag.aux)
 \openout1 = `Stageverslag.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
  (C:\Users\Olaf\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count330
-\scratchdimen=\dimen267
+\scratchcounter=\count351
+\scratchdimen=\dimen275
 \scratchbox=\box66
-\nofMPsegments=\count331
-\nofMParguments=\count332
-\everyMPshowfont=\toks33
-\MPscratchCnt=\count333
-\MPscratchDim=\dimen268
-\MPnumerator=\count334
-\makeMPintoPDFobject=\count335
-\everyMPtoPDFconversion=\toks34
+\nofMPsegments=\count352
+\nofMParguments=\count353
+\everyMPshowfont=\toks34
+\MPscratchCnt=\count354
+\MPscratchDim=\dimen276
+\MPnumerator=\count355
+\makeMPintoPDFobject=\count356
+\everyMPtoPDFconversion=\toks35
 ) (C:\Users\Olaf\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (C:\Users\Olaf\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring OFF on input line 11.
+Package hyperref Info: Link coloring OFF on input line 13.
  (Stageverslag.out) (Stageverslag.out)
 \@outlinefile=\write4
 \openout4 = `Stageverslag.out'.
 
-\c@lstlisting=\count336
-<ChatGPTFrontImage.png, id=150, 925.056pt x 826.287pt>
-File: ChatGPTFrontImage.png Graphic file (type png)
-<use ChatGPTFrontImage.png>
-Package pdftex.def Info: ChatGPTFrontImage.png  used on input line 13.
-(pdftex.def)             Requested size: 345.0pt x 308.16737pt.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 17.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 17.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 17.
+\c@lstlisting=\count357
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(81.94394pt, 433.62pt, 81.94394pt)
+* v-part:(T,H,B)=(106.75473pt, 578.15999pt, 160.13213pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=433.62pt
+* \textheight=578.15999pt
+* \oddsidemargin=9.67395pt
+* \evensidemargin=9.67395pt
+* \topmargin=-2.51526pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+<Sens2SeaLogo.png, id=154, 1143.27126pt x 219.82124pt>
+File: Sens2SeaLogo.png Graphic file (type png)
+<use Sens2SeaLogo.png>
+Package pdftex.def Info: Sens2SeaLogo.png  used on input line 17.
+(pdftex.def)             Requested size: 227.62204pt x 43.76556pt.
 
 
-[1{C:/Users/Olaf/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}
+[1
 
- <./ChatGPTFrontImage.png>] (Stageverslag.toc
+{C:/Users/Olaf/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./Sens2SeaLogo.png>] (Stageverslag.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 2.
+(Font)              <7> on input line 3.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 2.
+(Font)              <5> on input line 3.
 )
 \tf@toc=\write5
 \openout5 = `Stageverslag.toc'.
 
 
 
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.48 	\newpage
+               [1]
+Package hyperref Info: bookmark level for unknown todo defaults to 0 on input line 52.
+
+
 [2]
-Package hyperref Info: bookmark level for unknown todo defaults to 0 on input line 21.
-
-
-LaTeX Warning: Marginpar on page 3 moved.
-
-
 
 [3]
 
 [4]
 
 [5]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 133.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 133.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 133.
+
 
 [6]
+Overfull \hbox (2.139pt too wide) in paragraph at lines 184--184
+[][][]\OT1/cmss/m/n/10 waarnemingen 
+ []
+
+
+Overfull \hbox (2.139pt too wide) in paragraph at lines 184--184
+[][][]\OT1/cmss/m/n/10 waarnemingen 
+ []
+
+
+Overfull \hbox (1.38899pt too wide) in paragraph at lines 189--189
+[][][]\OT1/cmss/m/n/10 aanbevelingen 
+ []
+
+
+Overfull \hbox (1.38899pt too wide) in paragraph at lines 189--189
+[][][]\OT1/cmss/m/n/10 aanbevelingen 
+ []
+
+
 
 [7]
-Overfull \hbox (5.4168pt too wide) in paragraph at lines 148--148
-[][][]\OT1/cmr/m/n/10 waarnemingen 
- []
-
-
-Overfull \hbox (5.4168pt too wide) in paragraph at lines 148--148
-[][][]\OT1/cmr/m/n/10 waarnemingen 
- []
-
-
-Overfull \hbox (4.00014pt too wide) in paragraph at lines 153--153
-[][][]\OT1/cmr/m/n/10 aanbevelingen 
- []
-
-
-Overfull \hbox (4.00014pt too wide) in paragraph at lines 153--153
-[][][]\OT1/cmr/m/n/10 aanbevelingen 
- []
-
-
 
 [8] (Stageverslag.aux)
  ***********
@@ -506,20 +586,20 @@ LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-08-13>
  ***********
 Package rerunfilecheck Info: File `Stageverslag.out' has not changed.
-(rerunfilecheck)             Checksum: 7C2113D07947DB0426A8887845387DDB;5819.
+(rerunfilecheck)             Checksum: 3A7CDE75F68482F8F17A922B3E9DE326;5905.
  ) 
 Here is how much of TeX's memory you used:
- 21107 strings out of 468133
- 397097 string characters out of 5431197
- 786329 words of memory out of 5000000
- 49345 multiletter control sequences out of 15000+600000
- 631248 words of font info for 55 fonts, out of 8000000 for 9000
+ 21823 strings out of 468133
+ 408875 string characters out of 5431197
+ 806564 words of memory out of 5000000
+ 50043 multiletter control sequences out of 15000+600000
+ 633037 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,9n,101p,906b,1047s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on Stageverslag.pdf (8 pages, 1799756 bytes).
+ 99i,9n,101p,891b,1053s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss12.pfb><C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss17.pfb><C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Users/Olaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on Stageverslag.pdf (9 pages, 262233 bytes).
 PDF statistics:
- 300 PDF objects out of 1000 (max. 8388607)
- 65 named destinations out of 1000 (max. 500000)
- 306 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 311 PDF objects out of 1000 (max. 8388607)
+ 69 named destinations out of 1000 (max. 500000)
+ 314 words of extra memory for PDF output out of 10000 (max. 10000000)
 

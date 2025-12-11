@@ -40,3 +40,8 @@
 #define STEPPER_FULL 0
 #define STEPPER_EMPTY 1
 #define STEPPER_ERROR 2
+
+
+
+#define X_STEP_PIN PD5
+#define X_DIR_PIN PD6

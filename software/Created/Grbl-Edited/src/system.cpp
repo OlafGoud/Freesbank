@@ -1,6 +1,5 @@
 #include "system.h"
 #include "string.h"
-#include <Arduino.h>
 
 GCodeSettings gCodeSettings;
 
@@ -113,7 +112,6 @@ void readGCodeLine(char* line, uint8 size) {
       println("ERR: !NUMBER");
       return;
     }
-    println(value, 3);
     intValue = trunc(value);
     mantissa = round(100 * (value - intValue)); /** @note get the value after the '.' for commands like: GXX.X */
 
@@ -163,7 +161,7 @@ void readGCodeLine(char* line, uint8 size) {
     case 'K': break; /** @todo @note Not suported (YET) */
     case 'L': break; /** @todo @note Not suported (YET) */
     case 'N': break; /** @todo @note Not suported (YET) */
-    case 'O': break; /** @todo @note Not suported (YET) */
+    case 'O': encoderSteps = intValue; println("encoder steps to value"); break; /** @todo @note Not suported (YET) */
     case 'P': break; /** @todo @note Not suported (YET) */
     case 'Q': break; /** @todo @note Not suported (YET) */
     case 'R': block.radius = value; break; /** @note Radius for circle */
@@ -538,12 +536,12 @@ ISR(INT1_vect) {
 
 
 
- /***************************
-  * 
-  * stepper interupts
-  * 
-  * 
-  */
+/***************************
+ * 
+ * stepper interupts
+ * 
+ * 
+ */
 
 void setStepperInterupts() {
   cli();
@@ -592,12 +590,12 @@ void setDirection() {
 
   static bool on = true;
 
-  if(encoderSteps <= targetStep + 4 && encoderState >= targetStep - 4) {
+
+  if(encoderSteps <= targetStep + 4 && encoderSteps >= targetStep - 4) {
     TIMSK1 &= ~(1 << OCIE1A);   // disable Timer1 compare A interrupt
     on = false;
     return;
   }
-
   if(on == false) {
     TIMSK1 |= (1 << OCIE1A);    // enable Timer1 compare A interrupt
     on = true;

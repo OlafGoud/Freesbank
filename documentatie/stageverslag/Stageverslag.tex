@@ -4,71 +4,107 @@
 \usepackage{todonotes}
 \usepackage{hyperref}
 \usepackage{listings}
+\usepackage{blindtext}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
 
 \title{Stage Verslag 2025 - 2026}
 \author{Olaf Goudriaan 1071349}
 \date{TINSTG05 - Wessel Oele, Renee van Dorn}
 \begin{document}
-	\begin{figure}
-		\includegraphics[width=\linewidth]{ChatGPTFrontImage.png}
-		\caption{Gemaakt door ChatGPT}
-	\end{figure}
-	\maketitle
+\sffamily
+	\begin{titlepage}
+		\begin{center}
+			\includegraphics[width=8cm]{Sens2SeaLogo.png}
 
+			\vspace*{4cm}
+			\Huge
+			\textbf{Aansturing Freesmachine} \\
+			\LARGE
+			\vspace{0.5cm}
+        Stage verslag \\ 
+				Sens2Sea
+			
+			\vspace{1.5cm}
+					
+			\huge
+			\textbf{Olaf Goudriaan}
+			\vspace{1.5cm}	
+			\vfill
+			\Large
+			\begin{flushright}
+				Geert Mosterdijk \\
+				TINSTG05 \\
+				Wessel Oele, Renee van Dorn \\
+				1071349	\\
+				2025 - 2026
+			\end{flushright}
+			
+		\end{center}
+
+	\end{titlepage}
 	\newpage
+ 	\renewcommand{\familydefault}{\sfdefault}
 	\tableofcontents
 	\newpage
-	\todo{voorwoord}
+	\large
+
+	\section{Voorwoord}
+	Dank gaat uit naar alle mensen die hebben meegeholpen aan deze stage. De medewerkers, begeleiders en andere mensen die hebben meegeholpen. Dit was een leerzame periode waarin veel geleerd is.  \todo{beter maken?  hoe???}
+
 	\section{Context}
 		\subsection{Het bedrijf}
-			De stage vond plaats bij het bedrijf Sens2Sea. Sens2Sea is een klein bedrijf dat gevestigd is op het RDM terrein. Het bedrijf heeft een kavel in het innovation dock. Sens2Sea ontwikkelt radar technologieën voor sectoren zoals de scheepsvaart en andere maritieme sectoren. Hiernaast heeft Sens2Sea veel projecten lopen bij de hogeschool voor studenten.
+			De stage heeft plaatsgevonden bij het bedrijf Sens2Sea. Sens2Sea is een klein bedrijf dat gevestigd is op het RDM terrein. Het bedrijf heeft een kavel in het innovation dock. Sens2Sea ontwikkelt radar technologieën voor sectoren zoals de scheepsvaart en andere maritieme sectoren. Het bedrijf word geleid door Geert Mosterdijk. Het bedrijf heeft maar een paar medewerkers. Deze zijn gespecialiseerd in hun vak gebieden zoals: electronica en software. Verder lopen er bij Sens2Sea een aantal studenten stage van verschillende opleidingen.
 
 		\subsection{Opdracht}
-			Sens2Sea is bezig met radar technologie. Radar is een technologie dat radiogolven gebruikt om de afstand, snelheid en richting van objecten te bepalen. Radar kan gebruikt worden in goed en slecht weer. Hierdoor is het uitstekend om objecten te detecteren in sectoren zoals de scheepsvaart. Ook kan radar technologie gebruikt worden om de zeebodem in kaart te brengen en om olievlekken te detecteren.
+			\paragraph{} Sens2Sea is bezig met radar technologie. Radar is een technologie dat radiogolven gebruikt om de afstand, snelheid en richting van objecten te bepalen. Radar kan gebruikt worden in goed en slecht weer. Hierdoor is het uitstekend om objecten te detecteren in sectoren zoals de scheepsvaart. Ook kan radar technologie gebruikt worden om de zeebodem in kaart te brengen en om olievlekken te detecteren. 
 
-			Sens2Sea is nu bezig met puls radar technologie. Hiervoor wilt Sens2Sea parabool antennes gebruiken. Deze antennes zorgen ervoor dat de radiogolven gebundeld worden. Door de bundeling van deze golven is er sterke signaalversterking. Dit zorgt ervoor dat het beeld een betere resolutie heeft. Deze antennes zijn te verkrijgen in standaard maten, deze maten voldoen niet aan de maten die Sens2Sea nodig heeft. Hierom zijn aangepaste maten nodig, deze zijn relatief aan de standaard maten een stuk duurder. Daarom wilt Sens2Sea hun eigen antennes maken met een 3D freesmachine. Machines die al op de markt zijn en groot genoeg zijn met een werkgrote van 4m x 1m x 0.4m, kosten 10 duizenden euro's. Dit vind Sens2Sea te duur en daarom is deze opdracht er om de aansturing van een 3d freesmachine te maken.
+			\paragraph{} Sens2Sea is nu bezig met pulsradar technologie. Hiervoor wilt Sens2Sea parabool antennes gebruiken. Deze antennes zorgen ervoor dat de radiogolven gebundeld worden. Door de bundeling van deze golven worden de signalen versterkt. Dit zorgt ervoor dat het beeld een betere resolutie heeft. Deze antennes zijn niet te verkrijgen in alle maten. Deze zouden custom op maat gemaakt moeten worden. Dit is alleen relatief tot standaard geproduceerde maten een stuk duurder. Daarom wilt Sens2Sea hun eigen antennes maken met een 3D freesmachine. Machines die al op de markt zijn en groot genoeg zijn met een werkgrote van 4m x 1m x 0.4m, kosten tienduizenden euro's. Dit vind Sens2Sea te duur en daarom is deze opdracht er om de aansturing van een 3d freesmachine te maken.
 			
 		\subsection{Scope} 
-			Om een freesmachine aan te sturen is er opensource software zoals GRBL. Alleen wilt Sens2Sea makkelijk aanpasbaar is door het systeem modulair te houden. Ook omdat de freesmachine over een afstand van 4 meter moet kunnen werken zonder nauwkeurigheid problemen. Hiervoor moet de aandrijving en locatie bepaling gescheiden worden. Dit is niet het geval met deze opensource software zoals GRBL. Bij deze systemen bepaalt het systeem de positie van de kop door de stappen te tellen die de motoren moeten uitvoeren. Het problem hiervan is dat de motoren een stap kunnen verspringen waardoor de vorm van de antenne wordt veranderd. Hierom wilt Sens2Sea dat de positie van de kop door sensoren wordt bepaald. 
+			\paragraph{} Om een freesmachine aan te sturen zijn er al opensource projecten zoals GRBL. Deze projecten voldoen niet aan de eissen omdat Sens2Sea wilt dat de software en hardware makkelijk aanpassbaar is. De freesmachine moet over een afstand van 4 meter nauwkeurig kunnen werken. Hiervoor moet de aandrijving en locatie bepaling gescheiden worden. Dit is niet het geval met deze opensource software zoals GRBL. Bij deze systemen bepaalt het systeem de positie van de kop door de stappen te tellen die de motoren moeten uitvoeren. Het problem hiervan is dat de motoren een stap kunnen verspringen waardoor de vorm van de antenne wordt veranderd. Hierom wilt Sens2Sea dat de positie van de kop door sensoren wordt bepaald. 
 			
-			De scope omvat het scheiden van de aandrijving en locatie bepaling van de machine. Daarnaast het aanpassen of herschrijven van GRBL om deze te laten werken met de sensoren. Ook de hardware aansturen/aansluiten hoort bij de scope.
+			\paragraph{} De scope omvat het scheiden van de aandrijving en locatie bepaling van de machine. Daarnaast het aanpassen of herschrijven van GRBL om deze te laten werken met de sensoren. Ook de hardware aansturen/aansluiten hoort bij de scope.
 	
 		\subsection{Requirements}
-			Waar het prototype aan moet voldoen is het volgende.
+			Hieronder zijn de requirement te vinden. Om deze op te stellen is moscow gebruikt. Moscow verdeelt de requirements op in Must, Should, Could en Won't. Hiernaast zijn de requirements functioneel en niet functioneel.
 
 			\subsubsection{De kop van de machine moet over drie bewegingsassen bewegen.}
 				De kop van de machine moet over de x, y, z assen kunnen bewegen. (Functioneel) (MUST) \newline
-				\textbf{Acceptatie:} De requirement is voltooid als de kop over de drie assen heen en weer kan bewegen.
-				
+				\textbf{Acceptatie:} De requirement is voltooid als de kop over de drie assen heen en weer kan bewegen. \newline
+				\textbf{Userstory:} Als opdrachtgever wil ik dat de machine zich kan verplaatsen over de x, y en z bewegingsassen.
+
 			\subsubsection{De kop kan materiaal verwijderen en/of toevoegen.}
 				De kop van de machine kan materiaal verwijderen en/of toevoegen. (Functioneel) (MUST) \newline
-				\textbf{Acceptatie:} De requirement is voltooid als de kop materiaal kan toevoegen of verwijderen.
+				\textbf{Acceptatie:} De requirement is voltooid als de kop materiaal kan toevoegen of verwijderen. \newline
+				\textbf{Userstory:} Als opdrachtgever wil ik dat de machine materiaal kan verwijderen of kan toevoegen aan het model.
 
 			\subsubsection{De positie van de kop wordt bepaald door sensoren.} 
 				De positie van de kop van de machine moet bepaald kunnen worden doormiddel van sensoren. (Functioneel) (MUST) \newline
-				\textbf{Acceptatie:} De requirement is voltooid als de locatie van de kop van de machine bepaald wordt door een sensor.
+				\textbf{Acceptatie:} De requirement is voltooid als de locatie van de kop van de machine bepaald wordt door een sensor. \newline
+				\textbf{Userstory:} Als opdrachtgever wil ik dat de machine de positie van de kop bepaald doormiddel van een sensor om de nauwkeurigheid te garandeeren. 
 
 			\subsubsection{Er kan g-code worden uitgevoerd met de machine.} 
 				De machine kan een g-code bestand uitvoeren dat deze gestreamd krijgt via een seriële verbinding. (Functioneel) (MUST) \newline
-				\textbf{Acceptatie:} De requirement is voltooid als er een g-code bestand uitgelezen en uitgevoerd kan worden door de machine via een seriële verbinding.
+				\textbf{Acceptatie:} De requirement is voltooid als er een g-code bestand uitgelezen en uitgevoerd kan worden door de machine via een seriële verbinding. \newline
+				\textbf{Userstory:} Als opdrachtgever wil ik een g-code bestand kunnen laten uitvoeren door de machine. 
 
 			\subsubsection{De code moet modulair zijn}
 				De code van het prototype moet modulair zijn waardoor er gemakkelijk delen vervangen kunnen worden. Bijvoorbeeld andere soorten actuatoren en sensoren toevoegen / vervangen. (Functioneel) (MUST) \newline				
-				\textbf{Acceptatie:} De requirement is voltooid als de code van de machine modulair is en niet afhangt van andere stukken code.
+				\textbf{Acceptatie:} De requirement is voltooid als de code van de machine modulair is en niet afhangt van andere stukken code. \newline
+				\textbf{Userstory:} Als opdrachtgever wil ik gemakkelijk onderdelen kunnen vervangen en toevoegen aan de machine, zonder het hele systeem om te gooien.
 
 			\subsubsection{De kop van de machine moet over twee rotatie assen bewegen}
 				De kop van de machine moet over twee roatie assen kunnen bewegen (Functioneel) (SHOULD) \newline
-				\textbf{Acceptatie:} De requirement is voltooid als de kop van de machine over twee rotatie assen kan bewegen.
+				\textbf{Acceptatie:} De requirement is voltooid als de kop van de machine over twee rotatie assen kan bewegen. \newline
+				\textbf{Userstory:} Als opdrachtgever wil ik graag dat de machine over twee rotatie assen kan draaien om een mooie parabool te maken.
+
 	
 	\section{Stakeholders}
 		\subsection{Geert Mosterdijk}
 			Geert is de opdrachtgever. Hierom heeft hij veel belang bij het project heeft alle zeggenschap over hoe dingen gebeuren. Het prototype is voor Geert.
 
-		\subsection{Student}
-			De student Olaf Goudriaan is de projectleider en voert het project uit. 
-
 		\subsection{P.G.M. van der Klugt} \todo{veranderen}
-			Peter is de collega van Geert. Zijn belang is bij dat het project soepel verloopt en dat e reen werkend productkomt. Tevens is hij expert op het gebied van regel systemen en andere algoritmes.
+			Peter is de collega van Geert. Zijn belang is bij dat het project soepel verloopt en dat er een werkend productkomt. Tevens is hij expert op het gebied van regel systemen en andere algoritmes.
 
 		\subsection{Medewerkers}
 			Medewerkers van het bedrijf die expert zijn op bepaalde gebieden zoals electronica en software hebben veel invloed op het project omdat deze bepalen of de manier die voorgesteld wordt acceptabel is.
@@ -85,7 +121,7 @@
 			Encoders zijn er in verschillende soorten. Hieronder worden de encoders genoemd. Na het voorleggen aan de opdrachtgever heeft deze de incrementele encoder gekozen omdat deze meer vrijheid biedt dan de andere encoders.
 
 			\subsubsection{Incrementele encoder}
-				Encoders zijn encoders die pulsen geven als de as is gedraaid. De resolutie van deze encoders wordt afgedrukt in PPR (pulsen per rotatie). Door de pulsen te tellen die uit de output(s) komen kun je de locatie en eventueel snelheid bepalen. Als deze encoders meerdere uitgangen heeft, wordt de resolutie van deze encoders beter. Als een encoder 2 uitgangen heeft kan de encoder in 4x resolutie werken. Dit is omdat op de schijf van deze encoders fases in verschuiving staan. Hierdoor kan de richting ook bepaald worden door de sequentie te volgen die de encoder loopt zoals te zien is in \todo{figure 2}. Door de sequentie door te lopen in een richting kan de richting bepaald worden.
+				Incrementele Encoders zijn encoders die pulsen geven als de as is gedraaid. De resolutie van deze encoders wordt afgedrukt in PPR (pulsen per rotatie). Door de pulsen te tellen die uit de output(s) komen kun je de locatie en eventueel snelheid bepalen. Als deze encoders meerdere uitgangen heeft, wordt de resolutie van deze encoders beter. Als een encoder 2 uitgangen heeft kan de encoder in 4x resolutie werken. Dit is omdat op de schijf van deze encoders fases in verschuiving staan. Hierdoor kan de richting ook bepaald worden door de sequentie te volgen die de encoder loopt zoals te zien is in figure 1\todo{figure 1}. Door de sequentie door te lopen in een richting kan de richting bepaald worden.
 				
 				\paragraph{Interrupts} Omdat deze encoders signalen versturen wanneer er een rotatie plaatsvindt, is de locatie niet op te vragen. Hiervoor kunnen er interrupts gebruikt worden. Deze gaan af wanneer er een signaal plaatsvindt. Een interrupt is een signaal dat de computer vertelt dat die moet stoppen waar die mee bezig is en een specifiek stuk code moet uitvoeren. Omdat deze encoders per rotatie een x aantal pulsen afgeeft is het belangrijk om te weten of een arduino zoveel interrupts kan verwerken. Hiervoor is een test gedaan. De code is te vinden bij de bijlagen. \todo{code bijlagen} Voor deze test is gekeken hoeveel interrupts de arduino per seconde registreert om een beeld te geven of deze optie realistisch is.
 
@@ -160,6 +196,19 @@
 		\section{Bijlagen}
 			\subsection{Bijlage test code}
 			\todo{Bijlage toevoegen}
+
+	\section{Changelog}
+		\begin{center}
+		\begin{tabular}{|c|c|}
+			\hline
+			Datum & verandering \\ 
+			\hline
+			1-12-2025 & Begonnen met stage verslag maken van losse documenten \\
+			\hline
+			10-12-2025 & Feedback verwerkt van studenten \\    
+			\hline
+		\end{tabular}
+		\end{center}
 \end{document}
 
 • Voorwoord

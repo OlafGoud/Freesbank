@@ -12,6 +12,7 @@
 #define SYSTEM_MAX_BRAKE 200
 #define PLANNER_MAX_ITERATIONS 10
 
+extern uint8 systemState;
 extern uint8 stepperState;
 extern volatile long int encoderSteps;
 extern volatile long int targetStep;
