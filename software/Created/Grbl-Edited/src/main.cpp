@@ -16,7 +16,6 @@ uint8 stepperState = STEPPER_EMPTY;
  * @todo
  */
 int main() {
-
   cli();
   uartInit(BAUD);
   sei();

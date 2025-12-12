@@ -8,25 +8,38 @@ lines = []
 
 def readfile():
   filename = input("filename: ")
-
+  i = 0
   with open(filename, "r") as f:
     for line in f:
       lines.append(line)
-  
+      i += 1
+  print(i)
 
 def send():
   with serial.Serial(PORT, BAUDRATE, timeout=1) as cnc:
     time.sleep(2)
     cnc.reset_input_buffer()
     for line in lines:
+      line = line + '\0'
       cnc.write(line.encode())
       # Give cnc a moment to respond
-      time.sleep(0.1)
+      time.sleep(1)
 
       # Read and print available response
       while cnc.in_waiting > 0:
         response = cnc.readline().decode(errors='ignore').strip()
         print(response)
+    while True:
+      inp = input("-------------------------------------------------------------------------\ngeef n input: \n")
+      inp = inp + '\0'
+      cnc.write(inp.encode())
+      time.sleep(1)
+      print("-------------------------------------------------------------------------\n")
+      while cnc.in_waiting > 0:
+        response = cnc.readline().decode(errors='ignore').strip()
+        print(response)
+
+      
 
 
 try:

@@ -17,6 +17,11 @@
 - risico-iventarisatie.md
 - 
 
+## advies
+limiten van imput. anders word die geblocked
+terug gave Ok als command is gelukt
+opslaan locatie
+
 ## Code
 
 ## Hardware
@@ -26,3 +31,21 @@
 
 
 # Backlog
+
+
+
+
+hoe verder?
+welke functies?
+
+
+
+
+
+---
+handleiding (Hoe aanzetten)
+diagrammen
+elecktrisch schema / aansluit schema
+instalatie platformio 
+code + comments
+gcode commands

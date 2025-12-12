@@ -3,9 +3,6 @@
 
 GCodeSettings gCodeSettings;
 
-volatile int32 encoderSteps = 0;
-volatile int32 targetStep = 0;
-
 StepperBlock stepperBlock;
 PlannerBuffer plannerBuffer;
 
@@ -26,7 +23,7 @@ void loadSegmentInStepperBuffer() {
   stepperBlock.feedrate = plannerBuffer.block[idx].feedrate;
   stepperBlock.exitSpeed = plannerBuffer.block[idx].exitSpeed;
 
-  targetStep = static_cast<int32>(stepperBlock.exitPos[0]);
+  targetStep[0] = static_cast<int32>(stepperBlock.exitPos[0]);
   stepperState = STEPPER_FULL;
 
 }
@@ -45,6 +42,7 @@ void readSerialLine() {
     unsigned char c = uartRead();
     
     if(c == EMPTY_CHAR) return; /** No data on RX Line */
+    //println("not empty");
     if(c == 32) continue;       /** filter spaces */
     if(lineComment == true) {
       if(c == ')') lineComment = false; /** comments off */
@@ -54,16 +52,42 @@ void readSerialLine() {
     if(c == '\n' || c == '\0') {
       line[size++] = '\n';
 
-      if(line[0] == '$' && size > 1) {
+      if(line[0] == '$' && size - 1 > 1) {
+
+        if(line[1] == 'X') {
+          encoderSteps[0] = 0; /** @todo change to struct with 3 values for 3 encoders */
+          println("reset X encoder to 0");
+        } else if (line[1] == 'Y') {
+          /** @todo + docu */
+        } else if (line[1] == 'Z') {
+          /** @todo + docu */
+        } else if (line[1] == '?') {
+
+          print("<"); print(getStatus(systemState)); print("|");
+          print(encoderSteps); print("|");
+          print(stepperBlock.exitPos); print("|"); print(stepperBlock.feedrate, 1); println(">");
+
+        } else if (line[1] == 'D') {
+          /** @todo Debug + docu */
+          print("<"); print(encoderSteps); print(targetStep); 
+        }
+
+
         /** @todo handle commands (I (info about system), G (print settings), $ (???)) */
         /** @fn funciton */
       } else if (line[0] == '?') {
-        print("Current pos: "); print(static_cast<int32>(encoderSteps)); print(", target: "); println(static_cast<int32>(targetStep));
+      } else if (line[0] == ']') {
+        stepperState = STEPPER_EMPTY;
+      } else if (line[0] == 'M' || line[0] == 'G') {
+        if(readGCodeLine(line, size)) {
+          println(OK_MESSAGE);
+        }
       } else {
-        readGCodeLine(line, size);
+        println("ERR");
       }
 
       size = 0;
+      println("size reset!");
       line = new char[MAX_LINE_SIZE];
       continue;
     } else {
@@ -91,14 +115,14 @@ void readSerialLine() {
  * @param line char* line of information
  * @param size size of the effective data.
  */
-void readGCodeLine(char* line, uint8 size) {
+bool readGCodeLine(char* line, uint8 size) {
   
   GCodeBlock block;
 
   float value;
   int32 intValue;
   uint16 mantissa; /** used for commands like GX.X (G28.1) */
-  uint16 command;
+  int16 command = -1;
   uint8 charIndex = 0;
 
   while(charIndex < size - 1) {
@@ -106,11 +130,11 @@ void readGCodeLine(char* line, uint8 size) {
     char letter = line[charIndex++];
     if(letter < 'A' && letter > 'Z') {
       println("ERR: !LETTER");
-      return;
+      return false;
     }
     if(!readFloat(line, &charIndex, &value)) {
       println("ERR: !NUMBER");
-      return;
+      return false;
     }
     intValue = trunc(value);
     mantissa = round(100 * (value - intValue)); /** @note get the value after the '.' for commands like: GXX.X */
@@ -131,7 +155,7 @@ void readGCodeLine(char* line, uint8 size) {
         /** @note unsuported commands */
         print("ERR: UNSUPORTED G");
         println((int)intValue);
-        return;
+        return false;
       }
       continue;
     }
@@ -161,7 +185,7 @@ void readGCodeLine(char* line, uint8 size) {
     case 'K': break; /** @todo @note Not suported (YET) */
     case 'L': break; /** @todo @note Not suported (YET) */
     case 'N': break; /** @todo @note Not suported (YET) */
-    case 'O': encoderSteps = intValue; println("encoder steps to value"); break; /** @todo @note Not suported (YET) */
+    case 'O': encoderSteps[0] = intValue; println("encoder steps to value"); break; /** @todo @note Not suported (YET) */
     case 'P': break; /** @todo @note Not suported (YET) */
     case 'Q': break; /** @todo @note Not suported (YET) */
     case 'R': block.radius = value; break; /** @note Radius for circle */
@@ -178,27 +202,28 @@ void readGCodeLine(char* line, uint8 size) {
       break; /** LETTER NOT SUPORTED */
     }  
   }
+  if(command == -1) return false;
 
   if(command >= 0 && command <= 1) {
     addSegmentToPlanBuffer(block);
-  }
-  if(command >= 2 && command <= 3) {
+  } else if(command >= 2 && command <= 3) {
     generateStraightSegementsFromCurve(block, gCodeSettings.selectedPlane);
+  } else {
+    return false;
   }
 
 
   /** @todo split movement in lines when curved, plan function */
-  return;
+  return true;
 }
 
 
-static float currPos[3] = {0,0,0};
+static float currPos[3] = {0.0f,0.0f,0.0f};
 
 void addSegmentToPlanBuffer(GCodeBlock &gcode) {
   
 
   PlannerBlock *block = &plannerBuffer.block[plannerBuffer.head];
-
   memcpy(block->entryPoint, currPos, sizeof(block->entryPoint));
   memcpy(block->exitPoint, gcode.position, sizeof(block->exitPoint));
 
@@ -216,8 +241,8 @@ void addSegmentToPlanBuffer(GCodeBlock &gcode) {
   if (plannerBuffer.head == plannerBuffer.tail) return; /** Buffer full */
 
   memcpy(currPos, block->exitPoint, sizeof(currPos));
-  stepperState = STEPPER_EMPTY;
-    
+  
+  plannerRecalculate(CORNER_DIVIDATION);
 }
 
 
@@ -262,7 +287,6 @@ void plannerRecalculate(float J) {
       PlannerBlock *P = &plannerBuffer.block[prev];
 
       float maxEntryFromPrev = sqrt(fmax(0.0f, P->exitSpeed * P->exitSpeed + 2.0f * SYSTEM_MAX_ACCEL * P->distance));
-
       if(B->entrySpeed > maxEntryFromPrev) {
         B->entrySpeed = maxEntryFromPrev;
         changes = true;
@@ -280,6 +304,14 @@ void plannerRecalculate(float J) {
   /** set last block to have a exit speed of 0 */
   int last = (plannerBuffer.head - 1 + MAX_PLANNER_BUFFER_SIZE) % MAX_PLANNER_BUFFER_SIZE;
   plannerBuffer.block[last].exitSpeed = 0.0f;
+  print("tail: "); print(plannerBuffer.tail); print(", head: "); println(plannerBuffer.head);
+  for(int i = plannerBuffer.tail; i != plannerBuffer.head; i = (i + 1) % MAX_PLANNER_BUFFER_SIZE) {
+    printHline(10);
+    print(plannerBuffer.block[i].exitPoint[0], 2); print(", "); print(plannerBuffer.block[i].exitPoint[1], 2); print(", "); println(plannerBuffer.block[i].exitPoint[2], 2); 
+    print(plannerBuffer.block[i].entrySpeed, 2); print(", "); println(plannerBuffer.block[i].exitSpeed, 2);
+    println(plannerBuffer.block[i].feedrate, 2);
+  }
+  printHline(10);
 
 }
 
@@ -487,6 +519,11 @@ void setEncoderInterupts() {
  * encoder interupts. will be called on change for each interrupt.
  */
 
+/**
+ * vec3 float for (x,y,z) axis encoders
+ */
+volatile int32 encoderSteps[3] {};
+
 /***
  * Encoder state
  */
@@ -510,7 +547,7 @@ ISR(INT0_vect) {
   uint8 diff = (curr  - encoderState) & 3;
   int8 delta = (diff == 1) - (diff == 3);
 
-  encoderSteps += delta;
+  encoderSteps[0] += delta;
   encoderState = curr;
 }
 
@@ -526,7 +563,7 @@ ISR(INT1_vect) {
   uint8 diff = (curr  - encoderState) & 3;
   int8 delta = (diff == 1) - (diff == 3);
 
-  encoderSteps += delta;
+  encoderSteps[0] += delta;
   encoderState = curr;
 }
 
@@ -534,6 +571,11 @@ ISR(INT1_vect) {
  * end encoder interupts
  */
 
+
+/** 
+ * targetStep
+ */
+volatile int32 targetStep[3] {};
 
 
 /***************************
@@ -591,7 +633,7 @@ void setDirection() {
   static bool on = true;
 
 
-  if(encoderSteps <= targetStep + 4 && encoderSteps >= targetStep - 4) {
+  if(encoderSteps[0] <= targetStep[0] + 4 && encoderSteps[0] >= targetStep[0] - 4) {
     TIMSK1 &= ~(1 << OCIE1A);   // disable Timer1 compare A interrupt
     on = false;
     return;
@@ -601,9 +643,24 @@ void setDirection() {
     on = true;
   }
 
-  if(encoderSteps > targetStep) {
+  if(encoderSteps[0] > targetStep[0]) {
     PORTD &= ~(1 << PD6);
-  } else if (encoderSteps < targetStep) {
+  } else if (encoderSteps[0] < targetStep[0]) {
     PORTD |= (1 << PD6);
+  }
+}
+
+
+char* getStatus(int s) {
+  if(s == IDLE) {
+    return "IDLE";
+  } else if (s == RUNNING) {
+    return "RUNNING";
+  } else if (s == ERROR) {
+    return "ERROR";
+  } else if (s == INTERNAL_ERROR_RESTART_REQUIRED) {
+    return "RESTARTERROR";
+  } else {
+    return "ERR!";
   }
 }

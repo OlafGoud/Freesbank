@@ -309,3 +309,21 @@ void println(int32 n) {
   print(n);
   uartWrite('\n');
 }
+
+void print(float vec[3]) {
+  print(vec[0], 1); print(";"); print(vec[1], 1); print(";"); print(vec[2], 1); 
+}
+
+void println(float vec[3]) {
+  print(vec);
+  uartWrite('\n');
+}
+
+void print(volatile int32 vec[3]) {
+  print(vec[0]); print(";"); print(vec[1]); print(";"); print(vec[2]); 
+}
+
+void println(volatile int32 vec[3]) {
+  print(vec);
+  uartWrite('\n');
+}

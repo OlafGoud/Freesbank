@@ -30,18 +30,33 @@
  */
 
 
-#define BAUD 9600
+#define BAUD 9600 /** @note Only 9600 suported */
+#define MAX_LINE_SIZE 60 /** Line size for serial input */
+#define MAX_PLANNER_BUFFER_SIZE 10 /** Planner buffer size.  */
+#define PLANNER_MAX_ITERATIONS 10 /** Amount of iterations the planner can execute */
 
-#define IDLE 0
-#define RUNNING 1
-#define ERROR 2
-#define INTERNAL_ERROR_RESTART_REQUIRED 3
+#define OK_MESSAGE "OK." /** message if message is ok */
 
-#define STEPPER_FULL 0
-#define STEPPER_EMPTY 1
-#define STEPPER_ERROR 2
+#define IDLE 0 /** System State */
+#define RUNNING 1 /** System State */
+#define ERROR 2 /** System State */
+#define INTERNAL_ERROR_RESTART_REQUIRED 3 /** System State */
 
 
+#define STEPPER_FULL 0 /** Stepper state */
+#define STEPPER_EMPTY 1 /** Stepper state */
+#define STEPPER_ERROR 2 /** Stepper state */
 
-#define X_STEP_PIN PD5
-#define X_DIR_PIN PD6
+#define AXIS_PLANE_XY 0 /** Work axis plane */
+#define AXIS_PLANE_XZ 1 /** Work axis plane */
+#define AXIS_PLANE_YZ 2 /** Work axis plane */
+
+
+#define X_STEP_PIN PD5 /** Pin definition */
+#define X_DIR_PIN PD6 /** Pin definition */
+
+
+#define EPS_COS_STRAIGHT 0.999999f
+#define SYSTEM_MAX_ACCEL 300
+#define SYSTEM_MAX_BRAKE 200
+#define CORNER_DIVIDATION 0.2f
