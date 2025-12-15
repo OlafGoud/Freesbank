@@ -60,3 +60,22 @@
 #define SYSTEM_MAX_ACCEL 300
 #define SYSTEM_MAX_BRAKE 200
 #define CORNER_DIVIDATION 0.2f
+
+
+
+/** Encoders */
+
+#define ENCODERS_AXIS 1
+#define ENCODER_PIN_XA PD2 /** Interrupt pin for encoder A line */
+#define ENCODER_PIN_XB PD3 /** Interrupt pin for encoder B line */
+
+
+/** Steppers */
+#define STEPPER_ACCURACY 0.5f
+
+#define STEPPER_DIR_MASK ((1 << X_DIR_PIN))
+#define STEPPER_STEP_MASK ((1 << X_STEP_PIN))
+
+
+#define TIMECONST 3
+#define INTERVAL_MS 1000 /* not used yet*/

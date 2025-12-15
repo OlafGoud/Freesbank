@@ -16,3 +16,21 @@ eruit is gebleken dat de opdrachtgever wilt dat er een incrementele encoder gebr
 
 week van 10-11
 sensor is binnen, maar is kapot.
+
+
+
+
+
+code bezittingen
+
+stepper.h & stepper.cpp
+
+
+
+
+encoder.h & encoder.cpp
+
+zet mm om naar encoder steps met conversion rate
+
+
+float getMMFromEncoder()s
