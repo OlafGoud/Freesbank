@@ -96,3 +96,21 @@ Omdat de arduino zijn grote van een integer kleiner is dan die van andere comput
 
 ### M commands  
 - M1 -> stop instantly (not implmenented)
+
+
+
+
+
+## Timers
+In dit programma zitten verschillende interrupts. Hieronder zijn Timers & hardware interrupts.
+
+
+### Hardware interrupts
+
+### Internal timer compare interrupts
+Een arduino heeft meerdere timer compare interrupts die te gebruiken zijn. Een uno heeft Timer0 (8 bits), Timer1(16 bits) en Timer2 (8 bits). Deze pinnen worden ook gebruikt voor pwm outputs, dus veranderen van de configuration zal de pwm channels veranderen. Hiernaast wordt timer0 gebruikt voor de delay, millis en micros. Hier de configuraties van veranderen zal dit veranderen.
+
+
+
+https://deepbluembedded.com/arduino-timers/
+https://deepbluembedded.com/arduino-timer-calculator-code-generator/

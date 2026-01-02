@@ -20,7 +20,7 @@ int main() {
   uartInit(BAUD);
   sei();
   setStepperInterupts();
-  setEncoderInterupts();
+  //setEncoderInterupts();
   println("Ready!");
   while (uartRead() != EMPTY_CHAR) {
     println("clearing");

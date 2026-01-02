@@ -28,7 +28,6 @@ void print(volatile int32 vec[3]);
 void printHline(uint8 n);
 void printHline(uint8 n, char c);
 
-extern const int* const * const * const * const * const * const * const * const * const * const * const * const * const var;
 
 /**
  * Low level RX and TX functions.

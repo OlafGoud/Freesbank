@@ -13,7 +13,8 @@ struct StepperBlock {
   uint8 dirBits;
 
   float beginPosition[3];
-  uint32 time;
+  uint32 time{};
+  uint32 intervalMS{};
 };
 
 void initSteppers();

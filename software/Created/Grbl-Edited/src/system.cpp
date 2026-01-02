@@ -5,7 +5,7 @@ GCodeSettings gCodeSettings;
 
 StepperBlock stepperBlock;
 PlannerBuffer plannerBuffer;
-
+volatile int32 steps = 0;
 /**
  * Function to load 1 segement into the buffer for the stepper motors. Also execute all functions for other componements for this segment (like spindle, printer etc)
  * Load 1 segment into buffer to use for the stepper motors
@@ -76,6 +76,7 @@ void readSerialLine() {
         /** @todo handle commands (I (info about system), G (print settings), $ (???)) */
         /** @fn funciton */
       } else if (line[0] == '?') {
+        print(steps);
       } else if (line[0] == ']') {
         stepperState = STEPPER_EMPTY;
       } else if (line[0] == 'M' || line[0] == 'G') {
@@ -609,7 +610,7 @@ void setStepperInterupts() {
 
 ISR(TIMER1_COMPA_vect) {
   /** call stepper */
-
+  steps++;
   PORTD |= (1 << PD5); /* set pin 5 high*/
   
 
@@ -636,6 +637,7 @@ void setDirection() {
   if(encoderSteps[0] <= targetStep[0] + 4 && encoderSteps[0] >= targetStep[0] - 4) {
     TIMSK1 &= ~(1 << OCIE1A);   // disable Timer1 compare A interrupt
     on = false;
+    stepperState = STEPPER_EMPTY;
     return;
   }
   if(on == false) {

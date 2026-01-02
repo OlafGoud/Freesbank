@@ -10,7 +10,7 @@
 #define uint32 unsigned long int        /** 0 to 4,294,967,295 */
 #define int32 long int                  /** -2,147,483,648 to 2,147,483,647 */
 
-/**
+/** 
  * types: arduino uno
  * 
  * char     size: -128 to 127
@@ -68,7 +68,7 @@
 #define ENCODERS_AXIS 1
 #define ENCODER_PIN_XA PD2 /** Interrupt pin for encoder A line */
 #define ENCODER_PIN_XB PD3 /** Interrupt pin for encoder B line */
-
+#define ENCODERPORT DDRD
 
 /** Steppers */
 #define STEPPER_ACCURACY 0.5f
@@ -78,4 +78,8 @@
 
 
 #define TIMECONST 3
-#define INTERVAL_MS 1000 /* not used yet*/
+
+#define STEPPER_STEP_PORT DDRD
+#define STEPPER_DIR_PORT DDRB
+
+#define RESET_STEPBITS_US 800
