@@ -1,3 +1,10 @@
 *.mp4
 *.mkv
 /software/Found/
+*.aux
+*.fls
+*.fdb_latexmk
+*.log
+*.out
+*.synctex.gz
+*.toc
