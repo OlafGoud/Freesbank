@@ -48,71 +48,54 @@
 	\newpage
 	\large
 
-	\section{Voorwoord}
+	\paragraph{Voorwoord}
 	Dank gaat uit naar alle mensen die hebben meegeholpen aan deze stage. De medewerkers, begeleiders en andere mensen die hebben meegeholpen. Dit was een leerzame periode waarin veel geleerd is.  \todo{beter maken?  hoe???}
 
 	\section{Context}
 		\subsection{Het bedrijf}
-			De stage heeft plaatsgevonden bij het bedrijf Sens2Sea. Sens2Sea is een klein bedrijf dat gevestigd is op het RDM terrein. Het bedrijf heeft een kavel in het innovation dock. Sens2Sea ontwikkelt radar technologieën voor sectoren zoals de scheepsvaart en andere maritieme sectoren. Het bedrijf word geleid door Geert Mosterdijk. Het bedrijf heeft maar een paar medewerkers. Deze zijn gespecialiseerd in hun vak gebieden zoals: electronica en software. Verder lopen er bij Sens2Sea een aantal studenten stage van verschillende opleidingen.
+			De stage heeft plaatsgevonden bij het bedrijf Sens2Sea. Sens2Sea is een klein bedrijf dat gevestigd is op het RDM terrein. Het bedrijf heeft een kavel in het innovation dock. Sens2Sea ontwikkelt radar technologieen voor sectoren zoals de scheepsvaart en andere maritieme sectoren. Het bedrijf wordt geleid door Geert Mosterdijk. Het bedrijf heeft maar een paar medewerkers. Deze zijn gespecialiseerd in hun vakgebieden zoals: elektronica en software. Verder lopen er bij Sens2Sea een aantal studenten stage van verschillende opleidingen. Het bedrijf werkt voor projecten samen met andere bedrijven. Deze bedrijven zijn tevens de stakeholders voor de projecten. Voor dit bedrijf geldt het volgende:
+			\begin{enumerate}
+				\item Sens2Sea. De opdracht is voor Sens2Sea, dit bedrijf bepaalt welke beslissingen gemaakt worden. (Hoge invloed en Hoog belang)
+				\item PKMarine. Dit bedrijf werkt samen met Sens2Sea en bied expertise in regeltechniek. (Hoge invloed, laag belang)
+				\item CoE HRTech. Dit bedrijf financiert het project. (Lage invloed en hoog belang)
+			\end{enumerate}
 
 		\subsection{Opdracht}
-			\paragraph{} Sens2Sea is bezig met radar technologie. Radar is een technologie dat radiogolven gebruikt om de afstand, snelheid en richting van objecten te bepalen. Radar kan gebruikt worden in goed en slecht weer. Hierdoor is het uitstekend om objecten te detecteren in sectoren zoals de scheepsvaart. Ook kan radar technologie gebruikt worden om de zeebodem in kaart te brengen en om olievlekken te detecteren. 
+			\paragraph{} Sens2Sea is bezig met radar technologie. Radar is een technologie die radiogolven gebruikt om, t.o.v. de positie van de radar, de afstand, snelheid en richting van objecten te bepalen. Radar kan gebruikt worden in goed en slecht weer. Hierdoor is het uitstekend geschikt om objecten te detecteren in sectoren zoals de scheepsvaart. Ook kan radar technologie gebruikt worden om de zeebodem in kaart te brengen en om olievlekken te detecteren. 
 
-			\paragraph{} Sens2Sea is nu bezig met pulsradar technologie. Hiervoor wilt Sens2Sea parabool antennes gebruiken. Deze antennes zorgen ervoor dat de radiogolven gebundeld worden. Door de bundeling van deze golven worden de signalen versterkt. Dit zorgt ervoor dat het beeld een betere resolutie heeft. Deze antennes zijn niet te verkrijgen in alle maten. Deze zouden custom op maat gemaakt moeten worden. Dit is alleen relatief tot standaard geproduceerde maten een stuk duurder. Daarom wilt Sens2Sea hun eigen antennes maken met een 3D freesmachine. Machines die al op de markt zijn en groot genoeg zijn met een werkgrote van 4m x 1m x 0.4m, kosten tienduizenden euro's. Dit vind Sens2Sea te duur en daarom is deze opdracht er om de aansturing van een 3d freesmachine te maken.
+			\paragraph{} Sens2Sea is sinds kort bezig FMCW (Frequency Modulated Constant Wave) radar technologie. Hiervoor wilt Sens2Sea parabool antennes gebruiken. Deze antennes zorgen ervoor dat de radiogolven gebundeld worden. Door de bundeling van deze golven worden de signalen versterkt. Dit zorgt ervoor dat het beeld een betere resolutie heeft. Deze antennes zijn niet te verkrijgen in alle maten. Deze zouden custom op maat gemaakt moeten worden. Dit is ten opzichte van standaard geproduceerde maten een stuk duurder. Machines die al op de markt zijn en met een werkgrote van 4m x 1m x 0.4m, groot genoeg zijn kosten tienduizenden euro's. Daarp, wil Sens2Sea eigen antennes maken met een eigen 3D freesmachine. Deze opdracht omvat het realiseren van een nauwkeurige aansturing van een 3D freesmachine.
 			
 		\subsection{Scope} 
-			\paragraph{} Om een freesmachine aan te sturen zijn er al opensource projecten zoals GRBL. Deze projecten voldoen niet aan de eissen omdat Sens2Sea wilt dat de software en hardware makkelijk aanpassbaar is. De freesmachine moet over een afstand van 4 meter nauwkeurig kunnen werken. Hiervoor moet de aandrijving en locatie bepaling gescheiden worden. Dit is niet het geval met deze opensource software zoals GRBL. Bij deze systemen bepaalt het systeem de positie van de kop door de stappen te tellen die de motoren moeten uitvoeren. Het problem hiervan is dat de motoren een stap kunnen verspringen waardoor de vorm van de antenne wordt veranderd. Hierom wilt Sens2Sea dat de positie van de kop door sensoren wordt bepaald. 
+			\paragraph{} Om een freesmachine aan te sturen zijn er al opensource projecten zoals GRBL uitgevoerd. Deze projecten voldoen helaas niet aan de eisen omdat Sens2Sea wil dat de software en hardware makkelijk aanpasbaar is. Bovendien moet de freesmachine over een afstand van 4 meter nauwkeurig kunnen werken. Hiervoor is het van belang de aandrijving van de frees en delocatie bepaling van de freeskop gescheiden te houden. Dit is niet het geval met deze opensource software zoals GRBL. Bij deze oplossingen bepaalt het systeem de positie van de kop door de stappen te tellen die de motoren moeten uitvoeren. Een probleem hiervan is dat de motoren een stap kunnen verspringen waardoor de gewenste qualiteit van de vorm van de antenne niet kan worden gegarandeerd. Daarom wil Sens2Sea dat de positie van de freeskop door sensoren wordt bepaald opdat deze kop nauwkeurig kan worden gepositioneerd in zowel de  als de Y en Z richtingen. 
 			
-			\paragraph{} De scope omvat het scheiden van de aandrijving en locatie bepaling van de machine. Daarnaast het aanpassen of herschrijven van GRBL om deze te laten werken met de sensoren. Ook de hardware aansturen/aansluiten hoort bij de scope.
-	
-		\subsection{Requirements}
-			Hieronder zijn de requirement te vinden. Om deze op te stellen is moscow gebruikt. Moscow verdeelt de requirements op in Must, Should, Could en Won't. Hiernaast zijn de requirements functioneel en niet functioneel.
-
-			\subsubsection{De kop van de machine moet over drie bewegingsassen bewegen.}
-				De kop van de machine moet over de x, y, z assen kunnen bewegen. (Functioneel) (MUST) \newline
-				\textbf{Acceptatie:} De requirement is voltooid als de kop over de drie assen heen en weer kan bewegen. \newline
-				\textbf{Userstory:} Als opdrachtgever wil ik dat de machine zich kan verplaatsen over de x, y en z bewegingsassen.
-
-			\subsubsection{De kop kan materiaal verwijderen}
-				De kop van de machine kan materiaal verwijderen. (Functioneel) (MUST) \newline
-				\textbf{Acceptatie:} De requirement is voltooid als de kop materiaal kan verwijderen van het model. \newline
-				\textbf{Userstory:} Als opdrachtgever wil ik dat de machine materiaal kan verwijderen van het model.
-
-			\subsubsection{De positie van de kop wordt bepaald door sensoren.} 
-				De positie van de kop van de machine moet bepaald kunnen worden doormiddel van sensoren. (Functioneel) (MUST) \newline
-				\textbf{Acceptatie:} De requirement is voltooid als de locatie van de kop van de machine bepaald wordt door een sensor. \newline
-				\textbf{Userstory:} Als opdrachtgever wil ik dat de machine de positie van de kop bepaald doormiddel van een sensor om de nauwkeurigheid te garandeeren. 
-
-			\subsubsection{Er kan g-code worden uitgevoerd met de machine.} 
-				De machine kan een g-code bestand uitvoeren dat deze gestreamd krijgt via een seriële verbinding. (Functioneel) (MUST) \newline
-				\textbf{Acceptatie:} De requirement is voltooid als er een g-code bestand uitgelezen en uitgevoerd kan worden door de machine via een seriële verbinding. \newline
-				\textbf{Userstory:} Als opdrachtgever wil ik een g-code bestand kunnen laten uitvoeren door de machine. 
-
-			\subsubsection{De code moet modulair zijn}
-				De code van het prototype moet modulair zijn waardoor er gemakkelijk delen vervangen kunnen worden. Bijvoorbeeld andere soorten actuatoren en sensoren toevoegen / vervangen. (Functioneel) (MUST) \newline				
-				\textbf{Acceptatie:} De requirement is voltooid als de code van de machine modulair is en niet afhangt van andere stukken code. \newline
-				\textbf{Userstory:} Als opdrachtgever wil ik gemakkelijk onderdelen kunnen vervangen en toevoegen aan de machine, zonder het hele systeem om te gooien.
-
-			\subsubsection{De kop van de machine moet over twee rotatie assen bewegen}
-				De kop van de machine moet over twee roatie assen kunnen bewegen (Functioneel) (SHOULD) \newline
-				\textbf{Acceptatie:} De requirement is voltooid als de kop van de machine over twee rotatie assen kan bewegen. \newline
-				\textbf{Userstory:} Als opdrachtgever wil ik graag dat de machine over twee rotatie assen kan draaien om een mooie parabool te maken.
-
-	
-	\section{Stakeholders}
-		\subsection{Geert Mosterdijk}
-			Geert is de opdrachtgever. Hierom heeft hij veel belang bij het project heeft alle zeggenschap over hoe dingen gebeuren. Het prototype is voor Geert.
-
-		\subsection{P.G.M. van der Klugt} \todo{veranderen}
-			Peter is de collega van Geert. Zijn belang is bij dat het project soepel verloopt en dat er een werkend productkomt. Tevens is hij expert op het gebied van regel systemen en andere algoritmes.
-
-		\subsection{Medewerkers}
-			Medewerkers van het bedrijf die expert zijn op bepaalde gebieden zoals electronica en software hebben veel invloed op het project omdat deze bepalen of de manier die voorgesteld wordt acceptabel is.
-
-		\subsection{CoE HRTech}
-			CoE HRTech is de investeerder voor het project. Deze partij zorgt voor uitbetaling en heeft dus belang over dat het project goed gaat.
+			\paragraph{} De scope van het project omvat het scheiden van de aandrijving en de locatie bepaling van de freeskop. Daarnaast is er sprake van aanpassen of herschrijven van GRBL om deze te laten werken met de sensoren. Ook de hardware aansturen/aansluiten hoort bij de scope.
 
 	\section{Analyse}
+		\subsection{Huidige situatie}
+			De huidige situatie bestaat uit de onderdelen in figuur ... \todo{figuur}. 
+			\begin{figure}
+				\begin{center}
+				\includegraphics[width=8cm]{huidigsysteemdiagram.png}
+				\caption{systeem diagram}
+				\end{center}
+			\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 		\subsection{Closed loop}
 			In het begin van de stage is er een oplossing gevonden die te gebruiken is zonder de code van GRBL aan te passen. Dit is in de vorm van closed loop encoders. Deze encoders zitten vast aan de achterkant van de motoren en compenseren meteen de fouten als deze gemaakt worden door de motoren. Dit vindt Sens2Sea geen oplossing omdat zij dan afhankelijk zijn van de encoder die de fabrikant levert. Het systeem dat Sens2Sea wilt is een systeem dat aan te passen is indien meer nauwkeurigheid nodig is. Hiervoor moet de aansturing en locatie bepaling gescheiden worden.
@@ -153,6 +136,41 @@
 
 			\subsubsection{Lineaire encoder}
 				Lineaire encoders bepalen op een zelfde manier als incrementele encoders de locatie. Deze sensoren zijn minder flexibel dan andere encoders omdat deze een vaste lengte hebben voor een vooraf gedefinieerde afstand.
+
+				\subsection{Requirements}
+			Hieronder zijn de requirement te vinden. Om deze op te stellen is moscow gebruikt. Moscow verdeelt de requirements op in Must, Should, Could en Won't. Hiernaast zijn de requirements functioneel en niet functioneel.
+
+			\subsubsection{De kop van de machine moet over drie bewegingsassen bewegen.}
+				De kop van de machine moet over de x, y, z assen kunnen bewegen. (Functioneel) (MUST) \newline
+				\textbf{Acceptatie:} De requirement is voltooid als de kop over de drie assen heen en weer kan bewegen. \newline
+				\textbf{Userstory:} Als opdrachtgever wil ik dat de machine zich kan verplaatsen over de x, y en z bewegingsassen.
+
+			\subsubsection{De kop kan materiaal verwijderen}
+				De kop van de machine kan materiaal verwijderen. (Functioneel) (MUST) \newline
+				\textbf{Acceptatie:} De requirement is voltooid als de kop materiaal kan verwijderen van het model. \newline
+				\textbf{Userstory:} Als opdrachtgever wil ik dat de machine materiaal kan verwijderen van het model.
+
+			\subsubsection{De positie van de kop wordt bepaald door sensoren.} 
+				De positie van de kop van de machine moet bepaald kunnen worden doormiddel van sensoren. (Functioneel) (MUST) \newline
+				\textbf{Acceptatie:} De requirement is voltooid als de locatie van de kop van de machine bepaald wordt door een sensor. \newline
+				\textbf{Userstory:} Als opdrachtgever wil ik dat de machine de positie van de kop bepaald doormiddel van een sensor om de nauwkeurigheid te garandeeren. 
+
+			\subsubsection{Er kan g-code worden uitgevoerd met de machine.} 
+				De machine kan een g-code bestand uitvoeren dat deze gestreamd krijgt via een seriële verbinding. (Functioneel) (MUST) \newline
+				\textbf{Acceptatie:} De requirement is voltooid als er een g-code bestand uitgelezen en uitgevoerd kan worden door de machine via een seriële verbinding. \newline
+				\textbf{Userstory:} Als opdrachtgever wil ik een g-code bestand kunnen laten uitvoeren door de machine. 
+
+			\subsubsection{De code moet modulair zijn}
+				De code van het prototype moet modulair zijn waardoor er gemakkelijk delen vervangen kunnen worden. Bijvoorbeeld andere soorten actuatoren en sensoren toevoegen / vervangen. (Functioneel) (MUST) \newline				
+				\textbf{Acceptatie:} De requirement is voltooid als de code van de machine modulair is en niet afhangt van andere stukken code. \newline
+				\textbf{Userstory:} Als opdrachtgever wil ik gemakkelijk onderdelen kunnen vervangen en toevoegen aan de machine, zonder het hele systeem om te gooien.
+
+			\subsubsection{De kop van de machine moet over twee rotatie assen bewegen}
+				De kop van de machine moet over twee roatie assen kunnen bewegen (Functioneel) (SHOULD) \newline
+				\textbf{Acceptatie:} De requirement is voltooid als de kop van de machine over twee rotatie assen kan bewegen. \newline
+				\textbf{Userstory:} Als opdrachtgever wil ik graag dat de machine over twee rotatie assen kan draaien om een mooie parabool te maken.
+
+
 	\section{Ontwerpen}
 		\subsection{Tekeningen en diagrammen}
 
@@ -207,6 +225,8 @@
 			\hline
 			10-12-2025 & Feedback verwerkt van studenten \\    
 			\hline
+			05-01-2026 & document herordend en annalyse verbeterd \\
+			\hline
 		\end{tabular}
 		\end{center}
 \end{document}
@@ -228,3 +248,14 @@ Bijlagen
 
 
 
+het bedrijf + stakeholders
+stakeholders: bedrijven -> pkmarine
+
+annalyse
+wat is er nu? blokjes -> onderdelen
+oude situatie -> nieuwe situatie
+wat moet er komen?
+
+freeskop
+
+maten
