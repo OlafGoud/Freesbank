@@ -1,6 +1,5 @@
 \documentclass{article}
 \usepackage{graphicx} % Required for inserting images
-\usepackage{hyperref} 
 \usepackage{todonotes}
 \usepackage{hyperref}
 \usepackage{listings}
@@ -66,19 +65,68 @@
 			\paragraph{} Sens2Sea is sinds kort bezig FMCW (Frequency Modulated Constant Wave) radar technologie. Hiervoor wilt Sens2Sea parabool antennes gebruiken. Deze antennes zorgen ervoor dat de radiogolven gebundeld worden. Door de bundeling van deze golven worden de signalen versterkt. Dit zorgt ervoor dat het beeld een betere resolutie heeft. Deze antennes zijn niet te verkrijgen in alle maten. Deze zouden custom op maat gemaakt moeten worden. Dit is ten opzichte van standaard geproduceerde maten een stuk duurder. Machines die al op de markt zijn en met een werkgrote van 4m x 1m x 0.4m, groot genoeg zijn kosten tienduizenden euro's. Daarp, wil Sens2Sea eigen antennes maken met een eigen 3D freesmachine. Deze opdracht omvat het realiseren van een nauwkeurige aansturing van een 3D freesmachine.
 			
 		\subsection{Scope} 
-			\paragraph{} Om een freesmachine aan te sturen zijn er al opensource projecten zoals GRBL uitgevoerd. Deze projecten voldoen helaas niet aan de eisen omdat Sens2Sea wil dat de software en hardware makkelijk aanpasbaar is. Bovendien moet de freesmachine over een afstand van 4 meter nauwkeurig kunnen werken. Hiervoor is het van belang de aandrijving van de frees en delocatie bepaling van de freeskop gescheiden te houden. Dit is niet het geval met deze opensource software zoals GRBL. Bij deze oplossingen bepaalt het systeem de positie van de kop door de stappen te tellen die de motoren moeten uitvoeren. Een probleem hiervan is dat de motoren een stap kunnen verspringen waardoor de gewenste qualiteit van de vorm van de antenne niet kan worden gegarandeerd. Daarom wil Sens2Sea dat de positie van de freeskop door sensoren wordt bepaald opdat deze kop nauwkeurig kan worden gepositioneerd in zowel de  als de Y en Z richtingen. 
+			\paragraph{} Om een freesmachine aan te sturen zijn er al opensource projecten zoals GRBL uitgevoerd. Deze projecten voldoen helaas niet aan de eisen omdat Sens2Sea wil dat de software en hardware makkelijk aanpasbaar is. Bovendien moet de freesmachine over een afstand van 4 meter nauwkeurig kunnen werken. Hiervoor is het van belang de aandrijving van de frees en de locatie bepaling van de snijkop gescheiden te houden. Dit is niet het geval met deze opensource software zoals GRBL. Bij deze oplossingen bepaalt het systeem de positie van de kop door de stappen te tellen die de motoren moeten uitvoeren. Een probleem hiervan is dat de motoren een stap kunnen verspringen waardoor de gewenste qualiteit van de vorm van de antenne niet kan worden gegarandeerd. Daarom wil Sens2Sea dat de positie van de snijkop door sensoren wordt bepaald opdat deze kop nauwkeurig kan worden gepositioneerd in zowel de  als de Y en Z richtingen. 
 			
-			\paragraph{} De scope van het project omvat het scheiden van de aandrijving en de locatie bepaling van de freeskop. Daarnaast is er sprake van aanpassen of herschrijven van GRBL om deze te laten werken met de sensoren. Ook de hardware aansturen/aansluiten hoort bij de scope.
+			\paragraph{} De scope van het project omvat het scheiden van de aandrijving en de locatie bepaling van de snijkop. Daarnaast is er sprake van aanpassen of herschrijven van GRBL om deze te laten werken met de sensoren. Ook de hardware aansturen/aansluiten hoort bij de scope.
 
 	\section{Analyse}
 		\subsection{Huidige situatie}
-			De huidige situatie bestaat uit de onderdelen in figuur ... \todo{figuur}. 
 			\begin{figure}
 				\begin{center}
-				\includegraphics[width=8cm]{huidigsysteemdiagram.png}
+				\includegraphics[width=9cm]{huidigsysteemdiagram.png}
 				\caption{systeem diagram}
 				\end{center}
 			\end{figure}
+			De huidige situatie bestaat uit de onderdelen in figuur ... \todo{figuur}. In groen is aangegeven welke onderdelen al aanwezig zijn. Deze zijn: de motor drivers, motoren het frame en een frees. en in oranje is aangegeven welke onderdelen toegevoegd moeten worden.
+			
+
+			\todo{frees valt buiten scope, microstepping buiten scope, verwijzing datasheet?}
+			\subsubsection{Huidige onderdelen}
+				\paragraph{Frame}Het frame is gemaakt van hout. De werkruimte van het frame bedraagt \todo{groote van freesbank} x m in de lengte (X-as), xm in breedte (Y-as) en x m m in hoogte (Z-as). De totale buitenafmetingen van het frame zijn X m bij X m bij X m. langs beide zijden van de lengte-as zijn geleiderails gemonteerd. Hierover beweegt een wagentje. Op deze wagen is een tweede railsysteem bevestigd voor de beweging in de breedte-as.  Hierop bevind zich een een tweede wagentje voor de hoogte-as. De hoogte beweging wordt gerealiseerd door middel van een draaiende schroef, waardoor de snijkop gecontroleerd omhoog en omlaag kan bewegen. Aan deze snijkop is een frees gemonteerd. De aandrijving van de lengte- en breedte-as gebeurt met tandriemen. Deze lopen over de volledige lengte van de assen en worden aangedreven door timing pulleys. Dit zijn tandwielen voor tandriemen.
+
+				\paragraph{Frees}Aan de hoogte-as is een frees bevestigd. Dit is een handfrees die op netstroom werkt. 
+
+				\paragraph{Motoren}De motoren die gebruikt worden zijn NEMA 17 stappenmotoren. Deze motoren werken op 12-36V en mogen maximaal 2A hebben. Deze zitten bevestigd op het frame met brackets. Deze hebben een timing pulley waar de tandriem overheen loopt. De lengte as wordt aangedreven door 2 motoren. De breedte en hoogte assen worden aangedreven door 1 motor. 
+
+				\paragraph{Drivers}De drivers die worden gebruikt voor de motoren zijn DRV8824 drivers. Deze drivers werken op 8.2-45V en mogen maximaal 2.5A hebben op 24V. Deze drivers maken gebruik van een STEP en DIR pin. Door de DIR pin hoog en laag te maken veranderd de polariteit over de aangesloten motor. Door de STEP pin hoog te maken zet de motor een stap. Deze drivers hebben ook de mogelijkheid om te microsteppen. Microsteppen maakt gebruik van sinusvormige stromen om meer nauwkeurigheid en hogere resolutie te krijgen. 
+
+			\subsubsection{Nieuwe onderdelen}
+			\todo{lab voeding gebruik ik, custom valt buiten scope}
+				\paragraph{Voeding}De voeding is niet aanwezig voor het systeem. De microcontroller heeft 5V nodig en kan worden aangesloten op een laptop of powerbrick voor telefoons. De actuatoren hebben meer vermogen nodig en hiervoor word een labvoeding gebruikt
+
+				\paragraph{Sensor}Uit een interview met de opdrachtgever is gebleken dat de opdrachtgever encoders wilt gebruiken en wilt bevestigen op een getande riem die op het frame is geplakt. Hierdoor kan de getande riem niet uitrekken. De nauwkeurigheid van de encoder is niet het belangrijkste omdat het project gaat over het scheiden van de aandrijving van de frees en locatie bepaling van de snijkop. Verder doen de kosten er toe, maximaal 60 euro per encoder. Ook is er belang bij dat de de huidige locatie opvragen snel kan aangezien een freesmachine een high performance machine is. Er zijn verschillende soorten encoders die verschillend werken. De nauwkeurigheid van een encoder wordt gemeten in Pulses Per Rotation(PPR). Dit geeft aan dat hoe hoger de PPR is de hoger de nauwkeurigheid omdat er meer pulses gegeven worden in de zelfde rotatie.
+				
+
+				\paragraph{Microcontroller}
+
+
+
+		\subsection{Requirements}
+			Uit de analyse en aan de hand van meerdere interviews met de opdrachtgever zijn de volgende requirements opgekomen.
+			\begin{center}
+				\scalebox{0.711875}{\begin{tabular}{|c|c|c|c|}
+					\hline
+					Requirement & User story & Acceptatie & soort \\
+					\hline
+					De snijkop van de machine moet over & Als opdrachtgever wil ik dat de machine & Als de kop zich over de 	& Funct.	\\
+					de X, Y en Z as kunnen bewegen. 		&	zich over de X, Y en Z as kan bewegen. 	& X, Y en Z as kan bewegen.	& 				\\
+					\hline
+					De positie van de snijkop moet  		& Als opdrachtgever wil ik dat de machine	& Als de de locatie van de	& Funct. 	\\
+					bepaald worden doormiddel van   		& de positie van de kop bepaald doormiddel& snijkop bepaald word door	&				 	\\
+					sensoren.														& van sensoren on de nauwkeurigheid te 		& een sensor.								&				 	\\
+																							& garanderen.															&														&					\\
+					\hline
+					Er kan g-code uitgevoerd worden			& Als opdrachtgever wil ik een g-code  		& Als de machine g-code kan & Funct. 	\\
+					door de freesmachine. 							& bestand laten uitvoeren door de 				& uitvoeren.								&					\\
+																							& freesmachine.														&														&					\\
+					\hline
+					De code van het prototype moet 			& Als opdrachtgever wil ik gemakkelijk 		& Als er in de code van de 	& Niet		\\
+					modulair zijn waardoor gemakkelijk	& onderdelenkunnen vervangen en toevoegen & machine componenten				& Funct.	\\
+					delen vervangen kunnen worden,			& aan de machine, zonder dat de hele code & toegevoegd, vervangen of	&					\\
+				  zoals actuatoren en sensoren.				&	omgebouwd moet worden.									& verwijderd kunnen worden.	&					\\
+					\hline
+				\end{tabular} }
+			\end{center}
 
 
 
@@ -97,48 +145,12 @@
 
 
 
-		\subsection{Closed loop}
+
+
+		
+		\subsection{Closed loop}\todo{waar?>}
 			In het begin van de stage is er een oplossing gevonden die te gebruiken is zonder de code van GRBL aan te passen. Dit is in de vorm van closed loop encoders. Deze encoders zitten vast aan de achterkant van de motoren en compenseren meteen de fouten als deze gemaakt worden door de motoren. Dit vindt Sens2Sea geen oplossing omdat zij dan afhankelijk zijn van de encoder die de fabrikant levert. Het systeem dat Sens2Sea wilt is een systeem dat aan te passen is indien meer nauwkeurigheid nodig is. Hiervoor moet de aansturing en locatie bepaling gescheiden worden.
 
-		\subsection{Encoders}
-			Encoders zijn er in verschillende soorten. Hieronder worden de encoders genoemd. Na het voorleggen aan de opdrachtgever heeft deze de incrementele encoder gekozen omdat deze meer vrijheid biedt dan de andere encoders.
-
-			\subsubsection{Incrementele encoder}
-				Incrementele Encoders zijn encoders die pulsen geven als de as is gedraaid. De resolutie van deze encoders wordt afgedrukt in PPR (pulsen per rotatie). Door de pulsen te tellen die uit de output(s) komen kun je de locatie en eventueel snelheid bepalen. Als deze encoders meerdere uitgangen heeft, wordt de resolutie van deze encoders beter. Als een encoder 2 uitgangen heeft kan de encoder in 4x resolutie werken. Dit is omdat op de schijf van deze encoders fases in verschuiving staan. Hierdoor kan de richting ook bepaald worden door de sequentie te volgen die de encoder loopt zoals te zien is in figure 1\todo{figure 1}. Door de sequentie door te lopen in een richting kan de richting bepaald worden.
-				
-				\paragraph{Interrupts} Omdat deze encoders signalen versturen wanneer er een rotatie plaatsvindt, is de locatie niet op te vragen. Hiervoor kunnen er interrupts gebruikt worden. Deze gaan af wanneer er een signaal plaatsvindt. Een interrupt is een signaal dat de computer vertelt dat die moet stoppen waar die mee bezig is en een specifiek stuk code moet uitvoeren. Omdat deze encoders per rotatie een x aantal pulsen afgeeft is het belangrijk om te weten of een arduino zoveel interrupts kan verwerken. Hiervoor is een test gedaan. De code is te vinden bij de bijlagen. \todo{code bijlagen} Voor deze test is gekeken hoeveel interrupts de arduino per seconde registreert om een beeld te geven of deze optie realistisch is.
-
-				\begin{center}
-					Op tijdstip 1: 09:36:47.772 waren er 848785 interrupts geweest. \\
-					Op tijdstip 2: 09:36:53.204 waren er 1484065 interrupts geweest.\\ 
-
-					Dit betekent dat er in 5.432 seconde 635280 interrupts zijn geweest. \\
-					$5.432/635280 =~ 116951$ interrupts per seconde.
-				\end{center}
-
-				\begin{figure}
-				\begin{center}\begin{tabular}{ c|c }
-				A & B \\
-				\hline
-				0 & 0 \\
-				\hline
-				1 & 0 \\
-				\hline
-				1 & 1 \\
-				\hline
-				0 & 1      
-				\end{tabular}\end{center}
-				\caption{Encoder sequentie}
-				\end{figure}
-
-			\subsubsection{Absolute encoder}
-				Een absolute encoder geeft voor elke hoek van de as een unieke code. Deze encoders bepalen door de as op een bepaalde manier te encoden tussen welke hoeken de as zich bevindt. Deze encoders slaan de rotatie op in een register en deze is uit te lezen door een microcontroller via een protocol zoals SPI. Het aantal bits bepaaldt de nauwkeurigheid van deze encoder. Er zijn ook absolute encoders die naast de hoek, ook het aantal revoluties bijhouden.
-
-			\subsubsection{Lineaire encoder}
-				Lineaire encoders bepalen op een zelfde manier als incrementele encoders de locatie. Deze sensoren zijn minder flexibel dan andere encoders omdat deze een vaste lengte hebben voor een vooraf gedefinieerde afstand.
-
-				\subsection{Requirements}
-			Hieronder zijn de requirement te vinden. Om deze op te stellen is moscow gebruikt. Moscow verdeelt de requirements op in Must, Should, Could en Won't. Hiernaast zijn de requirements functioneel en niet functioneel.
 
 			\subsubsection{De kop van de machine moet over drie bewegingsassen bewegen.}
 				De kop van de machine moet over de x, y, z assen kunnen bewegen. (Functioneel) (MUST) \newline
@@ -207,13 +219,131 @@
 		\todo{aanbevelingen toeveogen}
 	\section{Bronnen}
 		\begin{enumerate}
-			\item \url{https://nl.wikipedia.org/wiki/Radar}
-			\item \url{https://en.wikipedia.org/wiki/Incremental_encoder}
-			\item \url{https://en.wikipedia.org/wiki/Rotary_encoder} 
+			\item Wikipedia contributors, “Radar,” Wikipedia, The Free Encyclopedia (Dutch version). [Online]. Available: \url{https://nl.wikipedia.org/wiki/Radar}. Accessed: Jan. 6, 2026.
+			\item Wikipedia contributors, “Radar,” Wikipedia, The Free Encyclopedia. [Online]. Available: \url{https://en.wikipedia.org/wiki/Radar}. Accessed: Jan. 6, 2026.
+			\item Wikipedia contributors, “Incremental encoder,” Wikipedia, The Free Encyclopedia. [Online]. Available: \url{https://en.wikipedia.org/wiki/Incremental_encoder}. Accessed: Jan. 6, 2026.
+			\item Wikipedia contributors, “Rotary encoder,” Wikipedia, The Free Encyclopedia. [Online]. Available: \url{https://en.wikipedia.org/wiki/Rotary_encoder}. Accessed: Jan. 6, 2026.
+			\item Laumans Techniek, “Encoders voor industriële automatisering,” Laumans Techniek. [Online]. Available: \url{https://www.laumanstechniek.nl/blog/kennisbank-3/encoders-voor-industriele-automatisering-20}. Accessed: Jan. 6, 2026.
+			\item PBC Linear, “Stepper Motor Support: NEMA 17 Data Sheet,” PBC Linear. [Online]. Available: \url{https://media.pbclinear.com/pdfs/pbc-linear-data-sheets/data-sheet-stepper-motor-support.pdf}. Accessed: Jan. 6, 2026.
+			\item Texas Instruments, “DRV8824 Stepper Motor Controller IC,” Datasheet. [Online]. Available: \url{https://www.ti.com/lit/ds/symlink/drv8824.pdf}. Accessed: Jan. 6, 2026.
+			\item Linear Motion Tips, “Microstepping Basics,” Linear Motion Tips. [Online]. Available: \url{https://www.linearmotiontips.com/microstepping-basics/}. Accessed: Jan. 6, 2026.
+			\item https://www.dynapar.com/knowledge/encoder-basics/encoder-technology/magnetic-encoders
 		\end{enumerate}
+
+
 		\section{Bijlagen}
+			\subsection{Encoder onderzoek}
+				Voor de locatie van de snijkop van een freesbank te bepalen zijn verschillende mogelijkheden. Uit een interview met de opdrachtgever is gekomen dat deze encoders wilt gebruiken. Een encoder is een sensor met een roterende as. Als deze as draait zet de encoder de beweging om in elektrische signalen. Hierdoor kunnen microcontrollers de positie, snelheid en richting bepalen. De encoders zijn onderteverdelen in verschillende soorten: Incrementeel of absoluut. Ook zijn er verschillende meet methodes: Magnetisch of optisch. Bij de keuze moet ook rekening gehouden worden met dat de prijs van een sensor onder de 60 euro moet blijven. 
+
+				\subsubsection{Meet methodes}
+					Er zijn verschillende manieren om de beweging te meten. Hiervoor zijn optisch en magnetisch de meest gebruikte technologieen.
+					\textbf{Magnetisch} Magnetische encoders maken gebruik van een magnetisch veld om de rotatie van de as te bepalen. Dit heeft het voordeel dat deze robuuster zijn. Hiernaast zijn deze ook beter bestand tegen vervuiling, trillingen en extreme omgevingsomstandigheden. Het nadeel is dat sterke magnetische velden metingen van andere sensoren kunnen beinvloeden. Er zijn ook drie grote groepen magnetische encoders.
+					\begin{enumerate}
+						\item \textbf{Magnetic Gear Tooth Sensor or Pickup}, Deze encoder heeft een magnetiche sensor en een ferromagnetische tandwiel. Dit betekend dat het tandwiel in staat is om een magnetisch veld te geleiden. Het voordeel hiervan is dat deze goedkoop zijn, alleen zijn deze gelimiteerd door het aantal tanden. Dit limiteerd de resolutie naar 120 of 240 PPR.
+						\item \textbf{Magneto-Resistive}, Deze encoder genereert een sinus golf door weerstand te meten op een wiel met afwisselende magnetische polen of een film met weerstanden. De afwisselende magnetische polen bieden een hogere nauwkeurigheid dan het film met weerstanden. Deze encoders zijn moeilijker om te intergreren in een systeem.
+						\item \textbf{Hall-Effect magnetic}, Deze encoder maakt gebruik van het Hall-Effect. De encoder bevat een laag van een halfgeleider materiaal dat verbonden is met een voeding. als een magnetische pool langs de hall-effect sensor komt, word er een hoge voltage gegenereerd. De frequentie en amplitude van de verstoring in het magnetisch veld kan worden gebruikt om de snelheid en verplaatsing te bepalen. 
+					\end{enumerate}
+
+
+					\textbf{Optisch}
+
+				Encoders zijn er in verschillende soorten. Deze soorten
+
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					\subsection{Encoders}
+			Encoders zijn er in verschillende soorten. Hieronder worden de encoders genoemd. Na het voorleggen aan de opdrachtgever heeft deze de incrementele encoder gekozen omdat deze meer vrijheid biedt dan de andere encoders.
+
+			\subsubsection{Incrementele encoder}
+				Incrementele Encoders zijn encoders die pulsen geven als de as is gedraaid. De resolutie van deze encoders wordt afgedrukt in PPR (pulsen per rotatie). Door de pulsen te tellen die uit de output(s) komen kun je de locatie en eventueel snelheid bepalen. Als deze encoders meerdere uitgangen heeft, wordt de resolutie van deze encoders beter. Als een encoder 2 uitgangen heeft kan de encoder in 4x resolutie werken. Dit is omdat op de schijf van deze encoders fases in verschuiving staan. Hierdoor kan de richting ook bepaald worden door de sequentie te volgen die de encoder loopt zoals te zien is in figure 1\todo{figure 1}. Door de sequentie door te lopen in een richting kan de richting bepaald worden.
+				
+				\paragraph{Interrupts} Omdat deze encoders signalen versturen wanneer er een rotatie plaatsvindt, is de locatie niet op te vragen. Hiervoor kunnen er interrupts gebruikt worden. Deze gaan af wanneer er een signaal plaatsvindt. Een interrupt is een signaal dat de computer vertelt dat die moet stoppen waar die mee bezig is en een specifiek stuk code moet uitvoeren. Omdat deze encoders per rotatie een x aantal pulsen afgeeft is het belangrijk om te weten of een arduino zoveel interrupts kan verwerken. Hiervoor is een test gedaan. De code is te vinden bij de bijlagen. \todo{code bijlagen} Voor deze test is gekeken hoeveel interrupts de arduino per seconde registreert om een beeld te geven of deze optie realistisch is.
+
+				\begin{center}
+					Op tijdstip 1: 09:36:47.772 waren er 848785 interrupts geweest. \\
+					Op tijdstip 2: 09:36:53.204 waren er 1484065 interrupts geweest.\\ 
+
+					Dit betekent dat er in 5.432 seconde 635280 interrupts zijn geweest. \\
+					$5.432/635280 \approx 116951$ interrupts per seconde.
+				\end{center}
+
+				\begin{figure}
+				\begin{center}\begin{tabular}{ c|c }
+				A & B \\
+				\hline
+				0 & 0 \\
+				\hline
+				1 & 0 \\
+				\hline
+				1 & 1 \\
+				\hline
+				0 & 1      
+				\end{tabular}\end{center}
+				\caption{Encoder sequentie}
+				\end{figure}
+
+			\subsubsection{Absolute encoder}
+				Een absolute encoder geeft voor elke hoek van de as een unieke code. Deze encoders bepalen door de as op een bepaalde manier te encoden tussen welke hoeken de as zich bevindt. Deze encoders slaan de rotatie op in een register en deze is uit te lezen door een microcontroller via een protocol zoals SPI. Het aantal bits bepaaldt de nauwkeurigheid van deze encoder. Er zijn ook absolute encoders die naast de hoek, ook het aantal revoluties bijhouden.
+
+			\subsubsection{Lineaire encoder}
+				Lineaire encoders bepalen op een zelfde manier als incrementele encoders de locatie. Deze sensoren zijn minder flexibel dan andere encoders omdat deze een vaste lengte hebben voor een vooraf gedefinieerde afstand.
+
+				\subsection{Requirements}
+			Hieronder zijn de requirement te vinden. Om deze op te stellen is moscow gebruikt. Moscow verdeelt de requirements op in Must, Should, Could en Won't. Hiernaast zijn de requirements functioneel en niet functioneel.
+
 			\subsection{Bijlage test code}
 			\todo{Bijlage toevoegen}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	\section{Changelog}
 		\begin{center}
@@ -225,8 +355,9 @@
 			\hline
 			10-12-2025 & Feedback verwerkt van studenten \\    
 			\hline
-			05-01-2026 & document herordend en annalyse verbeterd \\
+			05-01-2026 & Document herordend en analyse verbeterd \\
 			\hline
+			06-01-2026 & Stakeholders verplaatst, spelling, onderzoek verplaatst/herschreven
 		\end{tabular}
 		\end{center}
 \end{document}
@@ -251,11 +382,11 @@ Bijlagen
 het bedrijf + stakeholders
 stakeholders: bedrijven -> pkmarine
 
-annalyse
+analyse
 wat is er nu? blokjes -> onderdelen
 oude situatie -> nieuwe situatie
 wat moet er komen?
 
-freeskop
+snijkop
 
 maten
