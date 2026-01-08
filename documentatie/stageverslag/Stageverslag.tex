@@ -3,6 +3,7 @@
 \usepackage{todonotes}
 \usepackage{hyperref}
 \usepackage{listings}
+\usepackage{rotating}
 \usepackage{blindtext}
 \usepackage[a4paper, total={6in, 8in}]{geometry}
 
@@ -54,7 +55,7 @@
 		\subsection{Het bedrijf}
 			De stage heeft plaatsgevonden bij het bedrijf Sens2Sea. Sens2Sea is een klein bedrijf dat gevestigd is op het RDM terrein. Het bedrijf heeft een kavel in het innovation dock. Sens2Sea ontwikkelt radar technologieen voor sectoren zoals de scheepsvaart en andere maritieme sectoren. Het bedrijf wordt geleid door Geert Mosterdijk. Het bedrijf heeft maar een paar medewerkers. Deze zijn gespecialiseerd in hun vakgebieden zoals: elektronica en software. Verder lopen er bij Sens2Sea een aantal studenten stage van verschillende opleidingen. Het bedrijf werkt voor projecten samen met andere bedrijven. Deze bedrijven zijn tevens de stakeholders voor de projecten. Voor dit bedrijf geldt het volgende:
 			\begin{enumerate}
-				\item Sens2Sea. De opdracht is voor Sens2Sea, dit bedrijf bepaalt welke beslissingen gemaakt worden. (Hoge invloed en Hoog belang)
+				\item Sens2Sea. De opdracht is voor Sens2Sea, dit bedrijf bepaalt welke beslissingen gemaakt worden. Dit bedrijf heeft mensen in dienst die expertise bieden op gebied van elektronica en software. (Hoge invloed en Hoog belang)
 				\item PKMarine. Dit bedrijf werkt samen met Sens2Sea en bied expertise in regeltechniek. (Hoge invloed, laag belang)
 				\item CoE HRTech. Dit bedrijf financiert het project. (Lage invloed en hoog belang)
 			\end{enumerate}
@@ -65,15 +66,23 @@
 			\paragraph{} Sens2Sea is sinds kort bezig FMCW (Frequency Modulated Constant Wave) radar technologie. Hiervoor wilt Sens2Sea parabool antennes gebruiken. Deze antennes zorgen ervoor dat de radiogolven gebundeld worden. Door de bundeling van deze golven worden de signalen versterkt. Dit zorgt ervoor dat het beeld een betere resolutie heeft. Deze antennes zijn niet te verkrijgen in alle maten. Deze zouden custom op maat gemaakt moeten worden. Dit is ten opzichte van standaard geproduceerde maten een stuk duurder. Machines die al op de markt zijn en met een werkgrote van 4m x 1m x 0.4m, groot genoeg zijn kosten tienduizenden euro's. Daarp, wil Sens2Sea eigen antennes maken met een eigen 3D freesmachine. Deze opdracht omvat het realiseren van een nauwkeurige aansturing van een 3D freesmachine.
 			
 		\subsection{Scope} 
-			\paragraph{} Om een freesmachine aan te sturen zijn er al opensource projecten zoals GRBL uitgevoerd. Deze projecten voldoen helaas niet aan de eisen omdat Sens2Sea wil dat de software en hardware makkelijk aanpasbaar is. Bovendien moet de freesmachine over een afstand van 4 meter nauwkeurig kunnen werken. Hiervoor is het van belang de aandrijving van de frees en de locatie bepaling van de snijkop gescheiden te houden. Dit is niet het geval met deze opensource software zoals GRBL. Bij deze oplossingen bepaalt het systeem de positie van de kop door de stappen te tellen die de motoren moeten uitvoeren. Een probleem hiervan is dat de motoren een stap kunnen verspringen waardoor de gewenste qualiteit van de vorm van de antenne niet kan worden gegarandeerd. Daarom wil Sens2Sea dat de positie van de snijkop door sensoren wordt bepaald opdat deze kop nauwkeurig kan worden gepositioneerd in zowel de  als de Y en Z richtingen. 
+			\paragraph{} Om een freesmachine aan te sturen zijn er al opensource projecten zoals GRBL uitgevoerd. Deze projecten voldoen helaas niet aan de eisen omdat Sens2Sea wil dat de software en hardware makkelijk aanpasbaar is. Bovendien moet de freesmachine over een afstand van 4 meter nauwkeurig kunnen werken. Hiervoor is het van belang de aandrijving van de frees en de positie bepaling van de snijkop gescheiden te houden. Dit is niet het geval met deze opensource software zoals GRBL. Bij deze oplossingen bepaalt het systeem de positie van de kop door de stappen te tellen die de motoren moeten uitvoeren. Een probleem hiervan is dat de motoren een stap kunnen verspringen waardoor de gewenste qualiteit van de vorm van de antenne niet kan worden gegarandeerd. Daarom wil Sens2Sea dat de positie van de snijkop door sensoren wordt bepaald opdat deze kop nauwkeurig kan worden gepositioneerd in zowel de  als de Y en Z richtingen. 
 			
-			\paragraph{} De scope van het project omvat het scheiden van de aandrijving en de locatie bepaling van de snijkop. Daarnaast is er sprake van aanpassen of herschrijven van GRBL om deze te laten werken met de sensoren. Ook de hardware aansturen/aansluiten hoort bij de scope.
+			\paragraph{} De scope van het project omvat het scheiden van de aandrijving en de positie bepaling van de snijkop. Daarnaast is er sprake van aanpassen of herschrijven van GRBL om deze te laten werken met de sensoren. Ook de hardware aansturen/aansluiten hoort bij de scope.
 
+		\subsection{Mogelijke oplossingen}
+			Een mogelijke oplossing voor het probleem zouden stappenmotoren met encoder kunnen zijn. Dit zou handig zijn omdat de code van GRBL niet aangepast hoeft te worden. Deze encoders zitten op de achterkant van de encoder en meten of de encoder wel de stap heeft gezet die die moest zetten. Indien hier een fout in zit zal de encoder compenseren.
+
+			Dit is voorgelegd aan de opdrachtgever. Maar dat is geen oplossing omdat afhankelijkheid van de fabrikant wordt gemaakt. Dit omdat de fabrikant de encoder bepaald op de motor en hierdoor de nauwkeurigheid van de encoder bepaald. Sens2Sea wilt een systeem dat aan te passen is naar de wensen die op dat moment belangrijk zijn. En indien nodig andere sensoren toevoegen/gebruiken voor de bepaling van de positie van de snijkop. 
+
+
+
+	\newpage
 	\section{Analyse}
 		\subsection{Huidige situatie}
 			\begin{figure}
 				\begin{center}
-				\includegraphics[width=9cm]{huidigsysteemdiagram.png}
+				\includegraphics[width=12cm]{huidigsysteemdiagram2.png}
 				\caption{systeem diagram}
 				\end{center}
 			\end{figure}
@@ -94,12 +103,9 @@
 			\todo{lab voeding gebruik ik, custom valt buiten scope}
 				\paragraph{Voeding}De voeding is niet aanwezig voor het systeem. De microcontroller heeft 5V nodig en kan worden aangesloten op een laptop of powerbrick voor telefoons. De actuatoren hebben meer vermogen nodig en hiervoor word een labvoeding gebruikt
 
-				\paragraph{Sensor}Uit een interview met de opdrachtgever is gebleken dat de opdrachtgever encoders wilt gebruiken en wilt bevestigen op een getande riem die op het frame is geplakt. Hierdoor kan de getande riem niet uitrekken. De nauwkeurigheid van de encoder is niet het belangrijkste omdat het project gaat over het scheiden van de aandrijving van de frees en locatie bepaling van de snijkop. Verder doen de kosten er toe, maximaal 60 euro per encoder. Ook is er belang bij dat de de huidige locatie opvragen snel kan aangezien een freesmachine een high performance machine is. Er zijn verschillende soorten encoders die verschillend werken. De nauwkeurigheid van een encoder wordt gemeten in Pulses Per Rotation(PPR). Dit geeft aan dat hoe hoger de PPR is de hoger de nauwkeurigheid omdat er meer pulses gegeven worden in de zelfde rotatie.
+				\paragraph{Sensor}Uit een interview met de opdrachtgever is gebleken dat de opdrachtgever encoders wilt gebruiken en wilt bevestigen op een getande riem die op het frame is geplakt. Hierdoor kan de getande riem niet uitrekken. De nauwkeurigheid van de encoder is niet het belangrijkste omdat het project gaat over het scheiden van de aandrijving van de frees en positie bepaling van de snijkop. Verder doen de kosten er toe, maximaal 60 euro per encoder. Ook is er belang bij dat de de huidige positie opvragen snel kan aangezien een freesmachine een high performance machine is. Er zijn verschillende soorten encoders die verschillend werken. De nauwkeurigheid van een encoder wordt gemeten in Pulses Per Rotation(PPR). Dit geeft aan dat hoe hoger de PPR is de hoger de nauwkeurigheid omdat er meer pulses gegeven worden in de zelfde rotatie. Na het onderzoek zijn de opties voorgelegd aan de opdrachtgever en is er gekozen om een optische incrementele encoder te gebruiken.
 				
-
-				\paragraph{Microcontroller}
-
-
+				\paragraph{Microcontroller}Na de keuze voor een encoder is gekomen dat de microcontroller 6 interrupt pinnen nodig heeft. Verder moet deze rond de specificaties zijn als een arduino uno. Dit is omdat opensource oplossingen zoals GRBL gebaseerd zijn op een arduino uno. Hierom is voorgesteld om een arduino mega te gebruiken. Deze mircrocontroller heeft voldoende rekenkracht voor dit soort applicaties. Hiernaast heeft deze microcontroller ook de benodigde 6 interrupt pinnen voor de 3 verschillende assen. Daarnaast bieden de vele pinnen mogelijkheden om het systeem uit te breiden.
 
 		\subsection{Requirements}
 			Uit de analyse en aan de hand van meerdere interviews met de opdrachtgever zijn de volgende requirements opgekomen.
@@ -111,7 +117,7 @@
 					De snijkop van de machine moet over & Als opdrachtgever wil ik dat de machine & Als de kop zich over de 	& Funct.	\\
 					de X, Y en Z as kunnen bewegen. 		&	zich over de X, Y en Z as kan bewegen. 	& X, Y en Z as kan bewegen.	& 				\\
 					\hline
-					De positie van de snijkop moet  		& Als opdrachtgever wil ik dat de machine	& Als de de locatie van de	& Funct. 	\\
+					De positie van de snijkop moet  		& Als opdrachtgever wil ik dat de machine	& Als de de positie van de	& Funct. 	\\
 					bepaald worden doormiddel van   		& de positie van de kop bepaald doormiddel& snijkop bepaald word door	&				 	\\
 					sensoren.														& van sensoren on de nauwkeurigheid te 		& een sensor.								&				 	\\
 																							& garanderen.															&														&					\\
@@ -127,64 +133,21 @@
 					\hline
 				\end{tabular} }
 			\end{center}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		
-		\subsection{Closed loop}\todo{waar?>}
-			In het begin van de stage is er een oplossing gevonden die te gebruiken is zonder de code van GRBL aan te passen. Dit is in de vorm van closed loop encoders. Deze encoders zitten vast aan de achterkant van de motoren en compenseren meteen de fouten als deze gemaakt worden door de motoren. Dit vindt Sens2Sea geen oplossing omdat zij dan afhankelijk zijn van de encoder die de fabrikant levert. Het systeem dat Sens2Sea wilt is een systeem dat aan te passen is indien meer nauwkeurigheid nodig is. Hiervoor moet de aansturing en locatie bepaling gescheiden worden.
-
-
-			\subsubsection{De kop van de machine moet over drie bewegingsassen bewegen.}
-				De kop van de machine moet over de x, y, z assen kunnen bewegen. (Functioneel) (MUST) \newline
-				\textbf{Acceptatie:} De requirement is voltooid als de kop over de drie assen heen en weer kan bewegen. \newline
-				\textbf{Userstory:} Als opdrachtgever wil ik dat de machine zich kan verplaatsen over de x, y en z bewegingsassen.
-
-			\subsubsection{De kop kan materiaal verwijderen}
-				De kop van de machine kan materiaal verwijderen. (Functioneel) (MUST) \newline
-				\textbf{Acceptatie:} De requirement is voltooid als de kop materiaal kan verwijderen van het model. \newline
-				\textbf{Userstory:} Als opdrachtgever wil ik dat de machine materiaal kan verwijderen van het model.
-
-			\subsubsection{De positie van de kop wordt bepaald door sensoren.} 
-				De positie van de kop van de machine moet bepaald kunnen worden doormiddel van sensoren. (Functioneel) (MUST) \newline
-				\textbf{Acceptatie:} De requirement is voltooid als de locatie van de kop van de machine bepaald wordt door een sensor. \newline
-				\textbf{Userstory:} Als opdrachtgever wil ik dat de machine de positie van de kop bepaald doormiddel van een sensor om de nauwkeurigheid te garandeeren. 
-
-			\subsubsection{Er kan g-code worden uitgevoerd met de machine.} 
-				De machine kan een g-code bestand uitvoeren dat deze gestreamd krijgt via een seriële verbinding. (Functioneel) (MUST) \newline
-				\textbf{Acceptatie:} De requirement is voltooid als er een g-code bestand uitgelezen en uitgevoerd kan worden door de machine via een seriële verbinding. \newline
-				\textbf{Userstory:} Als opdrachtgever wil ik een g-code bestand kunnen laten uitvoeren door de machine. 
-
-			\subsubsection{De code moet modulair zijn}
-				De code van het prototype moet modulair zijn waardoor er gemakkelijk delen vervangen kunnen worden. Bijvoorbeeld andere soorten actuatoren en sensoren toevoegen / vervangen. (Functioneel) (MUST) \newline				
-				\textbf{Acceptatie:} De requirement is voltooid als de code van de machine modulair is en niet afhangt van andere stukken code. \newline
-				\textbf{Userstory:} Als opdrachtgever wil ik gemakkelijk onderdelen kunnen vervangen en toevoegen aan de machine, zonder het hele systeem om te gooien.
-
-			\subsubsection{De kop van de machine moet over twee rotatie assen bewegen}
-				De kop van de machine moet over twee roatie assen kunnen bewegen (Functioneel) (SHOULD) \newline
-				\textbf{Acceptatie:} De requirement is voltooid als de kop van de machine over twee rotatie assen kan bewegen. \newline
-				\textbf{Userstory:} Als opdrachtgever wil ik graag dat de machine over twee rotatie assen kan draaien om een mooie parabool te maken.
-
-
+	
 	\section{Ontwerpen}
 		\subsection{Tekeningen en diagrammen}
+			Het elektrische schema voor een motor en encoder is te vinden in appendix B. Het schema bevat een arduino uno, DRV8824 stepper driver en een stepper motor. Het tweede schema bevat alle componenten voor 3 assen.
+		\todo{mount encoder iteraties, }
+
+
+
+
+
+
+
+
+
+
 
 	\section{Test Rapport}
 		\todo{Work in progress}
@@ -213,7 +176,6 @@
 			\subsubsection{Waarnemingen}
 				\todo{waarnemingen invullen}
 				
-		peter.vanderklucht@pkmarine.nl
 
 	\section{Aanbevelingen}
 		\todo{aanbevelingen toeveogen}
@@ -227,15 +189,17 @@
 			\item PBC Linear, “Stepper Motor Support: NEMA 17 Data Sheet,” PBC Linear. [Online]. Available: \url{https://media.pbclinear.com/pdfs/pbc-linear-data-sheets/data-sheet-stepper-motor-support.pdf}. Accessed: Jan. 6, 2026.
 			\item Texas Instruments, “DRV8824 Stepper Motor Controller IC,” Datasheet. [Online]. Available: \url{https://www.ti.com/lit/ds/symlink/drv8824.pdf}. Accessed: Jan. 6, 2026.
 			\item Linear Motion Tips, “Microstepping Basics,” Linear Motion Tips. [Online]. Available: \url{https://www.linearmotiontips.com/microstepping-basics/}. Accessed: Jan. 6, 2026.
-			\item https://www.dynapar.com/knowledge/encoder-basics/encoder-technology/magnetic-encoders
+			\item Dynapar, “Magnetic Encoders,” Dynapar Knowledge Center. [Online]. Available: \url{https://www.dynapar.com/knowledge/encoder-basics/encoder-technology/magnetic-encoders}. Accessed: Jan. 8, 2026.
+			\item Wikipedia contributors, “Gray code,” Wikipedia, The Free Encyclopedia. [Online]. Available: \url{https://en.wikipedia.org/wiki/Gray_code}. Accessed: Jan. 8, 2026. 
 		\end{enumerate}
 
 
-		\section{Bijlagen}
-			\subsection{Encoder onderzoek}
-				Voor de locatie van de snijkop van een freesbank te bepalen zijn verschillende mogelijkheden. Uit een interview met de opdrachtgever is gekomen dat deze encoders wilt gebruiken. Een encoder is een sensor met een roterende as. Als deze as draait zet de encoder de beweging om in elektrische signalen. Hierdoor kunnen microcontrollers de positie, snelheid en richting bepalen. De encoders zijn onderteverdelen in verschillende soorten: Incrementeel of absoluut. Ook zijn er verschillende meet methodes: Magnetisch of optisch. Bij de keuze moet ook rekening gehouden worden met dat de prijs van een sensor onder de 60 euro moet blijven. 
+		\appendix
+		
+			\section{Encoder onderzoek}
+				Voor de positie van de snijkop van een freesbank te bepalen zijn verschillende mogelijkheden. Uit een interview met de opdrachtgever is gekomen dat deze encoders wilt gebruiken. Een encoder is een sensor met een roterende as. Als deze as draait zet de encoder de beweging om in elektrische signalen. Hierdoor kunnen microcontrollers de positie, snelheid en richting bepalen. De encoders zijn onderteverdelen in verschillende soorten: Incrementeel of absoluut. Ook zijn er verschillende meet methodes: Magnetisch of optisch. Er zijn ook encoders die linear zijn, maar daarvan heeft de opdrahctgever aangegeven dat die niet bruikbaar zijn. Bij de keuze moet ook rekening gehouden worden met dat de prijs van een sensor onder de 60 euro moet blijven. 
 
-				\subsubsection{Meet methodes}
+				\subsection{Meet methodes}
 					Er zijn verschillende manieren om de beweging te meten. Hiervoor zijn optisch en magnetisch de meest gebruikte technologieen.
 					\textbf{Magnetisch} Magnetische encoders maken gebruik van een magnetisch veld om de rotatie van de as te bepalen. Dit heeft het voordeel dat deze robuuster zijn. Hiernaast zijn deze ook beter bestand tegen vervuiling, trillingen en extreme omgevingsomstandigheden. Het nadeel is dat sterke magnetische velden metingen van andere sensoren kunnen beinvloeden. Er zijn ook drie grote groepen magnetische encoders.
 					\begin{enumerate}
@@ -245,52 +209,140 @@
 					\end{enumerate}
 
 
-					\textbf{Optisch}
+					\textbf{Optisch} Optische encoders zijn encoders die gebruik maken van optische signalen om stappen te tellen. Dit doen deze encoders door een schijf met patronen dat vast zit aan de as. Door een lichtsensor worden deze patronen omgezet in elektrische pulsen. Deze sensoren bieden hoge resolutie en nauwkeurigheid. Hierdoor zijn deze encoders goed op plekken waar veel nauwkeurigheid verwacht wordt. Het nadeel van deze sensoren is dat deze gevoeliger zijn voor stof, vuil en trillingen.
 
-				Encoders zijn er in verschillende soorten. Deze soorten
+				\subsection{Encoder soorten}
+					\textbf{Incrementeel}, Incrementele encoders genereren pulsen als de as beweegt. Op de schijf zijn er 1 of meerdere rijen met patronen. die rijen heten kanalen en als er 2 of meer kanalen zijn, is het mogelijk om de richting bepalen. Deze patronen zijn 1/4 patroon van elkaar verschoven. Hierdoor kijg je bij een encoder met 2 kanalen een patroon in de signalen. Dit betekend ook dat deze het zelfde aantal draden heeft als kanalen. Doordat de encoder een patroon volgt ten opzichte van een referentie punt, moet de microcontroller zelf de positie bijhouden. Hierdoor gaat de positiebepaling verloren als er een stroomonderbreking is.
 
-			
+					Het aantal patronen per kanaal bepaald de nauwkeurigheid. Indien eene encoder meerdere kanalen heeft vergroot de nauwkeurigheid. bij 600 PPR (pulses per rotation)op 1 kanaal, heeft 2 kanalen 600*4=2400 PPR. 
+					
+					Het patroon van de signalen is in graycode. Dit patroon is te zien in figuur x\todo{figuur nummer}. Graycode is een ander soort binare code dat bij elke increment en decrement 1 bit veranderd. De signalen moet je opvangen met een microcontroller via polling of interrupts. Interrupts zijn handiger omdat er dan geen data verloren kan gaan door een te kleine sample snelheid.
+					\begin{figure}
+						\begin{center}\begin{tabular}{ c|c }
+						A & B \\
+						\hline
+						0 & 0 \\
+						\hline
+						1 & 0 \\
+						\hline
+						1 & 1 \\
+						\hline
+						0 & 1      
+						\end{tabular}\end{center}
+						\caption{Encoder sequentie}
+					\end{figure}
+
+					De signalen moeten worden opgevangen door een microcontroller. Dit kan via polling of interrupts. Interrupts stoppen het programma en voeren hun code uit, hierna kan het programma weer verder gaan. Polling is een manier van input lezen door iedere keer te kijken of de data veranderd is. Interrupts zijn hiervoor beter omdat er bij polling data verloren kan gaan door een te lage sample snelheid. De andere kant is dat een microcontroller maar een bepaald aantal interrupts per seconde kan verwerken.
+
+					\textbf{Absolute}, Absolute encoders zijn encoders die elke positie op de schijf een unieke code geven. Hierdoor weet de encoder exact waar die zich bevind in de rotatie. Hierdoor gaat de positie niet verloren als de spanning onderbroken is. Absolute encoders onthouden niet standaard het aantal rotaties die zijn gedaan. Hiervoor zijn multi-turn varianten. Absolute encoders moeten worden uitgelezen met een protocol zoals SPI. Op een Absolute encoder bepaald het aantal bits hoe nauwkeurig de encoder is. Een multi-turn absolute encoder heeft x aantal bits per rotatie en x aantal bits voor de aantal rotaties. 
+					
+					Absolute encoders zijn duurder dan incrementele encoders. Van absolute zijn de multi-turn encoders duurder dan single-turn encoder.
+
+					\begin{tabular}{|c|c|c|}
+						& absolute & Incrementeel\\
+						Kosten & Duur & goedkoper \\
+						uitlezen & protocol & pulsen tellen \\
+						positie onthouden zonder stroom & ja & nee \\
+					\end{tabular}
+
+					Na de opties voorgelegd te hebben aan de opdrachtgever heeft de opdrachtgever gekozen voor een optische incrementele encoder. 
+			\newpage
+			\section{elektrische schemas}
+			\begin{center}
+			\includegraphics[scale=0.70]{CNC-1as-elektrisch-schema.pdf}\\
+				Elektrisch schema 1 as
+			\end{center}
+			\begin{sidewaysfigure}
+				\includegraphics[scale=0.70]{CNC-3asen-elektrisch-schema.pdf}
+				\begin{center}
+				Elektrisch schema 3 asen
+				\end{center}
+			\end{sidewaysfigure}
+	\newpage
+	\Large
+	\textbf{Changelog}
+		\large\begin{center}
+		\begin{tabular}{|c|c|}
+			\hline
+			Datum & verandering \\ 
+			\hline
+			1-12-2025 & Begonnen met stage verslag maken van losse documenten \\
+			\hline
+			10-12-2025 & Feedback verwerkt van studenten \\    
+			\hline
+			05-01-2026 & Document herordend en analyse verbeterd \\
+			\hline
+			06-01-2026 & Stakeholders verplaatst, spelling, onderzoek verplaatst/herschreven \\
+			\hline
+			08-01-2026 & bijlage toegevoegd. \\
+			\hline
+		\end{tabular}
+		\end{center}
+\end{document}
+__________________________________________________________________________________________________________________________________________________________________
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+----------------------------------------========================================[]========================================----------------------------------------
+
+[ ] Voorwoord
+[x] Context waarin het stagebedrijf werkzaam is
+[x] Stagebedrijf: Wat voor soort bedrijf is het? (werkveld, grootte, afdeling waar je stageloopt)
+[x] Probleemstelling/ opdrachtbeschrijving/ eventueel een hoofdvraag en -deelvragen
+[x] Stakeholders (+ op welke manier je ze betrekt bij jouw opdracht)
+[ ] Scope en passende eisen die relevant zijn voor jouw opdracht
+[x] Mogelijke oplossingen en je onderbouwde keuze(s)
+[ ] Requirements
+[ ] Bijbehorende ontwerpen
+[ ] Realisatie (diverse iteraties/ prototypes), testen en testresultaten op basis van de requirements en
+de ontwerpen.
+[ ] Aanbevelingen
+Bijlagen
 
 
 
 
+het bedrijf + stakeholders
+stakeholders: bedrijven -> pkmarine
 
+analyse
+wat is er nu? blokjes -> onderdelen
+oude situatie -> nieuwe situatie
+wat moet er komen?
 
+snijkop
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-					\subsection{Encoders}
-			Encoders zijn er in verschillende soorten. Hieronder worden de encoders genoemd. Na het voorleggen aan de opdrachtgever heeft deze de incrementele encoder gekozen omdat deze meer vrijheid biedt dan de andere encoders.
-
-			\subsubsection{Incrementele encoder}
-				Incrementele Encoders zijn encoders die pulsen geven als de as is gedraaid. De resolutie van deze encoders wordt afgedrukt in PPR (pulsen per rotatie). Door de pulsen te tellen die uit de output(s) komen kun je de locatie en eventueel snelheid bepalen. Als deze encoders meerdere uitgangen heeft, wordt de resolutie van deze encoders beter. Als een encoder 2 uitgangen heeft kan de encoder in 4x resolutie werken. Dit is omdat op de schijf van deze encoders fases in verschuiving staan. Hierdoor kan de richting ook bepaald worden door de sequentie te volgen die de encoder loopt zoals te zien is in figure 1\todo{figure 1}. Door de sequentie door te lopen in een richting kan de richting bepaald worden.
-				
-				\paragraph{Interrupts} Omdat deze encoders signalen versturen wanneer er een rotatie plaatsvindt, is de locatie niet op te vragen. Hiervoor kunnen er interrupts gebruikt worden. Deze gaan af wanneer er een signaal plaatsvindt. Een interrupt is een signaal dat de computer vertelt dat die moet stoppen waar die mee bezig is en een specifiek stuk code moet uitvoeren. Omdat deze encoders per rotatie een x aantal pulsen afgeeft is het belangrijk om te weten of een arduino zoveel interrupts kan verwerken. Hiervoor is een test gedaan. De code is te vinden bij de bijlagen. \todo{code bijlagen} Voor deze test is gekeken hoeveel interrupts de arduino per seconde registreert om een beeld te geven of deze optie realistisch is.
+maten
 
 				\begin{center}
 					Op tijdstip 1: 09:36:47.772 waren er 848785 interrupts geweest. \\
@@ -315,78 +367,104 @@
 				\caption{Encoder sequentie}
 				\end{figure}
 
-			\subsubsection{Absolute encoder}
-				Een absolute encoder geeft voor elke hoek van de as een unieke code. Deze encoders bepalen door de as op een bepaalde manier te encoden tussen welke hoeken de as zich bevindt. Deze encoders slaan de rotatie op in een register en deze is uit te lezen door een microcontroller via een protocol zoals SPI. Het aantal bits bepaaldt de nauwkeurigheid van deze encoder. Er zijn ook absolute encoders die naast de hoek, ook het aantal revoluties bijhouden.
+		peter.vanderklugt@pkmarine.nl
 
-			\subsubsection{Lineaire encoder}
-				Lineaire encoders bepalen op een zelfde manier als incrementele encoders de locatie. Deze sensoren zijn minder flexibel dan andere encoders omdat deze een vaste lengte hebben voor een vooraf gedefinieerde afstand.
+//Port ** Arduino Pin Number ** pin designation
+PA 0 ** 22 ** D22	
+PA 1 ** 23 ** D23	
+PA 2 ** 24 ** D24	
+PA 3 ** 25 ** D25	
+PA 4 ** 26 ** D26	
+PA 5 ** 27 ** D27	
+PA 6 ** 28 ** D28	
+PA 7 ** 29 ** D29	
 
-				\subsection{Requirements}
-			Hieronder zijn de requirement te vinden. Om deze op te stellen is moscow gebruikt. Moscow verdeelt de requirements op in Must, Should, Could en Won't. Hiernaast zijn de requirements functioneel en niet functioneel.
+PB 0 ** 53 ** SPI_SS	
+PB 1 ** 52 ** SPI_SCK	
+PB 2 ** 51 ** SPI_MOSI	
+PB 3 ** 50 ** SPI_MISO	
+PB 4 ** 10 ** PWM10	
+PB 5 ** 11 ** PWM11	
+PB 6 ** 12 ** PWM12	
+PB 7 ** 13 ** PWM13	
 
-			\subsection{Bijlage test code}
-			\todo{Bijlage toevoegen}
+PC 0 ** 37 ** D37	
+PC 1 ** 36 ** D36	
+PC 2 ** 35 ** D35	
+PC 3 ** 34 ** D34	
+PC 4 ** 33 ** D33	
+PC 5 ** 32 ** D32	
+PC 6 ** 31 ** D31	
+PC 7 ** 30 ** D30	
+
+PD 0 ** 21 ** I2C_SCL	
+PD 1 ** 20 ** I2C_SDA	
+PD 2 ** 19 ** USART1_RX	
+PD 3 ** 18 ** USART1_TX	
+PD 7 ** 38 ** D38	
+
+PE 0 ** 0 ** USART0_RX	
+PE 1 ** 1 ** USART0_TX	
+PE 3 ** 5 ** PWM5	
+PE 4 ** 2 ** PWM2	
+PE 5 ** 3 ** PWM3	
+
+PF 0 ** 54 ** A0	
+PF 1 ** 55 ** A1	
+PF 2 ** 56 ** A2	
+PF 3 ** 57 ** A3	
+PF 4 ** 58 ** A4	
+PF 5 ** 59 ** A5	
+PF 6 ** 60 ** A6	
+PF 7 ** 61 ** A7	
+
+PG 0 ** 41 ** D41	
+PG 1 ** 40 ** D40	
+PG 2 ** 39 ** D39	
+PG 5 ** 4 ** PWM4	
+
+PH 0 ** 17 ** USART2_RX	
+PH 1 ** 16 ** USART2_TX	
+PH 3 ** 6 ** PWM6	
+PH 4 ** 7 ** PWM7	
+PH 5 ** 8 ** PWM8	
+PH 6 ** 9 ** PWM9	
+
+PJ 0 ** 15 ** USART3_RX	
+PJ 1 ** 14 ** USART3_TX	
+
+PK 0 ** 62 ** A8	
+PK 1 ** 63 ** A9	
+PK 2 ** 64 ** A10	
+PK 3 ** 65 ** A11	
+PK 4 ** 66 ** A12	
+PK 5 ** 67 ** A13	
+PK 6 ** 68 ** A14	
+PK 7 ** 69 ** A15	
+
+PL 0 ** 49 ** D49	
+PL 1 ** 48 ** D48	
+PL 2 ** 47 ** D47	
+PL 3 ** 46 ** D46	
+PL 4 ** 45 ** D45	
+PL 5 ** 44 ** D44	
+PL 6 ** 43 ** D43	
+PL 7 ** 42 ** D42	
 
 
+encoders
+x: PD0 en PD1 (20 en 21)
+y: PD2 en PD3 (18 en 19)
+z: PE4 en PE4 (2 en 3)
 
+step pins
+X: PA1 (23)
+Y: PA3 (25)
+Z: PA5 (27)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	\section{Changelog}
-		\begin{center}
-		\begin{tabular}{|c|c|}
-			\hline
-			Datum & verandering \\ 
-			\hline
-			1-12-2025 & Begonnen met stage verslag maken van losse documenten \\
-			\hline
-			10-12-2025 & Feedback verwerkt van studenten \\    
-			\hline
-			05-01-2026 & Document herordend en analyse verbeterd \\
-			\hline
-			06-01-2026 & Stakeholders verplaatst, spelling, onderzoek verplaatst/herschreven
-		\end{tabular}
-		\end{center}
-\end{document}
-
-• Voorwoord
-• Context waarin het stagebedrijf werkzaam is
-• Stagebedrijf: Wat voor soort bedrijf is het? (werkveld, grootte, afdeling waar je stageloopt)
-• Probleemstelling/ opdrachtbeschrijving/ eventueel een hoofdvraag en -deelvragen
-• Stakeholders (+ op welke manier je ze betrekt bij jouw opdracht)
-• Scope en passende eisen die relevant zijn voor jouw opdracht
-• Mogelijke oplossingen en je onderbouwde keuze(s)
-• Requirements
-• Bijbehorende ontwerpen
-• Realisatie (diverse iteraties/ prototypes), testen en testresultaten op basis van de requirements en
-de ontwerpen.
-• Aanbevelingen
-Bijlagen
-
-
-
-
-het bedrijf + stakeholders
-stakeholders: bedrijven -> pkmarine
-
-analyse
-wat is er nu? blokjes -> onderdelen
-oude situatie -> nieuwe situatie
-wat moet er komen?
-
-snijkop
-
-maten
+dir pins
+X: PA0 (22)
+Y: PA2 (24)
+Z: PA4 (26)
+pinouts:
+https://devboards.info/boards/arduino-mega2560-rev3
