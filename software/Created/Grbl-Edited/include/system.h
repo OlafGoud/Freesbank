@@ -1,6 +1,7 @@
 #include <stdlib.h>   
 #include <stdio.h>
 #include <math.h>
+
 #include "datacommunication.h"
 #include "macros.h"
 
@@ -71,3 +72,26 @@ void setStepperInterupts();
 void setEncoderInterupts();
 void setDirection();
 char* getStatus(int s);
+
+
+/** Data for CodeBlock */
+struct Movement {
+  float beginPos[ENCODERS_AXIS];
+  float endPos[ENCODERS_AXIS];
+  float E, F, H, I, J, R; /** all letters from Gcode in use */
+};
+
+
+
+
+struct CodeBlock {
+  uchar letter{}; /** can be M or G */
+  uint16 command{}; /** command number by G1 -> 1, M231 -> 231 */
+  uchar modifier{};
+  void* data; /** Pointer to a data struct. In use: Movement */
+};
+
+struct CodeBlockBuffer {
+  CodeBlock block;
+  
+}

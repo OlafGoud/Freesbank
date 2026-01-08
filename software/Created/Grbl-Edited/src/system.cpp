@@ -28,6 +28,8 @@ void loadSegmentInStepperBuffer() {
 
 }
 
+//\((x-h)^{2}+(y-k)^{2}=r^{2}\)
+
 /**
  * Function to get data from the RX buffer and make a line from it. And send the right commands to the right functions.
  * @todo system commands '$'

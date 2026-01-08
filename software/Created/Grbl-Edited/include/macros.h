@@ -52,8 +52,6 @@
 #define AXIS_PLANE_YZ 2 /** Work axis plane */
 
 
-#define X_STEP_PIN PD5 /** Pin definition */
-#define X_DIR_PIN PD6 /** Pin definition */
 
 
 #define EPS_COS_STRAIGHT 0.999999f
@@ -65,21 +63,48 @@
 
 /** Encoders */
 
-#define ENCODERS_AXIS 1
+#define ENCODERS_AXIS 3
+
+// #define ARDUINO_UNO
+#define ARDUINO_MEGA
+#ifdef ARDUINO_UNO
 #define ENCODER_PIN_XA PD2 /** Interrupt pin for encoder A line */
 #define ENCODER_PIN_XB PD3 /** Interrupt pin for encoder B line */
+#define ENCODER_PORT_XY DDRD
+#define STEPPER_STEP_PORT DDRD
+#define STEPPER_DIR_PORT DDRB
+#define X_STEP_PIN PD5 /** Pin definition */
+#define X_DIR_PIN PD6 /** Pin definition */
+
+#endif
+
+
+#ifdef ARDUINO_MEGA
+#define ENCODER_PIN_XA PD0 /** Interrupt pin for encoder A line */
+#define ENCODER_PIN_XB PD0 /** Interrupt pin for encoder B line */
+#define ENCODER_PIN_YA PD2
+#define ENCODER_PIN_YB PD3
+#define ENCODER_PIN_ZA PE4
+#define ENCODER_PIN_ZB PE5
+#define ENCODER_PORT_XY DDRD
+#define ENCODER_PORT_Z DDRE
+
+
+#define STEPPER_X_STEP_PIN PA1
+#define STEPPER_Y_STEP_PIN PA3
+#define STEPPER_Z_STEP_PIN PA5
+#define STEPPER_X_DIR_PIN PA0
+#define STEPPER_Y_DIR_PIN PA2
+#define STEPPER_Z_DIR_PIN PA4
+#define STEPPER_PORT DDRA
+#endif
 #define ENCODERPORT DDRD
 
 /** Steppers */
 #define STEPPER_ACCURACY 0.5f
-
-#define STEPPER_DIR_MASK ((1 << X_DIR_PIN))
-#define STEPPER_STEP_MASK ((1 << X_STEP_PIN))
-
-
 #define TIMECONST 3
 
-#define STEPPER_STEP_PORT DDRD
-#define STEPPER_DIR_PORT DDRB
 
 #define RESET_STEPBITS_US 800
+
+
