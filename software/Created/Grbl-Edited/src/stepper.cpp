@@ -2,7 +2,26 @@
 
 uint8 stepperState = STEPPER_EMPTY;
 
-static StepperBlock stepBlock;
+static StepperData stepperData; 
+
+
+float getYForCircle(float x, float y) {
+  float fTemp = sqrt((stepperData.formulaValues[Z_AXIS] * stepperData.formulaValues[Z_AXIS])- ((x - stepperData.formulaValues[Y_AXIS]) * (x - stepperData.formulaValues[Y_AXIS])));
+  float y1 = stepperData.formulaValues[X_AXIS] + fTemp;
+  float y2 = stepperData.formulaValues[X_AXIS] - fTemp;
+  if(y1 - y > y2 - y) {
+    /** y1 closer */
+    return y1;
+  } 
+
+  /** y2 closer */
+  return y2;
+}
+
+float getYForLine(float x, float x1, float x2, float y1, float y2) {
+  return (((y2 - y1)/(x2 - x1)) * (x - x1)) + y1;
+}
+
 
 static const uint8 dirPins[] = {PB5, PB6, PB7};
 static const uint8 stepPins[] = {PD5, PD6, PD7};
@@ -47,9 +66,9 @@ uint8 setHardwareCompareTimer(float targetms) {
   if(prescalerBits == 0) {
     return 1;
   }
-
+  stepperData.timerValue = compareValue;
   /** Timer config */
-
+  println((int32)compareValue);
   cli();
 
   TCCR1A = 0;
@@ -74,8 +93,8 @@ uint8 setHardwareCompareTimer(float targetms) {
 void initSteppers() {
 
   /** Set stepper pins to output */
-  STEPPER_DIR_PORT |= STEPPER_DIR_MASK;
-  STEPPER_STEP_PORT |= STEPPER_STEP_MASK;
+ // STEPPER_DIR_PORT |= STEPPER_DIR_MASK;
+ // STEPPER_STEP_PORT |= STEPPER_STEP_MASK;
   uint8 hardwareCompareStatusCode = setHardwareCompareTimer(100.0f);
   if(!(hardwareCompareStatusCode == 0)) {
     if(hardwareCompareStatusCode == 1) {
@@ -94,15 +113,37 @@ void initSteppers() {
 }
 
 
-void loadSegmentInBuffer(float currentPosition[3], PlannerBuffer& planBuffer) {
+void loadNewSegment() {
+  codeBlockBuffer.tail = (codeBlockBuffer.tail + 1) % CODEBLOCKBUFFERSIZE; /** Old block can be deleted. increment tail */
+  if(codeBlockBuffer.tail == codeBlockBuffer.head) {
+    return;
+  }
 
-  if(planBuffer.tail == planBuffer.head) return;
-  PlannerBlock* planBlock = &planBuffer.block[planBuffer.tail++];
+  CodeBlock* block = &codeBlockBuffer.block[codeBlockBuffer.tail]; /** Dont increment here, then it can be overritten.*/
+  if(block->command == 1 || block->command == 2) {
+    stepperData.formulaValues[X_AXIS] = block->endPos[X_AXIS] - block->beginPos[X_AXIS];
+    stepperData.formulaValues[Y_AXIS] = block->endPos[Y_AXIS] - block->beginPos[Y_AXIS];
+    stepperData.formulaValues[Z_AXIS] = block->endPos[Z_AXIS] - block->beginPos[Z_AXIS];
+
+    float maxValue = stepperData.formulaValues[X_AXIS] > stepperData.formulaValues[Y_AXIS] ? stepperData.formulaValues[X_AXIS] : stepperData.formulaValues[Y_AXIS];
+    maxValue = maxValue > stepperData.formulaValues[Z_AXIS] ? maxValue : stepperData.formulaValues[Z_AXIS];
+
+    stepperData.modifier = (int)stepperData.timerValue/maxValue;
 
 
+  } else if (block->command == 2 || block->command == 3) {
+    stepperData.formulaValues[X_AXIS] = block->I;
+    stepperData.formulaValues[Y_AXIS] = block->J;
+    stepperData.formulaValues[Z_AXIS] = block->R;
+  } else if (block->command >= 17 || block->command <= 19) {
+    stepperData.selectedPlane = block->subCommand;
+  } else {
+    return;
+  }
+
+  /** Here functions to turn on the spindle etc */
 
 
-  uint8 changes = 0;
   if(currentPosition[0] <= stepBlock.exitPos[0] + STEPPER_ACCURACY && encoderSteps[0] >= targetStep[0] - 4) {
     TIMSK1 &= ~(1 << OCIE1A); /** Disable Timer1 compare A interrupt */
     systemState = IDLE;
@@ -130,7 +171,6 @@ ISR(TIMER1_COMPA_vect) {
   if(isBusy) return; /** return if previous cycle is not done */
 
   isBusy = true; /** set busy */
-
   float currentPosition[3]{};
   getCurrentMMFromEncoders(currentPosition);
 
@@ -176,6 +216,8 @@ ISR(TIMER1_COMPA_vect) {
   isBusy = false;
 }
 
+
+
 ISR(TIMER1_COMPB_vect) {
   /** Set stepper low */
 
@@ -185,3 +227,4 @@ ISR(TIMER1_COMPB_vect) {
   TIMSK1 &= ~(1 << OCIE1B);            // disable until next cycle
 }
 
+//   \((x-h)^{2}+(y-k)^{2}=r^{2}\)

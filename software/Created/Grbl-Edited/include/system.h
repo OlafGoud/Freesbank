@@ -47,51 +47,38 @@ struct PlannerBuffer {
   uint8_t head;
 };
 
-void loadSegmentInStepperBuffer();
-
 void readSerialLine();
 
 bool readGCodeLine(char* line, uint8_t size);
 
 bool readFloat(char *line, uint8_t* i, float* f_ptr);
-
-void generateStraightSegementsFromCurve(GCodeBlock &block, uint8_t selectedPlane);
-
-void addSegmentToPlanBuffer(GCodeBlock &block);
-void plannerRecalculate(float J);
-float junctionSpeedFromDeviation(const float u[3], const float v[3], float J, float a);
 float vecDot3(const float a[3], const float b[3]);
-
 void vecSub3(float r[3], const float a[3], const float b[3]);
-
 float vecNorm3(const float a[3]);
-
 void vecNormalize3(float r[3]);
 
-void setStepperInterupts();
-void setEncoderInterupts();
 void setDirection();
 char* getStatus(int s);
 
-
-/** Data for CodeBlock */
-struct Movement {
-  float beginPos[ENCODERS_AXIS];
-  float endPos[ENCODERS_AXIS];
-  float E, F, H, I, J, R; /** all letters from Gcode in use */
-};
-
-
-
+extern CodeBlockBuffer codeBlockBuffer;
 
 struct CodeBlock {
   uchar letter{}; /** can be M or G */
   uint16 command{}; /** command number by G1 -> 1, M231 -> 231 */
-  uchar modifier{};
-  void* data; /** Pointer to a data struct. In use: Movement */
+  uint8 subCommand{};
+  float beginPos[ENCODERS_AXIS]{};
+  float endPos[ENCODERS_AXIS]{};
+  float E{}, F{}, H{}, I{}, J{}, R{}; /** all letters from Gcode in use */
 };
 
+#define CODEBLOCKBUFFERSIZE 16
+#define X_AXIS 0
+#define Y_AXIS 1
+#define Z_AXIS 2
+
 struct CodeBlockBuffer {
-  CodeBlock block;
-  
-}
+  CodeBlock block[CODEBLOCKBUFFERSIZE];
+  uint8 tail = 0;
+  uint8 head = 1;
+  uint8 size = 0;
+};

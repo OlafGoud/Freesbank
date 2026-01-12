@@ -80,6 +80,7 @@
 
 
 #ifdef ARDUINO_MEGA
+
 #define ENCODER_PIN_XA PD0 /** Interrupt pin for encoder A line */
 #define ENCODER_PIN_XB PD0 /** Interrupt pin for encoder B line */
 #define ENCODER_PIN_YA PD2

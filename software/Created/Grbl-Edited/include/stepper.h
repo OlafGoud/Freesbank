@@ -1,20 +1,18 @@
 #include "macros.h"
 #include "system.h"
 #include "encoder.h"
+#include <math.h>
 
 extern uint8 stepperState;
 
-struct StepperBlock {
-  float exitPos[3] {};
-  float exitSpeed {};
-  float feedrate {}; // maxspeed
+struct StepperData {
+  float formulaValues[3]{};
+  CodeBlock* currentBlock;
 
-  uint8 stepBits;
-  uint8 dirBits;
-
-  float beginPosition[3];
-  uint32 time{};
-  uint32 intervalMS{};
+  uint16 modifier;
+  uint16 timerValue;
+  uint8 selectedPlane = 0;
+  float prevY = 0;
 };
 
 void initSteppers();
