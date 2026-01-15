@@ -51,22 +51,12 @@
 #define AXIS_PLANE_XZ 1 /** Work axis plane */
 #define AXIS_PLANE_YZ 2 /** Work axis plane */
 
-
-
-
-#define EPS_COS_STRAIGHT 0.999999f
-#define SYSTEM_MAX_ACCEL 300
-#define SYSTEM_MAX_BRAKE 200
-#define CORNER_DIVIDATION 0.2f
-
-
-
 /** Encoders */
 
 #define ENCODERS_AXIS 3
 
 // #define ARDUINO_UNO
-#define ARDUINO_MEGA
+#define ARDUINO_UNO
 #ifdef ARDUINO_UNO
 #define ENCODER_PIN_XA PD2 /** Interrupt pin for encoder A line */
 #define ENCODER_PIN_XB PD3 /** Interrupt pin for encoder B line */
@@ -102,10 +92,9 @@
 #define ENCODERPORT DDRD
 
 /** Steppers */
-#define STEPPER_ACCURACY 0.5f
-#define TIMECONST 3
+#define STEPPER_ACCURACY 0.015f
 
-
+#define STEPPER_ISR_MS 10.0f
 #define RESET_STEPBITS_US 800
 
 

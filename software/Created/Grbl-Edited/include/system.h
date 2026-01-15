@@ -4,12 +4,11 @@
 
 #include "datacommunication.h"
 #include "macros.h"
-
+#include "encoder.h"
+#pragma once
 
 extern uint8 systemState;
 extern uint8 stepperState;
-extern volatile int32 encoderSteps[3];
-extern volatile int32 targetStep[3];
 
 struct GCodeBlock {
   float position[3] {};  /** xyz position, float, 12 bytes */
@@ -60,7 +59,6 @@ void vecNormalize3(float r[3]);
 void setDirection();
 char* getStatus(int s);
 
-extern CodeBlockBuffer codeBlockBuffer;
 
 struct CodeBlock {
   uchar letter{}; /** can be M or G */
@@ -82,3 +80,5 @@ struct CodeBlockBuffer {
   uint8 head = 1;
   uint8 size = 0;
 };
+
+extern CodeBlockBuffer codeBlockBuffer;

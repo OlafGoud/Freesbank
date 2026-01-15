@@ -83,30 +83,41 @@
 		\subsection{Huidige situatie}
 			\begin{figure}
 				\begin{center}
-				\includegraphics[width=10cm]{volledigsysteem.png}
+				\includegraphics[width=10cm]{beginsysteem.png}
 				\caption{systeem diagram}
 				\end{center}
 			\end{figure}
-			De huidige situatie bestaat uit een aantal functies die te zien zijn in het figuur ... \todo{figuur}. De onderdelen die al aanwezig zijn, zijn de motor drivers, motoren het frame en een frees. De rest van de onderdelen moeten nog worden toegevoegd.
+			De huidige situatie bestaat uit een aantal functies die te zien zijn in het figuur ... \todo{figuur}. De functies die al aanwezig zijn, zijn de motor drivers, actuatoren, freesbank met frees en een regelsysteem. 
 			
 
 			\todo{frees valt buiten scope, microstepping buiten scope, verwijzing datasheet?}
-			\subsubsection{Huidige onderdelen}
-				\paragraph{Frame}Het frame is gemaakt van hout. De werkruimte van het frame bedraagt 300cm in de lengte (X-as), 142,5cm in breedte (Z-as) en 8 cm in hoogte (Y-as). De werkelijke lengte van de freesbank is 251cm omdat het wagentje op de rails aan beide kanten uitsteekt. Aan de zijkant is een verhoging dat 5cm breed is aan beide kanten. Hierop zijn geleiderails gemonteerd waar het wagentje overheen beweegt. De effectieve werkbreedte is $142.5 - 8 - 7=127.5$cm omdat de frees niet helemaal tot de zijkant kan komen. Het hoogste punt van het wagentje is 60cm boven het bed van de freesbank. Op dit wagentje is een tweede railsysteem bevestigd voor de beweging in de breedte-as. Hierop bevind zich een tweede wagentje voor de hoogte-as. De hoogte beweging wordt gerealiseerd door middel van een draaiende schroef, waardoor de snij kop gecontroleerd omhoog en omlaag kan bewegen. Aan deze snij kop is een frees gemonteerd. De aandrijving van de lengte- en breedte-as gebeurt met tandriemen. Deze lopen over de volledige lengte van de assen en worden aangedreven door timing pulleys. Dit zijn tandwielen voor tandriemen.
+			\subsubsection{Huidige functies}
+				\paragraph{\textbf{Freesbank}}Het frame is gemaakt van hout. De werkruimte van het frame bedraagt 300cm in de lengte (X-as), 142,5cm in breedte (Z-as) en 8 cm in hoogte (Y-as). De werkelijke lengte van de freesbank is 251cm omdat de wagen op de rails aan beide kanten uitsteekt. Aan de zijkant is een verhoging dat 5cm breed is aan beide kanten. Hierop zijn geleiderails gemonteerd waarover de wagen beweegt. De effectieve werkbreedte is $142.5 - 8 - 7=127.5$cm omdat de frees niet helemaal tot de zijkant kan komen. Het hoogste punt van de wagen is 60cm boven het bed van de freesbank. Op deze wagen is een tweede railsysteem bevestigd voor de beweging in de breedte-as. Hierop bevind zich een tweede wagen voor de hoogte-as. De hoogte beweging wordt gerealiseerd door middel van een draaiende schroef, waardoor de snij kop gecontroleerd omhoog en omlaag kan bewegen. Aan deze wagen is een frees gemonteerd. De aandrijving van de lengte- en breedte-as gebeurt met tandriemen. Deze lopen over de volledige lengte van de assen en worden aangedreven door timing pulleys. Dit zijn tandwielen voor tandriemen. \\
+				{\color{white}-}\\
+				Op de wagen van de hoogte-as is een handfrees gemonteerd. Deze frees werkt op netstroom. Als de frees snijt, komt er materiaal los. Dit hoopt op op de freesbank. De ophoping en frees aansturen met de microcontroller of een nieuwe frees zoeken is buiten de scope van het project.\\
+				{\color{white}-}\\
+				De freesbank heeft externe invloeden zoals vrijving op de rails en uitrekking van de tandriemen.
 
-				\paragraph{Frees}Aan de hoogte-as is een frees bevestigd. Dit is een handfrees die op netstroom werkt. 
+				\paragraph{Actuatoren}De motoren die worden gebruikt voor de beweging van de assen zijn NEMA 17 motoren. Deze werken op 12-36V en mogen maximaal 2A hebben. De motoren zitten vast aan het frame met bevestigings punten. Aan de motoren zit een timing pulley bevestigd, waar een tandriem overheen loopt. De lengte as heeft motoren aan beide kanten van de freesbank. De hoogte en breedte assen worden aangedreven door één motor.
 
-				\paragraph{Motoren}De motoren die gebruikt worden zijn NEMA 17 stepper motor. Deze motoren werken op 12-36V en mogen maximaal 2A hebben. Deze zitten bevestigd op het frame met brackets. Deze hebben een timing pulley waar de tandriem overheen loopt. De lengte as wordt aangedreven door twee motoren. De breedte en hoogte assen worden aangedreven door één motor. 
+				\paragraph{Drivers}De drivers die worden gebruikt voor de motoren zijn DRV8824 drivers. Deze drivers werken op 8.2-45V en mogen maximaal 2.5A hebben op 24V. Deze drivers maken gebruik van een STEP en DIR pin. Door de DIR pin hoog en laag te maken veranderd de polariteit over de aangesloten motor. Door de STEP pin hoog te maken zet de motor een stap. Deze drivers hebben ook de mogelijkheid om te microsteppen. Microsteppen maakt gebruik van sinusvormige stromen om meer nauwkeurigheid en hogere resolutie te krijgen. De drivers krijgen voeding van een labvoeding en het regelsysteem.
 
-				\paragraph{Drivers}De drivers die worden gebruikt voor de motoren zijn DRV8824 drivers. Deze drivers werken op 8.2-45V en mogen maximaal 2.5A hebben op 24V. Deze drivers maken gebruik van een STEP en DIR pin. Door de DIR pin hoog en laag te maken veranderd de polariteit over de aangesloten motor. Door de STEP pin hoog te maken zet de motor een stap. Deze drivers hebben ook de mogelijkheid om te microsteppen. Microsteppen maakt gebruik van sinusvormige stromen om meer nauwkeurigheid en hogere resolutie te krijgen. 
+				\paragraph{Regelsysteem} Het systeem wordt geregeld doormiddel van een arduino uno met een opensource regelsysteem GRBL. Dit is het onderdeel dat input van de gebruiker krijgt en informatie terug stuurd naar de gebruiker.
 
-			\subsubsection{Nieuwe onderdelen}
-			\todo{lab voeding gebruik ik, custom valt buiten scope}
-				\paragraph{Voeding}De voeding is niet aanwezig voor het systeem. De microcontroller heeft 5V nodig en kan worden aangesloten op een laptop. De actuatoren hebben meer vermogen nodig en hiervoor word een lab voeding gebruikt.
+			\subsubsection{Oplossingen}
+				In interviews met de opdrachtgever is voorgelegd of een steppermotor met ingebouwde encoders een opslossing zou zijn. Hierdoor zou de code van GRBL niet aangepast hoeven worden. Deze encoders zijn closed loop en controlleren of de stappen motor de stap zet die die moet zetten en de fout kan herstellen. De opdrachtgever gaf aan dat dit niet de gewenste oplossing is, omdat er dan een afhankelijkheid van de fabrikant word gemaakt. Dit omdat de fabrikant bepaald welke encoder op de stappenmotor komt, waardoor de fabrikant bepaald hoe nauwkeurig de freesbank kan zijn. Ook wilt Sens2Sea het systeem gemakkelijk kunnen aanpassen wanneer er meer nauwkeurigheid gewenst is.
 
-				\paragraph{Sensor}Uit een interview met de opdrachtgever is gebleken dat de opdrachtgever encoders wilt gebruiken en wilt bevestigen op een getande riem die op het frame is geplakt. Hierdoor kan de getande riem niet uitrekken. De nauwkeurigheid van de encoder is niet het belangrijkste omdat het project gaat over het scheiden van de aandrijving van de frees en positie bepaling van de snij kop. Verder doen de kosten er toe, maximaal 60 euro per encoder. Ook is er belang bij dat de huidige positie opvragen snel kan aangezien een freesbank een high performance machine is. Er zijn verschillende soorten encoders die verschillend werken. De nauwkeurigheid van een encoder wordt gemeten in Pulses Per Rotation(PPR). Dit geeft aan dat hoe hoger de PPR is de hoger de nauwkeurigheid omdat er meer pulsen gegeven worden in de zelfde rotatie. Na het onderzoek zijn de opties voorgelegd aan de opdrachtgever en is er gekozen om een optische incrementele encoder te gebruiken.
+			\subsubsection{Nieuwe functies}
+				\begin{figure}
+					\begin{center}
+					\includegraphics[width=10cm]{beginsysteem.png}
+					\caption{Nieuw systeem diagram}
+					\end{center}
+				\end{figure}
+
+				\paragraph{Sensor}Uit een interview met de opdrachtgever is gebleken dat de opdrachtgever encoders wilt gebruiken en wilt bevestigen op een getande riem die op het frame is geplakt. Hierdoor kan de getande riem niet uitrekken. De nauwkeurigheid van de encoder is niet het belangrijkste omdat het project gaat over het scheiden van de aandrijving van de frees en positie bepaling van de snij kop. Verder doen de kosten er toe, maximaal 60 euro per encoder. Ook is er belang bij dat de huidige positie opvragen snel kan aangezien een freesbank een high performance machine is. Er zijn verschillende soorten encoders die verschillend werken. De nauwkeurigheid van een encoder wordt gemeten in Pulses Per Rotation(PPR). Dit geeft aan dat hoe hoger de PPR is de hoger de nauwkeurigheid omdat er meer pulsen gegeven worden in de zelfde rotatie. Na het onderzoek zijn de opties voorgelegd aan de opdrachtgever en is er gekozen om een optische incrementele encoder te gebruiken. Er zijn ook externe invloeden op de encoder zoals vuil dat in de encoder komt, dat de metingen kan verstoren.
 				
-				\paragraph{Microcontroller}Na de keuze voor een encoder is gekomen dat de microcontroller 6 interrupt pinnen nodig heeft. Verder moet deze rond de specificaties zijn als een arduino uno. Dit is omdat opensource oplossingen zoals GRBL gebaseerd zijn op een arduino uno. Hierom is voorgesteld om een arduino mega te gebruiken. Deze mircrocontroller heeft voldoende rekenkracht voor dit soort applicaties. Hiernaast heeft deze microcontroller ook de benodigde 6 interrupt pinnen voor de drie verschillende assen. Daarnaast bieden de vele pinnen mogelijkheden om het systeem uit te breiden.
+				\paragraph{Regelaar}Als regelaar is een microcontroller nodig. De keuze van de encoder zorgt er voor dat de microcontroller 6 interrupt pinnen nodig heeft. Verder moet deze rond de specificaties zijn als een arduino uno. Dit is omdat opensource oplossingen zoals GRBL gebaseerd zijn op een arduino uno. Hierom is voorgesteld om een arduino mega te gebruiken. Deze mircrocontroller heeft voldoende rekenkracht voor dit soort applicaties. Hiernaast heeft deze microcontroller ook de benodigde 6 interrupt pinnen voor de drie verschillende assen. Daarnaast bieden de vele pinnen mogelijkheden om het systeem uit te breiden.
 			
 			\subsubsection{Software}
 				\begin{figure}
@@ -116,21 +127,21 @@
 					\end{center}
 				\end{figure}
 				De software op de microcontroller bestaat uit verschillende onderdelen zoals te zien is in het figuur. Hoe de voeding binnen de microcontroller loopt is weggelaten. De datastromen zijn ook te zien in het figuur. \\
-
+				{\color{white}-}\\
 				\textbf{Actuatoren aansturing} is het onderdeel wat de actuatoren aanstuurt. Dit onderdeel beïnvloed de pinnen om de motor driver aan te sturen. \\
-
+				{\color{white}-}\\
 				\textbf{Sensoren uitlezer} is het onderdeel dat de sensoren uitleest. Hierna zet de sensor de data om naar bruikbare positie data. \\
-
+				{\color{white}-}\\
 				\textbf{Gebruiker input en output} is het onderdeel dat de data ontvangt en verstuurd van de gebruiker. \\
-
+				{\color{white}-}\\
 				\textbf{Gebruiker input verwerker} is het onderdeel dat de input van de gebruiker verwerkt en omzet naar bruikbare opdrachten. Ook zend dit onderdeel opdrachten naar de regelaars. Ook handelt dit onderdeel alle andere opdrachten voor het systeem af. Dit zijn opdrachten zoals status opvragen en terug sturen, andere opdrachten voor de bewegingen die niet afgehandeld door de regelaars. \\
-
+				{\color{white}-}\\
 				\textbf{De regelaars} zijn de onderdelen die per as bepalen hoe de actuatoren bewogen moeten worden. Dit doen ze door de positie data van de sensor uitlezer te vergelijken met de positie waar de actuator moet zijn. \\
 
 		\subsection{Requirements}
 			Uit de analyse en aan de hand van meerdere interviews met de opdrachtgever zijn de volgende requirements opgekomen.
 			\begin{center}
-				\scalebox{0.711875}{\begin{tabular}{|c|c|c|c|}
+				\scalebox{0.7}{\begin{tabular}{|c|c|c|c|}
 					\hline
 					Requirement & User story & Acceptatie & soort \\
 					\hline
@@ -220,6 +231,8 @@
 		Bij deze opdracht zijn meerdere onderdelen aan bod gekomen waar dit project niet aan toe gekomen is.
 		\begin{enumerate}
 			\item Er zijn modules waarmee de encoders makkelijker uit te lezen zijn. Hier moet onderzoek naar gedaan worden.
+			\item rotzooi afzuigen frees
+			\item 
 		\end{enumerate}
 		\todo{aanbevelingen toeveogen}
 	\section{Bronnen}
@@ -523,4 +536,6 @@ X: PA0 (22)
 Y: PA2 (24)
 Z: PA4 (26)
 pinouts:
-https://devboards.info/boards/arduino-mega2560-rev3
+https://devboards.info/boards/arduino-mega2560-rev3''
+
+  /* model refrence control */

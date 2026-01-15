@@ -3,8 +3,6 @@
 
 GCodeSettings gCodeSettings;
 
-StepperBlock stepperBlock;
-PlannerBuffer plannerBuffer;
 volatile int32 steps = 0;
 
 
@@ -15,7 +13,7 @@ volatile int32 steps = 0;
  * @todo gcode commands [all other]
  */
 void readSerialLine() {
-  static char* line = new char[MAX_LINE_SIZE];
+  static char line[MAX_LINE_SIZE];
   static uint8 size = 0;
   static bool lineComment = false;
   while(size < MAX_LINE_SIZE) {
@@ -35,21 +33,21 @@ void readSerialLine() {
       if(line[0] == '$' && size - 1 > 1) {
 
         if(line[1] == 'X') {
-          encoderSteps[0] = 0; /** @todo change to struct with 3 values for 3 encoders */
           println("reset X encoder to 0");
         } else if (line[1] == 'Y') {
           /** @todo + docu */
         } else if (line[1] == 'Z') {
           /** @todo + docu */
         } else if (line[1] == '?') {
-
+          float val[3]{};
+          getCurrentMMFromEncoders(val);
           print("<"); print(getStatus(systemState)); print("|");
-          print(encoderSteps); print("|");
-          print(stepperBlock.exitPos); print("|"); print(stepperBlock.feedrate, 1); println(">");
+          print(val); print("|");
+          print(codeBlockBuffer.block[codeBlockBuffer.tail].endPos); print("|"); print(codeBlockBuffer.block[codeBlockBuffer.tail].beginPos); println(">");
 
         } else if (line[1] == 'D') {
           /** @todo Debug + docu */
-          print("<"); print(encoderSteps); print(targetStep); 
+          //print("<"); print(encoderSteps); print(targetStep); 
         }
 
 
@@ -68,8 +66,10 @@ void readSerialLine() {
       }
 
       size = 0;
-      println("size reset!");
-      line = new char[MAX_LINE_SIZE];
+      for(int i = 0; i < MAX_LINE_SIZE; i++) {
+        line[i] = '\0';
+      }
+
       continue;
     } else {
       if(c == '(') { /** comments on */
@@ -168,7 +168,7 @@ bool readGCodeLine(char* line, uint8 size) {
     case 'K': break; /** @todo @note Not suported (YET) */
     case 'L': break; /** @todo @note Not suported (YET) */
     case 'N': break; /** @todo @note Not suported (YET) */
-    case 'O': encoderSteps[0] = intValue; println("encoder steps to value"); break; /** @todo @note Not suported (YET) */
+    case 'O': /*encoderSteps[0] = intValue; println("encoder steps to value"); */break; /** @todo @note Not suported (YET) */
     case 'P': break; /** @todo @note Not suported (YET) */
     case 'Q': break; /** @todo @note Not suported (YET) */
     case 'R': codeBlock.R = value; break; /** @note Radius for circle */
@@ -189,17 +189,17 @@ bool readGCodeLine(char* line, uint8 size) {
   if(codeBlock.command >= 0 && codeBlock.command <= 4) {
     memcpy(prevPos, codeBlock.endPos, sizeof(prevPos));
   }
-  
+  print(codeBlock.endPos[0], 2);
   if(codeBlockBuffer.head == codeBlockBuffer.tail) {
     // full
     return false;
   }
-  CodeBlock *block = &codeBlockBuffer.block[plannerBuffer.head];
+  CodeBlock *block = &codeBlockBuffer.block[codeBlockBuffer.head];
   
   memcpy(block, &codeBlock, sizeof(codeBlock));
   codeBlockBuffer.head = (codeBlockBuffer.head + 1) % CODEBLOCKBUFFERSIZE;
   codeBlockBuffer.size++;
-
+  print("done");
   /** @todo split movement in lines when curved, plan function */
   return true;
 }
@@ -334,51 +334,6 @@ void vecNormalize3(float r[3]) {
   float n = vecNorm3(r);
   if (n > 0.0f) { r[0]/=n; r[1]/=n; r[2]/=n; }
 }
-
-void setEncoderInterupts() {
-
-  DDRD &= ~((1 << PD2) | (1 << PD3)); /** Set pins to input */
-
-  PORTD |= (1 << PD2); /** pullup resistor pin 2 */ 
-  PORTD |= (1 << PD3); /** pullup resistor pin 3 */
-
-  /** onchange interupt pin 2 */
-  EICRA |= (1 << ISC00);
-  EICRA &= ~(1 << ISC01);
-
-  /** onchange interupt pin 3 */
-  EICRA |= (1 << ISC10);
-  EICRA &= ~(1 << ISC11);
-
-  /** enable  */
-  EIMSK |= (1 << INT0) | (1 << INT1);
-
-}
-
-
-void setDirection() {
-
-  static bool on = true;
-
-
-  if(encoderSteps[0] <= targetStep[0] + 4 && encoderSteps[0] >= targetStep[0] - 4) {
-    TIMSK1 &= ~(1 << OCIE1A);   // disable Timer1 compare A interrupt
-    on = false;
-    stepperState = STEPPER_EMPTY;
-    return;
-  }
-  if(on == false) {
-    TIMSK1 |= (1 << OCIE1A);    // enable Timer1 compare A interrupt
-    on = true;
-  }
-
-  if(encoderSteps[0] > targetStep[0]) {
-    PORTD &= ~(1 << PD6);
-  } else if (encoderSteps[0] < targetStep[0]) {
-    PORTD |= (1 << PD6);
-  }
-}
-
 
 char* getStatus(int s) {
   if(s == IDLE) {

@@ -4,18 +4,15 @@ static volatile int32 encoderSteps[ENCODERS_AXIS]{};
 static float accuracy[ENCODERS_AXIS]{};
 
 void getCurrentMMFromEncoders(float* encoderValues) {
-  float encoderInMM[ENCODERS_AXIS]{};
-
   for(int i = 0; i < ENCODERS_AXIS; i++) {
     encoderValues[i] = encoderSteps[i] * accuracy[i];
   }
-
 }
 
 void setAccuracy() {
-  accuracy[0] = 0.02f;
-  accuracy[1] = 0.02f;
-  accuracy[2] = 0.02f;
+  accuracy[0] = 0.016f;
+  accuracy[1] = 0.2f;
+  accuracy[2] = 0.2f;
 }
 
 void initEncoder() {
@@ -25,13 +22,13 @@ void initEncoder() {
    * @todo calibrate (side to side?)
    */
   setAccuracy();
-  
+  DDRB |= (1 << PB5);
   /** Encoder interrupt setup */
   /** Set pins for encoder to input */
-  DDRD &= ~((1 << ENCODER_PIN_XA) || (1 << ENCODER_PIN_XB)); 
+  DDRD &= ~((1 << ENCODER_PIN_XA) | (1 << ENCODER_PIN_XB)); 
   
   /** Set pullup resistors */
-  PORTD |= ((1 << ENCODER_PIN_XA) || (ENCODER_PIN_XB));
+  PORTD |= ((1 << ENCODER_PIN_XA) | (1 << ENCODER_PIN_XB));
 
   /** enable interrupt on PCINT2 GROUP for when either of A or B changes */
   PCICR |= (1 << PCIE2);    
@@ -41,7 +38,7 @@ void initEncoder() {
 
   
   /** enable interrupts */
-  EIMSK |= (1 << INT0) | (1 << INT1);
+  //EIMSK |= (1 << INT0) | (1 << INT1);
 
   readEncoderX();
 }
@@ -55,7 +52,8 @@ static inline void readEncoderX(void) {
 
   /** Get value of encoder pin b and masks everything but the lowest bit*/
   uint8 b = (PIND >> ENCODER_PIN_XB) & 1;
-
+  //PORTB ^= (1 << PB5); 
+  //println(encoderSteps[0]);
   /** 
    * Read and mask value of encoder pin A. and convert it to 'binary graycode' (only 1 changing bit each time)
    * 0 & 0 = 0
