@@ -1,5 +1,7 @@
 #include "encoder.h"
 
+
+
 static volatile int32 encoderSteps[ENCODERS_AXIS]{};
 static float accuracy[ENCODERS_AXIS]{};
 
@@ -15,33 +17,11 @@ void setAccuracy() {
   accuracy[2] = 0.2f;
 }
 
-void initEncoder() {
-
-  /**
-   * set the accuracy for the encoders
-   * @todo calibrate (side to side?)
-   */
-  setAccuracy();
-  DDRB |= (1 << PB5);
-  /** Encoder interrupt setup */
-  /** Set pins for encoder to input */
-  DDRD &= ~((1 << ENCODER_PIN_XA) | (1 << ENCODER_PIN_XB)); 
-  
-  /** Set pullup resistors */
-  PORTD |= ((1 << ENCODER_PIN_XA) | (1 << ENCODER_PIN_XB));
-
-  /** enable interrupt on PCINT2 GROUP for when either of A or B changes */
-  PCICR |= (1 << PCIE2);    
-
-  /** Set interupt on A and B pins */
-  PCMSK2 |= (1 << ENCODER_PIN_XA) | (1 << ENCODER_PIN_XB);
-
-  
-  /** enable interrupts */
-  //EIMSK |= (1 << INT0) | (1 << INT1);
-
-  readEncoderX();
-}
+/****************************************************************************************************************************
+ *  
+ * X Axis
+ * 
+ ***************************************************************************************************************************/
 
 /**
  * Encoder X interrupt function.
@@ -88,8 +68,63 @@ static inline void readEncoderX(void) {
  * Encoder interrupts for X axis. 
  * @note that PCINT2_vect activates when pin A or B activates.
  */
-
-
 ISR(PCINT2_vect) {
+  readEncoderX();
+}
+
+
+void initEncoder() {
+
+  /**
+   * set the accuracy for the encoders
+   * @todo calibrate (side to side?)
+   */
+  setAccuracy();
+
+  #ifdef ARDUINO_UNO
+  /** other system than on mega. this uses PCINT and mega uses INTX (both are available on both) */
+  /** X AXIS */
+  //ENCODER_DDR_X |= (1 << PB5);
+  /** Encoder interrupt setup */
+  /** Set pins for encoder to input */
+  ENCODER_DDR_X &= ~((1 << ENCODER_PIN_XA) | (1 << ENCODER_PIN_XB)); 
+  
+  /** Set pullup resistors */
+  ENCODER_PORT_X |= ((1 << ENCODER_PIN_XA) | (1 << ENCODER_PIN_XB));
+
+  /** enable interrupt on PCINT2 GROUP for when either of A or B changes */
+  PCICR |= (1 << PCIE2);
+
+  /** Set interupt on A and B pins */
+  PCMSK2 |= (1 << ENCODER_PIN_XA) | (1 << ENCODER_PIN_XB);
+  #endif
+
+  #ifdef ARDUINO_MEGA
+
+  /** Set inputs */
+  ENCODER_DDR_XY &= ~((1 << ENCODER_PIN_XA) | (1 << ENCODER_PIN_XB) | (1 << ENCODER_PIN_YA) | (1 << ENCODER_PIN_YB));
+  ENCODER_DDR_Z &= ~((1 << ENCODER_PIN_ZA) | (1 << ENCODER_PIN_ZB));
+  
+  /** set pullup resistors */
+  ENCODER_PORT_XY |= (1 << ENCODER_PIN_XA) | (1 << ENCODER_PIN_XB) | (1 << ENCODER_PIN_YA) | (1 << ENCODER_PIN_YB);
+  ENCODER_PORT_Z |= (1 << ENCODER_PIN_ZA) | (1 << ENCODER_PIN_ZB);
+
+  /** Setup rising and falling edge (any change) for PD0, PD1, PD2, PD3 (Pin 21 - 18) */
+  EICRA |= (1 << ISC00) | (1 << ISC10) | (1 << ISC20) << (1 << ISC30);
+  EICRA &= ~((1 << ISC01) | (1 << ISC11) | (1 << ISC21) | (1 << ISC31));
+
+  /** Setup rising and falling edge (any change) for D2, D3 (Pin 2 - 3) */
+  EICRB |= (1 << ISC40) | (1 << ISC50);
+  EICRB &= ~((1 << ISC41) | (1 << ISC51));
+
+  EIMSK |= (1 << INT0) | (1 << INT1) | (1 << INT2) | (1 << INT3) | (1 << INT4) | (1 << INT5);
+
+
+  EICRA = (1 << PCIE0);
+
+
+
+  #endif
+  
   readEncoderX();
 }

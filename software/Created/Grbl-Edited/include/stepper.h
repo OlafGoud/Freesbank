@@ -20,4 +20,8 @@ void initSteppers();
 void loadNewSegment();
 float getYForLine(float x, float x1, float x2, float y1, float y2);
 float getYForCircle(float x, float y);
-void peras(int i, unsigned long currentcycle, unsigned long maxCycle, float currPos);
+void stepAxisFromPos(int i, unsigned long currentcycle, unsigned long maxCycle, float currPos, uint8 port, uint8 pin);
+
+uint8 setHardwareCompareTimer(float targetms);
+void setSegmentDone();
+uint8 checkIfAxisNotDone(uint8 axisNumber, float currentPos);

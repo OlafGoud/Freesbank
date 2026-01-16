@@ -19,30 +19,28 @@ int main() {
   cli();
   uartInit(BAUD);
   initSteppers();
-  initEncoder();
+  //initEncoder();
   sei();
   println("Ready!");
   while (uartRead() != EMPTY_CHAR) {
     println("clearing");
   } 
-  println("hoi");
   while (!(systemState == INTERNAL_ERROR_RESTART_REQUIRED)) {
     /** 
      * Error handling
      * @details systemState -> system erros
      * @details stepper state -> stepper errors
      */
-    //print("HOI");
     if(systemState == ERROR) {
       /** @todo error handling */
-      println("e");
+      println("err");
 
       continue;
     }
 
     if(stepperState == STEPPER_ERROR) {
       /** @todo stepper error handling */
-      println("e");
+      println("err");
 
       continue;
     }

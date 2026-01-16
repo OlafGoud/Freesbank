@@ -32,8 +32,6 @@
 
 #define BAUD 9600 /** @note Only 9600 suported */
 #define MAX_LINE_SIZE 60 /** Line size for serial input */
-#define MAX_PLANNER_BUFFER_SIZE 10 /** Planner buffer size.  */
-#define PLANNER_MAX_ITERATIONS 10 /** Amount of iterations the planner can execute */
 
 #define OK_MESSAGE "OK." /** message if message is ok */
 
@@ -60,9 +58,14 @@
 #ifdef ARDUINO_UNO
 #define ENCODER_PIN_XA PD2 /** Interrupt pin for encoder A line */
 #define ENCODER_PIN_XB PD3 /** Interrupt pin for encoder B line */
-#define ENCODER_PORT_XY DDRD
-#define STEPPER_STEP_PORT DDRD
-#define STEPPER_DIR_PORT DDRB
+#define ENCODER_PORT_X PORTD
+#define ENCODER_DDR_X DDRD
+#define STEPPER_STEP_DDR DDRD
+#define STEPPER_DIR_DDR DDRD
+#define STEPPER_DIR_PORT PORTD
+#define STEPPER_STEP_PORT PORTD
+#define Y_STEP_PIN PD4
+#define Y_DIR_PIN PD7
 #define X_STEP_PIN PD5 /** Pin definition */
 #define X_DIR_PIN PD6 /** Pin definition */
 
@@ -72,13 +75,15 @@
 #ifdef ARDUINO_MEGA
 
 #define ENCODER_PIN_XA PD0 /** Interrupt pin for encoder A line */
-#define ENCODER_PIN_XB PD0 /** Interrupt pin for encoder B line */
+#define ENCODER_PIN_XB PD1 /** Interrupt pin for encoder B line */
 #define ENCODER_PIN_YA PD2
 #define ENCODER_PIN_YB PD3
 #define ENCODER_PIN_ZA PE4
 #define ENCODER_PIN_ZB PE5
-#define ENCODER_PORT_XY DDRD
-#define ENCODER_PORT_Z DDRE
+#define ENCODER_DDR_XY DDRD
+#define ENCODER_PORT_XY PORTD
+#define ENCODER_DDR_Z DDRE
+#define ENCODER_PORT_Z PORTE
 
 
 #define STEPPER_X_STEP_PIN PA1
@@ -87,9 +92,10 @@
 #define STEPPER_X_DIR_PIN PA0
 #define STEPPER_Y_DIR_PIN PA2
 #define STEPPER_Z_DIR_PIN PA4
-#define STEPPER_PORT DDRA
+#define STEPPER_PORT PORTA
+#define STEPPER_DDR DDRA
 #endif
-#define ENCODERPORT DDRD
+//#define ENCODERPORT DDRD
 
 /** Steppers */
 #define STEPPER_ACCURACY 0.015f
@@ -98,3 +104,4 @@
 #define RESET_STEPBITS_US 800
 
 
+// hij pakt niet goed de oude

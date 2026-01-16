@@ -3,50 +3,56 @@
 uint8 stepperState;
 
 volatile static StepperData stepperData; 
-float cururpos = 0;
-float cururpos1 = 0;
+volatile float currStepsPos[3];
 
-void peras(int i, unsigned long currentcycle, unsigned long maxCycle, float currPos) {
-  //print("b:");
-  /*println(stepperData.currentBlock->beginPos);
-  print("e:");
-  println(stepperData.currentBlock->endPos);
-  print("c:");
-  println(currentcycle);*/
-
-  float val = getYForLine(currentcycle, 0, maxCycle, stepperData.currentBlock->beginPos[i], stepperData.currentBlock->endPos[i]);  
-  //print("cu:\0");
-  //println(val, 4);
-  if(stepperData.formulaValues[i] < 0) {
-    if(currPos > val) {
-      STEPPER_STEP_PORT |= (1 << X_STEP_PIN);
-      print("F2:\0"); println(currPos, 2);
-      /*if(i == 0) {
-        cururpos -= 0.18;
-        print("F1:\0"); println(cururpos, 2);
-      } else if (i == 1) {
-        cururpos1 -= 0.18;
-        print("F2:\0"); println(cururpos1, 2);
-      }*/
+void stepAxisFromStepVar(uint8 axisNumber, uint32 currentCycle, uint32 endCycle, volatile uint8* port, uint8 pin) {
+  float val = getYForLine(currentCycle, 0, endCycle, stepperData.currentBlock->beginPos[axisNumber], stepperData.currentBlock->endPos[axisNumber]); 
+  if(stepperData.formulaValues[axisNumber] < 0) {
+    if(currStepsPos[axisNumber] < val) {
+      return;
     }
+    currStepsPos[axisNumber] -= STEPPER_ACCURACY;
   } else {
-    if(currPos < val) {
-      STEPPER_STEP_PORT |= (1 << X_STEP_PIN);
-      print("F2:\0"); println(currPos, 2);
-
-      /*if(i == 0) {
-        cururpos += 0.18;
-        print("F1:\0"); println(cururpos, 2);
-      } else if (i == 1) {
-        cururpos1 += 0.18;
-        print("F2:\0"); println(cururpos1, 2);
-      }*/
+    if(currStepsPos[axisNumber] > val) {
+      return;
     }
-    /** forward */
+    currStepsPos[axisNumber] += STEPPER_ACCURACY;
   }
-
+  print("CU:"); println(currStepsPos[axisNumber], 2);
+  *(port) |= (1 << pin);
 
 }
+
+/** 
+ * Does all the calculations for 1 axis and steps accordingly.
+ * 
+ * This function gets a value from a linear line that plots from t=0 to t=end. the beginpos is the position at t=0 and increases linear to the endpos at t=end. 
+ * By passing in the currentcycle you know the value that the currentposition needs to have. if it is lower than the desiredvalue the machine steps. else nothing happends.
+ * 
+ * @param axisNumber The number for the axis in vectors as a uint8(max 255).
+ * @param currentCycle The current cycle of the segment.
+ * @param endCycle The last cycle for the formula. 
+ * @param currPos The current position to compare to.
+ * @param port The IO port that the steppin is on.
+ * @param pin The step pin for the axis.
+ */
+void stepAxisFromPos(uint8 axisNumber, uint32 currentCycle, uint32 endCycle, float currPos, uint8 port, uint8 pin) {
+
+  float val = getYForLine(currentCycle, 0, endCycle, stepperData.currentBlock->beginPos[axisNumber], stepperData.currentBlock->endPos[axisNumber]);  
+  
+  if(stepperData.formulaValues[axisNumber] < 0) {
+    if(currPos < val) {
+      return;
+    }
+  } else {
+    if(currPos > val) {
+      return;
+    }
+  }
+  port |= (1 << pin);
+}
+
+
 
 
 /** not used for now */
@@ -63,12 +69,31 @@ float getYForCircle(float x, float y) {
   return y2;
 }
 
+
+
+
+/** 
+ * Function that gets the values from a linear formula by passing in the begin and end values of the formula and the current x value.
+ * @example when you have P1(3; 0) and P2(40; 100) and want the y value for x=5: x=5, x1=0, x2=100, y1=3, y2=40.
+ * @param x current x value to get the y value from.
+ * @param x1 begin x value; begin of horizontal axis of formula
+ * @param x2 end x value; end of horizontal axis of formula
+ * @param y1 begin y value; end of vertical axis of formula
+ * @param y2 end y value; end of vertical axis of formula
+ * @returns the y value from the x value;
+ */
 float getYForLine(float x, float x1, float x2, float y1, float y2) {
   return (((y2 - y1)/(x2 - x1)) * (x - x1)) + y1;
 }
 
+
+
 /** 
  * Set timer1, 16bit, prescalers(1,8,64,256,1024)
+ * give a target delay between interrupts in ms. the reset isr will always be 800us later, it will check if that is possible with the target ms.
+ * @param targetms the target time between interrupts in miliseconds.
+ * @returns 0 = all good, 1 = the delay is to high, 2 = reset isr delay is to low.
+ * @note Only works on timer1 because of it being 16 bit and the other 8 bit.
  */
 uint8 setHardwareCompareTimer(float targetms) {
 
@@ -126,21 +151,30 @@ uint8 setHardwareCompareTimer(float targetms) {
   TCCR1B |= (1 << WGM12);   /** Enable CTC Mode */
   TCCR1B |= prescalerBits; /** Start counter */
 
-  //TIMSK1 |= (1 << OCIE1A); /** Turn compare 1a on */
-
-
   sei();
 
   return 0;
 }
 
 
+
+
+/**
+ * Function to init the stepper motors.
+ * Set the output for stepper pins defined in macros.h
+ * Set ISR with ISR time out macros.h
+ * resets stepperState to empty.
+ * @note if there is not configuration for the stepper interval and the 800 us reset isr for it will set the systemstate to INTERNAL_ERROR_RESTART_REQUIRED.
+ */
 void initSteppers() {
 
   /** set outputs for pins */
-  STEPPER_DIR_PORT |= (1 << X_DIR_PIN);
-  STEPPER_STEP_PORT |= (1 << X_STEP_PIN);
+  STEPPER_DIR_DDR |= (1 << X_DIR_PIN) | (1 << Y_DIR_PIN);
+  STEPPER_STEP_DDR |= (1 << X_STEP_PIN) | (1 << Y_STEP_PIN);
 
+ // DDRD |= (1 << PD5) | (1 << PD6);
+  //PORTD &= ~(1 << PD5);
+  STEPPER_STEP_PORT &= ~(1 << X_STEP_PIN);
   /** setup stepperISR */
   uint8 hardwareCompareStatusCode = setHardwareCompareTimer(STEPPER_ISR_MS);
   if(!(hardwareCompareStatusCode == 0)) {
@@ -151,13 +185,25 @@ void initSteppers() {
     } else {
       println("ERR: UnexpectedStatusCodeCompareTimer");
     }
-    systemState = ERROR;
+    systemState = INTERNAL_ERROR_RESTART_REQUIRED;
   }
-  print("StepperIRSMS: "); println(STEPPER_ISR_MS, 1);
+  //print("StepperISRMS: "); println(STEPPER_ISR_MS, 1); // debug line
   stepperState = STEPPER_EMPTY;
 }
 
 
+
+/**
+ * Loads a new segment in the stepper buffer. if there isn't a new block it will return and change the systemstate to IDLE.
+ * It will exectue all things for each command.
+ * 
+ * Suported commands:
+ *  1, 2
+ *  
+ * 
+ * 
+ * @todo controlling frees, feedrate.
+ */
 void loadNewSegment() {
   uint8 tail = (codeBlockBuffer.tail + 1) % CODEBLOCKBUFFERSIZE; /** Old block can be deleted. increment tail */
   if(tail == codeBlockBuffer.head) {
@@ -173,24 +219,30 @@ void loadNewSegment() {
     stepperData.formulaValues[X_AXIS] = block->endPos[X_AXIS] - block->beginPos[X_AXIS];
     stepperData.formulaValues[Y_AXIS] = block->endPos[Y_AXIS] - block->beginPos[Y_AXIS];
     stepperData.formulaValues[Z_AXIS] = block->endPos[Z_AXIS] - block->beginPos[Z_AXIS];
-    //print(stepperData.formulaValues[X_AXIS], 2);
-    if (stepperData.formulaValues[X_AXIS] < 0) {
-      STEPPER_DIR_PORT &= ~(1 << X_DIR_PIN);
-    }
 
+    if (stepperData.formulaValues[X_AXIS] < 0) {
+      print("negx");
+      PORTD &= ~(1 << X_DIR_PIN);
+    } else {
+      STEPPER_DIR_PORT |= (1 << X_DIR_PIN);
+    }
+    if(stepperData.formulaValues[Y_AXIS] < 0) {
+      print("negy");
+      STEPPER_DIR_PORT &= ~(1 << Y_DIR_PIN);
+    } else {
+      STEPPER_DIR_PORT |= (1 << Y_DIR_PIN);
+    }
 
 
     float maxValue = abs(stepperData.formulaValues[X_AXIS]) > abs(stepperData.formulaValues[Y_AXIS]) ? abs(stepperData.formulaValues[X_AXIS]) : abs(stepperData.formulaValues[Y_AXIS]);
     maxValue = maxValue > abs(stepperData.formulaValues[Z_AXIS]) ? maxValue : abs(stepperData.formulaValues[Z_AXIS]);
 
     stepperData.modifier = (int)(maxValue / STEPPER_ACCURACY);
-    println((int)stepperData.modifier);
-
-  } else if (block->command == 2 || block->command == 3) {
+  }/* else if (block->command == 2 || block->command == 3) {
     stepperData.formulaValues[X_AXIS] = block->I;
     stepperData.formulaValues[Y_AXIS] = block->J;
     stepperData.formulaValues[Z_AXIS] = block->R;
-  } else if (block->command >= 17 || block->command <= 19) {
+  } */else if (block->command >= 17 || block->command <= 19) {
     stepperData.selectedPlane = block->subCommand;
   } else {
     return;
@@ -204,13 +256,44 @@ void loadNewSegment() {
   stepperState = STEPPER_FULL; /** change state to indicate that there is a loaded stepper buffer */ 
   systemState = RUNNING; /** set the systemstate to running */
   TIMSK1 |= (1 << OCIE1A); /** activate the interrupts */
- 
 }
 
+
+
+/** 
+ * runs when a segment is done.
+ * sets the stepperstete to empty,
+ * turn off the interrupt for the steppers.
+ */
 void setSegmentDone() {
-
+  stepperState = STEPPER_EMPTY; /** set the stepperstate to empty to get a new block */
+  TIMSK1 &= ~(1 << OCIE1A); /** turn the stepper interrupt */
+  /** Check if he is at the right place */
+  println("DONE"); // debug print line
 }
 
+
+
+/** 
+ * Checks if a axis has reached it end point.
+ * @param axisNumber The number for the axis in vectors as a uint8(max 255).
+ * @param currentPos The currentposition of the axis to compare to the end point.
+ * @returns 0 if done and 1 if not done. 
+ */
+uint8 checkIfAxisNotDone(uint8 axisNumber, float currentPos) {
+  if(stepperData.formulaValues[axisNumber] < 0) {
+    return currentPos > stepperData.currentBlock->endPos[axisNumber] ? 1 : 0;
+  }
+  return currentPos < stepperData.currentBlock->endPos[axisNumber] ? 1 : 0;
+}
+
+
+
+/** 
+ * Main ISR, runs at intervalls defined in STEPPER_ISR_MS in macros.h. 
+ * blocks a new interrupt if it fires before the previous interrupt is handled.
+ * This ISR does all the movements for the steppers and activate the reset ISR.
+ */
 ISR(TIMER1_COMPA_vect) {
   /** variable to prevent rentering the loop until it is finished */
   static bool isBusy = false;
@@ -218,22 +301,43 @@ ISR(TIMER1_COMPA_vect) {
   if(isBusy) return; /** return if previous cycle is not done */
 
   isBusy = true; /** set busy */
-  float currentPosition[3]{};
-  getCurrentMMFromEncoders(currentPosition);
+  float currentPosition[ENCODERS_AXIS]{};
+  getCurrentMMFromEncoders(currentPosition); /** get current encoder values */
 
+  /** check if the timer has reached and check if the axis are at the right place. */ /** @note maybe add a -4 of time and slowly move to the target while counting down and checking? */
   if(stepperData.timerValue >= stepperData.modifier) {
-    if(!(currentPosition[0] < stepperData.currentBlock->endPos[0])) {
-      //println("empty");
-      stepperState = STEPPER_EMPTY; /** set the stepperstate to empty to get a new block */
-      TIMSK1 &= ~(1 << OCIE1A); /** turn the stepper interrupt */
-      /** Check if he is at the right place */
-      println("DONE");
-    }
+    uint8 donecheck = 0;
+
+    /****************************************************************************************************************************
+     * @note add here axis that are used by the stepper motor.
+     ***************************************************************************************************************************/
     
+    //donecheck += checkIfAxisNotDone(0, currentPosition[0]);
+
+    /****************************************************************************************************************************
+     * END for adding more steppers.
+     ***************************************************************************************************************************/
+    
+     if(donecheck == 0) {
+      setSegmentDone();
+      isBusy = false;
+      return;
+    }
   }
 
-  peras(0, stepperData.timerValue, stepperData.modifier, currentPosition[0]);
-  //peras(1, stepperData.timerValue, stepperData.modifier, cururpos1 /*currentPosition[0]*/);
+
+  /****************************************************************************************************************************** 
+   * @note add here axis to be used by the stepper motor. 
+   * @note that they need to be added by the checker if they are done 
+   *****************************************************************************************************************************/
+
+  stepAxisFromStepVar(0, stepperData.timerValue, stepperData.modifier, &STEPPER_STEP_PORT, X_STEP_PIN);
+  stepAxisFromStepVar(1, stepperData.timerValue, stepperData.modifier, &STEPPER_STEP_PORT, Y_STEP_PIN);
+  //stepAxisFromPos(0, stepperData.timerValue, stepperData.modifier, currentPosition[0], STEPPER_STEP_PORT, X_STEP_PIN);
+
+  /******************************************************************************************************************************
+   * END for adding more steppers.
+   *****************************************************************************************************************************/
 
   stepperData.timerValue++;
 
@@ -246,12 +350,17 @@ ISR(TIMER1_COMPA_vect) {
 
 
 
+
+/**
+ * ISR to reset the stepperpins. Runs 800us after the main ISR.
+ */
 ISR(TIMER1_COMPB_vect) {
   /** Set stepper low */
 
-  PORTD &= ~(1 << X_STEP_PIN); /* set pin 5 low*/
+  STEPPER_STEP_PORT &= ~(1 << X_STEP_PIN); /* set pin 5 low*/
+  STEPPER_STEP_PORT &= ~(1 << Y_STEP_PIN);
 
-
+  
   TIMSK1 &= ~(1 << OCIE1B); // disable until activated by stepperISR
 }
 

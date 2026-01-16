@@ -24,27 +24,6 @@ struct GCodeSettings {
   uint8_t selectedPlane = AXIS_PLANE_XY;     /** 0 = xy, 1 = xz, 2 = yz */
 };
 
-struct StepperBlock {
-  float exitPos[3] {};
-  float exitSpeed {};
-  float feedrate {}; // maxspeed
-};
-
-struct PlannerBlock {
-  float distance {};
-  float feedrate {};
-  float entryPoint[3] {};
-  float exitPoint[3] {};
-  float entrySpeed {}; 
-  float exitSpeed {};
-  float unitVector[3] {};
-};
-
-struct PlannerBuffer {
-  PlannerBlock block[MAX_PLANNER_BUFFER_SIZE];
-  uint8_t tail;
-  uint8_t head;
-};
 
 void readSerialLine();
 
