@@ -14,7 +14,7 @@ void getCurrentMMFromEncoders(float* encoderValues) {
 void setAccuracy() {
   accuracy[0] = 0.016f;
   accuracy[1] = 0.016f;
-  accuracy[2] = 0.016f;
+  accuracy[2] = 0.0016f;
 }
 
 /****************************************************************************************************************************

@@ -107,8 +107,8 @@
 /** Steppers */
 #define STEPPER_ACCURACY 0.015f
 
-#define STEPPER_ISR_MS 2.0f
-#define RESET_STEPBITS_US 1000
+#define STEPPER_ISR_MS 15.0f
+#define RESET_STEPBITS_US 800
 
 #define X_AXIS 0
 #define Y_AXIS 1

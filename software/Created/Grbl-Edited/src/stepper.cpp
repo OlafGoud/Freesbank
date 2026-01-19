@@ -7,18 +7,22 @@ volatile float currStepsPos[3];
 
 void stepAxisFromStepVar(uint8 axisNumber, uint32 currentCycle, uint32 endCycle, volatile uint8* port, uint8 pin) {
   float val = getYForLine(currentCycle, 0, endCycle, stepperData.currentBlock->beginPos[axisNumber], stepperData.currentBlock->endPos[axisNumber]); 
-  if(stepperData.formulaValues[axisNumber] < 0) {
-    if(currStepsPos[axisNumber] <= val) {
+
+  if(stepperData.formulaValues[axisNumber] <= 0) {
+    if(stepperData.formulaValues[axisNumber] == 0) {
+      return;
+    }
+    if(currStepsPos[axisNumber] < val) {
       return;
     }
     currStepsPos[axisNumber] -= STEPPER_ACCURACY;
   } else {
-    if(currStepsPos[axisNumber] >= val) {
+    if(currStepsPos[axisNumber] > val) {
       return;
     }
     currStepsPos[axisNumber] += STEPPER_ACCURACY;
   }
-  //print("CU:"); println(currStepsPos[axisNumber], 2);
+  print("CU:"); println(val, 2); println(currStepsPos[axisNumber], 2);
   *(port) |= (1 << pin);
 
 }
@@ -39,12 +43,17 @@ void stepAxisFromStepVar(uint8 axisNumber, uint32 currentCycle, uint32 endCycle,
 void stepAxisFromPos(uint8 axisNumber, uint32 currentCycle, uint32 endCycle, float currPos, volatile uint8* port, uint8 pin) {
 
   float val = getYForLine(currentCycle, 0, endCycle, stepperData.currentBlock->beginPos[axisNumber], stepperData.currentBlock->endPos[axisNumber]);  
-  if(stepperData.formulaValues[axisNumber] < 0) {
-    if(currPos <= val) {
+  if(stepperData.formulaValues[axisNumber] <= 0) {
+    if(stepperData.formulaValues[axisNumber] == 0) {
+      return;
+    }
+    if(currPos < val) {
+      println("w");
       return;
     }
   } else {
-    if(currPos >= val) {
+    if(currPos > val) {
+      println("w");
       return;
     }
   }
@@ -289,6 +298,9 @@ void setSegmentDone() {
  * @returns 0 if done and 1 if not done. 
  */
 uint8 checkIfAxisNotDone(uint8 axisNumber, float currentPos) {
+  if(stepperData.formulaValues[axisNumber] == 0) {
+    return 0;
+  }
   if(stepperData.formulaValues[axisNumber] < 0) {
     return currentPos > stepperData.currentBlock->endPos[axisNumber] ? 1 : 0;
   }
@@ -348,12 +360,11 @@ ISR(TIMER1_COMPA_vect) {
    * END for adding more steppers.
    *****************************************************************************************************************************/
 
-  stepperData.timerValue++;
+  stepperData.timerValue >= stepperData.modifier ? stepperData.timerValue = stepperData.modifier : stepperData.timerValue++;
 
   /** set reset isr */
   TCNT1 = 0;                /** Set timer to 0 */
   TIMSK1 |= (1 << OCIE1B);  /** enable Reset ISR */
-  
   isBusy = false;
 }
 
