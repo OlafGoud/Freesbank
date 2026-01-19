@@ -36,11 +36,6 @@ Baud is de snelheid waarmee de seriele verbinding praat. (Alleen 9600 suported)
 **MAX_LINE_SIZE** 
 Maxlinesize is de lengte van een lijn zonder spaties en commentaar (aangegeven met `()` en `;`) die kan worden uitgelezen via de seriele monitor. Als deze langer is word er een error gegeven.
 
-**CORNER_DIVIDATION**  
-Deze parameter geeft aan hoe ver het pad van de ideale scherpe hoek af mag wijken.  
-- Kleiner -> scherpere hoeken, lagere snelheid, nauwkeuriger.
-- Groter -> meer ronde hoeken, hogere snelheiden, minder nauwkeurig.
-
 #### Pins
 
 **X_STEP_PIN**
@@ -98,6 +93,16 @@ Omdat de arduino zijn grote van een integer kleiner is dan die van andere comput
 - M1 -> stop instantly (not implmenented)
 
 
+
+G90 absolute pos
+G91 relative pos
+G92 set current 0
+F = feedrate
+S = spindle speed, tempratuur extruder
+M3 - 5 spindle (clocks, counter, off)
+M0 pause program 
+M2 end
+M30 end en reset
 
 
 

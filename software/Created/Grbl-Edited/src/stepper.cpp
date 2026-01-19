@@ -8,17 +8,17 @@ volatile float currStepsPos[3];
 void stepAxisFromStepVar(uint8 axisNumber, uint32 currentCycle, uint32 endCycle, volatile uint8* port, uint8 pin) {
   float val = getYForLine(currentCycle, 0, endCycle, stepperData.currentBlock->beginPos[axisNumber], stepperData.currentBlock->endPos[axisNumber]); 
   if(stepperData.formulaValues[axisNumber] < 0) {
-    if(currStepsPos[axisNumber] < val) {
+    if(currStepsPos[axisNumber] <= val) {
       return;
     }
     currStepsPos[axisNumber] -= STEPPER_ACCURACY;
   } else {
-    if(currStepsPos[axisNumber] > val) {
+    if(currStepsPos[axisNumber] >= val) {
       return;
     }
     currStepsPos[axisNumber] += STEPPER_ACCURACY;
   }
-  print("CU:"); println(currStepsPos[axisNumber], 2);
+  //print("CU:"); println(currStepsPos[axisNumber], 2);
   *(port) |= (1 << pin);
 
 }
@@ -36,20 +36,19 @@ void stepAxisFromStepVar(uint8 axisNumber, uint32 currentCycle, uint32 endCycle,
  * @param port The IO port that the steppin is on.
  * @param pin The step pin for the axis.
  */
-void stepAxisFromPos(uint8 axisNumber, uint32 currentCycle, uint32 endCycle, float currPos, uint8 port, uint8 pin) {
+void stepAxisFromPos(uint8 axisNumber, uint32 currentCycle, uint32 endCycle, float currPos, volatile uint8* port, uint8 pin) {
 
   float val = getYForLine(currentCycle, 0, endCycle, stepperData.currentBlock->beginPos[axisNumber], stepperData.currentBlock->endPos[axisNumber]);  
-  
   if(stepperData.formulaValues[axisNumber] < 0) {
-    if(currPos < val) {
+    if(currPos <= val) {
       return;
     }
   } else {
-    if(currPos > val) {
+    if(currPos >= val) {
       return;
     }
   }
-  port |= (1 << pin);
+  *(port) |= (1 << pin);
 }
 
 
@@ -169,12 +168,15 @@ uint8 setHardwareCompareTimer(float targetms) {
 void initSteppers() {
 
   /** set outputs for pins */
-  STEPPER_DIR_DDR |= (1 << X_DIR_PIN) | (1 << Y_DIR_PIN);
-  STEPPER_STEP_DDR |= (1 << X_STEP_PIN) | (1 << Y_STEP_PIN);
+  STEPPER_DIR_DDR |= (1 << X_DIR_PIN) | (1 << Y_DIR_PIN) | (1 << Z_DIR_PIN);
+  STEPPER_STEP_DDR |= (1 << X_STEP_PIN) | (1 << Y_STEP_PIN) | (1 << Z_STEP_PIN);
 
  // DDRD |= (1 << PD5) | (1 << PD6);
   //PORTD &= ~(1 << PD5);
   STEPPER_STEP_PORT &= ~(1 << X_STEP_PIN);
+  STEPPER_STEP_PORT &= ~(1 << Y_STEP_PIN);
+  STEPPER_STEP_PORT &= ~(1 << Z_STEP_PIN);
+
   /** setup stepperISR */
   uint8 hardwareCompareStatusCode = setHardwareCompareTimer(STEPPER_ISR_MS);
   if(!(hardwareCompareStatusCode == 0)) {
@@ -222,7 +224,7 @@ void loadNewSegment() {
 
     if (stepperData.formulaValues[X_AXIS] < 0) {
       print("negx");
-      PORTD &= ~(1 << X_DIR_PIN);
+      STEPPER_DIR_PORT &= ~(1 << X_DIR_PIN);
     } else {
       STEPPER_DIR_PORT |= (1 << X_DIR_PIN);
     }
@@ -231,6 +233,12 @@ void loadNewSegment() {
       STEPPER_DIR_PORT &= ~(1 << Y_DIR_PIN);
     } else {
       STEPPER_DIR_PORT |= (1 << Y_DIR_PIN);
+    }
+    if(stepperData.formulaValues[Z_AXIS] > 0) {
+      print("negy");
+      STEPPER_DIR_PORT &= ~(1 << Z_DIR_PIN);
+    } else {
+      STEPPER_DIR_PORT |= (1 << Z_DIR_PIN);
     }
 
 
@@ -312,13 +320,14 @@ ISR(TIMER1_COMPA_vect) {
      * @note add here axis that are used by the stepper motor.
      ***************************************************************************************************************************/
     
-    //donecheck += checkIfAxisNotDone(0, currentPosition[0]);
+    donecheck += checkIfAxisNotDone(Z_AXIS, currentPosition[Z_AXIS]);
 
     /****************************************************************************************************************************
      * END for adding more steppers.
      ***************************************************************************************************************************/
     
      if(donecheck == 0) {
+      println(currentPosition);
       setSegmentDone();
       isBusy = false;
       return;
@@ -331,9 +340,9 @@ ISR(TIMER1_COMPA_vect) {
    * @note that they need to be added by the checker if they are done 
    *****************************************************************************************************************************/
 
-  stepAxisFromStepVar(0, stepperData.timerValue, stepperData.modifier, &STEPPER_STEP_PORT, X_STEP_PIN);
-  stepAxisFromStepVar(1, stepperData.timerValue, stepperData.modifier, &STEPPER_STEP_PORT, Y_STEP_PIN);
-  //stepAxisFromPos(0, stepperData.timerValue, stepperData.modifier, currentPosition[0], STEPPER_STEP_PORT, X_STEP_PIN);
+  stepAxisFromStepVar(X_AXIS, stepperData.timerValue, stepperData.modifier, &STEPPER_STEP_PORT, X_STEP_PIN);
+  stepAxisFromStepVar(Y_AXIS, stepperData.timerValue, stepperData.modifier, &STEPPER_STEP_PORT, Y_STEP_PIN);
+  stepAxisFromPos(Z_AXIS, stepperData.timerValue, stepperData.modifier, currentPosition[Z_AXIS], &STEPPER_STEP_PORT, Z_STEP_PIN);
 
   /******************************************************************************************************************************
    * END for adding more steppers.
@@ -359,6 +368,7 @@ ISR(TIMER1_COMPB_vect) {
 
   STEPPER_STEP_PORT &= ~(1 << X_STEP_PIN); /* set pin 5 low*/
   STEPPER_STEP_PORT &= ~(1 << Y_STEP_PIN);
+  STEPPER_STEP_PORT &= ~(1 << Z_STEP_PIN);
 
   
   TIMSK1 &= ~(1 << OCIE1B); // disable until activated by stepperISR

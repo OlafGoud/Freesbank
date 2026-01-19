@@ -60,14 +60,21 @@
 #define ENCODER_PIN_XB PD3 /** Interrupt pin for encoder B line */
 #define ENCODER_PORT_X PORTD
 #define ENCODER_DDR_X DDRD
-#define STEPPER_STEP_DDR DDRD
-#define STEPPER_DIR_DDR DDRD
-#define STEPPER_DIR_PORT PORTD
-#define STEPPER_STEP_PORT PORTD
-#define Y_STEP_PIN PD4
+#define STEPPER_STEP_DDR DDRB
+#define STEPPER_DIR_DDR DDRB
+#define STEPPER_DIR_PORT PORTB
+#define STEPPER_STEP_PORT PORTB
+/*#define Y_STEP_PIN PD4
 #define Y_DIR_PIN PD7
 #define X_STEP_PIN PD5 /** Pin definition */
-#define X_DIR_PIN PD6 /** Pin definition */
+//#define X_DIR_PIN PD6 /** Pin definition */
+
+#define X_STEP_PIN PB0
+#define X_DIR_PIN PB1
+#define Y_STEP_PIN PB2
+#define Y_DIR_PIN PB3
+#define Z_STEP_PIN PB4
+#define Z_DIR_PIN PB5
 
 #endif
 
@@ -100,8 +107,15 @@
 /** Steppers */
 #define STEPPER_ACCURACY 0.015f
 
-#define STEPPER_ISR_MS 10.0f
-#define RESET_STEPBITS_US 800
+#define STEPPER_ISR_MS 2.0f
+#define RESET_STEPBITS_US 1000
 
-
+#define X_AXIS 0
+#define Y_AXIS 1
+#define Z_AXIS 2
 // hij pakt niet goed de oude
+
+// 10x 6y
+// 10.1 32.2
+// 12.7 45.6
+// 2.6  13

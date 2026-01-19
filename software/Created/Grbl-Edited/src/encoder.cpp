@@ -13,8 +13,8 @@ void getCurrentMMFromEncoders(float* encoderValues) {
 
 void setAccuracy() {
   accuracy[0] = 0.016f;
-  accuracy[1] = 0.2f;
-  accuracy[2] = 0.2f;
+  accuracy[1] = 0.016f;
+  accuracy[2] = 0.016f;
 }
 
 /****************************************************************************************************************************
@@ -57,7 +57,7 @@ static inline void readEncoderX(void) {
    * if diff = 1 the first part is true and it adds 1. second part is false so does not do anything
    * if diff = 3 the second part is true and it adds -1. first part is false so does not do anything
    */
-  encoderSteps[0] += (diff == 1) - (diff == 3); 
+  encoderSteps[Z_AXIS] += (diff == 1) - (diff == 3); 
   
   /** Save current state */
   encoderStateX = curr;

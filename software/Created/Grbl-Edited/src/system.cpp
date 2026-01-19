@@ -145,10 +145,12 @@ bool readGCodeLine(char* line, uint8 size) {
     
     if (letter == 'M') {
       switch (intValue) {
-      case 1:
+      case 0: break;
+      case 1: 
         /** STOP NOW @todo */
+        systemState = ERROR;
         break;
-      
+
       default:
         break;
       }
