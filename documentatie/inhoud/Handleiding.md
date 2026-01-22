@@ -1,6 +1,60 @@
-# Handleiding
+# Handleiding Freesbank
+Deze handleiding is voor het gebruik en aansluiten van de freesbank bij Sens2sea.
 
 ## Aansluiten
+Het systeem bestaat uit de volgende hardware:
+- Stepper motoren (2 voor X, 1 voor Y, 1 voor Z).
+- Handfrees (werkt op netstroom).
+- Encoders.
+- Arduino mega microcrontroller.
+- Freesbank.
+- CNCshield.
+- 4x DRV8824 stepper motor drivers.
+
+**Let op:** Om deze freesbank aan te zetten is er ook een labvoeding nodig.  
+
+Sluit het systeem aan zoals aangegeven op het elektrische schema.
+Omdat er een CNCShield gebruikt wordt kan de hoge voltage naar de CNCShield en zijn er geen losse condensatoren nodig. Verder moet de handfrees op het netstroom en handmatig aangezet worden.
+
+
+## Software.
+De [software](/Freesbank/software/Created/Grbl-Edited/) kan worden geupload op de arduino mega. Hierna kunnen de commando's die ondersteund worden uitgevoerd worden. 
+
+### Ondersteunde commando's
+#### Systeem commandos
+> $?: Krijg de huidige informatie. (state, huidige locatie, eindpunt beweging, beginpunt beweging).
+
+#### G-Code
+**Snelle rechte beweging (G0)**
+Dit commando laat de machine snel naar de gekozen locatie gaan in een rechte lijn. Hierbij is de tool niet actief.
+> Parameters:  
+> X: X positie in mm  
+> Y: Y positie in mm  
+> Z: Z positie in mm  
+
+**Snelle rechte beweging (G1)**
+Dit commando laat de machine snel naar de gekozen locatie gaan in een rechte lijn. Hierbij is de tool wel actief.
+> Parameters:  
+> X: X positie in mm  
+> Y: Y positie in mm  
+> Z: Z positie in mm  
+> F: Feedrate in mm/min (niet geimplementeerd.)
+
+#### M-code
+**Stop stop direct (M1)**
+dit commando zet de state van de machine op error. Hierdoor gaat de machine niet verder. (restart nodig)
+
+## Dev guide.
+
+#### Hieronder zijn verschillende onderdelen die handig zijn voor developers van het systeem.
+- Global variables.
+- Datatypes.
+- Assen veranderen / toevoegen
+- Bitwise poorten aansturen.
+- Interrupt timers.
+
+### Globals.
+Er zijn verschillende macros en globals om de code leesbaarder te maken.
 
 
 ## Macros & constanten & globals
@@ -63,27 +117,11 @@ Omdat de arduino zijn grote van een integer kleiner is dan die van andere comput
 ## Supported commands
 
 ## $ Commands
-- $?, Haal de status op van de machine (Status|Positie|EindLocatie|Snelheid)
 - $X, Zet de X positie van de encoder naar 0.
 - $D, Debug
 
 ### G commands
 
-**Snel rechte beweging**  
-- G0, (x, y, z, f), Ga naar locatie, tool niet actief
-> Parameters:  
-> X: X positie in mm  
-> Y: Y positie in mm  
-> Z: Z positie in mm  
-> F: Snelheid in (mm/min)
-
-- G1, (x, y, z, f, e), Ga naar locatie, tool actief  
-> Parameters:  
-> X: X positie in mm  
-> Y: Y positie in mm  
-> Z: Z positie in mm  
-> F: Snelheid in (mm/min)
-> E: Kracht van tool (Snelheid van spindle, etc), 0 to 255
 
 **Arc movement**  
 - G2, (x, y, z, i, j, r), clockwise

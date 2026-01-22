@@ -56,8 +56,8 @@
 // #define ARDUINO_UNO
 #define ARDUINO_UNO
 #ifdef ARDUINO_UNO
-#define ENCODER_PIN_XA PD2 /** Interrupt pin for encoder A line */
-#define ENCODER_PIN_XB PD3 /** Interrupt pin for encoder B line */
+#define ENCODER_PIN_ZA PD2 /** Interrupt pin for encoder A line */
+#define ENCODER_PIN_ZB PD3 /** Interrupt pin for encoder B line */
 #define ENCODER_PORT_X PORTD
 #define ENCODER_DDR_X DDRD
 #define STEPPER_STEP_DDR DDRB

@@ -5,16 +5,30 @@
 static volatile int32 encoderSteps[ENCODERS_AXIS]{};
 static float accuracy[ENCODERS_AXIS]{};
 
+/**
+ * Calculates the current pos in mm and returns the current position in mm on all axis.
+ * @param encoderValues pointer to place to store the values.
+ */
 void getCurrentMMFromEncoders(float* encoderValues) {
   for(int i = 0; i < ENCODERS_AXIS; i++) {
     encoderValues[i] = encoderSteps[i] * accuracy[i];
   }
 }
 
+
+/**
+ * Returns the current encoder steps of an axis.
+ * @param axis Axis number to get steps from
+ * @returns The current steps of the encoder.
+ */
+int32 getCurrentStepsEncoder(uint8 axis) {
+  return encoderSteps[axis];
+}
+
 void setAccuracy() {
-  accuracy[0] = 0.016f;
-  accuracy[1] = 0.016f;
-  accuracy[2] = 0.0016f;
+  accuracy[X_AXIS] = 0.016f;
+  accuracy[Y_AXIS] = 0.016f;
+  accuracy[Z_AXIS] = 0.0016f;
 }
 
 /****************************************************************************************************************************
@@ -27,11 +41,11 @@ void setAccuracy() {
  * Encoder X interrupt function.
  * not in ISR because it needs to be called to initilize.
  */
-static inline void readEncoderX(void) {
-  static uint8 encoderStateX = 0;
+static inline void readEncoderZ(void) {
+  static uint8 encoderStateZ = 0;
 
   /** Get value of encoder pin b and masks everything but the lowest bit*/
-  uint8 b = (PIND >> ENCODER_PIN_XB) & 1;
+  uint8 b = (PIND >> ENCODER_PIN_ZB) & 1;
   //PORTB ^= (1 << PB5); 
   //println(encoderSteps[0]);
   /** 
@@ -41,7 +55,7 @@ static inline void readEncoderX(void) {
    * 1 & 1 = 2
    * 0 & 1 = 3
    */
-  uint8 curr = (((PIND >> ENCODER_PIN_XA) & 1) ^ b) | (b << 1); 
+  uint8 curr = (((PIND >> ENCODER_PIN_ZA) & 1) ^ b) | (b << 1); 
 
   /** 
    * Calculate movement direction using the the current - previous. (&3 is a bitwise modulo (%4) to avoid dividing)
@@ -51,7 +65,7 @@ static inline void readEncoderX(void) {
    * 2 = error (invalid or skiped step); (ignored)
    * 3 = step backwards;
    */
-  uint8 diff = (curr - encoderStateX) & 3;
+  uint8 diff = (curr - encoderStateZ) & 3;
 
   /** if forward add 1, if backward subtract 1. 
    * if diff = 1 the first part is true and it adds 1. second part is false so does not do anything
@@ -60,7 +74,7 @@ static inline void readEncoderX(void) {
   encoderSteps[Z_AXIS] += (diff == 1) - (diff == 3); 
   
   /** Save current state */
-  encoderStateX = curr;
+  encoderStateZ = curr;
 }
 
 
@@ -69,7 +83,7 @@ static inline void readEncoderX(void) {
  * @note that PCINT2_vect activates when pin A or B activates.
  */
 ISR(PCINT2_vect) {
-  readEncoderX();
+  readEncoderZ();
 }
 
 

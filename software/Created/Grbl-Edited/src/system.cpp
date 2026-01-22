@@ -1,10 +1,7 @@
 #include "system.h"
-#include "string.h"
+#include "string.h" /** for memcpy */
 
-GCodeSettings gCodeSettings;
-
-volatile int32 steps = 0;
-
+GCodeSettings gCodeSettings; /** weg? */
 
 /**
  * Function to get data from the RX buffer and make a line from it. And send the right commands to the right functions.
@@ -20,7 +17,6 @@ void readSerialLine() {
     unsigned char c = uartRead();
     
     if(c == EMPTY_CHAR) return; /** No data on RX Line */
-    //println("not empty");
     if(c == 32) continue;       /** filter spaces */
     if(lineComment == true) {
       if(c == ')') lineComment = false; /** comments off */
@@ -53,10 +49,6 @@ void readSerialLine() {
 
         /** @todo handle commands (I (info about system), G (print settings), $ (???)) */
         /** @fn funciton */
-      } else if (line[0] == '?') {
-        print(steps);
-      } else if (line[0] == ']') {
-        stepperState = STEPPER_EMPTY;
       } else if (line[0] == 'M' || line[0] == 'G') {
         if(readGCodeLine(line, size)) {
           println(OK_MESSAGE);
@@ -191,7 +183,6 @@ bool readGCodeLine(char* line, uint8 size) {
   if(codeBlock.command >= 0 && codeBlock.command <= 4) {
     memcpy(prevPos, codeBlock.endPos, sizeof(prevPos));
   }
-  print(codeBlock.endPos[0], 2);
   if(codeBlockBuffer.head == codeBlockBuffer.tail) {
     // full
     return false;
@@ -201,7 +192,6 @@ bool readGCodeLine(char* line, uint8 size) {
   memcpy(block, &codeBlock, sizeof(codeBlock));
   codeBlockBuffer.head = (codeBlockBuffer.head + 1) % CODEBLOCKBUFFERSIZE;
   codeBlockBuffer.size++;
-  print("done");
   /** @todo split movement in lines when curved, plan function */
   return true;
 }
@@ -291,50 +281,6 @@ bool readFloat(char *line, uint8 *char_counter, float *float_ptr) {
   *char_counter = ptr - line - 1; // Set char_counter to next statement
 
   return (true);
-}
-
-
-/**
- * Vector function for function: junctionSpeedFromDeviation. 
- * 
- * @param a const float a[3] -> vector of floats 
- * @param b const float b[3] -> vector of floats
- * @return angle between vectors
- */
-float vecDot3(const float a[3], const float b[3]) {
-  return a[0]*b[0] + a[1]*b[1] + a[2]*b[2];
-}
-
-
-/**
- * Vector function for function: planBufferLine. Gives the displacement.
- *  
- * @param r float r[3] -> refrence to return vector
- * @param a float a[3] -> vector of floats
- * @param b float b[3] -> vector of floats
- */
-void vecSub3(float r[3], const float a[3], const float b[3]) {
-  r[0] = a[0]-b[0]; r[1] = a[1]-b[1]; r[2] = a[2]-b[2];
-}
-
-/**
- * Vector function for function: vecNormalize3. It calculates the length of the vector
- * 
- * @param a const float a[3] -> vector of floats to get length of.
- * @return float - lenght of vector
- */
-float vecNorm3(const float a[3]) {
-  return sqrtf(a[0]*a[0] + a[1]*a[1] + a[2]*a[2]);
-}
-
-/**
- * Vector function for function: planBufferLine. It calculates the unit vector.
- * 
- * @param r float r[3] -> refrence to vector to change.
- */
-void vecNormalize3(float r[3]) {
-  float n = vecNorm3(r);
-  if (n > 0.0f) { r[0]/=n; r[1]/=n; r[2]/=n; }
 }
 
 char* getStatus(int s) {

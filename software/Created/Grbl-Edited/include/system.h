@@ -10,15 +10,6 @@
 extern uint8 systemState;
 extern uint8 stepperState;
 
-struct GCodeBlock {
-  float position[3] {};  /** xyz position, float, 12 bytes */
-  float feedrate {300};     /** feedrate, float, 4 bytes */
-  float extrude {};      /** E modifier, amount to extrude, speed of spindle, 0 = off, float, 4 bytes */
-  float radius {};       /** radius for circle, float, 4 bytes */
-  float offset[2] {};    /** offset xy , float[2], 8 bytes */
-};
-
-
 struct GCodeSettings {
   bool absolute = true;             /** true = absolute (G91), false = relative (G90) */
   uint8_t selectedPlane = AXIS_PLANE_XY;     /** 0 = xy, 1 = xz, 2 = yz */
@@ -30,12 +21,7 @@ void readSerialLine();
 bool readGCodeLine(char* line, uint8_t size);
 
 bool readFloat(char *line, uint8_t* i, float* f_ptr);
-float vecDot3(const float a[3], const float b[3]);
-void vecSub3(float r[3], const float a[3], const float b[3]);
-float vecNorm3(const float a[3]);
-void vecNormalize3(float r[3]);
 
-void setDirection();
 char* getStatus(int s);
 
 

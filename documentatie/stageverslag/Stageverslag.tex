@@ -51,7 +51,7 @@
 	\paragraph{Voorwoord}
 	Ik dank hierbij iedereen die heeft geholpen met de stage. Ik ben veel gegroeid in dit half jaar in hard en soft skills.
 
-
+	\todo{naam file aanpassen}
 	\section{Context}
 		\subsection{Het bedrijf}
 			De stage heeft plaatsgevonden bij het bedrijf Sens2Sea. Sens2Sea is een klein bedrijf dat gevestigd is op het RDM terrein. Het bedrijf heeft een kavel in het Innovation Dock. Sens2Sea ontwikkelt radar technologieën voor sectoren zoals de scheepsvaart en andere maritieme sectoren. Het bedrijf wordt geleid door Geert Mosterdijk. Het bedrijf heeft maar een paar medewerkers. Deze zijn gespecialiseerd in hun vakgebieden zoals: elektronica en software. Verder lopen er bij Sens2Sea een aantal studenten stage van verschillende opleidingen. Het bedrijf werkt voor projecten samen met andere bedrijven. Deze bedrijven zijn tevens de stakeholders voor de projecten. Voor dit bedrijf geldt het volgende:
@@ -92,7 +92,7 @@
 
 			\todo{frees valt buiten scope, microstepping buiten scope, verwijzing datasheet?}
 			\subsubsection{Huidige functies}
-				\paragraph{\textbf{Freesbank}}Het frame is gemaakt van hout. De werkruimte van het frame bedraagt 300cm in de lengte (X-as), 142,5cm in breedte (Z-as) en 8 cm in hoogte (Y-as). De werkelijke lengte van de freesbank is 251cm omdat de wagen op de rails aan beide kanten uitsteekt. Aan de zijkant is een verhoging dat 5cm breed is aan beide kanten. Hierop zijn geleiderails gemonteerd waarover de wagen beweegt. De effectieve werkbreedte is $142.5 - 8 - 7=127.5$cm omdat de frees niet helemaal tot de zijkant kan komen. Het hoogste punt van de wagen is 60cm boven het bed van de freesbank. Op deze wagen is een tweede railsysteem bevestigd voor de beweging in de breedte-as. Hierop bevind zich een tweede wagen voor de hoogte-as. De hoogte beweging wordt gerealiseerd door middel van een draaiende schroef, waardoor de snij kop gecontroleerd omhoog en omlaag kan bewegen. Aan deze wagen is een frees gemonteerd. De aandrijving van de lengte- en breedte-as gebeurt met tandriemen. Deze lopen over de volledige lengte van de assen en worden aangedreven door timing pulleys. Dit zijn tandwielen voor tandriemen. \\
+				\paragraph{\textbf{Freesbank}}Het frame is gemaakt van hout. De werkruimte van het frame bedraagt 300cm in de lengte (X-as), 142,5cm in breedte (Z-as) en 8 cm in hoogte (Y-as). De werkelijke lengte van de freesbank is 251cm omdat de wagen op de rails aan beide kanten uitsteekt. Aan de zijkant is een verhoging dat 5cm breed is aan beide kanten. Hierop zijn geleiderails gemonteerd waarover de wagen beweegt. De effectieve werkbreedte is $142.5 - 8 - 7=127.5$cm omdat de frees niet helemaal tot de zijkant kan komen. Het hoogste punt van de wagen is 60cm boven het bed van de freesbank. Op deze wagen is een tweede railsysteem bevestigd voor de beweging in de breedte-as. Hierop bevind zich een tweede wagen voor de hoogte-as. De hoogte beweging wordt gerealiseerd door middel van een draaiende schroef, waardoor de snij kop gecontroleerd omhoog en omlaag kan bewegen. Aan deze wagen is een frees gemonteerd. De aandrijving van de lengte- en breedte-as gebeurt met tandriemen. Deze lopen over de volledige lengte van de assen en worden aangedreven door timing pulleys. Dit zijn tandwielen voor tandriemen. In appendex \todo{nummer} is dit te zien\\
 				{\color{white}-}\\
 				Op de wagen van de hoogte-as is een handfrees gemonteerd. Deze frees werkt op netstroom. Als de frees snijt, komt er materiaal los. Dit hoopt op op de freesbank. De ophoping en frees aansturen met de microcontroller of een nieuwe frees zoeken is buiten de scope van het project.\\
 				{\color{white}-}\\
@@ -110,14 +110,17 @@
 			\subsubsection{Nieuwe functies}
 				\begin{figure}
 					\begin{center}
-					\includegraphics[width=10cm]{beginsysteem.png}
+					\includegraphics[width=10cm]{volledigsysteem.png}
 					\caption{Nieuw systeem diagram}
 					\end{center}
 				\end{figure}
 
 				\paragraph{Sensor}Uit een interview met de opdrachtgever is gebleken dat de opdrachtgever encoders wilt gebruiken en wilt bevestigen op een getande riem die op het frame is geplakt. Hierdoor kan de getande riem niet uitrekken. De nauwkeurigheid van de encoder is niet het belangrijkste omdat het project gaat over het scheiden van de aandrijving van de frees en positie bepaling van de snij kop. Verder doen de kosten er toe, maximaal 60 euro per encoder. Ook is er belang bij dat de huidige positie opvragen snel kan aangezien een freesbank een high performance machine is. Er zijn verschillende soorten encoders die verschillend werken. De nauwkeurigheid van een encoder wordt gemeten in Pulses Per Rotation(PPR). Dit geeft aan dat hoe hoger de PPR is de hoger de nauwkeurigheid omdat er meer pulsen gegeven worden in de zelfde rotatie. Na het onderzoek zijn de opties voorgelegd aan de opdrachtgever en is er gekozen om een optische incrementele encoder te gebruiken. Er zijn ook externe invloeden op de encoder zoals vuil dat in de encoder komt, dat de metingen kan verstoren.
 				
-				\paragraph{Regelaar}Als regelaar is een microcontroller nodig. De keuze van de encoder zorgt er voor dat de microcontroller 6 interrupt pinnen nodig heeft. Verder moet deze rond de specificaties zijn als een arduino uno. Dit is omdat opensource oplossingen zoals GRBL gebaseerd zijn op een arduino uno. Hierom is voorgesteld om een arduino mega te gebruiken. Deze mircrocontroller heeft voldoende rekenkracht voor dit soort applicaties. Hiernaast heeft deze microcontroller ook de benodigde 6 interrupt pinnen voor de drie verschillende assen. Daarnaast bieden de vele pinnen mogelijkheden om het systeem uit te breiden.
+				\paragraph{Regelaar}Als regelaar is een microcontroller nodig. De keuze van de encoder zorgt er voor dat de microcontroller 6 interrupt pinnen nodig heeft. Verder moet deze rond de specificaties zijn als een arduino uno. Dit is omdat opensource oplossingen zoals GRBL gebaseerd zijn op een arduino uno. Hierom is voorgesteld om een arduino mega te gebruiken. Deze mircrocontroller heeft voldoende rekenkracht voor dit soort applicaties. Hiernaast heeft deze microcontroller ook de benodigde 6 interrupt pinnen voor de drie verschillende assen. Daarnaast bieden de vele pinnen mogelijkheden om het systeem uit te breiden. 
+				
+				{\color{white}-}\\
+				Na de opties voorgelegd te hebben aan de opdrachtgever zijn er optische incrementele encoders (me38s6-c-(600)b5g2) besteld. Hiernaast is er ook een Arduino mega besteld.
 			
 			\subsubsection{Software}
 				\begin{figure}
@@ -148,10 +151,10 @@
 					De snij kop van de machine moet over& Als opdrachtgever wil ik dat de machine & Als de kop zich over de 	& Funct.	\\
 					de X, Y en Z as kunnen bewegen. 		&	zich over de X, Y en Z as kan bewegen. 	& X, Y en Z as kan bewegen.	& 				\\
 					\hline
-					De positie van de snij kop moet  		& Als opdrachtgever wil ik dat de machine	& Als de positie van de			& Funct. 	\\
-					bepaald worden doormiddel van   		& de positie van de kop bepaald doormiddel& snij kop bepaald word  		&				 	\\
-					sensoren.														& van sensoren on de nauwkeurigheid te 		& door een sensor.					&				 	\\
-																							& garanderen.															&														&					\\
+					De positie van de snij kop op    		& Als opdrachtgever wil ik dat de machine	& Als de positie van de			& Funct. 	\\
+					een as moet bepaald worden    	  	& de positie van de kop bepaald doormiddel& snij kop op een as    		&				 	\\
+					doormiddel van sensoren.						& van sensoren on de nauwkeurigheid te 		& bepaald word door een     &				 	\\
+																							& garanderen.															&	sensor.										&					\\
 					\hline
 					Er kan g-code uitgevoerd worden			& Als opdrachtgever wil ik een g-code  		& Als de machine g-code kan & Funct. 	\\
 					door de freesbank. 									& bestand laten uitvoeren door de 				& uitvoeren.								&					\\
@@ -206,36 +209,91 @@
 		\todo{Work in progress}
 		In dit plan worden de eisen/requirements van het prototype getest om te kijken of ze behaald zijn.
 
-		\subsection{De kop van de machine moet over drie assen bewegen}
-			\subsubsection{Acceptatiecriteria:}
-				Deze test is voltooid als de kop van de machine kan bewegen over de drie bewegingsassen (x, y, z).
+		\subsection{De snij kop van de machine moet over de X, Y en Z as kunnen bewegen.}
+			\paragraph{Acceptatiecriteria:}
+				Deze test is voldaan als de kop van de machine kan bewegen over de drie bewegingsassen (x, y, z).
 
-			\subsubsection{Testopstelling}
-				Deze test kan alleen op de machine worden uitgevoerd. Benodigd is: 
+			\paragraph{Testopstelling}
+				Deze test kan alleen op de machine worden uitgevoerd. Benodigd hiervoor is: 
 				\begin{enumerate}
-					\item Testopstelling.
+					\item Freesbank met de opstelling voor 3 assen
 					\item Handleiding \todo{work in progress}
 				\end{enumerate}
 
-			\subsubsection{Instructies}
+			\paragraph{Instructies}
 				\begin{enumerate}
 					\item Volg de handleiding om de machine aan te zetten.
-					\item Upload een simpel stuk gcode om te machine over alle drie de assen te laten bewegen.
+					\item Stuur een opdracht naar de machine via de serial monitor om over alle drie de assen te bewegen.
+					\item Kijk of alle drie de assen bewegen.
 				\end{enumerate}
 
-			\subsubsection{Verwacht resultaat}
+			\paragraph{Verwacht resultaat}
 				Het verwachte resultaat is dat de kop van de machine beweegt naar het punt uit de instructies.
 
-			\subsubsection{Waarnemingen}
-				\todo{waarnemingen invullen}
-				
+			\paragraph{Waarnemingen en conclusie}
+				De freesbank beweegt zich over de drie assen naar het aangewezen punt en alle drie de assen komen tegelijker tijd aan op dat punt. Dus deze test is voldaan.
+
+		\subsection{De positie van de snij kop op een as moet bepaald worden doormiddel van sensoren.}
+			\paragraph{Acceptatiecriteria:}
+				Deze test is voldaan als de locatie van de snij kop op een as te bepalen is doormiddel van een sensor.
+
+			\paragraph{Testopstelling} 
+				Deze test kan alleen op de machine worden uitgevoerd. Benodigd hiervoor is:
+				\begin{enumerate}
+					\item Freesbank met de opstelling van minimaal 1 as waaraan een sensor bevestigd is.
+					\item Handleiding
+				\end{enumerate}
+
+			\paragraph{Instructies}
+				\begin{enumerate}
+					\item Volg de handleiding om de machine aan te zetten.
+					\item Indien nodig voeg de onderdelen voor de sensor toe aan de code.
+					\item Stuur een opdracht naar de machine via de serial monitor om over de gekozen as te bewegen.
+					\item Kijk of de as beweegt.
+					\item Voer het commando uit om informatie op te vragen \((\$?)\) om te controleren of de sensor de beweging meet. 
+				\end{enumerate}
+			
+			\paragraph{Verwacht resultaat}
+				Het verwachte resulataat is dat de kop van de machine beweegt over de gekozen as, en dat de sensor de beweging meet.
+			
+			\paragraph{Waarnemingen en conclusie}
+				De sensor meet de bewegingen over de as waar die aan vast zit. Dus deze test is voldaan.
+
+		\subsection{Er kan g-code uitgevoerd worden door de freesbank.}
+			\paragraph{Acceptatiecriteria:}
+				Deze test is voldaan als de machine g-code kan uitvoeren.
+			
+			\paragraph{Testopstelling}
+				Deze test kan alleen op de machine worden uitgevoerd. Benodigd hiervoor is:
+				\begin{enumerate}
+					\item Freesbank met de opstelling van minimaal 1 as.
+					\item Handleiding
+				\end{enumerate}
+
+			\paragraph{Instructies:}
+				\begin{enumerate}
+					\item Volg de handleiding om de machine aan te zetten.
+					\item Stuur een opdracht naar de machine via de serial monitor. De opdrachten die gebruikt kunnen worden zijn te vinden in de handleiding.
+					\item Controleer of de freesbank de opdracht uitvoert en een OK terug stuurt.
+				\end{enumerate}
+
+			\paragraph{Verwacht resultaat}
+				Het verwachte resulaat is dat de machine de g-code uitvoert en een OK terug stuurt.
+
+			\paragraph{Waarneming en conclusie}
+				Als de machine de opdracht krijgt stuurt die 'OK' terug en daarna voert de machine de opdracht uit.
+
 
 	\section{Aanbevelingen}
 		Bij deze opdracht zijn meerdere onderdelen aan bod gekomen waar dit project niet aan toe gekomen is.
 		\begin{enumerate}
 			\item Er zijn modules waarmee de encoders makkelijker uit te lezen zijn. Hier moet onderzoek naar gedaan worden.
 			\item rotzooi afzuigen frees
-			\item 
+			\item calibratie
+			\item zorgen volledige werkruimte benutten. 
+			\item microcontroller en voeding niet mee laten bewegen met de freesbank, dus de alleen de kabels voor de stroom. 
+			\item zorgen dat de machine geen beweegings commandos aanneemt als de buffer vol is.
+			\item pcb maken voor alle steppermotoren
 		\end{enumerate}
 		\todo{aanbevelingen toeveogen}
 	\section{Bronnen}
@@ -252,7 +310,7 @@
 			\item Wikipedia contributors, “Gray code,” Wikipedia, The Free Encyclopedia. [Online]. Available: \url{https://en.wikipedia.org/wiki/Gray_code}. Accessed: Jan. 8, 2026. 
 		\end{enumerate}
 
-
+\todo{code in bijlage linken}
 		\appendix
 		
 			\section{Encoder onderzoek}
@@ -337,6 +395,15 @@
 				Elektrisch schema drie assen
 				\end{center}
 			\end{sidewaysfigure}
+			\newpage
+			\section{Plaatjes systeem}
+				\begin{center}
+					\includegraphics[scale=0.8]{sideview.png}\\
+					Zij aanzicht\\
+					\includegraphics[scale=0.8]{frontview.png}\\
+					Voor aanzicht\\
+				\end{center}
+
 	\newpage
 	\Large
 	\textbf{Changelog}
@@ -354,6 +421,8 @@
 			06-01-2026 & Stakeholders verplaatst, spelling, onderzoek verplaatst/herschreven \\
 			\hline
 			08-01-2026 & bijlage toegevoegd. \\
+			\hline
+			14-01-2026 & ontwerpen toegevoegd en aan realisatie gewerkt\\
 			\hline
 		\end{tabular}
 		\end{center}
@@ -399,9 +468,9 @@ ________________________________________________________________________________
 [x] Stagebedrijf: Wat voor soort bedrijf is het? (werkveld, grootte, afdeling waar je stageloopt)
 [x] Probleemstelling/ opdrachtbeschrijving/ eventueel een hoofdvraag en -deelvragen
 [x] Stakeholders (+ op welke manier je ze betrekt bij jouw opdracht)
-[ ] Scope en passende eisen die relevant zijn voor jouw opdracht
+[x] Scope en passende eisen die relevant zijn voor jouw opdracht
 [x] Mogelijke oplossingen en je onderbouwde keuze(s)
-[ ] Requirements
+[x] Requirements
 [ ] Bijbehorende ontwerpen
 [ ] Realisatie (diverse iteraties/ prototypes), testen en testresultaten op basis van de requirements en
 de ontwerpen.

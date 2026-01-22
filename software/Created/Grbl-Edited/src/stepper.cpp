@@ -170,7 +170,8 @@ uint8 setHardwareCompareTimer(float targetms) {
 /**
  * Function to init the stepper motors.
  * Set the output for stepper pins defined in macros.h
- * Set ISR with ISR time out macros.h
+ * Set ISR with STEPPER_ISR_MS out macros.h
+ * Set reset ISR with RESET_STEPBITS_US out macros.h
  * resets stepperState to empty.
  * @note if there is not configuration for the stepper interval and the 800 us reset isr for it will set the systemstate to INTERNAL_ERROR_RESTART_REQUIRED.
  */
@@ -180,8 +181,7 @@ void initSteppers() {
   STEPPER_DIR_DDR |= (1 << X_DIR_PIN) | (1 << Y_DIR_PIN) | (1 << Z_DIR_PIN);
   STEPPER_STEP_DDR |= (1 << X_STEP_PIN) | (1 << Y_STEP_PIN) | (1 << Z_STEP_PIN);
 
- // DDRD |= (1 << PD5) | (1 << PD6);
-  //PORTD &= ~(1 << PD5);
+  /**  */
   STEPPER_STEP_PORT &= ~(1 << X_STEP_PIN);
   STEPPER_STEP_PORT &= ~(1 << Y_STEP_PIN);
   STEPPER_STEP_PORT &= ~(1 << Z_STEP_PIN);

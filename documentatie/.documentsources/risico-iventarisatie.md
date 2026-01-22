@@ -37,7 +37,7 @@ Bij het ontwerpen en realiseren van een project als deze komen vele verschillend
 <td>1</td>
 <td>3</td>
 <td style="background-color:green">3</td>
-<td>in te vullen</td>
+<td>Optijd spullen bestellen en als het toch niet werkt, iemand anders naar laten kijken en niet zomaar wat doen</td>
 </tr>
 <tr>
 <td>Vertraging in levering van spullen</td>
@@ -49,19 +49,7 @@ Bij het ontwerpen en realiseren van een project als deze komen vele verschillend
 <td>3</td>
 <td>3</td>
 <td style="background-color: orange">9</td>
-<td>in te vullen</td>
-</tr>
-<tr>
-<td>Test omgeving is niet beschikbaar op RDM</td>
-<td>2</td>
-<td>2</td>
-<td style="background-color: green">4</td>
-<td>Niet te voorkomen, wel kan er nagedacht worden of de functionaliteit op een andere manier te testen is</td>
-<td>Ver van te voren reserveren/ afspreken met het RDM om te kunnen testen, of kijken of dezelfde functionaliteit ook op een andere manier te testen is</td>
-<td>1</td>
-<td>2</td>
-<td style="background-color: green">2</td>
-<td>in te vullen</td>
+<td>Wachten en ondertussen werken aan onderdelen waar de vertraging geen invloed op heeft</td>
 </tr>
 <tr>
 <td>Alle bestanden kwijtraken</td>
@@ -85,7 +73,7 @@ Bij het ontwerpen en realiseren van een project als deze komen vele verschillend
 <td>1</td>
 <td>3</td>
 <td style="background-color: green">3</td>
-<td>nog in te vullen</td>
+<td>De stroom uitzetten als er iets niet goed gaat</td>
 </tr>
 </tbody>
 <!-- changelog -->
@@ -105,7 +93,12 @@ Bij het ontwerpen en realiseren van een project als deze komen vele verschillend
 <tbody>
 <tr>
 <td>1</td>
-<td>7-3-2025</td>
+<td>20-09-2025</td>
 <td>Risico-inventarisatie is gemaakt</td>
+</tr>
+<tr>
+<td>2</td>
+<td>20-01-2026</td>
+<td>Ingevuld welke oplossingen toegepast zijn</td>
 </tr>
 </tbody>
