@@ -63,6 +63,7 @@ void stepAxisFromPos(uint8 axisNumber, uint32 currentCycle, uint32 endCycle, flo
 
 
 
+
 /** not used for now */
 float getYForCircle(float x, float y) {
   float fTemp = sqrt((stepperData.formulaValues[Z_AXIS] * stepperData.formulaValues[Z_AXIS])- ((x - stepperData.formulaValues[Y_AXIS]) * (x - stepperData.formulaValues[Y_AXIS])));
@@ -94,7 +95,13 @@ float getYForLine(float x, float x1, float x2, float y1, float y2) {
   return (((y2 - y1)/(x2 - x1)) * (x - x1)) + y1;
 }
 
+float getCircleYPos(float yCenter, float radius, int time, int totalSteps, float offset) {
+  return yCenter + (radius * cos((2 * PI * (time - offset))/totalSteps));
+}
 
+float getCircleXPos(float xCenter, float radius, int time, int totalSteps, float offset) {
+  return xCenter + (radius * sin((2 * PI * (time - offset)/totalSteps)));
+}
 
 /** 
  * Set timer1, 16bit, prescalers(1,8,64,256,1024)
@@ -332,7 +339,7 @@ ISR(TIMER1_COMPA_vect) {
      * @note add here axis that are used by the stepper motor.
      ***************************************************************************************************************************/
     
-    donecheck += checkIfAxisNotDone(Z_AXIS, currentPosition[Z_AXIS]);
+    // donecheck += checkIfAxisNotDone(Z_AXIS, currentPosition[Z_AXIS]);
 
     /****************************************************************************************************************************
      * END for adding more steppers.
@@ -354,7 +361,8 @@ ISR(TIMER1_COMPA_vect) {
 
   stepAxisFromStepVar(X_AXIS, stepperData.timerValue, stepperData.modifier, &STEPPER_STEP_PORT, X_STEP_PIN);
   stepAxisFromStepVar(Y_AXIS, stepperData.timerValue, stepperData.modifier, &STEPPER_STEP_PORT, Y_STEP_PIN);
-  stepAxisFromPos(Z_AXIS, stepperData.timerValue, stepperData.modifier, currentPosition[Z_AXIS], &STEPPER_STEP_PORT, Z_STEP_PIN);
+  stepAxisFromStepVar(Z_AXIS, stepperData.timerValue, stepperData.modifier, &STEPPER_STEP_PORT, Z_STEP_PIN);
+  //stepAxisFromPos(Z_AXIS, stepperData.timerValue, stepperData.modifier, currentPosition[Z_AXIS], &STEPPER_STEP_PORT, Z_STEP_PIN);
 
   /******************************************************************************************************************************
    * END for adding more steppers.

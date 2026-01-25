@@ -19,7 +19,7 @@ int main() {
   cli();
   uartInit(BAUD);
   initSteppers();
-  initEncoder();
+  //initEncoder();
   sei();
   println("Ready!");
   while (uartRead() != EMPTY_CHAR) {

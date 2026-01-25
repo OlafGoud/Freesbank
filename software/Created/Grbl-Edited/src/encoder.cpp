@@ -101,16 +101,16 @@ void initEncoder() {
   //ENCODER_DDR_X |= (1 << PB5);
   /** Encoder interrupt setup */
   /** Set pins for encoder to input */
-  ENCODER_DDR_X &= ~((1 << ENCODER_PIN_XA) | (1 << ENCODER_PIN_XB)); 
+  ENCODER_DDR_X &= ~((1 << ENCODER_PIN_ZA) | (1 << ENCODER_PIN_ZB)); 
   
   /** Set pullup resistors */
-  ENCODER_PORT_X |= ((1 << ENCODER_PIN_XA) | (1 << ENCODER_PIN_XB));
+  ENCODER_PORT_X |= ((1 << ENCODER_PIN_ZA) | (1 << ENCODER_PIN_ZB));
 
   /** enable interrupt on PCINT2 GROUP for when either of A or B changes */
   PCICR |= (1 << PCIE2);
 
   /** Set interupt on A and B pins */
-  PCMSK2 |= (1 << ENCODER_PIN_XA) | (1 << ENCODER_PIN_XB);
+  PCMSK2 |= (1 << ENCODER_PIN_ZA) | (1 << ENCODER_PIN_ZB);
   #endif
 
   #ifdef ARDUINO_MEGA
@@ -140,5 +140,5 @@ void initEncoder() {
 
   #endif
   
-  readEncoderX();
+  readEncoderZ();
 }

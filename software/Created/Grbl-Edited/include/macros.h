@@ -32,6 +32,7 @@
 
 #define BAUD 9600 /** @note Only 9600 suported */
 #define MAX_LINE_SIZE 60 /** Line size for serial input */
+#define PI 3.1415926535897932384626433832795 /** pi */
 
 #define OK_MESSAGE "OK." /** message if message is ok */
 
