@@ -10,12 +10,6 @@
 extern uint8 systemState;
 extern uint8 stepperState;
 
-struct GCodeSettings {
-  bool absolute = true;             /** true = absolute (G91), false = relative (G90) */
-  uint8_t selectedPlane = AXIS_PLANE_XY;     /** 0 = xy, 1 = xz, 2 = yz */
-};
-
-
 void readSerialLine();
 
 bool readGCodeLine(char* line, uint8_t size);

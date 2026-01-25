@@ -40,6 +40,38 @@ Dit commando laat de machine snel naar de gekozen locatie gaan in een rechte lij
 > Z: Z positie in mm  
 > F: Feedrate in mm/min (niet geimplementeerd.)
 
+**Clockwise cirkel beweging (G2)**
+Dit commando laat de machine bewegen met de klok mee. Hierbij is de tool actief.
+> Parameters:
+> X: X positie in mm  
+> Y: Y positie in mm  
+> Z: Z positie in mm  
+> I: X middelpunt van cirkel in mm
+> J: Y middelpunt van cirkel in mm
+> R: Radius in mm
+
+**Anticlockwise cirkel beweging (G3)**
+Dit commando laat de machine bewegen tegen de klok in. Hierbij is de tool actief.
+> Parameters:
+> X: X positie in mm  
+> Y: Y positie in mm  
+> Z: Z positie in mm  
+> I: X middelpunt van cirkel in mm
+> J: Y middelpunt van cirkel in mm
+> R: Radius in mm
+
+**Plane selectie (G17 G18 G19)**
+Dit commando laat de gebruiker de plane kiezen op welke plane de machine cirkels maakt.
+> G17: XY
+> G18: YZ
+> G19: ZX
+
+**Mode selectie (G90 G91)**
+Dit commando laat de gebruiker kiezen of de machine werkt in Incrementeel of absolute bewegingen.
+>G90: Absolute
+>G91: Incrementeel
+
+
 #### M-code
 **Stop stop direct (M1)**
 dit commando zet de state van de machine op error. Hierdoor gaat de machine niet verder. (restart nodig)

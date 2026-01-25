@@ -1,8 +1,6 @@
 #include "system.h"
 #include "string.h" /** for memcpy */
 
-GCodeSettings gCodeSettings; /** weg? */
-
 /**
  * Function to get data from the RX buffer and make a line from it. And send the right commands to the right functions.
  * @todo system commands '$'
@@ -92,6 +90,7 @@ CodeBlockBuffer codeBlockBuffer{};
  */
 bool readGCodeLine(char* line, uint8 size) {
   static float prevPos[3] = {0, 0, 0};
+  static uint8 positionMode = 0; /** 0 = absolute, 1 = incrementeel */
   CodeBlock codeBlock;
 
   float value;
@@ -124,7 +123,7 @@ bool readGCodeLine(char* line, uint8 size) {
         codeBlock.subCommand = intValue - 17;
         break;
       case 90: case 91: 
-        gCodeSettings.absolute = (bool)(intValue - 90); 
+        positionMode = (bool)(intValue - 90); 
         break;
       default:
         /** @note unsuported commands */
@@ -155,10 +154,10 @@ bool readGCodeLine(char* line, uint8 size) {
     case 'C': break; /** @todo @note Not suported (YET) */
     case 'D': break; /** @todo @note Not suported (YET) */
     case 'E': codeBlock.E = value; break; /** @note Speed of spindle?? Not suported (YET) */
-    case 'F': codeBlock.F = value; break; /** Feedrate */
+    case 'F': codeBlock.F = value; break; /** @note not suported Feedrate */
     case 'H': break; /** @todo @note Not suported (YET) */
-    case 'I': codeBlock.I = value; break; /** @note circle offset X |> stored as a 2 component float  */
-    case 'J': codeBlock.J = value; break; /** @note circle offset Y |                                 */
+    case 'I': codeBlock.I = value; break; /** @note circle offset X */
+    case 'J': codeBlock.J = value; break; /** @note circle offset Y */
     case 'K': break; /** @todo @note Not suported (YET) */
     case 'L': break; /** @todo @note Not suported (YET) */
     case 'N': break; /** @todo @note Not suported (YET) */
@@ -180,6 +179,13 @@ bool readGCodeLine(char* line, uint8 size) {
     }  
   }
 
+  if(positionMode == 1) { /** operating in incemental mode */
+    codeBlock.endPos[X_AXIS] = prevPos[X_AXIS] + codeBlock.endPos[X_AXIS];
+    codeBlock.endPos[Y_AXIS] = prevPos[Y_AXIS] + codeBlock.endPos[Y_AXIS];
+    codeBlock.endPos[Z_AXIS] = prevPos[Z_AXIS] + codeBlock.endPos[Z_AXIS];
+  }
+
+
   if(codeBlock.command >= 0 && codeBlock.command <= 4) {
     memcpy(prevPos, codeBlock.endPos, sizeof(prevPos));
   }
@@ -192,7 +198,6 @@ bool readGCodeLine(char* line, uint8 size) {
   memcpy(block, &codeBlock, sizeof(codeBlock));
   codeBlockBuffer.head = (codeBlockBuffer.head + 1) % CODEBLOCKBUFFERSIZE;
   codeBlockBuffer.size++;
-  /** @todo split movement in lines when curved, plan function */
   return true;
 }
 

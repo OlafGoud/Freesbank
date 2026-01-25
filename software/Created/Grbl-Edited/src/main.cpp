@@ -34,8 +34,8 @@ int main() {
     if(systemState == ERROR) {
       /** @todo error handling */
       println("err");
+      /** shutdown stepper */
 
-      continue;
     }
 
     if(stepperState == STEPPER_ERROR) {
