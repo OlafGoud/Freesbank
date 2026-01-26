@@ -16,7 +16,8 @@ struct StepperData {
   int8 signage = 1;
   uint8 xAxisNumber = 0;
   uint8 yAxisNumber = 1;
-
+  float angleStep = 0;
+  float deltaAngle = 0;
 };
 
 void initSteppers();
@@ -30,7 +31,5 @@ void stepAxisFromStepVar(uint8 axisNumber, uint32 currentCycle, uint32 endCycle,
 void stepAxisFromPos(int i, unsigned long currentcycle, unsigned long maxCycle, float currPos, uint8 port, uint8 pin);
 
 float getYForLine(float x, float x1, float x2, float y1, float y2);
-float getCircleYPos(float yCenter, float radius, uint32 time, uint32 totalSteps, float offset);
-float getCircleXPos(float xCenter, float radius, uint32 time, uint32 totalSteps, float offset);
-float getAngleInDegreesClock(float cx, float cy, float px, float py);
-float getAngleInDegreesAntiClock(float cx, float cy, float px, float py);
+float getCircleYPos(uint32 currentTime, float startAngle);
+float getCircleXPos(uint32 currentTime, float startAngle);

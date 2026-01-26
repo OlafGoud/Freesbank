@@ -37,52 +37,48 @@ void stepAxisFromStepVar(uint8 axisNumber, uint32 currentCycle, uint32 endCycle,
       currStepsPos[axisNumber] += STEPPER_ACCURACY;
     }
     print("R:"); println(val, 2); println(currStepsPos[axisNumber], 2);
-  } else {
+  } else if(stepperData.currentBlock->command == 2 || stepperData.currentBlock->command == 3) {
     float val = 0;
     if(axisNumber == stepperData.xAxisNumber) {
-      val = getCircleXPos(stepperData.currentBlock->I, stepperData.signage * stepperData.currentBlock->R, currentCycle, endCycle, stepperData.formulaValues[0]/360);
-
-      if(currStepsPos[stepperData.yAxisNumber] > stepperData.currentBlock->J) { /** check if y = positive */
-        if(currStepsPos[stepperData.xAxisNumber] > val) return;
-        stepperData.signage == 1 ? *(dirport) |= (1 << dirpin) : *(dirport) &= ~(1 << dirpin);
+      val = getCircleXPos(currentCycle, stepperData.formulaValues[0]);
+      if(currStepsPos[stepperData.xAxisNumber] > val) { /** check if y = positive */
+        *(dirport) &= ~(1 << dirpin);
         currStepsPos[stepperData.xAxisNumber] += STEPPER_ACCURACY;
-        
-      } else {
-        if(currStepsPos[stepperData.xAxisNumber] < val) return;
-        stepperData.signage == 1 ? *(dirport) &= ~(1 << dirpin) : *(dirport) |= (1 << dirpin);
-        currStepsPos[stepperData.xAxisNumber] -= STEPPER_ACCURACY;
-      }
-    } else if (axisNumber == stepperData.yAxisNumber) {
-      val = getCircleYPos(stepperData.currentBlock->J, stepperData.signage * stepperData.currentBlock->R, currentCycle, endCycle, stepperData.formulaValues[0]/360);
-      if(currStepsPos[stepperData.xAxisNumber] > stepperData.currentBlock->I) { /** check if x = positive */
-        if(currStepsPos[stepperData.yAxisNumber] > val) return;
-        stepperData.signage == 1 ? *(dirport) |= (1 << dirpin) : *(dirport) &= ~(1 << dirpin);
-        currStepsPos[stepperData.yAxisNumber] += STEPPER_ACCURACY;
-      } else {
-        if(currStepsPos[stepperData.yAxisNumber] < val) return;
-        stepperData.signage == 1 ? *(dirport) &= ~(1 << dirpin) : *(dirport) |= (1 << dirpin);
-        currStepsPos[stepperData.yAxisNumber] -= STEPPER_ACCURACY;
-      }
+        print("P1a:"); println(axisNumber);
 
+      } else if (currStepsPos[stepperData.xAxisNumber] < val) {
+        *(dirport) |= (1 << dirpin);
+        currStepsPos[stepperData.xAxisNumber] -= STEPPER_ACCURACY;
+        print("P1b:"); println(axisNumber);
+      } else {
+        return;
+      }
+      println(val - currStepsPos[stepperData.xAxisNumber], 2);
+
+    } else if (axisNumber == stepperData.yAxisNumber) {
+      val = getCircleYPos(currentCycle, stepperData.formulaValues[0]);
+      if(currStepsPos[stepperData.yAxisNumber] < val) { /** check if y = positive */
+        *(dirport) &= ~(1 << dirpin);
+        currStepsPos[stepperData.yAxisNumber] += STEPPER_ACCURACY;
+        print("P1a:"); println(axisNumber);
+
+      } else if (currStepsPos[stepperData.yAxisNumber] > val) {
+        *(dirport) |= (1 << dirpin);
+        currStepsPos[stepperData.yAxisNumber] -= STEPPER_ACCURACY;
+        print("P1b:"); println(axisNumber);
+      } else {
+        return;
+      }
+      println(val - currStepsPos[stepperData.yAxisNumber], 2);
     } else {
       return;
     }
+  } else {
+    return;
   }
   *(port) |= (1 << pin);
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 /** 
  * Does all the calculations for 1 axis and steps accordingly. This function takes a currendposition from a sensor.
@@ -98,21 +94,22 @@ void stepAxisFromStepVar(uint8 axisNumber, uint32 currentCycle, uint32 endCycle,
  * @param pin The step pin for the axis.
  */
 void stepAxisFromPos(uint8 axisNumber, uint32 currentCycle, uint32 endCycle, float currPos, volatile uint8* port, uint8 pin) {
-
-  float val = getYForLine(currentCycle, 0, endCycle, stepperData.currentBlock->beginPos[axisNumber], stepperData.currentBlock->endPos[axisNumber]);  
-  if(stepperData.formulaValues[axisNumber] <= 0) {
-    if(stepperData.formulaValues[axisNumber] == 0) {
-      return;
-    }
-    if(currPos < val) {
-      println("w");
-      return;
+  if(stepperData.currentBlock->command == 0 || stepperData.currentBlock->command == 1) {
+    float val = getYForLine(currentCycle, 0, endCycle, stepperData.currentBlock->beginPos[axisNumber], stepperData.currentBlock->endPos[axisNumber]);  
+    if(stepperData.formulaValues[axisNumber] <= 0) {
+      if(stepperData.formulaValues[axisNumber] == 0) {
+        return;
+      }
+      if(currPos < val) {
+        return;
+      }
+    } else {
+      if(currPos > val) {
+        return;
+      }
     }
   } else {
-    if(currPos > val) {
-      println("w");
-      return;
-    }
+    return;
   }
   *(port) |= (1 << pin);
 }
@@ -133,55 +130,23 @@ float getYForLine(float x, float x1, float x2, float y1, float y2) {
 
 /**
  * Function that gets the y pos on a circle for x time 
- * @param yCenter y centerposition of the circle
- * @param radius y radius for circle
- * @param time current time pos to get from the y value from
- * @param totalSteps total steps in the function
- * @param offset amount the formula is moved to adust the begin pos
+ * @param currentTime current time pos to get from the x value from
+ * @param startAngle start angle for the circle
 */
-float getCircleYPos(float yCenter, float radius, uint32 time, uint32 totalSteps, float offset) {
-  return yCenter + (radius * cos((2 * PI * (time - offset))/totalSteps));
+float getCircleYPos(uint32 currentTime, float startAngle) {
+  float theta = startAngle + stepperData.signage * stepperData.angleStep * currentTime;
+  return stepperData.currentBlock->J + stepperData.currentBlock->R * sin(theta);
 }
 
 /**
  * Function that gets the x pos on a circle for x time 
- * @param yCenter x centerposition of the circle
- * @param radius x radius for circle
- * @param time current time pos to get from the x value from
- * @param totalSteps total steps in the function
- * @param offset amount the formula is moved to adust the begin pos
+ * @param currentTime current time pos to get from the x value from
+ * @param startAngle start angle for the circle
 */
-float getCircleXPos(float xCenter, float radius, uint32 time, uint32 totalSteps, float offset) {
-  return xCenter + (radius * sin((2 * PI * (time - offset)/totalSteps)));
+float getCircleXPos(uint32 currentTime, float startAngle) {
+  float theta = startAngle + stepperData.signage * stepperData.angleStep * currentTime;
+  return stepperData.currentBlock->J + stepperData.currentBlock->R * sin(theta);
 }
-
-/** 
- * Function that gives the radus in degrees between 2 vectors clockwise
- * it gets the line from vector 1 to vector 2 and gets the angle that the line has with the y axis.
- * @param cx Circle centerpoint x
- * @param cy Circle centerpoint y
- * @param px Circle edge point x
- * @param py Circle edge point y
- * @returns the angle clockwise (0 -> 359) */
-float getAngleInDegreesClock(float cx, float cy, float px, float py) {
-  float angleDegrees = atan2(px - cx, py - cy) * 180.0f / PI;
-  return angleDegrees < 0 ? angleDegrees += 360 : angleDegrees;
-}
-
-/** 
- * Function that gives the radus in degrees between 2 vectors anti-clockwise
- * it gets the line from vector 1 to vector 2 and gets the angle that the line has with the y axis
- * @param cx Circle centerpoint x
- * @param cy Circle centerpoint y
- * @param px Circle edge point x
- * @param py Circle edge point y
- * @returns the angle anticlockwise (359 -> 0)
- */
-float getAngleInDegreesAntiClock(float cx, float cy, float px, float py) {
-  float angleDegrees = atan2(px - cx, py - cy) * 180.0f / PI;
-  return angleDegrees < 0 ? angleDegrees += 360 : angleDegrees;
-}
-
 
 /** 
  * Set timer1, 16bit, prescalers(1,8,64,256,1024)
@@ -289,7 +254,9 @@ void initSteppers() {
   stepperState = STEPPER_EMPTY;
 }
 
-
+float toPowerOf2(float f) {
+  return f * f;
+}
 
 /**
  * Loads a new segment in the stepper buffer. if there isn't a new block it will return and change the systemstate to IDLE.
@@ -311,7 +278,7 @@ void loadNewSegment() {
 
   CodeBlock* block = &codeBlockBuffer.block[tail]; /** Dont increment here, then it can be overritten.*/
   stepperData.currentBlock = &codeBlockBuffer.block[tail];
-  if(block->command == 1 || block->command == 2) {
+  if(block->command == 0 || block->command == 1) {
     stepperData.formulaValues[X_AXIS] = block->endPos[X_AXIS] - block->beginPos[X_AXIS];
     stepperData.formulaValues[Y_AXIS] = block->endPos[Y_AXIS] - block->beginPos[Y_AXIS];
     stepperData.formulaValues[Z_AXIS] = block->endPos[Z_AXIS] - block->beginPos[Z_AXIS];
@@ -343,14 +310,14 @@ void loadNewSegment() {
   } else if (block->command == 2 || block->command == 3) {
 
     /** check if beginpos and end pos are on the circle with the radius r */
-    if(!sqrt((block->beginPos[stepperData.xAxisNumber] * block->beginPos[stepperData.xAxisNumber]) + (block->beginPos[stepperData.yAxisNumber] * block->beginPos[stepperData.yAxisNumber])) == block->R) {
+    if((pow(block->R, 2)) - (pow(block->I - block->beginPos[stepperData.xAxisNumber], 2) + pow(block->J - block->beginPos[stepperData.yAxisNumber], 2)) != 0) {
       systemState = ERROR;
       println("begin point not on circle");
       tail--;
       return;
     }
 
-    if(!sqrt((block->endPos[stepperData.xAxisNumber] * block->endPos[stepperData.xAxisNumber]) + (block->endPos[stepperData.yAxisNumber] * block->endPos[stepperData.yAxisNumber])) == block->R) {
+    if((pow(block->R, 2)) - (pow(block->I - block->endPos[stepperData.xAxisNumber], 2) + pow(block->J - block->endPos[stepperData.yAxisNumber], 2)) != 0) {
       systemState = ERROR;
       println("end point not on circle");
       tail--;
@@ -359,24 +326,31 @@ void loadNewSegment() {
 
     /** calculate beginangle and end angle in degrees */
     if(block->command == 2) {
-      stepperData.formulaValues[0] = getAngleInDegreesClock(block->I, block->J, block->beginPos[stepperData.xAxisNumber], block->beginPos[stepperData.yAxisNumber]); /** begin */
-      stepperData.formulaValues[1] = getAngleInDegreesClock(block->I, block->J, block->endPos[stepperData.xAxisNumber], block->endPos[stepperData.yAxisNumber]); /** end */
       stepperData.signage = 1;
+      stepperData.formulaValues[0] = atan2(block->beginPos[stepperData.yAxisNumber] - block->J, block->beginPos[stepperData.xAxisNumber] - block->I);
+      stepperData.formulaValues[1] = atan2(block->endPos[stepperData.yAxisNumber] - block->J, block->endPos[stepperData.xAxisNumber] - block->I);
     } else {
-      stepperData.formulaValues[0] = getAngleInDegreesAntiClock(block->I, block->J, block->beginPos[stepperData.xAxisNumber], block->beginPos[stepperData.yAxisNumber]); /** begin */
-      stepperData.formulaValues[1] = getAngleInDegreesAntiClock(block->I, block->J, block->endPos[stepperData.xAxisNumber], block->endPos[stepperData.yAxisNumber]); /** end */
+      stepperData.formulaValues[0] = atan2(block->beginPos[stepperData.yAxisNumber] - block->J, block->beginPos[stepperData.xAxisNumber] - block->I); /** begin */
+      stepperData.formulaValues[1] = atan2(block->endPos[stepperData.yAxisNumber] - block->J, block->endPos[stepperData.xAxisNumber] - block->I); /** end */
       stepperData.signage = -1;
     }
+    float deltaAngle;
 
-    /** calculate total steps */
-    float totalAngle = stepperData.formulaValues[1] - stepperData.formulaValues[0];
-    if(totalAngle < 0) {
-      totalAngle += 360;
+    if (block->command == 2) { // G2 = clockwise
+        deltaAngle = stepperData.formulaValues[0] - stepperData.formulaValues[1];
+        if (deltaAngle <= 0) deltaAngle += 2 * PI;
+        stepperData.signage = -1;
+    } else {                  // G3 = counter-clockwise
+        deltaAngle = stepperData.formulaValues[1] - stepperData.formulaValues[0];
+        if (deltaAngle <= 0) deltaAngle += 2 * PI;
+        stepperData.signage = +1;
     }
-    /** total circle circumference with radius R * (totalvalue/360) */
-    float totalLength = (2 * PI * stepperData.currentBlock->R) * (totalAngle/360); 
+    stepperData.deltaAngle = deltaAngle;
 
-    stepperData.modifier = (int)(totalLength / STEPPER_ACCURACY);
+    float arcLength = deltaAngle * block->R;
+    stepperData.modifier = lround(arcLength / STEPPER_ACCURACY);
+    float angleStep = deltaAngle / stepperData.modifier;
+    stepperData.angleStep = angleStep;
 
   } else if (block->command >= 17 || block->command <= 19) {
 
@@ -390,8 +364,8 @@ void loadNewSegment() {
       stepperData.yAxisNumber = 2;
     } else {
       /** only 19 left. ZX */
-      stepperData.xAxisNumber = 2;
-      stepperData.yAxisNumber = 0;
+      stepperData.xAxisNumber = 0;
+      stepperData.yAxisNumber = 2;
     }
 
     stepperData.selectedPlane = block->subCommand;
@@ -441,7 +415,6 @@ uint8 checkIfAxisNotDone(uint8 axisNumber, float currentPos) {
     }
     return currentPos < stepperData.currentBlock->endPos[axisNumber] ? 1 : 0;
   } else if (stepperData.currentBlock->command == 2 || stepperData.currentBlock->command == 3) {
-    /** todo check */
     if(axisNumber == stepperData.xAxisNumber) {
       if(currStepsPos[stepperData.yAxisNumber] > stepperData.currentBlock->J) { /** check if y = positive */
         return currStepsPos[stepperData.xAxisNumber] > currentPos ? 0 : 1;      
@@ -487,7 +460,7 @@ ISR(TIMER1_COMPA_vect) {
      * @note add here axis that are used by the stepper motor.
      ***************************************************************************************************************************/
     
-    // donecheck += checkIfAxisNotDone(Z_AXIS, currentPosition[Z_AXIS]);
+    //donecheck += checkIfAxisNotDone(Z_AXIS, currentPosition[Z_AXIS]);
 
     /****************************************************************************************************************************
      * END for adding more steppers.

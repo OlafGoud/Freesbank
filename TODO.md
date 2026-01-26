@@ -49,3 +49,6 @@ elecktrisch schema / aansluit schema
 instalatie platformio 
 code + comments
 gcode commands
+
+
+comma getallen geod uitlezen
