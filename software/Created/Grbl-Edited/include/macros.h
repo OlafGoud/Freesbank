@@ -115,8 +115,3 @@
 #define Y_AXIS 1
 #define Z_AXIS 2
 // hij pakt niet goed de oude
-
-// 10x 6y
-// 10.1 32.2
-// 12.7 45.6
-// 2.6  13

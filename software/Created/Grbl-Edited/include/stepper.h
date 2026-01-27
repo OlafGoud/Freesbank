@@ -15,7 +15,7 @@ struct StepperData {
   float prevY = 0;
   int8 signage = 1;
   uint8 xAxisNumber = 0;
-  uint8 yAxisNumber = 1;
+  uint8 yAxisNumber = 2;
   float angleStep = 0;
   float deltaAngle = 0;
 };
