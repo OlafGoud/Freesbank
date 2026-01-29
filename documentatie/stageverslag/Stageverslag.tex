@@ -51,7 +51,7 @@
 	\todo{naam file aanpassen}
 	\section{Context}
 		\subsection{Het bedrijf}
-			De stage heeft plaatsgevonden bij het bedrijf Sens2Sea. Dit is een klein bedrijf dat gevestigd is op een kavel in het Innovation Dock op het RDM terrein. Sens2Sea ontwikkelt radar technologieën voor sectoren zoals de scheepsvaart en andere maritieme sectoren. Het bedrijf wordt geleid door Geert Mosterdijk. Het bedrijf heeft maar een paar medewerkers. Deze zijn gespecialiseerd in hun vakgebieden zoals: elektronica en software. Verder lopen er bij Sens2Sea een aantal studenten stage van verschillende opleidingen. Het bedrijf werkt voor projecten samen met andere bedrijven. Deze bedrijven zijn tevens de stakeholders voor de projecten. Voor dit bedrijf geldt het volgende:
+			De stage heeft plaatsgevonden bij het bedrijf Sens2Sea. Dit is een klein bedrijf dat gevestigd is in Rotterdam op een kavel in het Innovation Dock op het RDM terrein. Sens2Sea ontwikkelt radar technologieën voor sectoren zoals de scheepsvaart en andere maritieme sectoren. Het bedrijf wordt geleid door Geert Mosterdijk. Het bedrijf heeft maar een paar medewerkers. Deze zijn gespecialiseerd in diverse vakgebieden zoals elektronica en software. Verder lopen er bij Sens2Sea een aantal studenten van verschillende opleidingen stage. Het bedrijf werkt voor projecten samen met andere bedrijven. Deze bedrijven zijn tevens de stakeholders voor de projecten. Voor dit bedrijf geldt het volgende:
 			\begin{enumerate}
 				\item Sens2Sea. De opdracht is voor Sens2Sea, dit bedrijf bepaalt welke beslissingen gemaakt worden. Dit bedrijf heeft mensen in dienst die expertise bieden op gebied van elektronica en software. (Hoge invloed en Hoog belang)
 				\item PKMarine. Dit bedrijf werkt samen met Sens2Sea en bied expertise in regeltechniek. (Hoge invloed, laag belang)
@@ -59,62 +59,91 @@
 			\end{enumerate}
 
 		\subsection{Opdracht}
-			\paragraph{} 
-				Sens2Sea is bezig met radar technologie. Radar is een technologie die radiogolven gebruikt om, t.o.v. de positie van de radar, de afstand, snelheid en richting van objecten te bepalen. Radar kan gebruikt worden in goed en slecht weer. Hierdoor is het uitstekend geschikt om objecten te detecteren in sectoren zoals de scheepsvaart. Ook kan radar technologie gebruikt worden om de zeebodem in kaart te brengen en om olievlekken te detecteren. 
+			\paragraph{Sens2Sea} 
+				is bezig met radar technologie. Radar is een technologie die radiogolven gebruikt om, t.o.v. de positie van de radar, de afstand, snelheid en richting van objecten te bepalen. Radar kan gebruikt worden in goed en slecht weer. Hierdoor is het uitstekend geschikt om objecten te detecteren in sectoren zoals de scheepsvaart. Ook kan de radar technologie van Sens2Sea gebruikt worden om de zeebodem in kaart te brengen en om olievlekken te detecteren. 
 
-			\paragraph{} 
-				Sens2Sea is sinds kort bezig FMCW (Frequency Modulated Continuous Wave) radar technologie. Hiervoor wil Sens2Sea paraboolantennes gebruiken. Deze antennes zorgen ervoor dat de radiogolven gebundeld worden. Door de bundeling van deze golven worden de signalen versterkt. Dit zorgt ervoor dat het beeld een betere resolutie heeft. Deze antennes zijn niet te verkrijgen in alle maten. Dit is omdat een antenne gemaakt wordt met een mal. Een mal maken is duur waardoor een antenne op maat een stuk duurder wordt dan een standaardmaat waardoor Sens2Sea graag zelf deze antennes wil maken. Er zijn hiervoor al testen geweest met antennes die in stukken geprint zijn met een 3D printer. Dit heeft goed uitgepakt, maar tijdens het hechten van de onderdelen kan er een fout in de vorm ontstaan waardoor de antenne minder werkt. Hierom wil Sens2Sea de antennes in één keer produceren met een 3D printer CNC machine combinatie. Deze machine moet 4m x 1m x 1m groot worden. 
+			\paragraph{Sens2Sea} 
+				is sinds kort bezig FMCW (Frequency Modulated Continuous Wave) radar technologie. Hiervoor wil Sens2Sea paraboolantennes gebruiken. Deze antennes zorgen ervoor dat de radiogolven zodanig worden gebundeld de ontvangen waardoor de radar reflecties worden versterkt. Dit zorgt ervoor dat het beeld een betere resolutie heeft. Deze antennes zijn niet te verkrijgen in alle maten omdat een antenne gemaakt wordt met een mal. Een mal maken is duur waardoor een antenne op maat een stuk duurder wordt dan een standaardmaat. Om deze reden wil Sens2Sea graag zelf dergelijke antennes kunnen maken. Er zijn hiervoor al testen geweest met antennes die in stukken geprint zijn met een 3D printer. Dit heeft redelijk goed uitgepakt, hoewel al snel bleek dat tijdens het hechten van de onderdelen, er een fout in de vorm ontstaan waardoor de antenne minder werkt. Om deze reden wil Sens2Sea de antennes in één keer kunnen produceren met een 3D printer CNC machine combinatie. Deze machine moet in staat zijn antennes tot 4m x 1m x 1m kunnen produceren. 
 
-			\paragraph{} 
-				Er zijn opensource oplossingen voor CNC-machines en 3D printers. Een 3D printer bouwt een model op door laagjes toe te voegen en een CNC machine die haalt laagjes weg om het model te krijgen. GRBL is een voorbeeld van een opensource oplossing dat stappen telt om de gewenste locatie te bereiken. Hierdoor weet de microcontroller niet waar de snij kop zich exact bevind. Hiernaast zijn er nog meer verschillende oplossingen. Deze oplossingen voldoen niet aan wat Sens2Sea wenst. Het bedrijf wenst dat de freesbank zijn aansturing en locatie bepaling gescheiden wordt. Hierdoor kan de machine nauwkeuriger werken. Ook wil Sens2Sea sensoren kunnen vervangen dus moet het systeem modulair worden. Hiernaast is er een wens om de machine over vijf assen te laten lopen. Dit zijn X, Y, Z en de rotaties over de X en Z as.
+			\paragraph{Er} 
+				zijn opensource oplossingen voor CNC-machines en 3D printers. Een 3D printer bouwt een model op door laagjes toe te voegen en een CNC machine die haalt laagjes weg om het model te krijgen. Er zijn verschillende opensource oplossingen zoals GRBL en Marlin om die deze machines kunnen aansturen. Deze oplossingen gebruiken gebruiken de stappen van de stappenmotor om te bepalen waar de freeskop van machine zich bevind. Doordat er geen sensoren in het systeem zijn kan de microcontroller niet weten of de stappen echt gezet zijn en wordt de locatie minder nauwkeurig. Er zijn nog meer opensource oplossingen, maar geen van allen voldoen aan wat Sens2Sea wenst. Met name is de nauwkeurigheid een probleem. Het bedrijf denkt dat indien de aansturing en de locatie bepaling worden gescheiden de machine nauwkeurigheid kan werken. Ook denkt Sens2Sea dat het systeem modulair moet zijn opdat componenten als sensoren en actuatoren eenvoudig kunnen worden vervangen. Tenslotte is er de wens dat de freeskop van de machine op termijn over vijf assen moet kunnen bewegen. Deze assen zijn de bewegings assen X, Y, Z en daarnaast de rotaties over de X en Y as.
 			
-			\paragraph{} 
-				De scope van het project omvat het scheiden van de aandrijving en de positiebepaling van de snij kop. Daarnaast is er sprake van aanpassen of herschrijven van GRBL om deze te laten werken met de sensoren. Ook de hardware aansturen/aansluiten hoort bij de scope. Hier hoort het aansturen van de frees door de microcontroller niet bij.
+			\paragraph{De scope} 
+				van het project omvat pimair het scheiden van de aandrijving en positiebepaling van de freeskop. Daarnaast is er sprake van aanpassen of herschrijven van GRBL om deze te laten werken met de positie sensoren. Ook de hardware aansturen/aansluiten hoort bij de scope. Het aansturen of vervangen van de frees door de microcontroller, 3D print functie en het bewegen van de freeskop over de rotatie assen X en Y vallen buiten de scope van het project.
 
 	\newpage
 	\section{Analyse}
 		\subsection{Huidige situatie}
 			\begin{center}
-				\includegraphics[width=10cm]{beginsysteem.png}\\
-				Freesbank: Huidige situatie
+				\includegraphics[width=10cm]{Freesbank-oude-componenten}\\
+				Figuur 1: Freesbank huidige situatie
 			\end{center}
-			De huidige situatie bestaat uit een aantal functies die te zien zijn in het figuur: Freesbank: Huidige situatie. De functies die al aanwezig zijn, zijn de motor drivers, actuatoren, freesbank met frees en een regelsysteem. Hierin is het regelsysteem gebaseerd op GRBL en zoals er te zien is krijgt het regelsysteem geen terugkoppeling over waar de snij kop van de machine zich bevindt en of de stap succesvol gezet is.
+			De huidige situatie bestaat uit een aantal componenten die te zien zijn in figuur 1. Er zijn al verschillende componenten aanwezig. Dit zijn de drivers van de actuatoren, actuatoren, freesbank met frees en een regelsysteem. Hierin is het regelsysteem gebaseerd op de opensource software GRBL. In het figuur is te zien dat het regelsysteem niet kan weten waar de assen zich bevinden.
 
-			\todo{verwijzing datasheet?}
-			\paragraph{\textbf{Freesbank}}
-				De freesbank is gemaakt van hout en heeft drie assen. De effectieve werkruimte bedraagt 251cm in de lengte(X-as), 127.5cm in de breedte(Z-as) en 8 cm in de hoogte(Y-as). De werkelijke grootte van de freesbank is 300cm(X) x 152cm(Z) x 60cm (Y). De poten van de machine is niet meegerekend in de Y-as grote. De freesbank bestaat uit drie assen met beweging. De X-as heeft aan beide kanten rails waarover een wagen rijdt. Deze wagen heeft een rails waarover een wagen rijdt. Op deze wagen zit een schroef die de as beweegt als de schroef draait. De andere assen gebruiken timing pulleys op tandriemen voor de bewegingen. In appendex \todo{nummer} is dit te zien\\
-				{\color{white}-}\\
-				Op de wagen van de hoogte-as is een handfrees gemonteerd. Deze frees werkt op netstroom. Als de frees snijdt, komt er materiaal los. Dit blijft liggen op de freesbank. De afzuiging van het materiaal het aansturen van de frees met de microcontroller of een nieuwe frees zoeken is buiten de scope van het project.\\
-				{\color{white}-}\\
-				De freesbank heeft externe invloeden zoals wrijving op de rails en uitrekking van de tandriemen.
+			\paragraph{De freesbank}
+				is gemaakt van hout en heeft drie assen en een handfrees. De buitenmaten zijn 300cm in de lengte(X), 152cm in de breedte(Y) en 60cm hoog(Z). Bij de maat van de hoogte is de lengte van de poten niet meegerekend. De werkruimte dat de freesmachine kan bereiken is 251 cm in de lengte, 127.5 cm in de breedte en 8 cm in de hoogte. De freesbank kan in drie richtingen bewegen. De X-as is de lengterichting van de machine. Aan beide zijden bevinden zich rails. Over deze rails beweegt de carriage, het montageonderdeel dat over de X-as loopt waaraan de rest van de bewegingen zitten. Op de carriage is een tweede rails gemonteerd, waarover de montage van de Z-as kan bewegen. Deze beweging vindt zich plaats in de Y-richting. De Z-richting wordt bewogen met een schroef dat de frees beweegt over de Z-as. De X- en Y-as worden bewogen met tandriemen. De volledige constructie is te zien in appendix C.
 
-			\paragraph{Actuatoren}
-				De motoren die worden gebruikt voor de beweging van de assen zijn NEMA 17 motoren. Deze werken op 12-36V en mogen maximaal 2A hebben. De motoren zitten vast aan het frame met bevestigingspunten. Aan de motoren zit een timing pulley bevestigd, waar een tandriem overheen loopt. De lengte as heeft motoren aan beide kanten van de freesbank. De hoogte en breedte assen worden aangedreven door één motor. De datasheet van deze motor is te vinden in '6.1 Datasheets'. \todo{controleer nummber}
+				Aan de Z-as is een handfrees dat op netstroom werkt gemonteerd. Wanneer er gefreest wordt komt er materiaal los dat blijft liggen op de freesbank. Op de freesbank werken externe effecten zoals wrijving op de rails en uitrekking van de tandriemen.
+				
+			\paragraph{De motoren}
+				die worden gebruikt voor de beweging van de assen zijn NEMA 17 motoren. Deze werken op 12-36V en mogen maximaal 2A hebben. De motoren zitten vast aan het frame met bevestigingspunten. De lengte-as heeft motoren aan beide kanten van de freesbank. De hoogte en breedte assen worden aangedreven door één motor. De datasheet van deze motor is te vinden in '6.1 Datasheets'. \todo{controleer nummber}
 
 			\paragraph{Drivers}
-				De drivers die worden gebruikt voor de motoren zijn DRV8824 drivers. Deze drivers werken op 8.2-45V en mogen maximaal 2.5A hebben op 24V. Deze drivers maken gebruik van een STEP en DIR pin. Door de DIR pin hoog en laag te maken veranderd de polariteit over de aangesloten motor. Door de STEP pin hoog te maken zet de motor een stap. Deze drivers hebben ook de mogelijkheid om te microsteppen. Microsteppen maakt gebruik van sinusvormige stromen om meer nauwkeurigheid en hogere resolutie te krijgen. De drivers krijgen voeding van een lab voeding en het regelsysteem. De datasheet van deze driver is vinden in '6.1 Datasheets'. \todo{controleer nummber}
+				De drivers die worden gebruikt voor de motoren zijn DRV8824 drivers. Deze drivers werken op 8.2-45V en mogen maximaal 2.5A hebben op 24V. Deze drivers maken gebruik van een STEP en DIR pin. Door de DIR pin hoog en laag te maken veranderd de polariteit over de aangesloten motor. Door de STEP pin hoog te maken zet de motor een stap. Deze drivers hebben ook de mogelijkheid om te microstappen. Microstappen maakt gebruik van sinusvormige stromen om meer nauwkeurigheid en hogere resolutie te krijgen. De drivers zitten op een CNC shield dat 5V en 40mA nodig heeft. Dit krijgt deze de microcontroller. De drivers krijgen voeding van een lab voeding. De datasheet van deze drivers en CNC shield zijn vinden in '6.1 Datasheets'. \todo{controleer nummber}
 
-			\paragraph{Regelsysteem} 
-				Het systeem wordt geregeld doormiddel van een Arduino Uno met een opensource regelsysteem GRBL. Dit is het onderdeel dat input van de gebruiker krijgt en informatie terugstuurt naar de gebruiker.
+			\paragraph{De microcontroller} 
+				is een een Arduino Uno met de opensource software GRBL. Dit is het onderdeel dat input van de gebruiker krijgt en informatie over het systeem terugstuurt naar de gebruiker. Het regelsysteem wordt gevoed door een laptop met 5V en 200mA.
 
-			\subsubsection{Oplossingen}
-				Als eerste was de vraag er of een stappenmotor met ingebouwde encoders een oplossing zou zijn omdat dan de beweging logica van GRBL niet aangepast hoeft te worden. Dit is omdat deze encoders closed loop zijn zorgen ervoor dat de stappen motoren altijd op de juiste positie uitkomen. Dit is voorgelegd aan de opdrachtgever en die gaf aan dat dit niet de gewenste oplossing is, omdat er dan een afhankelijkheid van de fabrikant wordt gemaakt. Dit is omdat de fabrikant bepaald welke encoder op de stappenmotor komt, Hierdoor bepaald de fabrikant hoe nauwkeurig de freesbank kan zijn. Ook wil Sens2Sea het systeem gemakkelijk kunnen aanpassen om andere sensoren of actuatoren te gebruiken wanneer er meer nauwkeurigheid gewenst is.
+			\paragraph{Er} 
+				zijn drie voedingen in de huidige situtatie. De voeding voor de motor drivers is 24V 2A met een lab voeding. Het regelsysteem wordt gevoed door een laptop met 5V en 200mA. Hiernaast is er nog een voeding. Deze voeding voed de handfrees met netstroom. 
 
-		\subsection{Nieuwe functies}
-				\begin{center}
-				\includegraphics[width=10cm]{volledigsysteem.png}\\
-				Freesbank: Nieuwe situatie
-				\end{center}
-				In het diagram is een nieuw component toegevoegd. Dit component zorgt voor de terugkoppeling van de beweging van de actuatoren naar het regelsysteem.
+		\subsection{Sensor}
+			Uit een interview met de opdrachtgever is gebleken dat de opdrachtgever enocders wilt gebruiken. Dit mogen geen stappenmotoren zijn met encoders bevestigd omdat het bedrijf dan afhankelijk is van de fabrikant van de encoders. De opdrachtgever wilt indien nodig de nauwkeurigheid van de machine verhogen met andere soorten sensoren. 
 
-			\paragraph{Sensor}
-				Uit een interview met de opdrachtgever is gebleken dat de opdrachtgever encoders wil gebruiken en deze wil bevestigen op een getande riem die op het frame is geplakt. Hierdoor kan de getande riem niet uitrekken. De nauwkeurigheid van de encoder is niet het belangrijkste omdat het project gaat over het scheiden van de aandrijving van de frees en positiebepaling van de snij kop. Verder doen de kosten ertoe, maximaal 60 euro per encoder. Ook is er belang bij dat de huidige positie opvragen snel kan aangezien een freesbank een high performance machine is. Er zijn verschillende soorten encoders die verschillend werken. De nauwkeurigheid van een encoder wordt gemeten in Pulses Per Rotation(PPR). Dit geeft aan dat hoe hoger de PPR is de hoger de nauwkeurigheid omdat er meer pulsen gegeven worden in dezelfde rotatie. Na het onderzoek zijn de opties voorgelegd aan de opdrachtgever en is er gekozen om een optische incrementele encoder te gebruiken. Er zijn ook externe invloeden op de encoder zoals vuil dat in de encoder komt, dat de metingen kan verstoren. De datasheet van deze sensor is te vinden in '6.1 Datasheets'. \todo{controleer nummber}
+			Voor dit prototype is het belangrijk dat de locatie bepaling gescheiden wordt van de aansturing van de motoren. Verder mag de prijs van de encoder niet boven de 60 euro per encoder uitkomen. Er is geen eis voor de nauwkeurigheid van de encoder omdat dit niet het belangrijkste is voor dit prototype.
 			
-			\paragraph{Regelaar}
-				Als regelaar is een microcontroller nodig. De keuze van de encoder zorgt ervoor dat de microcontroller 6 interrupt pinnen nodig heeft. Verder moet deze rond de specificaties zijn als een Arduino Uno. Dit is omdat opensource oplossingen zoals GRBL gebaseerd zijn op een Arduino Uno. Verder werkt het bedrijf veel met Arduino Uno's. Hierom is voorgesteld om een Arduino Mega te gebruiken. Deze mircrocontroller heeft meer rekenkracht dan de Arduino Uno en heeft dus voldoende rekenkracht. Hiernaast heeft deze microcontroller ook de benodigde 6 interrupt pinnen voor de drie verschillende assen. Daarnaast bieden de vele pinnen mogelijkheden om het systeem uit te breiden. 
+			Er zijn verschillende soorten encoders waarnaar onderzoek gedaan is. De nauwkeurigheid van een encoder wordt gemeten in Pulses Per Rotation(PPR). Dit betekent dat hoe hoger de PPR is, hoe nauwkeuriger de encoder is. Na het onderzoek zijn de opties voorgelegd aan de opdrachtgever en is er gekozen om een optische incrementele encoder(me38s6-c-(600)b5g2) te gebruiken. Dit omdat deze encoder relatief goedkoop met een goede nauwkeurigheid ten opzichte van andere encoders. De datasheet van deze sensor is te vinden in '6.1 Datasheets'. \todo{controleer nummber} Het onderzoek is te vinden in appendix A. 
+
+		\subsection{Microcontroller}
+			het huidige systeem maakte gebruik van een Arduino Uno. Deze microcontroller heeft niet genoeg interrupt pinnen voor de encoders. Interrupt pinnen zijn speciale pinnen op een microcontroller. Deze pinnen onderbreken de code waardoor een ander stuk code uitgevoerd kan worden. Hierna gaat de microcontroller weer verder met waar deze meebezig was. De huidige microcontroller heeft niet genoeg van deze pinnen. Verder heeft deze microcontroller niet genoeg pinnen voor de uitbreidingen die in de toekomst toegevoegd zullen worden. In overleg met de opdrachtgever besloten om een Arduino Mega te gebruiken. Deze microcontroller heeft meer rekenkracht dan de Arduino Uno en heeft veel meer pinnen. Ook maakt het bedrijf al gebruik van de Arduino omgeving waardoor er al kennis over is.
+
+		\subsection{Requirements}
+			Uit de analyse en interviews met de opdrachtgever zijn er eisen opgesteld. 
 			
-			{\color{white}-}\\
-			Na de opties voorgelegd te hebben aan de opdrachtgever zijn er optische incrementele encoders (me38s6-c-(600)b5g2) besteld. Hiernaast is er ook een Arduino Mega besteld.
+			\begin{center}
+				\begin{tabular}{|c|c|c|}
+					\hline
+					De freeskop moet in de X richting kunnen bewegen. & Als opdrachtgever wil ik dat de freeskop in de X richting kan bewegen. & Funct.\\
+					\hline
+					De freeskop moet in de Y richting kunnen bewegen. & Als opdrachtgever wil ik dat de freeskop in de Y richting kan bewegen. & Funct.\\
+					\hline
+					De freeskop moet in de Z richting kunnen bewegen. & Als opdrachtgever wil ik dat de freeskop in de Z richting kan bewegen. & Funct.\\
+					\hline
+					De positie van de freeskop op de X as moet bepaald worden met een encoder. & Als opdrachtgever wil dat de positie van de freeskop op de X-as bepaald wordt met een encoder. & Funct.\\
+					\hline
+					De positie van de freeskop op de Y as moet bepaald worden met een encoder. & Als opdrachtgever wil dat de positie van de freeskop op de Y-as bepaald wordt met een encoder. & Funct.\\
+					\hline
+					De positie van de freeskop op de Z as moet bepaald worden met een encoder. & Als opdrachtgever wil dat de positie van de freeskop op de Z-as bepaald wordt met een encoder. & Funct.\\
+					\hline
+					De freesbank moet G-Code kunnen inlezen en uitvoeren. & Als opdrachtgever wil ik dat de freesbank G-Code commando's kan inlezen en uitvoeren & Funct.\\
+					\hline
+					De software moet modulair opgebouwd zijn. & ALs opdrachtgever wil ik dat de software van de freesbank modulair opgebouwd is, omdat er gemakkelijk onderdelen aan toegevoegd moeten kunnen worden. & Niet funct. \\
+					\hline
+				\end{tabular}
+			\end{center}
+
+	\section{Ontwerpen}
+		Uit de wensen en eisen van de opdrachtgever ontstaat er een nieuw diagram.
+		\begin{center}
+			\includegraphics[width=10cm]{Freesbank-nieuwe-componenten.png}\\
+			Figuur 2: Freesbank Nieuw ontwerp
+		\end{center}
+		In figuur 2 is het nieuwe ontwerp te zien waaraan een encoder is toegevoegd. Iedere as heeft zijn eigen encoder waardoor de bewegingen per as gemeten kan worden. De encoders moeten bevestigd worden op een getande riem dat op het frame is geplakt. Doordat deze riem op het frame geplakt is, kan deze niet uitrekken. De encoder gebruikt 5V en 40mA en krijgt deze voeding van de microcontroller. De encoders sturen als deze gedraait worden pulsen naar de microcontroller die deze verwerkt. Verder is de microcontroller vervangen door een Arduino Mega. Deze microcontroller verstuurd de step en richting signalen naar de motor drivers. 
+
+
+
+			
+			
 			
 			\subsubsection{Software}
 				\begin{center}
@@ -140,11 +169,11 @@
 					\hline
 					Requirement & User story & Acceptatie & soort \\
 					\hline
-					De snij kop van de machine moet over& Als opdrachtgever wil ik dat de machine & Als de kop zich over de 	& Funct.	\\
+					De freeskop van de machine moet over& Als opdrachtgever wil ik dat de machine & Als de kop zich over de 	& Funct.	\\
 					de X, Y en Z as kunnen bewegen. 		&	zich over de X, Y en Z as kan bewegen. 	& X, Y en Z as kan bewegen.	& 				\\
 					\hline
-					De positie van de snij kop op    		& Als opdrachtgever wil ik dat de machine	& Als de positie van de			& Funct. 	\\
-					een as moet bepaald worden    	  	& de positie van de kop bepaald doormiddel& snij kop op een as    		&				 	\\
+					De positie van de freeskop op    		& Als opdrachtgever wil ik dat de machine	& Als de positie van de			& Funct. 	\\
+					een as moet bepaald worden    	  	& de positie van de kop bepaald doormiddel& freeskop op een as    		&				 	\\
 					doormiddel van sensoren.						& van sensoren on de nauwkeurigheid te 		& bepaald word door een     &				 	\\
 																							& garanderen.															&	sensor.										&					\\
 					\hline
@@ -171,7 +200,7 @@
 				Software diagram A: State machine.
 			\end{center}
 
-			\paragraph{Flowchart} In software diagram B is een flowchart te zien. De flowchart is verdeeld in meerdere kleuren. Oranje en geel zijn interrupts voor de input van de gebruiker. Rood is de interrupt van de sensoren en paars de interrupt die de motoren aanstuurt. Het blauwe gedeelte is de main loop die input, errors en het maken van opdrachten afhandelt. Als er een input van de gebruiker komt, wordt die gelezen. Als het een systeem commando is zoals de status opvragen zal die meteen worden afgehandeld door 'execute system command'. Anders wordt de G-Code gelezen en in de queue gezet. Als het G-Code commando meteen afgehandeld moet worden, zal dat gedaan worden.
+			\paragraph{Flowchart} In software diagram B is een flowchart te zien. De flowchart is verdeeld in meerdere kleuren. Oranje en geel zijn interrupts voor de input van de gebruiker. Rood is de interrupt van de sensoren en paars de interrupt die de motoren aanstuurt. Het blauwe gedeelte is de main loop die input, errors en het maken van opdrachten afhandelt. Als er een input van de gebruiker komt, wordt die gelezen. Als het een systeem opdracht is zoals de status opvragen zal die meteen worden afgehandeld door 'execute system command'. Anders wordt de G-Code gelezen en in de queue gezet. Als het G-Code commando meteen afgehandeld moet worden, zal dat gedaan worden.
 			\begin{center}
 				\includegraphics[width=8cm]{Flowchart-full.png}\\
 				Software diagram B: Flowchart.
@@ -205,16 +234,16 @@
 		\subsection{Software}
 			De software is opgebouwd uit de volgende modules: Datacommunicatie, stepper, encoder, system. Ook is er een bestand main waar het programma begint en een macros.h file waar alle macros zich bevinden. De software is geschreven in C++ maar maakt geen gebruik van classes. De software maakt geen gebruik van de Arduino.h library. Hierdoor zijn alle Arduino functies niet beschikbaar en worden pinnen rechtstreeks gezet met door de registers te beïnvloeden. Ook interrupts worden op deze manier toegevoegd. Interrupts zijn seinen die de processor vertellen dat die moet stoppen met waar die nu mee bezig is en de code die bij die interrupt hoort moet uitvoeren.
 
-			\paragraph{main}
+			\paragraph{Main}
 				Deze module definieert het begin van het programma. Hier bevindt zich de main loop waaruit alle andere functies van andere modules worden aangeroepen. Deze module initialiseert alle andere modules indien nodig en leegt de seriële buffer voor de zekerheid.
 
-			\paragraph{macro's}
+			\paragraph{Macro's}
 				Deze header file heeft alle macro's die nodig zijn voor het bestand. Macro's zijn woorden die door de compiler veranderd worden in de definitie van de macro. Dus als er een macro \small \textbf{TIJD\_MS 3} \normalsize is, zal de compiler alle instanties van \small \textbf{TIJD\_MS 3} \normalsize veranderen in 3. Een belangrijk onderdeel van dit bestand is de custom datatypes. Omdat een int op een Arduino geen 32 bit maar 16 bit is, kloppen de standaard uint32\_t datatypes niet. Hiervoor zijn deze opnieuw gedefinieerd als:\small \textbf{uchar, uint8, int8, uint16, int16, uint32, int32}\normalsize. Floats en doubles zijn dezelfde grootte op een Arduino dus wordt er verder alleen float gebruikt. Hier zijn ook alle pin en port definities te vinden.
 
 			\paragraph{Datacommunicatie}
 				Deze module zorgt voor de seriële verbinding met de gebruiker. De standaard Arduino library voldoet niet aan de benodigdheden voor een machine dat snel en nauwkeurig moet werken. Dit komt doordat de functies van deze library blokkerend zijn. Dit betekent dat wanneer de buffer op de Arduino vol zit omdat het niet snel genoeg verstuurd wordt of ontvangen wordt, de Arduino wacht met alles wat gedaan moet worden inclusief bewegingen totdat er weer characters op de buffer kunnen. De implementatie van dit project werkt op dezelfde manier als de standaard library, maar deze gooit de characters weg als de buffer vol zit, waardoor de bewegingen nauwkeurig blijven. Deze module bevat ook verschillende high level implementaties om de data te sturen. Er kunnen door de \textbf{print()} functie intergers, chars, floats, strings, en nog meer verschillende datatypes geprint worden. 
 
-			\paragraph{stepper}
+			\paragraph{Stepper}
 				Deze module zorgt voor alle functies van de steppers. Eerst wordt een segment(block) klaar gemaakt. Dit block heeft een aantal eigenschappen, Hieronder vallen alle parameters meegegeven met de G-Code commando's. Hiervan worden een paar extra parameters berekend die nodig zijn per stap. Het stappen wordt gedaan door een interrupt die iedere aantal milliseconde uitgevoerd wordt. Deze snelheid is gedefinieerd in macros.h. Voor ieder segment wordt er een wiskundige formule opgesteld voor het pad dat de motoren moeten volgen. Iedere as heeft zijn eigen formule. Deze formules zorgen ervoor dat als de machine naar (X=10, Y=5, Z=2) moet, alle assen op hetzelfde moment aankomen. Er zijn twee verschillende modellen: Rechte beweging, Cirkelbeweging. De commando's zijn te vinden in de handleiding. \\
 				{\color{white}-}\\
 				{\color{white}-}\\
@@ -225,20 +254,20 @@
 				\end{center}
 				{\color{white}-}\\
 				{\color{white}-}\\
-				De cirkelbeweging word gedaan met sinus en cosinus functies. Deze functies hebben een 4ste cirkel verschil met elkaar waardoor als deze gecombineerd worden er een cirkel beweging ontstaat. Ook deze functie gaat van t=0 naar t=eind. Maar deze word verschoven met de begin hoek. Als de cirkel tegen de klok in gaat wordt de de sinus en cosinus vermenigvuldigd met -1. Hierdoor lopen de golven de andere kant op waardoor de assen tegen de klok in gaan. De cirkel beweging kan maar op twee assen, dus zijn de commandos (G17-G19) om te kiezen op welk vlak de machine moet werken. De standaard is op het XZ vlak(G19).\\
+				De cirkelbeweging word gedaan met sinus en cosinus functies. Deze functies hebben een 4ste cirkel verschil met elkaar waardoor als deze gecombineerd worden er een cirkel beweging ontstaat. Ook deze functie gaat van t=0 naar t=eind. Maar deze word verschoven met de begin hoek. Als de cirkel tegen de klok in gaat wordt de sinus en cosinus vermenigvuldigd met -1. Hierdoor lopen de golven de andere kant op waardoor de assen tegen de klok in gaan. De cirkel beweging kan maar op twee assen, dus zijn de commando's (G17-G19) om te kiezen op welk vlak de machine moet werken. De standaard is op het XZ vlak(G19).\\
 				\begin{center}
 					\includegraphics[width=10cm]{model-circelbeweging.png}\\
 					Software model: Cirkelbeweging
 				\end{center}
 
-			\paragraph{encoder}
+			\paragraph{Encoder}
 				Deze module zet de pulsen van de encoders om in een locatie. Deze module zet interrupts aan op alle pinnen van de machine. Als er een interrupt af gaat worden de beide pinnen uitgelezen. Door beide pinnen te gebruiken kan er onderscheid gemaakt worden tussen voor- en achteruit bewegen. Hieronder is de functie om de encoder uit te lezen te zien. Deze code maakt slim gebruik van bitwise operaties om het verschil te vinden. Dit stukje code wordt heel vaak uitgevoerd waardoor het belangrijk is dat dit heel snel is. De encoders maken gebruikt van de interrupt pinnen van de Arduino omdat deze de 2e hoogste prioriteit hebben op de Arduino. Deze pinnen staan ingesteld op 'any change' om de 'rising en falling edge' te detecteren.
 				\begin{center}
 					\includegraphics[width=11cm]{encodercode.png}\\
 					Software: Encoder functie
 				\end{center}
 
-			\paragraph{system}
+			\paragraph{System}
 				Deze module gebruikt de andere modules om alle opdrachten uit te lezen uit de buffers, om te zetten naar bruikbare info en in de buffer voor de stappen motoren zetten. Deze module zet de G-Code om naar een block en zet in de buffer. Hiernaast voert deze module ook alle systeem commando's uit zoals $\$?$ om de huidige status uit te lezen. 
 
 
@@ -249,9 +278,9 @@
 					\hline
 					Soort & Requirement & Uitslag \\
 					\hline
-					Funct & De positie van de snij kop op een as moet bepaald worden doormiddel van sensoren. & Behaald. \\
+					Funct & De positie van de freeskop op een as moet bepaald worden doormiddel van sensoren. & Behaald. \\
 					\hline
-					Funct & De snijkop van de machine moet over de X, Y en Z as kunnen bewegen. & Behaald \\
+					Funct & De freeskop van de machine moet over de X, Y en Z as kunnen bewegen. & Behaald \\
 					\hline
 					Funct & Er kan G-Code uitgevoerd worden door de freesbank. & Behaald \\
 					\hline
@@ -261,24 +290,24 @@
 				\end{tabular}
 			\end{center}
 
-
-
-\todo{spelling check}
-
 	\section{Aanbevelingen}
-		Bij deze opdracht zijn meerdere onderdelen aan bod gekomen waar dit project niet aan toe gekomen is.
-		\begin{enumerate}
-			\item Er zijn modules waarmee de encoders makkelijker uit te lezen zijn. Hier moet onderzoek naar gedaan worden.
-			\item rotzooi afzuigen frees
-			\item calibratie
-			\item zorgen volledige werkruimte benutten. 
-			\item microcontroller en voeding niet mee laten bewegen met de freesbank, dus de alleen de kabels voor de stroom. 
-			\item zorgen dat de machine geen beweegings commandos aanneemt als de buffer vol is.
-			\item pcb maken voor alle steppermotoren
-		\end{enumerate}
-		\todo{aanbevelingen toeveogen}
+			Tijdens dit project zijn meerdere onderdelen aan bod gekomen waar geen tijd voor was of buiten de scope lag. 
 
-    
+			\paragraph{Frees} In dit project is de handfrees gebruikt die al op de machine zat. Deze moet handmatig aangezet worden waardoor dit niet praktisch is. Dus zou er een frees moeten komen die aangestuurd kan worden door het regelsysteem. Ook maakt de frees materiaal los dat afgezogen moet worden. Hier moet ook over nagedacht worden.
+
+			\paragraph{Bekabeling} De bekabeling van de freesbank is niet netjes. Voor het nieuwe ontwerp moet er voor gezorgd worden dat de kabels niet vast kunnen zitten in andere onderdelen van de machine. Hiernaast moet ervoor gezorgd worden dat de bekabeling niet hangt om kabelbreuken tegen te gaan.
+
+			\paragraph{PCB} De drivers van het systeem zitten in dit ontwerp op een CNC-shield. De pinconfiguraties van de code is anders dan de configuratie van het CNC-shield. Hierdoor moeten losse kabels gebruikt worden en de bevestigingspunten voor deze kabels zitten onder- en bovenop de shield. Om deze reden en dat de freesbank in de toekomst 5 assen moet krijgt zou een PCB maken te adviseren zijn.
+
+			\paragraph{Encoder} Om de encoder uit te lezen wordt op dit moment interrupt pinnen gebruikt op de Arduino. Er zijn ook modules die de encoders pulsen opvangen en hiermee de locatie bepalen. Deze modules zouden alleen uitgelezen moeten worden door de microcontroller om de huidige locatie te krijgen. Of dit werkt moet onderzoek naar gedaan worden.
+
+			\paragraph{SD} Het regelsysteem heeft een gelimiteerd aantal plekken in de buffer voor G-Code opdrachten. Hierdoor raakt de buffer van de seriële lijn vol waardoor andere belangrijke opdrachten niet binnen komen. Een SD kaart toevoegen aan het systeem waar de step files op staan zou dit verhelpen. Een andere oplossing is om een de bevestiging van het regelsysteem uit te lezen met de hoeveelheid plekken die aanwezig zijn om ervoor te zorgen dat alle informatie op het juiste moment binnen komt.
+
+			\paragraph{Kalibratie} Het systeem moet gekalibreerd worden als deze gebruikt wordt. Dit kan gedaan worden door de freeskop van (X-, Y- en Z-) hoek naar de (X+, Y+ en Z+) hoek te bewegen en de encoderstappen tellen. Het aantal stappen per as kan door de lengte van de as gedeeld worden om de nauwkeurigheid te krijgen. 
+
+			\paragraph{Stappen} Het systeem maakt gebruikt van stappenmotoren. Deze motoren kunnen normale stappen zetten, maar ook microstappen. In het systeem worden normale stappen gebruikt. Maar microstappen zijn fijner en maken minder trillingen waardoor de nauwkeurigheid van de machine beter wordt.
+
+\newpage
 	\section{Bronnen}
 		\begin{enumerate}
 			\item Wikipedia contributors, “Radar,” Wikipedia, The Free Encyclopedia (Dutch version). [Online]. Available: \url{https://nl.wikipedia.org/wiki/Radar}. Accessed: Jan. 6, 2026.
@@ -295,58 +324,58 @@
 			\begin{enumerate}
 				\item Texas Instruments, “DRV8824 Stepper Motor Controller IC,” Datasheet. [Online]. Available: \url{https://www.ti.com/lit/ds/symlink/drv8824.pdf}. Accessed: Jan. 6, 2026.
 				\item PBC Linear, “Stepper Motor Support: NEMA 17 Data Sheet,” PBC Linear. [Online]. Available: \url{https://media.pbclinear.com/pdfs/pbc-linear-data-sheets/data-sheet-stepper-motor-support.pdf}. Accessed: Jan. 6, 2026.
-				\item “Datasheet E38S6G5-600B-G24N,” engautomacaoing, Scribd, Online. Available: https://www.scribd.com/document/756625816/Datasheet-E38S6G5-600B-G24N. Accessed on: Jan. 27, 2026.
+				\item “Datasheet E38S6G5-600B-G24N,” engautomacaoing, Scribd, [Online]. Available: \url{https://www.scribd.com/document/756625816/Datasheet-E38S6G5-600B-G24N}. Accessed on: Jan. 27, 2026.
+				\item Handson Technology, “3-Axis CNC/Stepper Motor Shield for Arduino User Manual,” Handson Technology, Online. Available: \url{https://www.handsontec.com/dataspecs/cnc-3axis-shield.pdf}. Accessed on: Jan. 29, 2026.
+
 			\end{enumerate}
 
 \todo{code in bijlage linken}
-		\newpage
-		\appendix
-		
-			\section{Encoder onderzoek}
-				Voor de positie van de snij kop van een freesbank te bepalen zijn verschillende mogelijkheden. Uit een interview met de opdrachtgever is gekomen dat deze encoders wilt gebruiken. Een encoder is een sensor met een roterende as. Als deze as draait zet de encoder de beweging om in elektrische signalen. Hierdoor kunnen microcontrollers de positie, snelheid en richting bepalen. De encoders zijn onder te verdelen in verschillende soorten: Incrementeel of absoluut. Ook zijn er verschillende meet methodes: Magnetisch of optisch. Er zijn ook encoders die lineair zijn, maar daarvan heeft de opdrachtgever aangegeven dat die niet bruikbaar zijn. Bij de keuze moet ook rekening gehouden worden met dat de prijs van een sensor onder de 60 euro moet blijven. 
+	\newpage
+	\appendix
+		\section{Encoder onderzoek}
+			Voor de positie van de freeskop van een freesbank te bepalen zijn verschillende mogelijkheden. Uit een interview met de opdrachtgever is gekomen dat deze encoders wilt gebruiken. Een encoder is een sensor met een roterende as. Als deze as draait zet de encoder de beweging om in elektrische signalen. Hierdoor kunnen microcontrollers de positie, snelheid en richting bepalen. De encoders zijn onder te verdelen in verschillende soorten: Incrementeel of absoluut. Ook zijn er verschillende meet methodes: Magnetisch of optisch. Er zijn ook encoders die lineair zijn, maar daarvan heeft de opdrachtgever aangegeven dat die niet bruikbaar zijn. Bij de keuze moet ook rekening gehouden worden met dat de prijs van een sensor onder de 60 euro moet blijven. 
 
-				\subsection{Meet methodes}
-					Er zijn verschillende manieren om de beweging te meten. Hiervoor zijn optisch en magnetisch de meest gebruikte technologieën.
+			\subsection{Meet methodes}
+				Er zijn verschillende manieren om de beweging te meten. Hiervoor zijn optisch en magnetisch de meest gebruikte technologieën.
 
-					\textbf{Magnetisch} Magnetische encoders maken gebruik van een magnetisch veld om de rotatie van de as te bepalen. Dit heeft het voordeel dat deze robuuster zijn. Hiernaast zijn deze ook beter bestand tegen vervuiling, trillingen en extreme omgevingsomstandigheden. Het nadeel is dat sterke magnetische velden metingen van andere sensoren kunnen beïnvloeden. Er zijn ook drie grote groepen magnetische encoders.
-					\begin{enumerate}
-						\item \textbf{Magnetic Gear Tooth Sensor or Pickup}, Deze encoder heeft een magnetische sensor en een ferromagnetische tandwiel. Dit betekend dat het tandwiel in staat is om een magnetisch veld te geleiden. Het voordeel hiervan is dat deze goedkoop zijn, alleen zijn deze gelimiteerd door het aantal tanden. Dit limiteert de resolutie naar 120 of 240 PPR.
-						\item \textbf{Magneto-Resistive}, Deze encoder genereert een sinus golf door weerstand te meten op een wiel met afwisselende magnetische polen of een film met weerstanden. De afwisselende magnetische polen bieden een hogere nauwkeurigheid dan het film met weerstanden. Deze encoders zijn moeilijker om te integreren in een systeem.
-						\item \textbf{Hall-Effect magnetic}, Deze encoder maakt gebruik van het Hall-Effect. De encoder bevat een laag van een halfgeleider materiaal dat verbonden is met een voeding. als een magnetische pool langs de hall-effect sensor komt, word er een hoge voltage gegenereerd. De frequentie en amplitude van de verstoring in het magnetisch veld kan worden gebruikt om de snelheid en verplaatsing te bepalen. 
-					\end{enumerate}
-
-
-					\textbf{Optisch} Optische encoders zijn encoders die gebruik maken van optische signalen om stappen te tellen. Dit doen deze encoders door een schijf met patronen dat vast zit aan de as. Door een lichtsensor worden deze patronen omgezet in elektrische pulsen. Deze sensoren bieden hoge resolutie en nauwkeurigheid. Hierdoor zijn deze encoders goed op plekken waar veel nauwkeurigheid verwacht wordt. Het nadeel van deze sensoren is dat deze gevoeliger zijn voor stof, vuil en trillingen.
-
-				\subsection{Encoder soorten}
-					\textbf{Incrementeel}, Incrementele encoders genereren pulsen als de as beweegt. Op de schijf zijn er 1 of meerdere rijen met patronen. die rijen heten kanalen en als er twee of meer kanalen zijn, is het mogelijk om de richting bepalen. Deze patronen zijn 1/4 patroon van elkaar verschoven. Hierdoor krijg je bij een encoder met twee kanalen een patroon in de signalen. Dit betekend ook dat deze het zelfde aantal draden heeft als kanalen. Doordat de encoder een patroon volgt ten opzichte van een referentie punt, moet de microcontroller zelf de positie bijhouden. Hierdoor gaat de positiebepaling verloren als er een stroomonderbreking is.
+				{\color{white}-}\\\textbf{Magnetisch} Magnetische encoders maken gebruik van een magnetisch veld om de rotatie van de as te bepalen. Dit heeft het voordeel dat deze robuuster zijn. Hiernaast zijn deze ook beter bestand tegen vervuiling, trillingen en extreme omgevingsomstandigheden. Het nadeel is dat sterke magnetische velden metingen van andere sensoren kunnen beïnvloeden. Er zijn ook drie grote groepen magnetische encoders.
+				\begin{enumerate}
+					\item \textbf{Magnetic Gear Tooth Sensor or Pickup}, Deze encoder heeft een magnetische sensor en een ferromagnetische tandwiel. Dit betekend dat het tandwiel in staat is om een magnetisch veld te geleiden. Het voordeel hiervan is dat deze goedkoop zijn, alleen zijn deze gelimiteerd door het aantal tanden. Dit limiteert de resolutie naar 120 of 240 PPR.
+					\item \textbf{Magneto-Resistive}, Deze encoder genereert een sinus golf door weerstand te meten op een wiel met afwisselende magnetische polen of een film met weerstanden. De afwisselende magnetische polen bieden een hogere nauwkeurigheid dan het film met weerstanden. Deze encoders zijn moeilijker om te integreren in een systeem.
+					\item \textbf{Hall-Effect magnetic}, Deze encoder maakt gebruik van het Hall-Effect. De encoder bevat een laag van een halfgeleider materiaal dat verbonden is met een voeding. als een magnetische pool langs de hall-effect sensor komt, word er een hoge voltage gegenereerd. De frequentie en amplitude van de verstoring in het magnetisch veld kan worden gebruikt om de snelheid en verplaatsing te bepalen. 
+				\end{enumerate}
 
 
-					Het aantal patronen per kanaal bepaald de nauwkeurigheid. Indien een encoder meerdere kanalen heeft vergroot de nauwkeurigheid. bij 600 PPR (pulses per rotation)op één kanaal, heeft twee kanalen 600*4=2400 PPR. 
-					
+				{\color{white}-}\\\textbf{Optisch} Optische encoders zijn encoders die gebruik maken van optische signalen om stappen te tellen. Dit doen deze encoders door een schijf met patronen dat vast zit aan de as. Door een lichtsensor worden deze patronen omgezet in elektrische pulsen. Deze sensoren bieden hoge resolutie en nauwkeurigheid. Hierdoor zijn deze encoders goed op plekken waar veel nauwkeurigheid verwacht wordt. Het nadeel van deze sensoren is dat deze gevoeliger zijn voor stof, vuil en trillingen.
 
-					Het patroon van de signalen is in graycode. Dit patroon is te zien in figuur x\todo{figuur nummer}. Graycode is een ander soort binaire code dat bij elke ophoging en verlaging één bit veranderd. De signalen moet je opvangen met een microcontroller via polling of interrupts. Interrupts zijn handiger omdat er dan geen data verloren kan gaan door een te kleine sample snelheid.
-					\begin{figure}
-						\begin{center}\begin{tabular}{ c|c }
-						A & B \\
-						\hline
-						0 & 0 \\
-						\hline
-						1 & 0 \\
-						\hline
-						1 & 1 \\
-						\hline
-						0 & 1      
-						\end{tabular}\end{center}
-						\caption{Encoder sequentie}
-					\end{figure}
+			\subsection{Encoder soorten}
+				{\color{white}-}\\\textbf{Incrementeel}, Incrementele encoders genereren pulsen als de as beweegt. Op de schijf zijn er 1 of meerdere rijen met patronen. die rijen heten kanalen en als er twee of meer kanalen zijn, is het mogelijk om de richting bepalen. Deze patronen zijn 1/4 patroon van elkaar verschoven. Hierdoor krijg je bij een encoder met twee kanalen een patroon in de signalen. Dit betekend ook dat deze het zelfde aantal draden heeft als kanalen. Doordat de encoder een patroon volgt ten opzichte van een referentie punt, moet de microcontroller zelf de positie bijhouden. Hierdoor gaat de positiebepaling verloren als er een stroomonderbreking is.
 
-					De signalen moeten worden opgevangen door een microcontroller. Dit kan via polling of interrupts. Interrupts stoppen het programma en voeren hun code uit, hierna kan het programma weer verder gaan. Polling is een manier van input lezen door iedere keer te kijken of de data veranderd is. Interrupts zijn hiervoor beter omdat er bij polling data verloren kan gaan door een te lage sample snelheid. De andere kant is dat een microcontroller maar een bepaald aantal interrupts per seconde kan verwerken.
+				{\color{white}-}\\Het aantal patronen per kanaal bepaald de nauwkeurigheid. Indien een encoder meerdere kanalen heeft vergroot dat de nauwkeurigheid. Bij een encoder met twee kanalen gaat de nauwkeurig maal vier. Bijvoorbeeld bij 600 PPR (Pulses Per Rotation) op één kanaal, is de nauwkeurig op twee kanalen $600*4=2400$ PPR. 
+				
 
-					\textbf{Absolute}, Absolute encoders zijn encoders die elke positie op de schijf een unieke code geven. Hierdoor weet de encoder exact waar die zich bevind in de rotatie. Hierdoor gaat de positie niet verloren als de spanning onderbroken is. Absolute encoders onthouden niet standaard het aantal rotaties die zijn gedaan. Hiervoor zijn multi-turn varianten. Absolute encoders moeten worden uitgelezen met een protocol zoals SPI. Op een Absolute encoder bepaald het aantal bits hoe nauwkeurig de encoder is. Een multi-turn absolute encoder heeft x aantal bits per rotatie en x aantal bits voor de aantal rotaties. 
-					
-					Absolute encoders zijn duurder dan incrementele encoders. Van absolute zijn de multi-turn encoders duurder dan single-turn encoder.
+				{\color{white}-}\\Het patroon van de signalen is in graycode. Dit patroon is te zien in figuur x\todo{figuur nummer}. Graycode is een ander soort binaire code dat bij elke ophoging en verlaging één bit veranderd. De signalen moet je opvangen met een microcontroller via polling of interrupts. Een interrupts vertelen de microcontroller dat er een verandering is in de pin waarop de interrupt staat. Hiernaast is polling het steeds kijken of de status veranderd is. Interrupts zijn hierin handiger omdat er dan geen data verloren kan gaan door een te langzame sample snelheid.
+				\begin{figure}
+					\begin{center}\begin{tabular}{ c|c }
+					A & B \\
+					\hline
+					0 & 0 \\
+					\hline
+					1 & 0 \\
+					\hline
+					1 & 1 \\
+					\hline
+					0 & 1      
+					\end{tabular}\end{center}
+					\caption{Encoder sequentie}
+				\end{figure}
 
+				{\color{white}-}\\De signalen moeten worden opgevangen door een microcontroller. Dit kan via polling of interrupts. Interrupts stoppen het programma en voeren hun code uit, hierna kan het programma weer verder gaan. Polling is een manier van input lezen door iedere keer te kijken of de data veranderd is. Interrupts zijn hiervoor beter omdat er bij polling data verloren kan gaan door een te lage sample snelheid. De andere kant is dat een microcontroller maar een bepaald aantal interrupts per seconde kan verwerken.
+
+				{\color{white}-}\\\textbf{Absolute}, Absolute encoders zijn encoders die elke positie op de schijf een unieke code geven. Hierdoor weet de encoder exact waar die zich bevind in de rotatie. Hierdoor gaat de positie niet verloren als de spanning onderbroken is. Absolute encoders onthouden niet standaard het aantal rotaties die zijn gedaan. Hiervoor zijn multi-turn varianten. Absolute encoders moeten worden uitgelezen met een protocol zoals SPI. Op een Absolute encoder bepaald het aantal bits hoe nauwkeurig de encoder is. Een multi-turn absolute encoder heeft x aantal bits per rotatie en x aantal bits voor de aantal rotaties. 
+				
+				{\color{white}-}\\Absolute encoders zijn duurder dan incrementele encoders. Van absolute zijn de multi-turn encoders duurder dan single-turn encoder.
+				\begin{center}
 					\begin{tabular}{|c|c|c|}
 						\hline
 						& absolute & Incrementeel\\
@@ -358,153 +387,154 @@
 						positie onthouden zonder stroom & ja & nee \\
 						\hline
 					\end{tabular}
+				\end{center}
 
-					{\color{white}-}\\
-					Om zeker te weten of een incrementele encoder kan werken door middel van interrupts, is er een testje gedaan. Door de interrupt pin te verbinden met een andere pin die steeds hoog en laag gemaakt wordt, is er getest hoeveel interrupts de microcontroller kan krijgen in een seconde. Deze test geeft een idee hoeveel de microcontroller kan hebben. Hierin wordt de tijd gemeten door de tijd van de serial monitor.
-					\begin{center}
-						Op tijdstip 1: 09:36:47.772 waren er 848785 interrupts geweest. \\
-						Op tijdstip 2: 09:36:53.204 waren er 1484065 interrupts geweest.\\ 
+				{\color{white}-}\\Om zeker te weten of een incrementele encoder kan werken door middel van interrupts, is er een testje gedaan. Door de interrupt pin te verbinden met een andere pin die steeds hoog en laag gemaakt wordt, is er getest hoeveel interrupts de microcontroller kan krijgen in een seconde. Deze test geeft een idee hoeveel de microcontroller kan hebben. Hierin wordt de tijd gemeten door de tijd van de seriële monitor.
 
-						Dit betekent dat er in 5.432 seconde 635280 interrupts zijn geweest. \\
-						$5.432/635280 \approx 116951$ interrupts per seconde.
-					\end{center}
+				\begin{center}
+					Op tijdstip 1: $09:36:47.772$ waren er $848785$ interrupts geweest. \\
+					Op tijdstip 2: $09:36:53.204$ waren er $1484065$ interrupts geweest.\\ 
 
-					Een pulley van 16 tanden op een tandriem van 1mm tanden geeft 2mm op een tand. $2*16=32$mm per rotatie. Indien er 20000 interrupts per as gebruikt kunnen worden door de sensoren kan de freesbank in theorie $20000/2400*32\approx266.6$mm/s bewegen. Dit is genoeg dus deze soorten encoders zijn een optie.
+					Dit betekent dat er in $5.432$ seconde $635280$ interrupts zijn geweest. \\
+					$5.432/635280 \approx 116951$ interrupts per seconde.
+				\end{center}
+				Een pulley van 16 tanden op een tandriem van 1mm tanden geeft 2mm op een tand. $2 * 16 = 32$mm per rotatie. Indien er $20000$ interrupts per as gebruikt kunnen worden door de sensoren kan de freesbank in theorie $20000 / 2400 * 32 \approx 266.6$mm/s bewegen. Dit is genoeg dus deze soorten encoders zijn een optie.
 
-					Na de opties voorgelegd te hebben aan de opdrachtgever heeft de opdrachtgever gekozen voor een betaalbare optische incrementele encoder. Dit is uiteindelijk de 'me38s6-c-(600)b5g2' rotary encoder geworden. Deze encoder heeft 600 PPR per kanaal. Dus 2400 PPR in dual channel. 
-			\newpage
-			\section{elektrische schema's}
+				{\color{white}-}\\Na de opties voorgelegd te hebben aan de opdrachtgever heeft de opdrachtgever gekozen voor een betaalbare optische incrementele encoder. Dit is uiteindelijk de 'me38s6-c-(600)b5g2' rotary encoder geworden. Deze encoder heeft 600 PPR per kanaal. Dus 2400 PPR in dual channel. 
+		\newpage
+
+		
+		\section{elektrische schema's}
+		\begin{center}
+		\includegraphics[scale=0.70]{CNC-1as-elektrisch-schema.pdf}\\
+			Elektrisch schema één as
+		\end{center}
+		\begin{sidewaysfigure}
+			\includegraphics[scale=0.60]{CNC-3asen-elektrisch-schema.pdf}
 			\begin{center}
-			\includegraphics[scale=0.70]{CNC-1as-elektrisch-schema.pdf}\\
-				Elektrisch schema één as
+			Elektrisch schema drie assen
 			\end{center}
-			\begin{sidewaysfigure}
-				\includegraphics[scale=0.60]{CNC-3asen-elektrisch-schema.pdf}
+		\end{sidewaysfigure}
+		\newpage
+
+
+
+		\section{Plaatjes systeem}
+			\begin{center}
+				\includegraphics[scale=0.8]{sideview.png}\\
+				Zij aanzicht.\\
+				\includegraphics[scale=0.8]{frontview.png}\\
+				Voor aanzicht.\\
+				\includegraphics[scale=0.8]{beugel-overbrugging.png} \includegraphics[scale=0.8]{beugel-overbrugging-encoder.png}\\
+				Links de Z-as zonder encoder, Rechts de Z-as met encoder en mechanische onderdelen.
+			\end{center}
+
+		\newpage
+		\section{Testrapport}
+			In dit rapport worden alle testen voor de eisen van het prototype weergegeven. Het prototype moet verschillende dingen kunnen. Deze zijn gedefineerd in de requirements en zijn de volgende:
+			\begin{enumerate}
+				\item De freeskop van de machine moet over de X, Y en Z as kunnen bewegen.
+				\item De positie van de freeskop op een as moet bepaald worden doormiddel van sensoren.
+				\item Er kan G-Code uitgevoerd worden door de freesbank.
+				\item De code van het prototype moet modulair zijn waardoor gemakkelijk delen vervangen kunnen worden, zoals actuatoren en sensoren.
+			\end{enumerate}
+			De vierde requirement is niet functioneel en is behaald als de code makkelijk is aan te passen voor de verschillende testen. 
+
+			\subsection{Er kan G-Code uitgevoerd worden door de freesbank.}
+				Deze test heeft de volgende acceptatie criteria: De test is voldaan als de machine G-Code commando's uitvoert.
+				
+				\paragraph{Testopstelling}
+					Deze test kan alleen op de machine uitgevoerd worden. Benodigd hiervoor is:
+					\begin{enumerate}
+						\item Freesbank een as of meer verbonden met stappen motor(s).
+						\item Microcontroller met code om G-Code commando's te ontvangen en uit te voeren.
+					\end{enumerate}
+
+				\paragraph{Instructies}
+					\begin{enumerate}
+						\item Verbind alle stappenmotoren met de microcontroller op de manier aangegeven op het elektrische schema(1 motor is genoeg).
+						\item Ze op de microcontroller de code om de machine te laten bewegen.
+						\item Voer het G-Code commando uit om een rechte lijn te bewegen op de aangesloten as.
+						\item Wacht totdat de machine klaar is met bewegen en laat de machine terug bewegen.
+					\end{enumerate}
+			
+				\paragraph{Verwacht resultaat}
+					Het verwachte resultaat is dat de machine gaat bewegen wanneer deze een G-Code commando krijgt en OK. stuurt.
+
+				\paragraph{Waarnemingen en conclusie}
+					De machine stuurt OK. terug en begint te bewegen naar het punt. Na het volgende commando stuurt de machine weer OK. en beweegt die terug. Dit betekend dat deze test voldaan is.
+
+
+			\subsection{De freeskop van de machine moet over de X, Y en Z as kunnen bewegen.}
+				Deze test heeft de volgende acceptatie criteria: De test is voldaan als de machine over de X, Y en Z as kan bewegen.
+				
+				\paragraph{Testopstelling}
+					Deze test kan alleen op de machine uitgevoerd worden. Ook is hiervoor nodig dat G-Code uitgevoerd kan worden. Benodigd hiervoor is:
+					\begin{enumerate}
+						\item Freesbank met drie assen verbonden met stappen motors.
+						\item Microcontroller met code voor drie assen en G-Code commando's te ontvangen en uit te voeren.
+					\end{enumerate}
+
+				\paragraph{Instructies}
+					\begin{enumerate}
+						\item Verbind alle stappenmotoren met de microcontroller op de manier aangegeven op het elektrische schema.
+						\item Ze op de microcontroller de code om de machine te laten bewegen.
+						\item Voer het G-Code commando uit om een rechte lijn te bewegen naar (X=10, Y=2, Z=5).
+						\item Wacht totdat de machine klaar is met bewegen en laat de machine naar het 0 punt bewegen.
+						\item Wacht totdat de machine klaar is met bewegen en laat de machine met een halve cirkel naar (X=10, Y=0, Z=0) bewegen met centerpunt (X=5, Z=0)
+					\end{enumerate}
+			
+				\paragraph{Verwacht resultaat}
+					Het verwachte resultaat is dat de machine eerst naar (X=10, Y=2, Z=5) beweegt, daarna terug gaat naar het 0 punt en hierna een halver cirkel maakt naar (X=10, Y=0, Z=0)
+
+				\paragraph{Waarnemingen en conclusie}
+					De machine beweegt naar (X=10, Y=2, Z=5) en stopt. Hierna beweegt de machine terug naar het 0 punt. De machine beweegt met een halve cirkel naar X=10. Dit betekend dat deze test voldaan is.
+
+			\subsection{De positie van de freeskop op een as moet bepaald worden doormiddel van sensoren.}
+				Deze test heeft de volgende acceptatie criteria: De test is voldaan als de machine de locatie kan bepalen op een as doormiddel van sensoren.
+				
+				\paragraph{Testopstelling}
+					Deze test kan alleen op de machine uitgevoerd worden. Ook is hiervoor nodig dat G-Code uitgevoerd kan worden. Benodigd hiervoor is:
+					\begin{enumerate}
+						\item Freesbank met een as verbonden met stappen motor en encoder.
+						\item Microcontroller met code voor een of meer assen, encoder locatie bepaling en G-Code commando's te ontvangen en uit te voeren.
+					\end{enumerate}
+
+				\paragraph{Instructies}
+					\begin{enumerate}
+						\item Verbind alle stappenmotoren met de microcontroller op de manier aangegeven op het elektrische schema(1 is genoeg).
+						\item Verbind een encoder van de as met een stappenmotor met de microcontroller zoals aangegeven op het elektrische schema.
+						\item Ze op de microcontroller de code om de machine te laten bewegen en locatie bepalen doormiddel van een encoder.
+						\item Voer het G-Code commando uit om een rechte lijn over de as.
+						\item Wacht totdat de machine klaar is met bewegen en vraag de locatie op.
+						\item Controleer of de locatie is veranderd naar de juiste richting en dat de locatie overeen komt met de locatie uit het commando.
+					\end{enumerate}
+			
+				\paragraph{Verwacht resultaat}
+					Het verwachte resultaat is dat de machine beweegt over de as en dat de encoder de bewegingen meet. Verwacht wordt dat de encoder het getal aangeeft dat in het commando is ingevoerd.
+
+				\paragraph{Waarnemingen en conclusie}
+					De machine beweegt over de as en de positie telt mee op. De machine stopt als de encoder de locatie uit het commando bereikt. Dit betekend dat deze test voldaan is.
+			
+
+			\subsection{Conclusie}
+				Na testen is de conclusie dat alle requirements gehaald zijn.
 				\begin{center}
-				Elektrisch schema drie assen
+					\begin{tabular}{|c|c|c|}
+						\hline
+						Soort & Requirement & Uitslag \\
+						\hline
+						Funct & De positie van de freeskop op een as moet bepaald worden doormiddel van sensoren. & Behaald. \\
+						\hline
+						Funct & De freeskop van de machine moet over de X, Y en Z as kunnen bewegen. & Behaald \\
+						\hline
+						Funct & Er kan G-Code uitgevoerd worden door de freesbank. & Behaald \\
+						\hline
+						Niet. Funct & De code van het prototype moet modulair zijn waardoor gemakkelijk  & behaald \\
+						& delen vervangen kunnen worden, zoals actuatoren en sensoren. & \\
+						\hline
+					\end{tabular}
 				\end{center}
-			\end{sidewaysfigure}
-			\newpage
-			\section{Plaatjes systeem}
-				\begin{center}
-					\includegraphics[scale=0.8]{sideview.png}\\
-					Zij aanzicht\\
-					\includegraphics[scale=0.8]{frontview.png}\\
-					Voor aanzicht\\
-				\end{center}
-
-			\section{Testrapport}
-				In dit rapport worden alle testen voor de eisen van het prototype weergegeven. Het prototype moet verschillende dingen kunnen. Deze zijn gedefineerd in de requirements en zijn de volgende:
-				\begin{enumerate}
-					\item De snijkop van de machine moet over de X, Y en Z as kunnen bewegen.
-					\item De positie van de snij kop op een as moet bepaald worden doormiddel van sensoren.
-					\item Er kan G-Code uitgevoerd worden door de freesbank.
-					\item De code van het prototype moet modulair zijn waardoor gemakkelijk delen vervangen kunnen worden, zoals actuatoren en sensoren.
-				\end{enumerate}
-				De vierde requirement is niet functioneel en is behaald als de code makkelijk is aan te passen voor de verschillende testen. 
-
-				\subsection{Er kan G-Code uitgevoerd worden door de freesbank.}
-					Deze test heeft de volgende acceptatie criteria: De test is voldaan als de machine G-Code commandos uitvoert.
-					
-					\paragraph{Testopstelling}
-						Deze test kan alleen op de machine uitgevoerd worden. Benodigd hiervoor is:
-						\begin{enumerate}
-							\item Freesbank een as of meer verbonden met stappen motor(s).
-							\item Microcontroller met code om G-Code commando's te ontvangen en uit te voeren.
-						\end{enumerate}
-
-					\paragraph{Instructies}
-						\begin{enumerate}
-							\item Verbind alle stappenmotoren met de microcontroller op de manier aangegeven op het elektrische schema(1 motor is genoeg).
-							\item Ze op de microcontroller de code om de machine te laten bewegen.
-							\item Voer het G-Code commando uit om een rechte lijn te bewegen op de aangesloten as.
-							\item Wacht totdat de machine klaar is met bewegen en laat de machine terug bewegen.
-						\end{enumerate}
-				
-					\paragraph{Verwacht resultaat}
-						Het verwachte resultaat is dat de machine gaat bewegen wanneer deze een G-Code command krijgt en OK. stuurt.
-
-					\paragraph{Waarnemingen en conclusie}
-						De machine stuurt OK. terug en begint te bewegen naar het punt. Na het volgende commando stuurt de machine weer OK. en beweegt die terug. Dit betekend dat deze test voldaan is.
-
-
-				\subsection{De snijkop van de machine moet over de X, Y en Z as kunnen bewegen.}
-					Deze test heeft de volgende acceptatie criteria: De test is voldaan als de machine over de X, Y en Z as kan bewegen.
-					
-					\paragraph{Testopstelling}
-						Deze test kan alleen op de machine uitgevoerd worden. Ook is hiervoor nodig dat G-Code uitgevoerd kan worden. Benodigd hiervoor is:
-						\begin{enumerate}
-							\item Freesbank met drie assen verbonden met stappen motors.
-							\item Microcontroller met code voor drie assen en G-Code commando's te ontvangen en uit te voeren.
-						\end{enumerate}
-
-					\paragraph{Instructies}
-						\begin{enumerate}
-							\item Verbind alle stappenmotoren met de microcontroller op de manier aangegeven op het elektrische schema.
-							\item Ze op de microcontroller de code om de machine te laten bewegen.
-							\item Voer het G-Code commando uit om een rechte lijn te bewegen naar (X=10, Y=2, Z=5).
-							\item Wacht totdat de machine klaar is met bewegen en laat de machine naar het 0 punt bewegen.
-							\item Wacht totdat de machine klaar is met bewegen en laat de machine met een halve cirkel naar (X=10, Y=0, Z=0) bewegen met centerpunt (X=5, Z=0)
-						\end{enumerate}
-				
-					\paragraph{Verwacht resultaat}
-						Het verwachte resultaat is dat de machine eerst naar (X=10, Y=2, Z=5) beweegt, daarna terug gaat naar het 0 punt en hierna een halver cirkel maakt naar (X=10, Y=0, Z=0)
-
-					\paragraph{Waarnemingen en conclusie}
-						De machine beweegt naar (X=10, Y=2, Z=5) en stopt. Hierna beweegt de machine terug naar het 0 punt. De machine beweegt met een halve cirkel naar X=10. Dit betekend dat deze test voldaan is.
-
-				\subsection{De positie van de snij kop op een as moet bepaald worden doormiddel van sensoren.}
-					Deze test heeft de volgende acceptatie criteria: De test is voldaan als de machine de locatie kan bepalen op een as doormiddel van sensoren.
-					
-					\paragraph{Testopstelling}
-						Deze test kan alleen op de machine uitgevoerd worden. Ook is hiervoor nodig dat G-Code uitgevoerd kan worden. Benodigd hiervoor is:
-						\begin{enumerate}
-							\item Freesbank met een as verbonden met stappen motor en encoder.
-							\item Microcontroller met code voor een of meer assen, encoder locatie bepaling en G-Code commando's te ontvangen en uit te voeren.
-						\end{enumerate}
-
-					\paragraph{Instructies}
-						\begin{enumerate}
-							\item Verbind alle stappenmotoren met de microcontroller op de manier aangegeven op het elektrische schema(1 is genoeg).
-							\item Verbind een encoder van de as met een stappenmotor met de microcontroller zoals aangegeven op het elektrische schema.
-							\item Ze op de microcontroller de code om de machine te laten bewegen en locatie bepalen doormiddel van een encoder.
-							\item Voer het G-Code commando uit om een rechte lijn over de as.
-							\item Wacht totdat de machine klaar is met bewegen en vraag de locatie op.
-							\item Controleer of de locatie is veranderd naar de juiste richting en dat de locatie overeen komt met de de locatie uit het commando.
-						\end{enumerate}
-				
-					\paragraph{Verwacht resultaat}
-						Het verwachte resultaat is dat de machine beweegt over de as en dat de encoder de bewegingen meet. Verwacht wordt dat de encoder het getal aangeeft dat in het commando is ingevoerd.
-
-					\paragraph{Waarnemingen en conclusie}
-						De machine beweegt over de as en de positie telt mee op. De machine stopt als de encoder de locatie uit het commando bereikt. Dit betekend dat deze test voldaan is.
-				
-
-				\subsection{Conclusie}
-					Na testen is de conclusie dat alle requirements gehaald zijn.
-					\begin{center}
-						\begin{tabular}{|c|c|c|}
-							\hline
-							Soort & Requirement & Uitslag \\
-							\hline
-							Funct & De positie van de snij kop op een as moet bepaald worden doormiddel van sensoren. & Behaald. \\
-							\hline
-							Funct & De snijkop van de machine moet over de X, Y en Z as kunnen bewegen. & Behaald \\
-							\hline
-							Funct & Er kan G-Code uitgevoerd worden door de freesbank. & Behaald \\
-							\hline
-							Niet. Funct & De code van het prototype moet modulair zijn waardoor gemakkelijk  & behaald \\
-							& delen vervangen kunnen worden, zoals actuatoren en sensoren. & \\
-							\hline
-						\end{tabular}
-					\end{center}
-
-
-
-
-
-
-
 
 	\newpage
 	\Large
@@ -528,91 +558,18 @@
 			\hline
 			27-01-2026 & Realisatie ingevuld, testrapport toegevoegd. Spellingcheck \\
 			\hline
+			29-01-2026 & revision \\
+			\hline
 		\end{tabular}
 	\end{center}
 \end{document}
 __________________________________________________________________________________________________________________________________________________________________
 ----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-----------------------------------------========================================[]========================================----------------------------------------
-
-[x] Voorwoord
-[x] Context waarin het stagebedrijf werkzaam is
-[x] Stagebedrijf: Wat voor soort bedrijf is het? (werkveld, grootte, afdeling waar je stageloopt)
-[x] Probleemstelling/ opdrachtbeschrijving/ eventueel een hoofdvraag en -deelvragen
-[x] Stakeholders (+ op welke manier je ze betrekt bij jouw opdracht)
-[x] Scope en passende eisen die relevant zijn voor jouw opdracht
-[x] Mogelijke oplossingen en je onderbouwde keuze(s)
-[x] Requirements
-[x] Bijbehorende ontwerpen
-[x] Realisatie (diverse iteraties/ prototypes), testen en testresultaten op basis van de requirements en
-de ontwerpen.
-[ ] Aanbevelingen
-Bijlagen
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 Plaatjes freesbank
 
-commandos -> opdrachten?
 stepper / steppen -> stappen
-
-
-
-
-
-
-
-
+microcontroller -> regelsysteem?
 
 het bedrijf + stakeholders
 stakeholders: bedrijven -> pkmarine
@@ -622,126 +579,6 @@ wat is er nu? blokjes -> onderdelen
 oude situatie -> nieuwe situatie
 wat moet er komen?
 
-snij kop
+freeskop
 
 maten
-
-
-				\begin{figure}
-				\begin{center}\begin{tabular}{ c|c }
-				A & B \\
-				\hline
-				0 & 0 \\
-				\hline
-				1 & 0 \\
-				\hline
-				1 & 1 \\
-				\hline
-				0 & 1      
-				\end{tabular}\end{center}
-				\caption{Encoder sequentie}
-				\end{figure}
-
-		peter.vanderklugt@pkmarine.nl
-
-//Port ** Arduino Pin Number ** pin designation
-PA 0 ** 22 ** D22	
-PA 1 ** 23 ** D23	
-PA 2 ** 24 ** D24	
-PA 3 ** 25 ** D25	
-PA 4 ** 26 ** D26	
-PA 5 ** 27 ** D27	
-PA 6 ** 28 ** D28	
-PA 7 ** 29 ** D29	
-
-PB 0 ** 53 ** SPI_SS	
-PB 1 ** 52 ** SPI_SCK	
-PB 2 ** 51 ** SPI_MOSI	
-PB 3 ** 50 ** SPI_MISO	
-PB 4 ** 10 ** PWM10	
-PB 5 ** 11 ** PWM11	
-PB 6 ** 12 ** PWM12	
-PB 7 ** 13 ** PWM13	
-
-PC 0 ** 37 ** D37	
-PC 1 ** 36 ** D36	
-PC 2 ** 35 ** D35	
-PC 3 ** 34 ** D34	
-PC 4 ** 33 ** D33	
-PC 5 ** 32 ** D32	
-PC 6 ** 31 ** D31	
-PC 7 ** 30 ** D30	
-
-PD 0 ** 21 ** I2C_SCL	
-PD 1 ** 20 ** I2C_SDA	
-PD 2 ** 19 ** USART1_RX	
-PD 3 ** 18 ** USART1_TX	
-PD 7 ** 38 ** D38	
-
-PE 0 ** 0 ** USART0_RX	
-PE 1 ** 1 ** USART0_TX	
-PE 3 ** 5 ** PWM5	
-PE 4 ** 2 ** PWM2	
-PE 5 ** 3 ** PWM3	
-
-PF 0 ** 54 ** A0	
-PF 1 ** 55 ** A1	
-PF 2 ** 56 ** A2	
-PF 3 ** 57 ** A3	
-PF 4 ** 58 ** A4	
-PF 5 ** 59 ** A5	
-PF 6 ** 60 ** A6	
-PF 7 ** 61 ** A7	
-
-PG 0 ** 41 ** D41	
-PG 1 ** 40 ** D40	
-PG 2 ** 39 ** D39	
-PG 5 ** 4 ** PWM4	
-
-PH 0 ** 17 ** USART2_RX	
-PH 1 ** 16 ** USART2_TX	
-PH 3 ** 6 ** PWM6	
-PH 4 ** 7 ** PWM7	
-PH 5 ** 8 ** PWM8	
-PH 6 ** 9 ** PWM9	
-
-PJ 0 ** 15 ** USART3_RX	
-PJ 1 ** 14 ** USART3_TX	
-
-PK 0 ** 62 ** A8	
-PK 1 ** 63 ** A9	
-PK 2 ** 64 ** A10	
-PK 3 ** 65 ** A11	
-PK 4 ** 66 ** A12	
-PK 5 ** 67 ** A13	
-PK 6 ** 68 ** A14	
-PK 7 ** 69 ** A15	
-
-PL 0 ** 49 ** D49	
-PL 1 ** 48 ** D48	
-PL 2 ** 47 ** D47	
-PL 3 ** 46 ** D46	
-PL 4 ** 45 ** D45	
-PL 5 ** 44 ** D44	
-PL 6 ** 43 ** D43	
-PL 7 ** 42 ** D42	
-
-
-encoders
-x: PD0 en PD1 (20 en 21)
-y: PD2 en PD3 (18 en 19)
-z: PE4 en PE4 (2 en 3)
-
-step pins
-X: PA1 (23)
-Y: PA3 (25)
-Z: PA5 (27)
-
-dir pins
-X: PA0 (22)
-Y: PA2 (24)
-Z: PA4 (26)
-pinouts:
-https://devboards.info/boards/Arduino-mega2560-rev3
-
-  /* model refrence control */

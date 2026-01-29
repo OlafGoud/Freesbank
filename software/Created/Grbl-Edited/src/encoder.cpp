@@ -45,7 +45,7 @@ static inline void readEncoderZ(void) {
   static uint8 encoderStateZ = 0;
 
   /** Get value of encoder pin b and masks everything but the lowest bit*/
-  uint8 b = (PIND >> ENCODER_PIN_ZB) & 1;
+  uint8 b = (PIND >> ENCODER_PIN_Z) & 1;
   //PORTB ^= (1 << PB5); 
   //println(encoderSteps[0]);
   /** 
@@ -55,7 +55,7 @@ static inline void readEncoderZ(void) {
    * 1 & 1 = 2
    * 0 & 1 = 3
    */
-  uint8 curr = (((PIND >> ENCODER_PIN_ZA) & 1) ^ b) | (b << 1); 
+  uint8 curr = (((PIND >> ENCODER_PIN_Z) & 1) ^ b) | (b << 1); 
 
   /** 
    * Calculate movement direction using the the current - previous. (&3 is a bitwise modulo (%4) to avoid dividing)
@@ -101,10 +101,10 @@ void initEncoder() {
   //ENCODER_DDR_X |= (1 << PB5);
   /** Encoder interrupt setup */
   /** Set pins for encoder to input */
-  ENCODER_DDR_X &= ~((1 << ENCODER_PIN_ZA) | (1 << ENCODER_PIN_ZB)); 
+  ENCODER_DDR_XY &= ~((1 << ENCODER_PIN_ZA) | (1 << ENCODER_PIN_ZB)); 
   
   /** Set pullup resistors */
-  ENCODER_PORT_X |= ((1 << ENCODER_PIN_ZA) | (1 << ENCODER_PIN_ZB));
+  ENCODER_PORT_XY |= ((1 << ENCODER_PIN_ZA) | (1 << ENCODER_PIN_ZB));
 
   /** enable interrupt on PCINT2 GROUP for when either of A or B changes */
   PCICR |= (1 << PCIE2);

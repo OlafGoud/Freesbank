@@ -457,7 +457,7 @@ ISR(TIMER1_COMPA_vect) {
     uint8 donecheck = 0;
 
     /****************************************************************************************************************************
-     * @note add here axis that are used by the stepper motor.
+     * @note add here axis that are used by the stepper motor. (and have an encoder) @attention (Place 1)
      ***************************************************************************************************************************/
     
     //donecheck += checkIfAxisNotDone(Z_AXIS, currentPosition[Z_AXIS]);
@@ -476,8 +476,8 @@ ISR(TIMER1_COMPA_vect) {
 
 
   /****************************************************************************************************************************** 
-   * @note add here axis to be used by the stepper motor. 
-   * @note that they need to be added by the checker if they are done 
+   * @note add here axis to be used by the stepper motor. @attention (Place 2)
+   * @note that they need to be added by @attention (Place 1) if encoder is used. This to check if they are done. 
    *****************************************************************************************************************************/
 
   stepAxisFromStepVar(X_AXIS, stepperData.timerValue, stepperData.modifier, &STEPPER_STEP_PORT, X_STEP_PIN, &STEPPER_DIR_PORT, X_DIR_PIN);
@@ -501,7 +501,7 @@ ISR(TIMER1_COMPA_vect) {
 
 
 /**
- * ISR to reset the stepperpins. Runs 800us after the main ISR.
+ * ISR to reset the stepperpins. Runs 800us after the main ISR. 
  */
 ISR(TIMER1_COMPB_vect) {
   /** Set stepper low */

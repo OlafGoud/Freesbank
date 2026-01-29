@@ -46,10 +46,6 @@
 #define STEPPER_EMPTY 1 /** Stepper state */
 #define STEPPER_ERROR 2 /** Stepper state */
 
-#define AXIS_PLANE_XY 0 /** Work axis plane */
-#define AXIS_PLANE_XZ 1 /** Work axis plane */
-#define AXIS_PLANE_YZ 2 /** Work axis plane */
-
 /** Encoders */
 
 #define ENCODERS_AXIS 3
@@ -59,16 +55,13 @@
 #ifdef ARDUINO_UNO
 #define ENCODER_PIN_ZA PD2 /** Interrupt pin for encoder A line */
 #define ENCODER_PIN_ZB PD3 /** Interrupt pin for encoder B line */
-#define ENCODER_PORT_X PORTD
-#define ENCODER_DDR_X DDRD
+#define ENCODER_PORT_XY PORTD
+#define ENCODER_DDR_XY DDRD
+#define ENCODER_PIN_Z PIND
 #define STEPPER_STEP_DDR DDRB
 #define STEPPER_DIR_DDR DDRB
 #define STEPPER_DIR_PORT PORTB
 #define STEPPER_STEP_PORT PORTB
-/*#define Y_STEP_PIN PD4
-#define Y_DIR_PIN PD7
-#define X_STEP_PIN PD5 /** Pin definition */
-//#define X_DIR_PIN PD6 /** Pin definition */
 
 #define X_STEP_PIN PB0
 #define X_DIR_PIN PB1
@@ -89,8 +82,10 @@
 #define ENCODER_PIN_ZA PE4
 #define ENCODER_PIN_ZB PE5
 #define ENCODER_DDR_XY DDRD
+#define ENCODER_PIN_XY PIND
 #define ENCODER_PORT_XY PORTD
 #define ENCODER_DDR_Z DDRE
+#define ENCODER_PIN_Z PINE
 #define ENCODER_PORT_Z PORTE
 
 
@@ -103,7 +98,6 @@
 #define STEPPER_PORT PORTA
 #define STEPPER_DDR DDRA
 #endif
-//#define ENCODERPORT DDRD
 
 /** Steppers */
 #define STEPPER_ACCURACY 0.015f
