@@ -460,7 +460,7 @@ ISR(TIMER1_COMPA_vect) {
      * @note add here axis that are used by the stepper motor. (and have an encoder) @attention (Place 1)
      ***************************************************************************************************************************/
     
-    //donecheck += checkIfAxisNotDone(Z_AXIS, currentPosition[Z_AXIS]);
+    //donecheck += checkIfAxisNotDone(Y_AXIS, currentPosition[Y_AXIS]);
 
     /****************************************************************************************************************************
      * END for adding more steppers.
@@ -483,7 +483,7 @@ ISR(TIMER1_COMPA_vect) {
   stepAxisFromStepVar(X_AXIS, stepperData.timerValue, stepperData.modifier, &STEPPER_STEP_PORT, X_STEP_PIN, &STEPPER_DIR_PORT, X_DIR_PIN);
   stepAxisFromStepVar(Y_AXIS, stepperData.timerValue, stepperData.modifier, &STEPPER_STEP_PORT, Y_STEP_PIN, &STEPPER_DIR_PORT, Y_DIR_PIN);
   stepAxisFromStepVar(Z_AXIS, stepperData.timerValue, stepperData.modifier, &STEPPER_STEP_PORT, Z_STEP_PIN, &STEPPER_DIR_PORT, Z_DIR_PIN);
-  //stepAxisFromPos(Z_AXIS, stepperData.timerValue, stepperData.modifier, currentPosition[Z_AXIS], &STEPPER_STEP_PORT, Z_STEP_PIN);
+  //stepAxisFromPos(Y_AXIS, stepperData.timerValue, stepperData.modifier, currentPosition[Y_AXIS], &STEPPER_STEP_PORT, Y_STEP_PIN);
 
   /******************************************************************************************************************************
    * END for adding more steppers.

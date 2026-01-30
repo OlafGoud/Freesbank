@@ -9,10 +9,10 @@ onderverdeeld in
 
 ## TODO:
 [ ] Stageverslag
-[ ] code
-[ ] codereview
+[x] code
+[x] codereview
 [x] flyer
-[ ] vlog
+[x] vlog
 [ ] Handleiding + technische docu
 [x] PVA
 [x] presentatie 50%
@@ -20,9 +20,10 @@ onderverdeeld in
 [x] Demo video
 [x] feedback 50%
 [x] feedback 95%
-[ ] reflectie
-[ ] flowchart
-[ ] plaatjes systeem
+[x] reflectie
+[x] flowchart
+[x] plaatjes systeem
+[x] planning
 
 
 //Port ** Arduino Pin Number ** pin designation
