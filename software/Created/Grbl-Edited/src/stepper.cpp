@@ -1,6 +1,6 @@
 #include "stepper.h"
 
-uint8 stepperState;
+StepperState stepperState;
 
 volatile static StepperData stepperData; 
 volatile float currStepsPos[3];
@@ -189,7 +189,7 @@ uint8 setHardwareCompareTimer(float targetms) {
 
       compareValue = (uint16)(steps - 1);
       prescalerBits = options[i].bits;
-      i = 10;
+      break;
     }
   }
 
@@ -248,13 +248,13 @@ void initSteppers() {
     } else {
       println("ERR: UnexpectedStatusCodeCompareTimer");
     }
-    systemState = INTERNAL_ERROR_RESTART_REQUIRED;
+    systemState = SYSTEM_INTERNAL_ERROR_RESTART_REQUIRED;
   }
   //print("StepperISRMS: "); println(STEPPER_ISR_MS, 1); // debug line
   stepperState = STEPPER_EMPTY;
 }
 
-float toPowerOf2(float f) {
+float square(float f) {
   return f * f;
 }
 
@@ -270,7 +270,7 @@ float toPowerOf2(float f) {
 void loadNewSegment() {
   uint8 tail = (codeBlockBuffer.tail + 1) % CODEBLOCKBUFFERSIZE; /** Old block can be deleted. increment tail */
   if(tail == codeBlockBuffer.head) {
-    if(systemState == RUNNING) systemState = IDLE; /** machine can not find new instructions, so it is idle */
+    if(systemState == RUNNING) systemState = SYSTEM_IDLE; /** machine can not find new instructions, so it is idle */
     return;
   }
   println("New buffer for stepper."); /** debug line */
@@ -310,15 +310,15 @@ void loadNewSegment() {
   } else if (block->command == 2 || block->command == 3) {
 
     /** check if beginpos and end pos are on the circle with the radius r */
-    if((pow(block->R, 2)) - (pow(block->I - block->beginPos[stepperData.xAxisNumber], 2) + pow(block->J - block->beginPos[stepperData.yAxisNumber], 2)) != 0) {
-      systemState = ERROR;
+    if(square(block->R) - (square(block->I - block->beginPos[stepperData.xAxisNumber]) + square(block->J - block->beginPos[stepperData.yAxisNumber])) != 0) {
+      systemState = SYSTEM_ERROR;
       println("begin point not on circle");
       tail--;
       return;
     }
 
-    if((pow(block->R, 2)) - (pow(block->I - block->endPos[stepperData.xAxisNumber], 2) + pow(block->J - block->endPos[stepperData.yAxisNumber], 2)) != 0) {
-      systemState = ERROR;
+    if(square(block->R) - (square(block->I - block->endPos[stepperData.xAxisNumber]) + square(block->J - block->endPos[stepperData.yAxisNumber])) != 0) {
+      systemState = SYSTEM_ERROR;
       println("end point not on circle");
       tail--;
       return;
@@ -356,16 +356,16 @@ void loadNewSegment() {
 
     if(block->command == 17) {
       /** XY */
-      stepperData.xAxisNumber = 0;
-      stepperData.yAxisNumber = 1;
+      stepperData.xAxisNumber = X_AXIS;
+      stepperData.yAxisNumber = Y_AXIS;
     } else if (block->command == 18) {
       /** YZ */
-      stepperData.xAxisNumber = 1;
-      stepperData.yAxisNumber = 2;
+      stepperData.xAxisNumber = Y_AXIS;
+      stepperData.yAxisNumber = Z_AXIS;
     } else {
       /** only 19 left. ZX */
-      stepperData.xAxisNumber = 0;
-      stepperData.yAxisNumber = 2;
+      stepperData.xAxisNumber = X_AXIS;
+      stepperData.yAxisNumber = Z_AXIS;
     }
 
     stepperData.selectedPlane = block->subCommand;
@@ -379,7 +379,7 @@ void loadNewSegment() {
 
   stepperData.timerValue = 0; /** set the timer back to 0 */
   stepperState = STEPPER_FULL; /** change state to indicate that there is a loaded stepper buffer */ 
-  systemState = RUNNING; /** set the systemstate to running */
+  systemState = SYSTEM_RUNNING; /** set the systemstate to running */
   TIMSK1 |= (1 << OCIE1A); /** activate the interrupts */
 }
 

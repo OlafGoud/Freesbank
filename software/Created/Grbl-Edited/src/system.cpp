@@ -11,12 +11,13 @@ void readSerialLine() {
   static char line[MAX_LINE_SIZE];
   static uint8 size = 0;
   static bool lineComment = false;
+
   while(size < MAX_LINE_SIZE) {
     unsigned char c = uartRead();
     
     if(c == EMPTY_CHAR) return; /** No data on RX Line */
-    if(c == 32) continue;       /** filter spaces */
-    if(lineComment == true) {
+    if(c == ' ') continue;       /** filter spaces */
+    if(lineComment) {
       if(c == ')') lineComment = false; /** comments off */
       continue; 
     }
@@ -35,7 +36,7 @@ void readSerialLine() {
         } else if (line[1] == '?') {
           float val[3]{};
           getCurrentMMFromEncoders(val);
-          print("<"); print(getStatus(systemState)); print("|");
+          print("<"); print(statusToString(systemState)); print("|");
           print(val); print("|");
           print(codeBlockBuffer.block[codeBlockBuffer.tail].endPos); print("|"); print(codeBlockBuffer.block[codeBlockBuffer.tail].beginPos); println(">");
 
@@ -56,9 +57,7 @@ void readSerialLine() {
       }
 
       size = 0;
-      for(int i = 0; i < MAX_LINE_SIZE; i++) {
-        line[i] = '\0';
-      }
+      line[0] = '\0';
 
       continue;
     } else {
@@ -78,6 +77,7 @@ void readSerialLine() {
   /** when this is reached, the input lines are or to big, or something is not correct. */
   print("To big: ");
   println(size);
+  size = 0;
 }
 
 CodeBlockBuffer codeBlockBuffer{};
@@ -93,9 +93,9 @@ bool readGCodeLine(char* line, uint8 size) {
   static uint8 positionMode = 0; /** 0 = absolute, 1 = incrementeel */
   CodeBlock codeBlock;
 
-  float value;
+  float floatValue;
   int32 intValue;
-  uint16 mantissa; /** used for commands like GX.X (G28.1) */
+  uint16 mantissa; /** used for commands like GX.X (G28.1) @note not used for now */
   uint8 charIndex = 0;
 
   while(charIndex < size - 1) {
@@ -105,24 +105,31 @@ bool readGCodeLine(char* line, uint8 size) {
       println("ERR: !LETTER");
       return false;
     }
-    if(!readFloat(line, &charIndex, &value)) {
+
+    /** reading float */
+    char* end;
+    floatValue = strtof(line + charIndex, &end) ;/** not tested */
+    if(end != line + charIndex) {
+      charIndex = end - line; /** conversion finished and update current index */
+    } else {
       println("ERR: !NUMBER");
       return false;
     }
-    intValue = trunc(value);
-    mantissa = round(100 * (value - intValue)); /** @note get the value after the '.' for commands like: GXX.X */
+
+    intValue = trunc(floatValue);
+    mantissa = round(100 * (floatValue - intValue)); /** @note get the value after the '.' for commands like: GXX.X */
 
     if(letter == 'G') {
       codeBlock.letter = 'G';
       codeBlock.command = intValue;
       switch (intValue) {
-      case 0: case 1: case 2: case 3:
+      case 0: case 1: case 2: case 3: /** movement commandos */
         memcpy(codeBlock.beginPos, prevPos, sizeof(prevPos));
         break;
-      case 17: case 18: case 19:
+      case 17: case 18: case 19: /** plane switch commandos */
         codeBlock.subCommand = intValue - 17;
         break;
-      case 90: case 91: 
+      case 90: case 91: /** absolute mode and incremental mode */
         positionMode = (bool)(intValue - 90); 
         break;
       default:
@@ -153,26 +160,26 @@ bool readGCodeLine(char* line, uint8 size) {
     case 'B': break; /** @todo @note reserverd for rotations??? */
     case 'C': break; /** @todo @note Not suported (YET) */
     case 'D': break; /** @todo @note Not suported (YET) */
-    case 'E': codeBlock.E = value; break; /** @note Speed of spindle?? Not suported (YET) */
-    case 'F': codeBlock.F = value; break; /** @note not suported Feedrate */
+    case 'E': codeBlock.E = floatValue; break; /** @note Speed of spindle?? Not suported (YET) */
+    case 'F': codeBlock.F = floatValue; break; /** @note not suported Feedrate */
     case 'H': break; /** @todo @note Not suported (YET) */
-    case 'I': codeBlock.I = value; break; /** @note circle offset X */
-    case 'J': codeBlock.J = value; break; /** @note circle offset Y */
+    case 'I': codeBlock.I = floatValue; break; /** @note circle offset X */
+    case 'J': codeBlock.J = floatValue; break; /** @note circle offset Y */
     case 'K': break; /** @todo @note Not suported (YET) */
     case 'L': break; /** @todo @note Not suported (YET) */
     case 'N': break; /** @todo @note Not suported (YET) */
     case 'O': /*encoderSteps[0] = intValue; println("encoder steps to value"); */break; /** @todo @note Not suported (YET) */
     case 'P': break; /** @todo @note Not suported (YET) */
     case 'Q': break; /** @todo @note Not suported (YET) */
-    case 'R': codeBlock.R = value; break; /** @note Radius for circle */
+    case 'R': codeBlock.R = floatValue; break; /** @note Radius for circle */
     case 'S': break; /** @todo @note Not suported (YET) */
     case 'T': break; /** @todo @note Not suported (YET) */
     case 'U': break; /** @todo @note Not suported (YET) */
     case 'V': break; /** @todo @note Not suported (YET) */
     case 'W': break; /** @todo @note Not suported (YET) */
-    case 'X': codeBlock.endPos[X_AXIS] = value; break; /** @note |                                 */
-    case 'Y': codeBlock.endPos[Y_AXIS] = value; break; /** @note |> stored as a 3 component float  */
-    case 'Z': codeBlock.endPos[Z_AXIS] = value; break; /** @note |                                 */
+    case 'X': codeBlock.endPos[X_AXIS] = floatValue; break; /** @note |                                 */
+    case 'Y': codeBlock.endPos[Y_AXIS] = floatValue; break; /** @note |> stored as a 3 component float  */
+    case 'Z': codeBlock.endPos[Z_AXIS] = floatValue; break; /** @note |                                 */
     
     default:
       break; /** LETTER NOT SUPORTED */
@@ -180,9 +187,9 @@ bool readGCodeLine(char* line, uint8 size) {
   }
 
   if(positionMode == 1) { /** operating in incemental mode */
-    codeBlock.endPos[X_AXIS] = prevPos[X_AXIS] + codeBlock.endPos[X_AXIS];
-    codeBlock.endPos[Y_AXIS] = prevPos[Y_AXIS] + codeBlock.endPos[Y_AXIS];
-    codeBlock.endPos[Z_AXIS] = prevPos[Z_AXIS] + codeBlock.endPos[Z_AXIS];
+    codeBlock.endPos[X_AXIS] += prevPos[X_AXIS];
+    codeBlock.endPos[Y_AXIS] += prevPos[Y_AXIS];
+    codeBlock.endPos[Z_AXIS] += prevPos[Z_AXIS];
   }
 
 
@@ -201,101 +208,14 @@ bool readGCodeLine(char* line, uint8 size) {
   return true;
 }
 
-
-bool readFloat(char *line, uint8 *char_counter, float *float_ptr) {
-
-  char *ptr = line + *char_counter;
-  unsigned char c;
-
-  // Grab first character and increment pointer. No spaces assumed in line.
-  c = *ptr++;
-
-  // Capture initial positive/minus character
-  bool isnegative = false;
-  if (c == '-') {
-    isnegative = true;
-    c = *ptr++;
-  }
-  else if (c == '+') {
-    c = *ptr++;
-  }
-
-  // Extract number into fast integer. Track decimal in terms of exponent value.
-  uint32 intval = 0;
-  int8 exp = 0;
-  uint8 ndigit = 0;
-  bool isdecimal = false;
-  while (1) {
-    c -= '0';
-    if (c <= 9) {
-      ndigit++;
-      if (ndigit <= 10) { /** max int digits */
-        if (isdecimal) {
-          exp--;
-        }
-        intval = (((intval << 2) + intval) << 1) + c; // intval*10 + c
-      }
-      else {
-        if (!(isdecimal)) {
-          exp++;
-        } // Drop overflow digits
-      }
-    }
-    else if (c == (('.' - '0') & 0xff) && !(isdecimal)) {
-      isdecimal = true;
-    }
-    else {
-      break;
-    }
-    c = *ptr++;
-  }
-
-  // Return if no digits have been read.
-  if (!ndigit) {
-    return (false);
-  };
-
-  // Convert integer into floating point.
-  float fval;
-  fval = (float)intval;
-
-  // Apply decimal. Should perform no more than two floating point multiplications for the
-  // expected range of E0 to E-4.
-  if (fval != 0) {
-    while (exp <= -2) {
-      fval *= 0.01;
-      exp += 2;
-    }
-    if (exp < 0) {
-      fval *= 0.1;
-    }
-    else if (exp > 0) {
-      do {
-        fval *= 10.0;
-      } while (--exp > 0);
-    }
-  }
-
-  // Assign floating point value with correct sign.
-  if (isnegative) {
-    *float_ptr = -fval;
-  }
-  else {
-    *float_ptr = fval;
-  }
-  *char_counter = ptr - line - 1; // Set char_counter to next statement
-
-  return (true);
-}
-
-char* getStatus(int s) {
-  if(s == IDLE) {
+char* statusToString(SystemState s) {
+  if(s == SYSTEM_IDLE) {
     return "IDLE";
-  } else if (s == RUNNING) {
+  } else if (s == SYSTEM_RUNNING) {
     return "RUNNING";
-  } else if (s == ERROR) {
+  } else if (s == SYSTEM_ERROR) {
     return "ERROR";
-  } else if (s == INTERNAL_ERROR_RESTART_REQUIRED) {
+  } else if (s == SYSTEM_INTERNAL_ERROR_RESTART_REQUIRED) {
     return "RESTARTERROR";
   } else {
     return "ERR!";

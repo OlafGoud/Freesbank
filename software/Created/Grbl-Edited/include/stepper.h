@@ -3,7 +3,7 @@
 #include "encoder.h"
 #include <math.h>
 #pragma once
-extern uint8 stepperState;
+extern StepperState stepperState;
 
 struct StepperData {
   float formulaValues[3]{};

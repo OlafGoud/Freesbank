@@ -8,7 +8,7 @@
 #include "stepper.h"
 
 
-uint8 systemState = IDLE;
+SystemState systemState = IDLE;
 
 
 /**
@@ -25,13 +25,13 @@ int main() {
   while (uartRead() != EMPTY_CHAR) {
     println("clearing");
   } 
-  while (!(systemState == INTERNAL_ERROR_RESTART_REQUIRED)) {
+  while (!(systemState == SYSTEM_INTERNAL_ERROR_RESTART_REQUIRED)) {
     /** 
      * Error handling
      * @details systemState -> system erros
      * @details stepper state -> stepper errors
      */
-    if(systemState == ERROR) {
+    if(systemState == SYSTEM_ERROR) {
       /** @todo error handling */
       println("err");
       /** shutdown stepper */
