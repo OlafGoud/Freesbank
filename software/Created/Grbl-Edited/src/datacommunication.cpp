@@ -128,7 +128,31 @@ void println(char* str) {
  * @param n integer to print in base 10.
  */
 void print(int16 n) {
-  print((int32) n);
+
+  if(n == 0) {
+    uartWrite('0');
+    return;
+  }
+
+  if(n < 0) {
+    uartWrite('-');
+    n = -n;
+  }
+
+  int16 p = 1;
+
+  // find highest power of 10 ≤ n
+  while (n / p >= 10) {
+    p *= 10;
+  }
+
+  while (p > 0) {
+    uartWrite('0' + (n / p));
+    n %= p;
+    p /= 10;
+  }
+
+
   return;
 }
 
@@ -137,7 +161,7 @@ void print(int16 n) {
  * @param n integer to print in base 10.
  */
 void println(int16 n) {
-  print((int32) n);
+  print(n);
   uartWrite('\n');
 }
 
@@ -155,6 +179,7 @@ void print(float f, uint8 d) {
  * @note: AVR '%' and '/' integer operations are very efficient. Bitshifting speed-up 
  * techniques are actually just slightly slower. Found this out the hard way.
  */
+
   if (f < 0) {
     uartWrite('-');
     f = -f;
@@ -235,7 +260,9 @@ void println(uint8 n) {
  * @param n amount of characters.
  */
 void printHline(uint8 n) {
-  printHline(n, '=');
+  for (int i = 0; i < n; i++) {
+    uartWrite('=');
+  }
   uartWrite('\n');
 }
 

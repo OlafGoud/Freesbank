@@ -1,3 +1,4 @@
+
 #define uchar unsigned char             /** 0 to 255 */
 
 #define uint8 unsigned char             /** 0 to 255 */
@@ -35,18 +36,15 @@
 
 #define OK_MESSAGE "OK." /** message if message is ok */
 
-enum SystemState {
-  SYSTEM_IDLE,
-  SYSTEM_RUNNING,
-  SYSTEM_ERROR,
-  SYSTEM_INTERNAL_ERROR_RESTART_REQUIRED,
-}
+#define IDLE 0 /** System State */
+#define RUNNING 1 /** System State */
+#define ERROR 2 /** System State */
+#define INTERNAL_ERROR_RESTART_REQUIRED 3 /** System State */
 
-enum StepperState {
-  STEPPER_FULL,
-  STEPPER_EMPTY,
-  STEPPER_ERROR,
-}
+
+#define STEPPER_FULL 0 /** Stepper state */
+#define STEPPER_EMPTY 1 /** Stepper state */
+#define STEPPER_ERROR 2 /** Stepper state */
 
 /** Encoders */
 

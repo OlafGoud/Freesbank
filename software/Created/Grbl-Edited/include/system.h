@@ -7,8 +7,8 @@
 #include "encoder.h"
 #pragma once
 
-extern SystemState systemState;
-extern StepperState stepperState;
+extern uint8 systemState;
+extern uint8 stepperState;
 
 void readSerialLine();
 
