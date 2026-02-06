@@ -460,7 +460,7 @@ ISR(TIMER1_COMPA_vect) {
      * @note add here axis that are used by the stepper motor. (and have an encoder) @attention (Place 1)
      ***************************************************************************************************************************/
     
-    //donecheck += checkIfAxisNotDone(Y_AXIS, currentPosition[Y_AXIS]);
+    donecheck += checkIfAxisNotDone(Y_AXIS, currentPosition[Y_AXIS]);
 
     /****************************************************************************************************************************
      * END for adding more steppers.
